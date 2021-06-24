@@ -1,8 +1,25 @@
 #include "channel.h"
+#include <QSqlQuery>
 
 int Channel::login(const QString& username, const QString& password)
 {
+    QSqlQuery query;
+    query.prepare("SELECT id FROM Accounts WHERE username=:username AND password=:password");
+    query.bindValue(":username", username);
+    query.bindValue(":password", password);
+    query.exec();
 
+    if (query.next())
+    {
+        query.clear();
+        query.prepare("SELECT id FROM Farmers WHERE account_id=:account_id");
+        query.bindValue(":account_id", query.value(0).toInt());
+        query.exec();
+        query.next();
+        return query.value(0).toInt();
+    }
+
+    return 0;
 }
 
 Channel::Channel(qintptr ID, QMutex& mutex, QObject *parent) : QThread(parent),  mutex(mutex)
