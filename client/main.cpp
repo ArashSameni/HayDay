@@ -2,7 +2,6 @@
 #include <QSqlDatabase>
 #include <QMessageBox>
 #include <QApplication>
-#include <QSqlQuery>
 
 bool initDatabase()
 {
