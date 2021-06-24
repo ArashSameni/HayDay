@@ -17,15 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     account.cpp \
-    dbtable.cpp \
     main.cpp \
     mainwindow.cpp \
+    silo.cpp \
     tcpsocket.cpp
 
 HEADERS += \
     account.h \
-    dbtable.h \
     mainwindow.h \
+    place.h \
+    silo.h \
     tcpsocket.h
 
 FORMS += \
