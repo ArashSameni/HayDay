@@ -5,7 +5,7 @@
 
 int Account::loginAndGetFarmerId(const QString &username, const QString &password)
 {
-    TCPSocket socket;
+    TcpSocket socket;
     socket.write("Login(" + username + "," + password + ")");
     int farmer_id = socket.read().toInt();
     return farmer_id;
@@ -13,7 +13,7 @@ int Account::loginAndGetFarmerId(const QString &username, const QString &passwor
 
 int Account::signup(const QString &username, const QString &password)
 {
-    TCPSocket socket;
+    TcpSocket socket;
     socket.write("Signup(" + username + "," + password + ")");
     int account_id = socket.read().toInt();
     return account_id;

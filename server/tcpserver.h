@@ -10,7 +10,6 @@ class TcpServer : public QTcpServer
     Q_OBJECT
 
 private:
-    QMutex mutex;
     void incomingConnection(qintptr socketDescriptor);
 
 public:

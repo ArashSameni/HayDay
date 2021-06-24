@@ -3,14 +3,14 @@
 
 #include <QTcpSocket>
 
-class TCPSocket
+class TcpSocket
 {
-    QTcpSocket *socket_;
-    void connectToServer(void);
+    QTcpSocket socket_;
+    void connectToServer();
 
 public:
-    TCPSocket();
-    ~TCPSocket();
+    TcpSocket();
+    ~TcpSocket();
 
     void write(const QString &data);
     void write(const QByteArray &data);

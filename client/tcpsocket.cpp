@@ -1,35 +1,35 @@
 #include "tcpsocket.h"
 
-TCPSocket::TCPSocket()
+TcpSocket::TcpSocket()
 {
     connectToServer();
 }
 
-TCPSocket::~TCPSocket()
+TcpSocket::~TcpSocket()
 {
-    socket_->disconnect();
+    socket_.disconnect();
 }
 
-QByteArray TCPSocket::read()
+QByteArray TcpSocket::read()
 {
-    socket_->waitForReadyRead(3000);
-    return socket_->readAll();
+    socket_.waitForReadyRead(3000);
+    return socket_.readAll();
 }
 
-void TCPSocket::write(const QString &data)
+void TcpSocket::write(const QString &data)
 {
     write(data.toUtf8());
 }
 
-void TCPSocket::write(const QByteArray &data)
+void TcpSocket::write(const QByteArray &data)
 {
-    socket_->write(data);
-    socket_->waitForBytesWritten(1500);
+    socket_.write(data);
+    socket_.waitForBytesWritten(1500);
 }
 
-void TCPSocket::connectToServer()
+void TcpSocket::connectToServer()
 {
-    socket_->connectToHost("127.0.0.1", 8500);
-    if (!socket_->waitForConnected(3000))
+    socket_.connectToHost("127.0.0.1", 8500);
+    if (!socket_.waitForConnected(3000))
         throw std::exception("Failed to connect to server.");
 }

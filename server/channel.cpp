@@ -3,10 +3,9 @@
 
 int Channel::login(const QString& username, const QString& password)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", QString::number(socketDescriptor));
-    db.setDatabaseName("../database/HayDayDB.sqlite");
-    db.open();
-    QSqlQuery query;
+    QSqlDatabase db = QSqlDatabase::database(QString::number(socketDescriptor));
+
+    QSqlQuery query(db);
     query.prepare("SELECT id FROM Accounts WHERE username=:username AND password=:password");
     query.bindValue(":username", username);
     query.bindValue(":password", password);
@@ -20,18 +19,26 @@ int Channel::login(const QString& username, const QString& password)
         query.bindValue(":account_id", account_id);
         query.exec();
         query.first();
-
-        db.close();
         return query.value(0).toInt();
     }
 
-    db.close();
     return 0;
 }
 
-Channel::Channel(qintptr ID, QMutex& mutex, QObject *parent) : QThread(parent),  mutex(mutex)
+Channel::Channel(qintptr ID, QObject *parent) : QThread(parent)
 {
     socketDescriptor = ID;
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", QString::number(socketDescriptor));
+    db.setDatabaseName("../database/HayDayDB.sqlite");
+    db.open();
+}
+
+Channel::~Channel()
+{
+    QSqlDatabase db = QSqlDatabase::database(QString::number(socketDescriptor));
+    db.removeDatabase(QString::number(socketDescriptor));
+    db.close();
 }
 
 void Channel::run()

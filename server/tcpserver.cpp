@@ -16,7 +16,7 @@ void TcpServer::startServer()
 void TcpServer::incomingConnection(qintptr socketDescriptor)
 {
         qDebug() << socketDescriptor << " Connecting...";
-        Channel *channel = new Channel(socketDescriptor, mutex, this);
+        Channel *channel = new Channel(socketDescriptor, this);
         connect(channel, SIGNAL(finished()), channel, SLOT(deleteLater()));
         channel->start();
 }

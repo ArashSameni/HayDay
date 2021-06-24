@@ -5,7 +5,6 @@
 #include <QObject>
 #include <QDebug>
 #include <QTcpSocket>
-#include <QMutex>
 
 class Channel : public QThread
 {
@@ -14,11 +13,11 @@ class Channel : public QThread
 private:
     QTcpSocket *socket;
     qintptr socketDescriptor;
-    QMutex& mutex;
     int login(const QString& username, const QString& password);
 
 public:
-    explicit Channel(qintptr ID, QMutex& mutex, QObject *parent = nullptr);
+    explicit Channel(qintptr ID, QObject *parent = nullptr);
+    ~Channel();
     void run(void);
 
 signals:
