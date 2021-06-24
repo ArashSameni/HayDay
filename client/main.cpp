@@ -2,6 +2,7 @@
 #include <QSqlDatabase>
 #include <QMessageBox>
 #include <QApplication>
+#include <QSqlQuery>
 
 bool initDatabase()
 {
@@ -17,11 +18,11 @@ int main(int argc, char *argv[])
     if(!initDatabase())
     {
         QMessageBox::critical(nullptr, "Error", "Failed to connect to database.");
-        exit(0);
+        exit(EXIT_FAILURE);
     }
 
     MainWindow w;
     w.show();
-
+    QSqlDatabase::database().close();
     return a.exec();
 }
