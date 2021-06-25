@@ -86,7 +86,7 @@ Barn &Barn::create()
     return *barn;
 }
 
-void Barn::save()
+void Barn::save() const
 {
     QSqlQuery query;
     query.prepare("UPDATE Barns SET storage=:storage, max_storage=:max_storage, "
@@ -148,7 +148,7 @@ void Barn::addWool(int amount)
     storage_ += amount;
 }
 
-void Barn::addMilk(Milk milk)
+void Barn::addMilk(const Milk& milk)
 {
     milks_.push_back(milk);
     storage_ += 1;
@@ -194,7 +194,7 @@ void Barn::removeMilk(int milk_id)
     storage_ -= 1;
 }
 
-void Barn::removeMilk(Milk milk)
+void Barn::removeMilk(const Milk& milk)
 {
     removeMilk(milk.id());
 }

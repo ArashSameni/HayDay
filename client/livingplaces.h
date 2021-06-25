@@ -35,13 +35,13 @@ protected:
     LivingPlace();
 
 public:
-    void save(int id);
+    void save(int id) const;
 
-    int storage() { return storage_; }
-    int max_storage() { return max_storage_; }
-    int animals_condition() { return animals_condition_; }
-    int feeding_day() { return feeding_day_; }
-    int farm_id() { return farm_id_; }
+    int storage() const { return storage_; }
+    int max_storage() const { return max_storage_; }
+    int animals_condition() const { return animals_condition_; }
+    int feeding_day() const { return feeding_day_; }
+    int farm_id() const { return farm_id_; }
     void addAnimal(int amount) { storage_ += amount; }
 
     virtual bool checkFeeding() = 0;
@@ -70,10 +70,10 @@ public:
 
     ////////////// Not implemented
     bool checkUpgrade() { return false; }
-    bool isUpgradable() { return 0; }
-    int neededNailsToUpgrade() { return 0; }
-    int neededShovelsToUpgrade() { return 0; }
-    int neededCoinsToUpgrade() { return 0; }
+    bool isUpgradable() const { return 0; }
+    int neededNailsToUpgrade() const { return 0; }
+    int neededShovelsToUpgrade() const { return 0; }
+    int neededCoinsToUpgrade() const { return 0; }
     void upgrade() {}
 
     bool checkFeeding() { return false; }
@@ -104,10 +104,10 @@ public:
 
     ////////////// Not implemented
     bool checkUpgrade() { return false; }
-    bool isUpgradable() { return 0; }
-    int neededNailsToUpgrade() { return 0; }
-    int neededShovelsToUpgrade() { return 0; }
-    int neededCoinsToUpgrade() { return 0; }
+    bool isUpgradable() const { return 0; }
+    int neededNailsToUpgrade() const { return 0; }
+    int neededShovelsToUpgrade() const { return 0; }
+    int neededCoinsToUpgrade() const { return 0; }
     void upgrade() {}
 
     bool checkFeeding() { return false; }
@@ -138,10 +138,10 @@ public:
 
     ////////////// Not implemented
     bool checkUpgrade() { return false; }
-    bool isUpgradable() { return 0; }
-    int neededNailsToUpgrade() { return 0; }
-    int neededShovelsToUpgrade() { return 0; }
-    int neededCoinsToUpgrade() { return 0; }
+    bool isUpgradable() const { return 0; }
+    int neededNailsToUpgrade() const { return 0; }
+    int neededShovelsToUpgrade() const { return 0; }
+    int neededCoinsToUpgrade() const { return 0; }
     void upgrade() {}
 
     bool checkFeeding() { return false; }

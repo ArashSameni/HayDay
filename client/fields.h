@@ -26,10 +26,10 @@ protected:
     int planting_day_ = -1;
 
 public:
-    int area() { return area_; }
-    int planted_area() { return planted_area_; }
-    int plants_condition() { return plants_condition_; }
-    int planting_day() { return planting_day_; }
+    int area() const { return area_; }
+    int planted_area() const { return planted_area_; }
+    int plants_condition() const { return plants_condition_; }
+    int planting_day() const { return planting_day_; }
 
     virtual bool checkPlanting() = 0;
     virtual void plant(int) = 0;
@@ -53,14 +53,14 @@ public:
     static WheatField &get(int wheat_field_id);
     static WheatField &create();
     static int id() { return id_; }
-    void save();
+    void save() const;
 
     ////////////// Not implemented
     bool checkUpgrade() { return false; }
-    bool isUpgradable() { return 0; }
-    int neededNailsToUpgrade() { return 0; }
-    int neededShovelsToUpgrade() { return 0; }
-    int neededCoinsToUpgrade() { return 0; }
+    bool isUpgradable() const { return 0; }
+    int neededNailsToUpgrade() const { return 0; }
+    int neededShovelsToUpgrade() const { return 0; }
+    int neededCoinsToUpgrade() const { return 0; }
     void upgrade() {}
 
     void plant(int) {}
@@ -90,18 +90,18 @@ public:
     static AlfalfaField &get(int alfalfa_field_id);
     static AlfalfaField &create();
     static int id() { return id_; }
-    void save();
+    void save() const;
 
-    int plowing_condition() { return plowing_condition_; }
-    int plowing_day() { return plowing_day_; }
-    int neededCoinsToPlow() { return area_ * 5; }
+    int plowing_condition() const { return plowing_condition_; }
+    int plowing_day() const { return plowing_day_; }
+    int neededCoinsToPlow() const { return area_ * 5; }
 
     ////////////// Not implemented
     bool checkUpgrade() { return false; }
-    bool isUpgradable() { return 0; }
-    int neededNailsToUpgrade() { return 0; }
-    int neededShovelsToUpgrade() { return 0; }
-    int neededCoinsToUpgrade() { return 0; }
+    bool isUpgradable() const { return 0; }
+    int neededNailsToUpgrade() const { return 0; }
+    int neededShovelsToUpgrade() const { return 0; }
+    int neededCoinsToUpgrade() const { return 0; }
     void upgrade() {}
 
     void plant(int) {}

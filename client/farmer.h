@@ -25,20 +25,20 @@ public:
 
     static Farmer &get(int farmer_id);
     static Farmer &getByAccountId(int account_id);
-    static Farmer &create(QString nickname, int account_id, int farm_id);
+    static Farmer &create(const QString &nickname, int account_id, int farm_id);
     static int id() { return id_; }
-    void save();
+    void save() const;
 
-    QString nickname() { return nickname_; }
+    QString nickname() const { return nickname_; }
     void setNickname(const QString &nickname) { nickname_ = nickname; }
 
-    int coins() { return coins_; }
-    int level() { return level_; }
-    int xp() { return xp_; }
-    int max_xp() { return max_xp_; }
-    uint joining_date() { return joining_date_; }
-    int farm_id() { return farm_id_; }
-    int account_id() { return account_id_; }
+    int coins() const { return coins_; }
+    int level() const { return level_; }
+    int xp() const { return xp_; }
+    int max_xp() const { return max_xp_; }
+    uint joining_date() const { return joining_date_; }
+    int farm_id() const { return farm_id_; }
+    int account_id() const { return account_id_; }
 
     void addCoin(int amount) { coins_ += amount; }
     void removeCoin(int amount) { coins_ -= amount; }
@@ -47,7 +47,7 @@ public:
         xp_ += amount;
         return isLevelFinished();
     }
-    bool isLevelFinished() { return xp_ >= max_xp_; }
+    bool isLevelFinished() const { return xp_ >= max_xp_; }
 
     // Not implemented
     void goNextLevel();
