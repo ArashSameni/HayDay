@@ -19,6 +19,7 @@ SOURCES += \
     account.cpp \
     barn.cpp \
     farm.cpp \
+    farmer.cpp \
     fields.cpp \
     livingplaces.cpp \
     main.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     account.h \
     barn.h \
     farm.h \
+    farmer.h \
     fields.h \
     globals.h \
     livingplaces.h \

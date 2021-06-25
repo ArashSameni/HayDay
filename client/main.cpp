@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    if(!initDatabase())
+    if (!initDatabase())
     {
         QMessageBox::critical(nullptr, "Error", "Failed to connect to database.");
         exit(EXIT_FAILURE);

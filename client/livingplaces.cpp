@@ -76,7 +76,7 @@ void LivingPlace::save(int id)
     QSqlQuery query;
     query.prepare("UPDATE LivingPlaces SET type=:type, storage=:storage, "
                   "max_storage=:max_storage, animals_condition=:animals_condition, "
-                  "feeding_day=:feeding_day, upgrade_day=:upgrade_day, is_upgrading=:is_upgrading. "
+                  "feeding_day=:feeding_day, upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, "
                   "level=:level, farm_id=:farm_id "
                   "WHERE id=:id");
 
