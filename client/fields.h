@@ -17,7 +17,7 @@ enum PlowingCondition
     PLOWED
 };
 
-class Field
+class Field : public Place
 {
 protected:
     int area_;
@@ -30,8 +30,8 @@ public:
     int planted_area() { return planted_area_; }
     int plants_condition() { return plants_condition_; }
     int planting_day() { return planting_day_; }
-    virtual bool checkPlanting() { return false; }
 
+    virtual bool checkPlanting() = 0;
     virtual void plant(int) = 0;
     virtual void reap() = 0;
 
@@ -39,7 +39,7 @@ public:
 };
 Field::~Field() {}
 
-class WheatField : Field, Place
+class WheatField : public Field
 {
     static int id_;
     static WheatField *wheat_field;
@@ -73,7 +73,7 @@ public:
 int WheatField::id_ = 0;
 WheatField *WheatField::wheat_field = nullptr;
 
-class AlfalfaField : Field, Place
+class AlfalfaField : public Field
 {
     static int id_;
     static AlfalfaField *alfalfa_field;

@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     account.cpp \
     fields.cpp \
+    livingplaces.cpp \
     main.cpp \
     mainwindow.cpp \
     silo.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 HEADERS += \
     account.h \
     fields.h \
+    livingplaces.h \
     mainwindow.h \
     place.h \
     silo.h \
