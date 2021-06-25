@@ -2,9 +2,6 @@
 #include <QSqlQuery>
 #include <QVariant>
 
-int Silo::id_ = 0;
-Silo *Silo::silo = nullptr;
-
 Silo::Silo()
 {
     level_ = 1;
@@ -16,7 +13,7 @@ Silo::Silo()
 
 Silo &Silo::create()
 {
-    if(silo != nullptr)
+    if (silo != nullptr)
         delete silo;
 
     silo = new Silo;
@@ -45,10 +42,10 @@ void Silo::save()
 
 Silo &Silo::get(int silo_id)
 {
-    if(silo == nullptr)
+    if (silo == nullptr)
         silo = new Silo;
 
-    if(silo_id != silo->id_)
+    if (silo_id != silo->id_)
     {
         silo->id_ = silo_id;
 
@@ -65,8 +62,12 @@ Silo &Silo::get(int silo_id)
             silo->is_upgrading_ = query.value(3).toInt();
             silo->level_ = query.value(4).toInt();
         }
+        else
+        {
+            std::string err = "Silo with id " + std::to_string(wheat_field_id) + " doesn't exist!";
+            throw std::exception(err.c_str());
+        }
     }
 
     return *silo;
 }
-
