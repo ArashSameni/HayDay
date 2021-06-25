@@ -74,7 +74,7 @@ public:
     int alfalfas() { return alfalfas_; }
     int eggs() { return eggs_; }
     int wools() { return wools_; }
-    int milks(){ return milks_.size(); }
+    int milks() { return milks_.size(); }
 
     void addShovel(int amount);
     void addNail(int amount);

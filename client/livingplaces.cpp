@@ -133,6 +133,8 @@ ChickenCoop &ChickenCoop::create(int farm_id)
         delete chicken_coop;
 
     chicken_coop = new ChickenCoop;
+    chicken_coop->farm_id_ = farm_id;
+
     id_ = LivingPlace::create(farm_id, LivingPlace::CHICKEN_COOP);
     return *chicken_coop;
 }
@@ -177,6 +179,8 @@ CowPasture &CowPasture::create(int farm_id)
         delete cow_pasture;
 
     cow_pasture = new CowPasture;
+    cow_pasture->farm_id_ = farm_id;
+
     id_ = LivingPlace::create(farm_id, LivingPlace::COW_PASTURE);
     return *cow_pasture;
 }
@@ -221,6 +225,8 @@ SheepPasture &SheepPasture::create(int farm_id)
         delete sheep_pasture;
 
     sheep_pasture = new SheepPasture;
+    sheep_pasture->farm_id_ = farm_id;
+
     id_ = LivingPlace::create(farm_id, LivingPlace::SHEEP_PASTURE);
     return *sheep_pasture;
 }

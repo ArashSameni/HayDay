@@ -1,7 +1,10 @@
 #include "mainwindow.h"
+#include "globals.h"
 #include <QSqlDatabase>
 #include <QMessageBox>
 #include <QApplication>
+
+int CURRENT_DAY;
 
 bool initDatabase()
 {
