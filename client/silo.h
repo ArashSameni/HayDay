@@ -21,12 +21,14 @@ public:
     static int id() { return id_; }
     void save();
 
-    //    bool checkUpgrade(){ return false; }
-    //    bool isUpgradable();
-    //    int neededNailsToUpgrade();
-    //    int neededShovelsToUpgrade();
-    //    int neededCoinsToUpgrade();
-    //    void upgrade();
+    ////////////// Not implemented
+    bool checkUpgrade() { return false; }
+    bool isUpgradable() { return 0; }
+    int neededNailsToUpgrade() { return 0; }
+    int neededShovelsToUpgrade() { return 0; }
+    int neededCoinsToUpgrade() { return 0; }
+    void upgrade() {}
+    //////////////
 
     int storage() { return storage_; }
     int max_storage() { return max_storage_; }

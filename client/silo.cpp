@@ -64,7 +64,7 @@ Silo &Silo::get(int silo_id)
         }
         else
         {
-            std::string err = "Silo with id " + std::to_string(wheat_field_id) + " doesn't exist!";
+            std::string err = "Silo with id " + std::to_string(silo_id) + " doesn't exist!";
             throw std::exception(err.c_str());
         }
     }

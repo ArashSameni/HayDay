@@ -9,20 +9,18 @@ protected:
     bool is_upgrading_;
 
 public:
-    int level(){ return level_; }
-    int upgrade_day(){ return upgrade_day_; }
-    bool is_upgrading(){ return is_upgrading_; }
+    int level() { return level_; }
+    int upgrade_day() { return upgrade_day_; }
+    bool is_upgrading() { return is_upgrading_; }
 
-    virtual bool checkUpgrade(){ return false; } //check if upgrade is finished, then upgrade the level and the rest
-    virtual bool isUpgradable(){ return false; }
-    virtual int neededNailsToUpgrade(){ return 0; }
-    virtual int neededShovelsToUpgrade(){ return 0; }
-    virtual int neededCoinsToUpgrade(){ return 0; }
-    virtual void upgrade() {}
+    virtual bool checkUpgrade() = 0; //check if upgrade is finished, then upgrade the level and the rest
+    virtual bool isUpgradable() = 0;
+    virtual int neededNailsToUpgrade() = 0;
+    virtual int neededShovelsToUpgrade() = 0;
+    virtual int neededCoinsToUpgrade() = 0;
+    virtual void upgrade() = 0;
 
-    virtual ~Place() = 0;
+    virtual ~Place() {}
 };
-
-Place::~Place() {}
 
 #endif // PLACE_H

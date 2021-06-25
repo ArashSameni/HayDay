@@ -10,6 +10,13 @@ enum PlantsCondition
     REAPABLE
 };
 
+enum PlowingCondition
+{
+    NOT_PLOWED,
+    PLOWING,
+    PLOWED
+};
+
 class Field
 {
 protected:
@@ -25,8 +32,8 @@ public:
     int planting_day() { return planting_day_; }
     virtual bool checkPlanting() { return false; }
 
-    virtual void plant(int) {}
-    virtual void reap() {}
+    virtual void plant(int) = 0;
+    virtual void reap() = 0;
 
     virtual ~Field() = 0;
 };
@@ -48,17 +55,66 @@ public:
     static int id() { return id_; }
     void save();
 
-    //    bool checkUpgrade(){ return false; }
-    //    bool isUpgradable();
-    //    int neededNailsToUpgrade();
-    //    int neededShovelsToUpgrade();
-    //    int neededCoinsToUpgrade();
-    //    void upgrade();
+    ////////////// Not implemented
+    bool checkUpgrade() { return false; }
+    bool isUpgradable() { return 0; }
+    int neededNailsToUpgrade() { return 0; }
+    int neededShovelsToUpgrade() { return 0; }
+    int neededCoinsToUpgrade() { return 0; }
+    void upgrade() {}
 
-    //    void plant(int) {}
-    //    void reap() {}
+    void plant(int) {}
+    void reap() {}
+    bool checkPlanting() { return false; }
+    //////////////
+
+    ~WheatField() {}
 };
 int WheatField::id_ = 0;
 WheatField *WheatField::wheat_field = nullptr;
+
+class AlfalfaField : Field, Place
+{
+    static int id_;
+    static AlfalfaField *alfalfa_field;
+
+    int plowing_condition_ = PlowingCondition::NOT_PLOWED;
+    int plowing_day_ = -1;
+
+    AlfalfaField();
+
+public:
+    AlfalfaField(AlfalfaField const &) = delete;
+    void operator=(AlfalfaField const &) = delete;
+
+    static AlfalfaField &get(int alfalfa_field_id);
+    static AlfalfaField &create();
+    static int id() { return id_; }
+    void save();
+
+    int plowing_condition() { return plowing_condition_; }
+    int plowing_day() { return plowing_day_; }
+    int neededCoinsToPlow() { return area_ * 5; }
+
+    ////////////// Not implemented
+    bool checkUpgrade() { return false; }
+    bool isUpgradable() { return 0; }
+    int neededNailsToUpgrade() { return 0; }
+    int neededShovelsToUpgrade() { return 0; }
+    int neededCoinsToUpgrade() { return 0; }
+    void upgrade() {}
+
+    void plant(int) {}
+    void reap() {}
+    bool checkPlanting() { return false; }
+
+    bool checkPlowing();
+    void plow();
+    //////////////
+
+    ~AlfalfaField() {}
+};
+int AlfalfaField::id_ = 0;
+AlfalfaField *AlfalfaField::alfalfa_field = nullptr;
 
 #endif // FIELDS_H
