@@ -32,6 +32,8 @@ protected:
     static int getLivingPlaceIdByFarmId(int farm_id, int type);
     static int create(int farm_id, int type);
 
+    LivingPlace();
+
 public:
     void save(int id);
 
@@ -40,7 +42,7 @@ public:
     int animals_condition() { return animals_condition_; }
     int feeding_day() { return feeding_day_; }
     int farm_id() { return farm_id_; }
-    void addAnimal(int amount){ storage_ += amount; }
+    void addAnimal(int amount) { storage_ += amount; }
 
     virtual bool checkFeeding() = 0;
     virtual void feed(int) = 0;
@@ -74,14 +76,82 @@ public:
     int neededCoinsToUpgrade() { return 0; }
     void upgrade() {}
 
-    bool checkFeeding(){return false;}
-    void feed(int){}
-    void collect(){}
+    bool checkFeeding() { return false; }
+    void feed(int) {}
+    void collect() {}
     //////////////
 
     ~ChickenCoop() {}
 };
 int ChickenCoop::id_ = 0;
 ChickenCoop *ChickenCoop::chicken_coop = nullptr;
+
+class CowPasture : public LivingPlace
+{
+    static int id_;
+    static CowPasture *cow_pasture;
+
+    CowPasture();
+
+public:
+    CowPasture(CowPasture const &) = delete;
+    void operator=(CowPasture const &) = delete;
+
+    static CowPasture &get(int cow_pasture_id);
+    static CowPasture &getByFarmId(int farm_id);
+    static CowPasture &create(int farm_id);
+    static int id() { return id_; }
+
+    ////////////// Not implemented
+    bool checkUpgrade() { return false; }
+    bool isUpgradable() { return 0; }
+    int neededNailsToUpgrade() { return 0; }
+    int neededShovelsToUpgrade() { return 0; }
+    int neededCoinsToUpgrade() { return 0; }
+    void upgrade() {}
+
+    bool checkFeeding() { return false; }
+    void feed(int) {}
+    void collect() {}
+    //////////////
+
+    ~CowPasture() {}
+};
+int CowPasture::id_ = 0;
+CowPasture *CowPasture::cow_pasture = nullptr;
+
+class SheepPasture : public LivingPlace
+{
+    static int id_;
+    static SheepPasture *sheep_pasture;
+
+    SheepPasture();
+
+public:
+    SheepPasture(SheepPasture const &) = delete;
+    void operator=(SheepPasture const &) = delete;
+
+    static SheepPasture &get(int sheep_pasture_id);
+    static SheepPasture &getByFarmId(int farm_id);
+    static SheepPasture &create(int farm_id);
+    static int id() { return id_; }
+
+    ////////////// Not implemented
+    bool checkUpgrade() { return false; }
+    bool isUpgradable() { return 0; }
+    int neededNailsToUpgrade() { return 0; }
+    int neededShovelsToUpgrade() { return 0; }
+    int neededCoinsToUpgrade() { return 0; }
+    void upgrade() {}
+
+    bool checkFeeding() { return false; }
+    void feed(int) {}
+    void collect() {}
+    //////////////
+
+    ~SheepPasture() {}
+};
+int SheepPasture::id_ = 0;
+SheepPasture *SheepPasture::sheep_pasture = nullptr;
 
 #endif // LIVINGPLACES_H

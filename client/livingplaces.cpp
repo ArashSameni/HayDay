@@ -60,6 +60,17 @@ int LivingPlace::create(int farm_id, int type)
     return query.lastInsertId().toInt();
 }
 
+LivingPlace::LivingPlace()
+{
+    storage_ = 0;
+    max_storage_ = 0;
+    animals_condition_ = AnimalsCondition::HUNGRY;
+    feeding_day_ = -1;
+    upgrade_day_ = -1;
+    is_upgrading_ = false;
+    level_ = 0;
+}
+
 void LivingPlace::save(int id)
 {
     QSqlQuery query;
@@ -85,13 +96,6 @@ void LivingPlace::save(int id)
 ChickenCoop::ChickenCoop()
 {
     type_ = LivingPlace::CHICKEN_COOP;
-    storage_ = 0;
-    max_storage_ = 0;
-    animals_condition_ = AnimalsCondition::HUNGRY;
-    feeding_day_ = -1;
-    upgrade_day_ = -1;
-    is_upgrading_ = false;
-    level_ = 0;
 }
 
 ChickenCoop &ChickenCoop::get(int chicken_coop_id)
@@ -131,4 +135,92 @@ ChickenCoop &ChickenCoop::create(int farm_id)
     chicken_coop = new ChickenCoop;
     id_ = LivingPlace::create(farm_id, LivingPlace::CHICKEN_COOP);
     return *chicken_coop;
+}
+
+CowPasture::CowPasture()
+{
+    type_ = LivingPlace::COW_PASTURE;
+}
+
+CowPasture &CowPasture::get(int cow_pasture_id)
+{
+    if (cow_pasture == nullptr)
+        cow_pasture = new CowPasture;
+
+    if (cow_pasture_id != cow_pasture->id_)
+    {
+        cow_pasture->id_ = cow_pasture_id;
+        LivingPlace::get(*cow_pasture, cow_pasture_id);
+    }
+
+    return *cow_pasture;
+}
+
+CowPasture &CowPasture::getByFarmId(int farm_id)
+{
+    if (cow_pasture == nullptr)
+        cow_pasture = new CowPasture;
+
+    int cow_pasture_id = getLivingPlaceIdByFarmId(farm_id, LivingPlace::COW_PASTURE);
+    if (cow_pasture_id != cow_pasture->id_)
+    {
+        cow_pasture->id_ = cow_pasture_id;
+        LivingPlace::get(*cow_pasture, cow_pasture_id);
+    }
+
+    return *cow_pasture;
+}
+
+CowPasture &CowPasture::create(int farm_id)
+{
+    if (cow_pasture != nullptr)
+        delete cow_pasture;
+
+    cow_pasture = new CowPasture;
+    id_ = LivingPlace::create(farm_id, LivingPlace::COW_PASTURE);
+    return *cow_pasture;
+}
+
+SheepPasture::SheepPasture()
+{
+    type_ = LivingPlace::SHEEP_PASTURE;
+}
+
+SheepPasture &SheepPasture::get(int sheep_pasture_id)
+{
+    if (sheep_pasture == nullptr)
+        sheep_pasture = new SheepPasture;
+
+    if (sheep_pasture_id != sheep_pasture->id_)
+    {
+        sheep_pasture->id_ = sheep_pasture_id;
+        LivingPlace::get(*sheep_pasture, sheep_pasture_id);
+    }
+
+    return *sheep_pasture;
+}
+
+SheepPasture &SheepPasture::getByFarmId(int farm_id)
+{
+    if (sheep_pasture == nullptr)
+        sheep_pasture = new SheepPasture;
+
+    int sheep_pasture_id = getLivingPlaceIdByFarmId(farm_id, LivingPlace::SHEEP_PASTURE);
+    if (sheep_pasture_id != sheep_pasture->id_)
+    {
+        sheep_pasture->id_ = sheep_pasture_id;
+        LivingPlace::get(*sheep_pasture, sheep_pasture_id);
+    }
+
+    return *sheep_pasture;
+}
+
+SheepPasture &SheepPasture::create(int farm_id)
+{
+    if (sheep_pasture != nullptr)
+        delete sheep_pasture;
+
+    sheep_pasture = new SheepPasture;
+    id_ = LivingPlace::create(farm_id, LivingPlace::SHEEP_PASTURE);
+    return *sheep_pasture;
 }
