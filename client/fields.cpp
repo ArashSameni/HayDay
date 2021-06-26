@@ -64,7 +64,7 @@ WheatField &WheatField::create()
     return *wheat_field;
 }
 
-void WheatField::save()
+void WheatField::save() const
 {
     QSqlQuery query;
     query.prepare("UPDATE WheatFields SET area=:area, planted_area=:planted_area, "
@@ -147,7 +147,7 @@ AlfalfaField &AlfalfaField::create()
     return *alfalfa_field;
 }
 
-void AlfalfaField::save()
+void AlfalfaField::save() const
 {
     QSqlQuery query;
     query.prepare("UPDATE AlfalfaFields SET area=:area, planted_area=:planted_area, "

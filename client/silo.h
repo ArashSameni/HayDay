@@ -23,15 +23,15 @@ public:
 
     ////////////// Not implemented
     bool checkUpgrade() { return false; }
-    bool isUpgradable() { return 0; }
-    int neededNailsToUpgrade() { return 0; }
-    int neededShovelsToUpgrade() { return 0; }
-    int neededCoinsToUpgrade() { return 0; }
+    bool isUpgradable() const { return 0; }
+    int neededNailsToUpgrade() const { return 0; }
+    int neededShovelsToUpgrade() const { return 0; }
+    int neededCoinsToUpgrade() const { return 0; }
     void upgrade() {}
     //////////////
 
-    int storage() { return storage_; }
-    int max_storage() { return max_storage_; }
+    int storage() const { return storage_; }
+    int max_storage() const { return max_storage_; }
     void setStorage(int storage) { storage_ = storage; }
     void addWheat(int amount) { storage_ += amount; }
     void removeWheat(int amount) { storage_ -= amount; }

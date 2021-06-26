@@ -71,7 +71,7 @@ LivingPlace::LivingPlace()
     level_ = 0;
 }
 
-void LivingPlace::save(int id)
+void LivingPlace::save(int id) const
 {
     QSqlQuery query;
     query.prepare("UPDATE LivingPlaces SET type=:type, storage=:storage, "

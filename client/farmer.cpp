@@ -66,7 +66,7 @@ Farmer &Farmer::getByAccountId(int account_id)
     }
 }
 
-Farmer &Farmer::create(QString nickname, int account_id, int farm_id)
+Farmer &Farmer::create(const QString& nickname, int account_id, int farm_id)
 {
     if (farmer != nullptr)
         delete farmer;
@@ -88,7 +88,7 @@ Farmer &Farmer::create(QString nickname, int account_id, int farm_id)
     return *farmer;
 }
 
-void Farmer::save()
+void Farmer::save() const
 {
     QSqlQuery query;
     query.prepare("UPDATE Farmers SET nickname=:nickname, coins=:coins, "

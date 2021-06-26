@@ -9,15 +9,15 @@ protected:
     bool is_upgrading_;
 
 public:
-    int level() { return level_; }
-    int upgrade_day() { return upgrade_day_; }
-    bool is_upgrading() { return is_upgrading_; }
+    int level() const { return level_; }
+    int upgrade_day() const { return upgrade_day_; }
+    bool is_upgrading() const { return is_upgrading_; }
 
     virtual bool checkUpgrade() = 0; //check if upgrade is finished, then upgrade the level and the rest
-    virtual bool isUpgradable() = 0;
-    virtual int neededNailsToUpgrade() = 0;
-    virtual int neededShovelsToUpgrade() = 0;
-    virtual int neededCoinsToUpgrade() = 0;
+    virtual bool isUpgradable() const = 0;
+    virtual int neededNailsToUpgrade() const = 0;
+    virtual int neededShovelsToUpgrade() const = 0;
+    virtual int neededCoinsToUpgrade() const = 0;
     virtual void upgrade() = 0;
 
     virtual ~Place() {}
