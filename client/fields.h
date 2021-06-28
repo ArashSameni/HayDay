@@ -37,7 +37,6 @@ public:
 
     virtual ~Field() = 0;
 };
-Field::~Field() {}
 
 class WheatField : public Field
 {
@@ -70,8 +69,6 @@ public:
 
     ~WheatField() {}
 };
-int WheatField::id_ = 0;
-WheatField *WheatField::wheat_field = nullptr;
 
 class AlfalfaField : public Field
 {
@@ -114,7 +111,5 @@ public:
 
     ~AlfalfaField() {}
 };
-int AlfalfaField::id_ = 0;
-AlfalfaField *AlfalfaField::alfalfa_field = nullptr;
 
 #endif // FIELDS_H

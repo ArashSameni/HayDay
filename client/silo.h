@@ -38,7 +38,5 @@ public:
 
     ~Silo() {}
 };
-int Silo::id_ = 0;
-Silo *Silo::silo = nullptr;
 
 #endif // SILO_H

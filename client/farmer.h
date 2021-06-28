@@ -52,7 +52,5 @@ public:
     // Not implemented
     void goNextLevel();
 };
-int Farmer::id_ = 0;
-Farmer *Farmer::farmer = nullptr;
 
 #endif // FARMER_H

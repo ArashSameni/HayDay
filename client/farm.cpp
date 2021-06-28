@@ -2,6 +2,9 @@
 #include <QSqlQuery>
 #include <QVariant>
 
+int Farm::id_ = 0;
+Farm *Farm::farm = nullptr;
+
 Farm &Farm::get(int farm_id)
 {
     if (farm == nullptr)

@@ -36,7 +36,5 @@ public:
 
     ~Farm() {}
 };
-int Farm::id_ = 0;
-Farm *Farm::farm = nullptr;
 
 #endif // FARM_H

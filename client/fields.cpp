@@ -4,6 +4,14 @@
 #include <string>
 #include <exception>
 
+int WheatField::id_ = 0;
+WheatField *WheatField::wheat_field = nullptr;
+
+int AlfalfaField::id_ = 0;
+AlfalfaField *AlfalfaField::alfalfa_field = nullptr;
+
+Field::~Field() {}
+
 WheatField::WheatField()
 {
     level_ = 1;

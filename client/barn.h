@@ -94,7 +94,5 @@ public:
 
     ~Barn() {}
 };
-int Barn::id_ = 0;
-Barn *Barn::barn = nullptr;
 
 #endif // BARN_H

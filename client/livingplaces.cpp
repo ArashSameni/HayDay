@@ -2,6 +2,17 @@
 #include <QSqlQuery>
 #include <QVariant>
 
+int ChickenCoop::id_ = 0;
+ChickenCoop *ChickenCoop::chicken_coop = nullptr;
+
+int CowPasture::id_ = 0;
+CowPasture *CowPasture::cow_pasture = nullptr;
+
+int SheepPasture::id_ = 0;
+SheepPasture *SheepPasture::sheep_pasture = nullptr;
+
+LivingPlace::~LivingPlace() {}
+
 void LivingPlace::get(LivingPlace &living_place, int living_place_id)
 {
     QSqlQuery query;

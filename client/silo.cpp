@@ -2,6 +2,9 @@
 #include <QSqlQuery>
 #include <QVariant>
 
+int Silo::id_ = 0;
+Silo *Silo::silo = nullptr;
+
 Silo::Silo()
 {
     level_ = 1;

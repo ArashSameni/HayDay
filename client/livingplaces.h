@@ -50,7 +50,6 @@ public:
 
     virtual ~LivingPlace() = 0;
 };
-LivingPlace::~LivingPlace() {}
 
 class ChickenCoop : public LivingPlace
 {
@@ -83,8 +82,6 @@ public:
 
     ~ChickenCoop() {}
 };
-int ChickenCoop::id_ = 0;
-ChickenCoop *ChickenCoop::chicken_coop = nullptr;
 
 class CowPasture : public LivingPlace
 {
@@ -117,8 +114,6 @@ public:
 
     ~CowPasture() {}
 };
-int CowPasture::id_ = 0;
-CowPasture *CowPasture::cow_pasture = nullptr;
 
 class SheepPasture : public LivingPlace
 {
@@ -151,7 +146,5 @@ public:
 
     ~SheepPasture() {}
 };
-int SheepPasture::id_ = 0;
-SheepPasture *SheepPasture::sheep_pasture = nullptr;
 
 #endif // LIVINGPLACES_H

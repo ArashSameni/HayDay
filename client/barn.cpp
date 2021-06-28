@@ -3,6 +3,9 @@
 #include <QVariant>
 #include "globals.h"
 
+int Barn::id_ = 0;
+Barn *Barn::barn = nullptr;
+
 Barn::Barn()
 {
     storage_ = 1;

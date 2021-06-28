@@ -3,6 +3,9 @@
 #include <QSqlQuery>
 #include <QVariant>
 
+int Farmer::id_ = 0;
+Farmer *Farmer::farmer = nullptr;
+
 Farmer::Farmer()
 {
     coins_ = 20;
