@@ -1,14 +1,15 @@
 #include "channel.h"
 #include <QSqlQuery>
+#include <QCryptographicHash>
 
 int Channel::login(const QString& username, const QString& password)
 {
-    QSqlDatabase db = QSqlDatabase::database(QString::number(socketDescriptor));
+    QString hashed_password = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Md5).toHex();
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM Accounts WHERE username=:username AND password=:password");
     query.bindValue(":username", username);
-    query.bindValue(":password", password);
+    query.bindValue(":password", hashed_password);
     query.exec();
 
     if (query.first())
@@ -25,25 +26,46 @@ int Channel::login(const QString& username, const QString& password)
     return 0;
 }
 
+int Channel::signUp(const QString &username, const QString &password)
+{
+    QString hashed_password = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Md5).toHex();
+
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO Accounts(username, password) VALUES(:username, :password)");
+    query.bindValue(":username", username);
+    query.bindValue(":password", hashed_password);
+    query.exec();
+
+    return query.lastInsertId().toInt();
+}
+
+bool Channel::userExist(const QString &username)
+{
+    QSqlQuery query(db);
+    query.prepare("SELECT EXISTS(SELECT 1 FROM Accounts WHERE username=:username)");
+    query.bindValue(":username", username);
+    query.exec();
+    query.first();
+
+    return query.value(0).toBool();
+}
+
 Channel::Channel(qintptr ID, QObject *parent) : QThread(parent)
 {
     socketDescriptor = ID;
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", QString::number(socketDescriptor));
+    db = QSqlDatabase::addDatabase("QSQLITE", QString::number(socketDescriptor));
     db.setDatabaseName("../database/HayDayDB.sqlite");
     db.open();
 }
 
 Channel::~Channel()
 {
-    QSqlDatabase db = QSqlDatabase::database(QString::number(socketDescriptor));
-    db.removeDatabase(QString::number(socketDescriptor));
     db.close();
 }
 
 void Channel::run()
 {
-    qDebug() << " Thread started";
     socket = new QTcpSocket();
     if(!socket->setSocketDescriptor(this->socketDescriptor))
     {
@@ -65,11 +87,27 @@ void Channel::readyRead()
         QString username = data.split(',')[0];
         QString password = data.split(',')[1];
         password.chop(1);
-        qDebug() << username << password;
+        qDebug() << "Logging in " << username << ":" << password;
 
-        data.setNum(login(username, password));
-        socket->write(data.toUtf8());
+        int farmer_id = login(username, password);
+        data.setNum(farmer_id);
     }
+    else if(data.startsWith("Signup"))
+    {
+        data.remove("Signup(");
+        QString username = data.split(',')[0];
+        QString password = data.split(',')[1];
+        password.chop(1);
+        qDebug() << "Signing up " << username << ":" << password;
+
+        int account_id = 0;
+        if(!userExist(username))
+            account_id = signUp(username, password);
+
+        data.setNum(account_id);
+    }
+
+    socket->write(data.toUtf8());
 }
 
 void Channel::disconnected()

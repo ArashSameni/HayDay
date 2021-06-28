@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QDebug>
 #include <QTcpSocket>
+#include <QSqlDatabase>
 
 class Channel : public QThread
 {
@@ -13,7 +14,10 @@ class Channel : public QThread
 private:
     QTcpSocket *socket;
     qintptr socketDescriptor;
+    QSqlDatabase db;
     int login(const QString& username, const QString& password);
+    int signUp(const QString& username, const QString& password);
+    bool userExist(const QString& username);
 
 public:
     explicit Channel(qintptr ID, QObject *parent = nullptr);
