@@ -1,6 +1,8 @@
 #include "livingplaces.h"
-#include <QSqlQuery>
-#include <QVariant>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include "globals.h"
+#include <QDateTime>
 
 int ChickenCoop::id_ = 0;
 ChickenCoop *ChickenCoop::chicken_coop = nullptr;
@@ -15,23 +17,26 @@ LivingPlace::~LivingPlace() {}
 
 void LivingPlace::get(LivingPlace &living_place, int living_place_id)
 {
-    QSqlQuery query;
-    query.prepare("SELECT type, storage, max_storage, animals_condition, feeding_day, upgrade_day, is_upgrading, level, farm_id"
-                  " FROM LivingPlaces WHERE id=:id");
-    query.bindValue(":id", living_place_id);
-    query.exec();
+    QString query = "SELECT type, storage, max_storage, animals_condition, feeding_day, upgrade_day, is_upgrading, level, farm_id"
+                    " FROM LivingPlaces WHERE id=:id";
+    query.replace(":id", QString::number(living_place_id));
 
-    if (query.first())
+    socket.write(query);
+    QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
+
+    if (!servers_answer.isNull())
     {
-        living_place.type_ = query.value(0).toInt();
-        living_place.storage_ = query.value(1).toInt();
-        living_place.max_storage_ = query.value(2).toInt();
-        living_place.animals_condition_ = query.value(3).toInt();
-        living_place.feeding_day_ = query.value(4).toInt();
-        living_place.upgrade_day_ = query.value(5).toInt();
-        living_place.is_upgrading_ = query.value(6).toInt();
-        living_place.level_ = query.value(7).toInt();
-        living_place.farm_id_ = query.value(8).toInt();
+        QJsonObject json_obj = servers_answer.object();
+
+        living_place.type_ = json_obj["0"].toInt();
+        living_place.storage_ = json_obj["1"].toInt();
+        living_place.max_storage_ = json_obj["2"].toInt();
+        living_place.animals_condition_ = json_obj["3"].toInt();
+        living_place.feeding_day_ = json_obj["4"].toInt();
+        living_place.upgrade_day_ = json_obj["5"].toInt();
+        living_place.is_upgrading_ = json_obj["6"].toInt();
+        living_place.level_ = json_obj["7"].toInt();
+        living_place.farm_id_ = json_obj["8"].toInt();
     }
     else
     {
@@ -42,16 +47,18 @@ void LivingPlace::get(LivingPlace &living_place, int living_place_id)
 
 int LivingPlace::getLivingPlaceIdByFarmId(int farm_id, int type)
 {
-    QSqlQuery query;
-    query.prepare("SELECT id"
-                  " FROM LivingPlaces WHERE farm_id=:farm_id AND type=:type");
-    query.bindValue(":farm_id", farm_id);
-    query.bindValue(":type", type);
-    query.exec();
+    QString query = "SELECT id"
+                    " FROM LivingPlaces WHERE farm_id=:farm_id AND type=:type";
+    query.replace(":farm_id", QString::number(farm_id));
+    query.replace(":type", QString::number(type));
 
-    if (query.first())
+    socket.write(query);
+    QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
+
+    if (!servers_answer.isNull())
     {
-        return query.value(0).toInt();
+        QJsonObject json_obj = servers_answer.object();
+        return json_obj["0"].toInt();
     }
     else
     {
@@ -62,13 +69,12 @@ int LivingPlace::getLivingPlaceIdByFarmId(int farm_id, int type)
 
 int LivingPlace::create(int farm_id, int type)
 {
-    QSqlQuery query;
-    query.prepare("INSERT INTO LivingPlaces(type, farm_id) VALUES(:type, :farm_id)");
-    query.bindValue(":type", type);
-    query.bindValue(":farm_id", farm_id);
-    query.exec();
+    QString query = "INSERT INTO LivingPlaces(type, farm_id) VALUES(:type, :farm_id)";
+    query.replace(":type", QString::number(type));
+    query.replace(":farm_id", QString::number(farm_id));
 
-    return query.lastInsertId().toInt();
+    socket.write(query);
+    return socket.read().toInt();
 }
 
 LivingPlace::LivingPlace()
@@ -84,24 +90,23 @@ LivingPlace::LivingPlace()
 
 void LivingPlace::save(int id) const
 {
-    QSqlQuery query;
-    query.prepare("UPDATE LivingPlaces SET type=:type, storage=:storage, "
-                  "max_storage=:max_storage, animals_condition=:animals_condition, "
-                  "feeding_day=:feeding_day, upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, "
-                  "level=:level, farm_id=:farm_id "
-                  "WHERE id=:id");
+    QString query = "UPDATE LivingPlaces SET type=:type, storage=:storage, "
+                    "max_storage=:max_storage, animals_condition=:animals_condition, "
+                    "feeding_day=:feeding_day, upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, "
+                    "level=:level, farm_id=:farm_id "
+                    "WHERE id=:id";
+    query.replace(":id", QString::number(id));
+    query.replace(":type", QString::number(type_));
+    query.replace(":storage", QString::number(storage_));
+    query.replace(":max_storage", QString::number(max_storage_));
+    query.replace(":animals_condition", QString::number(animals_condition_));
+    query.replace(":feeding_day", QString::number(feeding_day_));
+    query.replace(":upgrade_day", QString::number(upgrade_day_));
+    query.replace(":is_upgrading", QString::number(is_upgrading_));
+    query.replace(":level", QString::number(level_));
+    query.replace(":farm_id", QString::number(farm_id_));
 
-    query.bindValue(":id", id);
-    query.bindValue(":type", type_);
-    query.bindValue(":storage", storage_);
-    query.bindValue(":max_storage", max_storage_);
-    query.bindValue(":animals_condition", animals_condition_);
-    query.bindValue(":feeding_day", feeding_day_);
-    query.bindValue(":upgrade_day", upgrade_day_);
-    query.bindValue(":is_upgrading", is_upgrading_);
-    query.bindValue(":level", level_);
-    query.bindValue(":farm_id", farm_id_);
-    query.exec();
+    socket.write(query);
 }
 
 ChickenCoop::ChickenCoop()
