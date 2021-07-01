@@ -1,6 +1,8 @@
 #include "fields.h"
-#include <QSqlQuery>
-#include <QVariant>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include "globals.h"
+#include <QDateTime>
 #include <string>
 #include <exception>
 
@@ -32,21 +34,24 @@ WheatField &WheatField::get(int wheat_field_id)
     {
         wheat_field->id_ = wheat_field_id;
 
-        QSqlQuery query;
-        query.prepare("SELECT area, planted_area, plants_condition, planting_day, upgrade_day, is_upgrading, level"
-                      " FROM WheatFields WHERE id=:id");
-        query.bindValue(":id", wheat_field_id);
-        query.exec();
+        QString query = "SELECT area, planted_area, plants_condition, planting_day, upgrade_day, is_upgrading, level"
+                        " FROM WheatFields WHERE id=:id";
+        query.replace(":id", QString::number(wheat_field_id));
 
-        if (query.first())
+        socket.write(query);
+        QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
+
+        if (!servers_answer.isNull())
         {
-            wheat_field->area_ = query.value(0).toInt();
-            wheat_field->planted_area_ = query.value(1).toInt();
-            wheat_field->plants_condition_ = query.value(2).toInt();
-            wheat_field->planting_day_ = query.value(3).toInt();
-            wheat_field->upgrade_day_ = query.value(4).toInt();
-            wheat_field->is_upgrading_ = query.value(5).toInt();
-            wheat_field->level_ = query.value(6).toInt();
+            QJsonObject json_obj = servers_answer.object();
+
+            wheat_field->area_ = json_obj["0"].toInt();
+            wheat_field->planted_area_ = json_obj["1"].toInt();
+            wheat_field->plants_condition_ = json_obj["2"].toInt();
+            wheat_field->planting_day_ = json_obj["3"].toInt();
+            wheat_field->upgrade_day_ = json_obj["4"].toInt();
+            wheat_field->is_upgrading_ = json_obj["5"].toInt();
+            wheat_field->level_ = json_obj["6"].toInt();
         }
         else
         {
@@ -64,30 +69,30 @@ WheatField &WheatField::create()
         delete wheat_field;
 
     wheat_field = new WheatField;
-    QSqlQuery query;
-    query.prepare("INSERT INTO WheatFields DEFAULT VALUES");
-    query.exec();
+    QString query = "INSERT INTO WheatFields DEFAULT VALUES";
 
-    id_ = query.lastInsertId().toInt();
+    socket.write(query);
+    id_ = socket.read().toInt();
+
     return *wheat_field;
 }
 
 void WheatField::save() const
 {
-    QSqlQuery query;
-    query.prepare("UPDATE WheatFields SET area=:area, planted_area=:planted_area, "
-                  "plants_condition=:plants_condition, planting_day=:planting_day, "
-                  "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level "
-                  "WHERE id=:id");
-    query.bindValue(":id", id_);
-    query.bindValue(":area", area_);
-    query.bindValue(":planted_area", planted_area_);
-    query.bindValue(":plants_condition", plants_condition_);
-    query.bindValue(":planting_day", planting_day_);
-    query.bindValue(":upgrade_day", upgrade_day_);
-    query.bindValue(":is_upgrading", is_upgrading_);
-    query.bindValue(":level", level_);
-    query.exec();
+    QString query = "UPDATE WheatFields SET area=:area, planted_area=:planted_area, "
+                    "plants_condition=:plants_condition, planting_day=:planting_day, "
+                    "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level "
+                    "WHERE id=:id";
+    query.replace(":id", QString::number(id_));
+    query.replace(":area", QString::number(area_));
+    query.replace(":planted_area", QString::number(planted_area_));
+    query.replace(":plants_condition", QString::number(plants_condition_));
+    query.replace(":planting_day", QString::number(planting_day_));
+    query.replace(":upgrade_day", QString::number(upgrade_day_));
+    query.replace(":is_upgrading", QString::number(is_upgrading_));
+    query.replace(":level", QString::number(level_));
+
+    socket.write(query);
 }
 
 AlfalfaField::AlfalfaField()
@@ -112,24 +117,27 @@ AlfalfaField &AlfalfaField::get(int alfalfa_field_id)
     {
         alfalfa_field->id_ = alfalfa_field_id;
 
-        QSqlQuery query;
-        query.prepare("SELECT area, planted_area, plants_condition, planting_day, upgrade_day, is_upgrading, level"
-                      ", plowing_condition, plowing_day"
-                      " FROM AlfalfaFields WHERE id=:id");
-        query.bindValue(":id", alfalfa_field_id);
-        query.exec();
+        QString query = "SELECT area, planted_area, plants_condition, planting_day, upgrade_day, is_upgrading, level"
+                        ", plowing_condition, plowing_day"
+                        " FROM AlfalfaFields WHERE id=:id";
+        query.replace(":id", QString::number(alfalfa_field_id));
 
-        if (query.first())
+        socket.write(query);
+        QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
+
+        if (!servers_answer.isNull())
         {
-            alfalfa_field->area_ = query.value(0).toInt();
-            alfalfa_field->planted_area_ = query.value(1).toInt();
-            alfalfa_field->plants_condition_ = query.value(2).toInt();
-            alfalfa_field->planting_day_ = query.value(3).toInt();
-            alfalfa_field->upgrade_day_ = query.value(4).toInt();
-            alfalfa_field->is_upgrading_ = query.value(5).toInt();
-            alfalfa_field->level_ = query.value(6).toInt();
-            alfalfa_field->plowing_condition_ = query.value(7).toInt();
-            alfalfa_field->plowing_day_ = query.value(8).toInt();
+            QJsonObject json_obj = servers_answer.object();
+
+            alfalfa_field->area_ = json_obj["0"].toInt();
+            alfalfa_field->planted_area_ = json_obj["1"].toInt();
+            alfalfa_field->plants_condition_ = json_obj["2"].toInt();
+            alfalfa_field->planting_day_ = json_obj["3"].toInt();
+            alfalfa_field->upgrade_day_ = json_obj["4"].toInt();
+            alfalfa_field->is_upgrading_ = json_obj["5"].toInt();
+            alfalfa_field->level_ = json_obj["6"].toInt();
+            alfalfa_field->plowing_condition_ = json_obj["7"].toInt();
+            alfalfa_field->plowing_day_ = json_obj["8"].toInt();
         }
         else
         {
@@ -147,31 +155,31 @@ AlfalfaField &AlfalfaField::create()
         delete alfalfa_field;
 
     alfalfa_field = new AlfalfaField;
-    QSqlQuery query;
-    query.prepare("INSERT INTO AlfalfaFields DEFAULT VALUES");
-    query.exec();
+    QString query = "INSERT INTO AlfalfaFields DEFAULT VALUES";
 
-    id_ = query.lastInsertId().toInt();
+    socket.write(query);
+    id_ = socket.read().toInt();
+
     return *alfalfa_field;
 }
 
 void AlfalfaField::save() const
 {
-    QSqlQuery query;
-    query.prepare("UPDATE AlfalfaFields SET area=:area, planted_area=:planted_area, "
-                  "plants_condition=:plants_condition, planting_day=:planting_day, "
-                  "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level "
-                  "plowing_condition=:plowing_condition, plowing_day=:plowing_day "
-                  "WHERE id=:id");
-    query.bindValue(":id", id_);
-    query.bindValue(":area", area_);
-    query.bindValue(":planted_area", planted_area_);
-    query.bindValue(":plants_condition", plants_condition_);
-    query.bindValue(":planting_day", planting_day_);
-    query.bindValue(":upgrade_day", upgrade_day_);
-    query.bindValue(":is_upgrading", is_upgrading_);
-    query.bindValue(":level", level_);
-    query.bindValue(":plowing_condition", plowing_condition_);
-    query.bindValue(":plowing_day", plowing_day_);
-    query.exec();
+    QString query = "UPDATE AlfalfaFields SET area=:area, planted_area=:planted_area, "
+                    "plants_condition=:plants_condition, planting_day=:planting_day, "
+                    "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level "
+                    "plowing_condition=:plowing_condition, plowing_day=:plowing_day "
+                    "WHERE id=:id";
+    query.replace(":id", QString::number(id_));
+    query.replace(":area", QString::number(area_));
+    query.replace(":planted_area", QString::number(planted_area_));
+    query.replace(":plants_condition", QString::number(plants_condition_));
+    query.replace(":planting_day", QString::number(planting_day_));
+    query.replace(":upgrade_day", QString::number(upgrade_day_));
+    query.replace(":is_upgrading", QString::number(is_upgrading_));
+    query.replace(":level", QString::number(level_));
+    query.replace(":plowing_condition", QString::number(plowing_condition_));
+    query.replace(":plowing_day", QString::number(plowing_day_));
+
+    socket.write(query);
 }
