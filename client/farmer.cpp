@@ -3,8 +3,6 @@
 #include <QJsonDocument>
 #include "globals.h"
 #include <QDateTime>
-#include <QSqlQuery>
-#include <QVariant>
 
 int Farmer::id_ = 0;
 Farmer *Farmer::farmer = nullptr;
