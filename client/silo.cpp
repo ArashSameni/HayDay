@@ -1,6 +1,8 @@
 #include "silo.h"
-#include <QSqlQuery>
-#include <QVariant>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include "globals.h"
+#include <QDateTime>
 
 int Silo::id_ = 0;
 Silo *Silo::silo = nullptr;
@@ -20,27 +22,27 @@ Silo &Silo::create()
         delete silo;
 
     silo = new Silo;
-    QSqlQuery query;
-    query.prepare("INSERT INTO Silos DEFAULT VALUES");
-    query.exec();
+    QString query = "INSERT INTO Silos DEFAULT VALUES";
 
-    id_ = query.lastInsertId().toInt();
+    socket.write(query);
+    id_ = socket.read().toInt();
+
     return *silo;
 }
 
 void Silo::save()
 {
-    QSqlQuery query;
-    query.prepare("UPDATE Silos SET storage=:storage, max_storage=:max_storage, "
-                  "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level "
-                  "WHERE id=:id");
-    query.bindValue(":id", id_);
-    query.bindValue(":storage", storage_);
-    query.bindValue(":max_storage", max_storage_);
-    query.bindValue(":upgrade_day", upgrade_day_);
-    query.bindValue(":is_upgrading", is_upgrading_);
-    query.bindValue(":level", level_);
-    query.exec();
+    QString query = "UPDATE Silos SET storage=:storage, max_storage=:max_storage, "
+                    "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level "
+                    "WHERE id=:id";
+    query.replace(":id", QString::number(id_));
+    query.replace(":storage", QString::number(storage_));
+    query.replace(":max_storage", QString::number(max_storage_));
+    query.replace(":upgrade_day", QString::number(upgrade_day_));
+    query.replace(":is_upgrading", QString::number(is_upgrading_));
+    query.replace(":level", QString::number(level_));
+
+    socket.write(query);
 }
 
 Silo &Silo::get(int silo_id)
@@ -52,18 +54,21 @@ Silo &Silo::get(int silo_id)
     {
         silo->id_ = silo_id;
 
-        QSqlQuery query;
-        query.prepare("SELECT storage, max_storage, upgrade_day, is_upgrading, level FROM Silos WHERE id=:id");
-        query.bindValue(":id", silo_id);
-        query.exec();
+        QString query = "SELECT storage, max_storage, upgrade_day, is_upgrading, level FROM Silos WHERE id=:id";
+        query.replace(":id", QString::number(silo_id));
 
-        if (query.first())
+        socket.write(query);
+        QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
+
+        if (!servers_answer.isNull())
         {
-            silo->storage_ = query.value(0).toInt();
-            silo->max_storage_ = query.value(1).toInt();
-            silo->upgrade_day_ = query.value(2).toInt();
-            silo->is_upgrading_ = query.value(3).toInt();
-            silo->level_ = query.value(4).toInt();
+            QJsonObject json_obj = servers_answer.object();
+
+            silo->storage_ = json_obj["0"].toInt();
+            silo->max_storage_ = json_obj["1"].toInt();
+            silo->upgrade_day_ = json_obj["2"].toInt();
+            silo->is_upgrading_ = json_obj["3"].toInt();
+            silo->level_ = json_obj["4"].toInt();
         }
         else
         {
