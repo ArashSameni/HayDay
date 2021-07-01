@@ -1,6 +1,8 @@
 #include "farm.h"
-#include <QSqlQuery>
-#include <QVariant>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include "globals.h"
+#include <QDateTime>
 
 int Farm::id_ = 0;
 Farm *Farm::farm = nullptr;
@@ -14,17 +16,20 @@ Farm &Farm::get(int farm_id)
     {
         farm->id_ = farm_id;
 
-        QSqlQuery query;
-        query.prepare("SELECT barn_id, silo_id, alfalfa_field_id, wheat_field_id FROM Farms WHERE id=:id");
-        query.bindValue(":id", farm_id);
-        query.exec();
+        QString query = "SELECT barn_id, silo_id, alfalfa_field_id, wheat_field_id FROM Farms WHERE id=:id";
+        query.replace(":id", QString::number(farm_id));
 
-        if (query.first())
+        socket.write(query);
+        QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
+
+        if (!servers_answer.isNull())
         {
-            farm->barn_id_ = query.value(0).toInt();
-            farm->silo_id_ = query.value(1).toInt();
-            farm->alfalfa_field_id_ = query.value(2).toInt();
-            farm->wheat_field_id_ = query.value(3).toInt();
+            QJsonObject json_obj = servers_answer.object();
+
+            farm->barn_id_ = json_obj["0"].toInt();
+            farm->silo_id_ = json_obj["1"].toInt();
+            farm->alfalfa_field_id_ = json_obj["2"].toInt();
+            farm->wheat_field_id_ = json_obj["3"].toInt();
         }
         else
         {
@@ -47,14 +52,14 @@ Farm &Farm::create(int barn_id, int silo_id, int alfalfa_field_id, int wheat_fie
     farm->alfalfa_field_id_ = alfalfa_field_id;
     farm->wheat_field_id_ = wheat_field_id;
 
-    QSqlQuery query;
-    query.prepare("INSERT INTO Farms(barn_id, silo_id, alfalfa_field_id, wheat_field_id) VALUES(:barn_id, :silo_id, :alfalfa_field_id, :wheat_field_id)");
-    query.bindValue(":barn_id", barn_id);
-    query.bindValue(":silo_id", silo_id);
-    query.bindValue(":alfalfa_field_id", alfalfa_field_id);
-    query.bindValue(":wheat_field_id", wheat_field_id);
-    query.exec();
+    QString query = "INSERT INTO Farms(barn_id, silo_id, alfalfa_field_id, wheat_field_id) VALUES(:barn_id, :silo_id, :alfalfa_field_id, :wheat_field_id)";
+    query.replace(":barn_id", QString::number(barn_id));
+    query.replace(":silo_id", QString::number(silo_id));
+    query.replace(":alfalfa_field_id", QString::number(alfalfa_field_id));
+    query.replace(":wheat_field_id", QString::number(wheat_field_id));
 
-    id_ = query.lastInsertId().toInt();
+    socket.write(query);
+    id_ = socket.read().toInt();
+
     return *farm;
 }
