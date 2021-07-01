@@ -1,7 +1,8 @@
 #include "barn.h"
-#include <QSqlQuery>
-#include <QVariant>
+#include <QJsonObject>
+#include <QJsonDocument>
 #include "globals.h"
+#include <QDateTime>
 
 int Barn::id_ = 0;
 Barn *Barn::barn = nullptr;
@@ -30,40 +31,42 @@ Barn &Barn::get(int barn_id)
         barn->id_ = barn_id;
         barn->milks_.clear();
 
-        QSqlQuery query;
-        query.prepare("SELECT storage, max_storage, shovels, nails, alfalfas, eggs, wools, upgrade_day, "
-                      "is_upgrading, level FROM Barns WHERE id=:id");
-        query.bindValue(":id", barn_id);
-        query.exec();
+        QString query = "SELECT storage, max_storage, shovels, nails, alfalfas, eggs, wools, upgrade_day, "
+                        "is_upgrading, level FROM Barns WHERE id=:id";
+        query.replace(":id", QString::number(barn_id));
 
-        if (query.first())
+        socket.write(query);
+        QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
+
+        if (!servers_answer.isNull())
         {
-            barn->storage_ = query.value(0).toInt();
-            barn->max_storage_ = query.value(1).toInt();
-            barn->shovels_ = query.value(2).toInt();
-            barn->nails_ = query.value(3).toInt();
-            barn->alfalfas_ = query.value(4).toInt();
-            barn->eggs_ = query.value(5).toInt();
-            barn->wools_ = query.value(6).toInt();
-            barn->upgrade_day_ = query.value(7).toInt();
-            barn->is_upgrading_ = query.value(8).toInt();
-            barn->level_ = query.value(9).toInt();
+            QJsonObject json_obj = servers_answer.object();
+            barn->storage_ = json_obj["0"].toInt();
+            barn->max_storage_ = json_obj["1"].toInt();
+            barn->shovels_ = json_obj["2"].toInt();
+            barn->nails_ = json_obj["3"].toInt();
+            barn->alfalfas_ = json_obj["4"].toInt();
+            barn->eggs_ = json_obj["5"].toInt();
+            barn->wools_ = json_obj["6"].toInt();
+            barn->upgrade_day_ = json_obj["7"].toInt();
+            barn->is_upgrading_ = json_obj["8"].toInt();
+            barn->level_ = json_obj["9"].toInt();
 
-            query.clear();
-            query.prepare("SELECT id, manufacture_day, expiration_day"
-                          " WHERE barn_id=:barn_id");
-            query.bindValue(":barn_id", barn_id);
-            query.exec();
+            //            query = "SELECT id, manufacture_day, expiration_day"
+            //                          " WHERE barn_id=:barn_id";
+            //            query.replace(":barn_id", QString::number(barn_id));
 
-            Milk milk(barn_id);
-            while (query.next())
-            {
-                milk.setId(query.value(0).toInt());
-                milk.setManufactureDay(query.value(1).toInt());
-                milk.setExpirationDay(query.value(0).toInt());
+            //            socket.write(query);
+            //            QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
+            //            Milk milk(barn_id);
+            //            while (query.next())
+            //            {
+            //                milk.setId(query.value(0).toInt());
+            //                milk.setManufactureDay(query.value(1).toInt());
+            //                milk.setExpirationDay(query.value(0).toInt());
 
-                barn->milks_.push_back(milk);
-            }
+            //                barn->milks_.push_back(milk);
+            //            }
         }
         else
         {
@@ -81,33 +84,32 @@ Barn &Barn::create()
         delete barn;
 
     barn = new Barn;
-    QSqlQuery query;
-    query.prepare("INSERT INTO Barns DEFAULT VALUES");
-    query.exec();
+    QString query = "INSERT INTO Barns DEFAULT VALUES";
 
-    id_ = query.lastInsertId().toInt();
+    socket.write(query);
+    id_ = socket.read().toInt();
     return *barn;
 }
 
 void Barn::save() const
 {
-    QSqlQuery query;
-    query.prepare("UPDATE Barns SET storage=:storage, max_storage=:max_storage, "
-                  "shovels=:shovels, nails=:nails, alfalfas=:alfalfas, eggs=:eggs, wools=:wools, "
-                  "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level "
-                  "WHERE id=:id");
+    QString query = "UPDATE Barns SET storage=:storage, max_storage=:max_storage, "
+                    "shovels=:shovels, nails=:nails, alfalfas=:alfalfas, eggs=:eggs, wools=:wools, "
+                    "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level "
+                    "WHERE id=:id";
 
-    query.bindValue(":storage", id_);
-    query.bindValue(":max_storage", max_storage_);
-    query.bindValue(":shovels", shovels_);
-    query.bindValue(":nails", nails_);
-    query.bindValue(":alfalfas", alfalfas_);
-    query.bindValue(":eggs", eggs_);
-    query.bindValue(":wools", wools_);
-    query.bindValue(":upgrade_day", upgrade_day_);
-    query.bindValue(":is_upgrading", is_upgrading_);
-    query.bindValue(":level", level_);
-    query.exec();
+    query.replace(":storage", QString::number(id_));
+    query.replace(":max_storage", QString::number(max_storage_));
+    query.replace(":shovels", QString::number(shovels_));
+    query.replace(":nails", QString::number(nails_));
+    query.replace(":alfalfas", QString::number(alfalfas_));
+    query.replace(":eggs", QString::number(eggs_));
+    query.replace(":wools", QString::number(wools_));
+    query.replace(":upgrade_day", QString::number(upgrade_day_));
+    query.replace(":is_upgrading", QString::number(is_upgrading_));
+    query.replace(":level", QString::number(level_));
+
+    socket.write(query);
 }
 
 void Barn::checkMilksExpiration()
@@ -204,22 +206,21 @@ void Barn::removeMilk(const Milk& milk)
 
 void Milk::save()
 {
-    QSqlQuery query;
-    query.prepare("INSERT INTO Milks(manufacture_day, expiration_day, barn_id) VALUES(:manufacture_day, :expiration_day, :barn_id)");
-    query.bindValue(":manufacture_day", manufacture_day_);
-    query.bindValue(":expiration_day", expiration_day_);
-    query.bindValue(":barn_id", barn_id_);
-    query.exec();
+    QString query = "INSERT INTO Milks(manufacture_day, expiration_day, barn_id)"
+                    " VALUES(:manufacture_day, :expiration_day, :barn_id)";
+    query.replace(":manufacture_day", QString::number(manufacture_day_));
+    query.replace(":expiration_day", QString::number(expiration_day_));
+    query.replace(":barn_id", QString::number(barn_id_));
 
-    id_ = query.lastInsertId().toInt();
+    socket.write(query);
+    id_ = socket.read().toInt();
 }
 
 void Milk::remove()
 {
-    QSqlQuery query;
-    query.prepare("DELETE FROM Milks WHERE id=:id");
-    query.bindValue(":id", id_);
-    query.exec();
+    QString query = "DELETE FROM Milks WHERE id=:id";
+    query.replace(":id", QString::number(id_));
+    socket.write(query);
 }
 
 bool Milk::isExpired()
