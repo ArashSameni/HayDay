@@ -1,4 +1,7 @@
 #include "farmer.h"
+#include <QJsonObject>
+#include <QJsonDocument>
+#include "globals.h"
 #include <QDateTime>
 #include <QSqlQuery>
 #include <QVariant>
@@ -24,21 +27,25 @@ Farmer &Farmer::get(int farmer_id)
     {
         farmer->id_ = farmer_id;
 
-        QSqlQuery query;
-        query.prepare("SELECT nickname, coins, level, xp, max_xp, joining_date, farm_id, account_id FROM farmers WHERE id=:id");
-        query.bindValue(":id", farmer_id);
-        query.exec();
+        QString query = "SELECT nickname, coins, level, xp, max_xp, joining_date, farm_id, account_id"
+                        " FROM farmers WHERE id=:id";
+        query.replace(":id", QString::number(farmer_id));
 
-        if (query.first())
+        socket.write(query);
+        QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
+
+        if (!servers_answer.isNull())
         {
-            farmer->nickname_ = query.value(0).toString();
-            farmer->coins_ = query.value(1).toInt();
-            farmer->level_ = query.value(2).toInt();
-            farmer->xp_ = query.value(3).toInt();
-            farmer->max_xp_ = query.value(4).toInt();
-            farmer->joining_date_ = query.value(5).toUInt();
-            farmer->farm_id_ = query.value(6).toInt();
-            farmer->account_id_ = query.value(7).toInt();
+            QJsonObject json_obj = servers_answer.object();
+
+            farmer->nickname_ = json_obj["0"].toString();
+            farmer->coins_ = json_obj["1"].toInt();
+            farmer->level_ = json_obj["2"].toInt();
+            farmer->xp_ = json_obj["3"].toInt();
+            farmer->max_xp_ = json_obj["4"].toInt();
+            farmer->joining_date_ = static_cast<uint>(json_obj["5"].toInt());
+            farmer->farm_id_ = json_obj["6"].toInt();
+            farmer->account_id_ = json_obj["7"].toInt();
         }
         else
         {
@@ -52,15 +59,15 @@ Farmer &Farmer::get(int farmer_id)
 
 Farmer &Farmer::getByAccountId(int account_id)
 {
-    QSqlQuery query;
-    query.prepare("SELECT id"
-                  " FROM Farmers WHERE account_id=:account_id");
-    query.bindValue(":account_id", account_id);
-    query.exec();
+    QString query = "SELECT id FROM Farmers WHERE account_id=:account_id";
+    query.replace(":account_id", QString::number(account_id));
 
-    if (query.first())
+    socket.write(query);
+    QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
+
+    if (!servers_answer.isNull())
     {
-        return get(query.value(0).toInt());
+        return get(servers_answer.object()["0"].toInt());
     }
     else
     {
@@ -79,35 +86,35 @@ Farmer &Farmer::create(const QString& nickname, int account_id, int farm_id)
     farmer->account_id_ = account_id;
     farmer->farm_id_ = farm_id;
 
-    QSqlQuery query;
-    query.prepare("INSERT INTO Farmers(nickname, account_id, farm_id, joining_date) VALUES(:nickname, :account_id, :farm_id, :joining_date)");
-    query.bindValue(":nickname", nickname);
-    query.bindValue(":account_id", account_id);
-    query.bindValue(":farm_id", farm_id);
-    query.bindValue(":joining_date", farmer->joining_date_);
-    query.exec();
+    QString query = "INSERT INTO Farmers(nickname, account_id, farm_id, joining_date) VALUES(':nickname', :account_id, :farm_id, :joining_date)";
+    query.replace(":nickname", nickname);
+    query.replace(":account_id", QString::number(account_id));
+    query.replace(":farm_id", QString::number(farm_id));
+    query.replace(":joining_date", QString::number(farmer->joining_date_));
 
-    id_ = query.lastInsertId().toInt();
+    socket.write(query);
+    id_ = socket.read().toInt();
+
     return *farmer;
 }
 
 void Farmer::save() const
 {
-    QSqlQuery query;
-    query.prepare("UPDATE Farmers SET nickname=:nickname, coins=:coins, "
+    QString query = "UPDATE Farmers SET nickname=':nickname', coins=:coins, "
                   "level=:level, xp=:xp, "
                   "max_xp=:max_xp, joining_date=:joining_date, farm_id=:farm_id, "
                   "account_id=:account_id "
-                  "WHERE id=:id");
+                  "WHERE id=:id";
 
-    query.bindValue(":id", id_);
-    query.bindValue(":nickname", nickname_);
-    query.bindValue(":coins", coins_);
-    query.bindValue(":level", level_);
-    query.bindValue(":xp", xp_);
-    query.bindValue(":max_xp", max_xp_);
-    query.bindValue(":joining_date", joining_date_);
-    query.bindValue(":farm_id", farm_id_);
-    query.bindValue(":account_id", account_id_);
-    query.exec();
+    query.replace(":id", QString::number(id_));
+    query.replace(":nickname", nickname_);
+    query.replace(":coins", QString::number(coins_));
+    query.replace(":level", QString::number(level_));
+    query.replace(":xp", QString::number(xp_));
+    query.replace(":max_xp", QString::number(max_xp_));
+    query.replace(":joining_date", QString::number(joining_date_));
+    query.replace(":farm_id", QString::number(farm_id_));
+    query.replace(":account_id", QString::number(account_id_));
+
+    socket.write(query);
 }

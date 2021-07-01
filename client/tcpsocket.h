@@ -14,6 +14,7 @@ public:
 
     void write(const QString &data);
     void write(const QByteArray &data);
+
     QByteArray read();
 };
 
