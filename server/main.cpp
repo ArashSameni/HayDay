@@ -1,5 +1,4 @@
 #include <QCoreApplication>
-#include <QSqlDatabase>
 #include "tcpserver.h"
 
 int main(int argc, char *argv[])

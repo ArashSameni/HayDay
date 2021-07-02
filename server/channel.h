@@ -17,6 +17,7 @@ private:
     QSqlDatabase db;
     int login(const QString& username, const QString& password);
     int signUp(const QString& username, const QString& password);
+    QJsonDocument select(const QString& query_string);
     bool userExist(const QString& username);
 
 public:

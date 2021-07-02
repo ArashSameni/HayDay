@@ -1,6 +1,9 @@
 #include "channel.h"
 #include <QSqlQuery>
 #include <QCryptographicHash>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QSqlRecord>
 
 int Channel::login(const QString& username, const QString& password)
 {
@@ -29,6 +32,26 @@ int Channel::signUp(const QString &username, const QString &password)
     query.exec();
 
     return query.lastInsertId().toInt();
+}
+
+QJsonDocument Channel::select(const QString &query_string)
+{
+    QSqlQuery query(db);
+    query.exec(query_string);
+
+    QJsonObject obj;
+    int result_number = 0;
+    while (query.next())
+    {
+        QJsonObject data;
+        for (int i = 0; i < query.record().count(); i++)
+            data[QString::number(i)] = query.value(i).toString();
+
+        obj[QString::number(result_number)] = data;
+        result_number++;
+    }
+
+    return QJsonDocument(obj);
 }
 
 bool Channel::userExist(const QString &username)
@@ -67,12 +90,14 @@ void Channel::run()
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()), Qt::DirectConnection);
     connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
     qDebug() << socketDescriptor << " Client connected";
+
     exec();
 }
 
 void Channel::readyRead()
 {
     QString data = socket->readAll();
+    QByteArray answer;
     if(data.startsWith("Login"))
     {
         data.remove("Login(");
@@ -82,7 +107,8 @@ void Channel::readyRead()
         qDebug() << "Logging in " << username << ":" << password;
 
         int account_id = login(username, password);
-        data.setNum(account_id);
+        answer.setNum(account_id);
+        socket->write(answer);
     }
     else if(data.startsWith("Signup"))
     {
@@ -96,10 +122,25 @@ void Channel::readyRead()
         if(!userExist(username))
             account_id = signUp(username, password);
 
-        data.setNum(account_id);
+        answer.setNum(account_id);
+        socket->write(answer);
     }
-
-    socket->write(data.toUtf8());
+    else if(data.startsWith("SELECT"))
+    {
+        socket->write(select(data).toJson());
+    }
+    else if(data.startsWith("INSERT"))
+    {
+        QSqlQuery query(db);
+        query.exec(data);
+        answer.setNum(query.lastInsertId().toInt());
+        socket->write(answer);
+    }
+    else if(data.startsWith("UPDATE") || data.startsWith("DELETE"))
+    {
+        QSqlQuery query(db);
+        query.exec(data);
+    }
 }
 
 void Channel::disconnected()
