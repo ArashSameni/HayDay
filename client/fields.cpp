@@ -43,7 +43,7 @@ WheatField &WheatField::get(int wheat_field_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object();
+            QJsonObject json_obj = servers_answer.object()["0"].toObject();
 
             wheat_field->area_ = json_obj["0"].toInt();
             wheat_field->planted_area_ = json_obj["1"].toInt();
@@ -127,7 +127,7 @@ AlfalfaField &AlfalfaField::get(int alfalfa_field_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object();
+            QJsonObject json_obj = servers_answer.object()["0"].toObject();
 
             alfalfa_field->area_ = json_obj["0"].toInt();
             alfalfa_field->planted_area_ = json_obj["1"].toInt();

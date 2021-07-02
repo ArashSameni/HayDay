@@ -26,7 +26,7 @@ void LivingPlace::get(LivingPlace &living_place, int living_place_id)
 
     if (!servers_answer.isNull())
     {
-        QJsonObject json_obj = servers_answer.object();
+        QJsonObject json_obj = servers_answer.object()["0"].toObject();
 
         living_place.type_ = json_obj["0"].toInt();
         living_place.storage_ = json_obj["1"].toInt();

@@ -40,7 +40,7 @@ Barn &Barn::get(int barn_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object();
+            QJsonObject json_obj = servers_answer.object()["0"].toObject();
             barn->storage_ = json_obj["0"].toInt();
             barn->max_storage_ = json_obj["1"].toInt();
             barn->shovels_ = json_obj["2"].toInt();
@@ -52,21 +52,27 @@ Barn &Barn::get(int barn_id)
             barn->is_upgrading_ = json_obj["8"].toInt();
             barn->level_ = json_obj["9"].toInt();
 
-            //            query = "SELECT id, manufacture_day, expiration_day"
-            //                          " WHERE barn_id=:barn_id";
-            //            query.replace(":barn_id", QString::number(barn_id));
+            query.clear();
+            query = "SELECT id, manufacture_day, expiration_day"
+                          " WHERE barn_id=:barn_id";
+            query.replace(":barn_id", QString::number(barn_id));
 
-            //            socket.write(query);
-            //            QJsonDocument servers_answer = QJsonDocument::fromJson(socket.read());
-            //            Milk milk(barn_id);
-            //            while (query.next())
-            //            {
-            //                milk.setId(query.value(0).toInt());
-            //                milk.setManufactureDay(query.value(1).toInt());
-            //                milk.setExpirationDay(query.value(0).toInt());
+            socket.write(query);
+            servers_answer = QJsonDocument::fromJson(socket.read());
+            Milk milk(barn_id);
+            if (!servers_answer.isNull())
+            {
+                QJsonObject json_obj = servers_answer.object();
+                for (int i = 0; i < json_obj.size(); i++)
+                {
+                    QJsonObject data = json_obj[QString::number(i)].toObject();
+                    milk.setId(data["0"].toInt());
+                    milk.setManufactureDay(data["1"].toInt());
+                    milk.setExpirationDay(data["2"].toInt());
 
-            //                barn->milks_.push_back(milk);
-            //            }
+                    barn->milks_.push_back(milk);
+                }
+            }
         }
         else
         {

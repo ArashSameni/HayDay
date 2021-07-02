@@ -62,7 +62,7 @@ Silo &Silo::get(int silo_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object();
+            QJsonObject json_obj = servers_answer.object()["0"].toObject();
 
             silo->storage_ = json_obj["0"].toInt();
             silo->max_storage_ = json_obj["1"].toInt();

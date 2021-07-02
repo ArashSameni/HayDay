@@ -24,7 +24,7 @@ Farm &Farm::get(int farm_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object();
+            QJsonObject json_obj = servers_answer.object()["0"].toObject();
 
             farm->barn_id_ = json_obj["0"].toInt();
             farm->silo_id_ = json_obj["1"].toInt();

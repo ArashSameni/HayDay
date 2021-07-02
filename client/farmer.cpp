@@ -35,7 +35,7 @@ Farmer &Farmer::get(int farmer_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object();
+            QJsonObject json_obj = servers_answer.object()["0"].toObject();
 
             farmer->nickname_ = json_obj["0"].toString();
             farmer->gender_ = json_obj["1"].toInt();
@@ -67,7 +67,7 @@ Farmer &Farmer::getByAccountId(int account_id)
 
     if (!servers_answer.isNull())
     {
-        return get(servers_answer.object()["0"].toInt());
+        return get(servers_answer.object()["0"].toObject()["0"].toInt());
     }
     else
     {
