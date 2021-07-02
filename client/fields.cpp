@@ -1,5 +1,5 @@
 #include "fields.h"
-#include <QJsonObject>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include "globals.h"
 #include <QDateTime>
@@ -43,15 +43,15 @@ WheatField &WheatField::get(int wheat_field_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object()["0"].toObject();
+            QJsonArray data = servers_answer.array()[0].toArray();
 
-            wheat_field->area_ = json_obj["0"].toInt();
-            wheat_field->planted_area_ = json_obj["1"].toInt();
-            wheat_field->plants_condition_ = json_obj["2"].toInt();
-            wheat_field->planting_day_ = json_obj["3"].toInt();
-            wheat_field->upgrade_day_ = json_obj["4"].toInt();
-            wheat_field->is_upgrading_ = json_obj["5"].toInt();
-            wheat_field->level_ = json_obj["6"].toInt();
+            wheat_field->area_ = data[0].toInt();
+            wheat_field->planted_area_ = data[1].toInt();
+            wheat_field->plants_condition_ = data[2].toInt();
+            wheat_field->planting_day_ = data[3].toInt();
+            wheat_field->upgrade_day_ = data[4].toInt();
+            wheat_field->is_upgrading_ = data[5].toInt();
+            wheat_field->level_ = data[6].toInt();
         }
         else
         {
@@ -127,17 +127,17 @@ AlfalfaField &AlfalfaField::get(int alfalfa_field_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object()["0"].toObject();
+            QJsonArray data = servers_answer.array()[0].toArray();
 
-            alfalfa_field->area_ = json_obj["0"].toInt();
-            alfalfa_field->planted_area_ = json_obj["1"].toInt();
-            alfalfa_field->plants_condition_ = json_obj["2"].toInt();
-            alfalfa_field->planting_day_ = json_obj["3"].toInt();
-            alfalfa_field->upgrade_day_ = json_obj["4"].toInt();
-            alfalfa_field->is_upgrading_ = json_obj["5"].toInt();
-            alfalfa_field->level_ = json_obj["6"].toInt();
-            alfalfa_field->plowing_condition_ = json_obj["7"].toInt();
-            alfalfa_field->plowing_day_ = json_obj["8"].toInt();
+            alfalfa_field->area_ = data[0].toInt();
+            alfalfa_field->planted_area_ = data[1].toInt();
+            alfalfa_field->plants_condition_ = data[2].toInt();
+            alfalfa_field->planting_day_ = data[3].toInt();
+            alfalfa_field->upgrade_day_ = data[4].toInt();
+            alfalfa_field->is_upgrading_ = data[5].toInt();
+            alfalfa_field->level_ = data[6].toInt();
+            alfalfa_field->plowing_condition_ = data[7].toInt();
+            alfalfa_field->plowing_day_ = data[8].toInt();
         }
         else
         {

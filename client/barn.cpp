@@ -1,5 +1,5 @@
 #include "barn.h"
-#include <QJsonObject>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include "globals.h"
 #include <QDateTime>
@@ -40,17 +40,17 @@ Barn &Barn::get(int barn_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object()["0"].toObject();
-            barn->storage_ = json_obj["0"].toInt();
-            barn->max_storage_ = json_obj["1"].toInt();
-            barn->shovels_ = json_obj["2"].toInt();
-            barn->nails_ = json_obj["3"].toInt();
-            barn->alfalfas_ = json_obj["4"].toInt();
-            barn->eggs_ = json_obj["5"].toInt();
-            barn->wools_ = json_obj["6"].toInt();
-            barn->upgrade_day_ = json_obj["7"].toInt();
-            barn->is_upgrading_ = json_obj["8"].toInt();
-            barn->level_ = json_obj["9"].toInt();
+            QJsonArray datas = servers_answer.array()[0].toArray();
+            barn->storage_ = datas[0].toInt();
+            barn->max_storage_ = datas[1].toInt();
+            barn->shovels_ = datas[2].toInt();
+            barn->nails_ = datas[3].toInt();
+            barn->alfalfas_ = datas[4].toInt();
+            barn->eggs_ = datas[5].toInt();
+            barn->wools_ = datas[6].toInt();
+            barn->upgrade_day_ = datas[7].toInt();
+            barn->is_upgrading_ = datas[8].toInt();
+            barn->level_ = datas[9].toInt();
 
             query.clear();
             query = "SELECT id, manufacture_day, expiration_day"
@@ -62,13 +62,13 @@ Barn &Barn::get(int barn_id)
             Milk milk(barn_id);
             if (!servers_answer.isNull())
             {
-                QJsonObject json_obj = servers_answer.object();
-                for (int i = 0; i < json_obj.size(); i++)
+                datas = servers_answer.array();
+                for (int i = 0; i < datas.size(); i++)
                 {
-                    QJsonObject data = json_obj[QString::number(i)].toObject();
-                    milk.setId(data["0"].toInt());
-                    milk.setManufactureDay(data["1"].toInt());
-                    milk.setExpirationDay(data["2"].toInt());
+                    QJsonArray data = datas[i].toArray();
+                    milk.setId(data[0].toInt());
+                    milk.setManufactureDay(data[1].toInt());
+                    milk.setExpirationDay(data[2].toInt());
 
                     barn->milks_.push_back(milk);
                 }

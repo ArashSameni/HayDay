@@ -4,6 +4,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QSqlRecord>
+#include <QJsonArray>
 
 int Channel::login(const QString& username, const QString& password)
 {
@@ -39,19 +40,18 @@ QJsonDocument Channel::select(const QString &query_string)
     QSqlQuery query(db);
     query.exec(query_string);
 
-    QJsonObject obj;
+    QJsonArray results;
     int result_number = 0;
     while (query.next())
     {
-        QJsonObject data;
+        QJsonArray data;
         for (int i = 0; i < query.record().count(); i++)
-            data[QString::number(i)] = query.value(i).toString();
+            data.append(query.value(i).toString());
 
-        obj[QString::number(result_number)] = data;
+        results.append(data);
         result_number++;
     }
-
-    return QJsonDocument(obj);
+    return QJsonDocument(results);
 }
 
 bool Channel::userExist(const QString &username)

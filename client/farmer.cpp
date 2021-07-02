@@ -1,5 +1,5 @@
 #include "farmer.h"
-#include <QJsonObject>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include "globals.h"
 #include <QDateTime>
@@ -35,17 +35,17 @@ Farmer &Farmer::get(int farmer_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object()["0"].toObject();
+            QJsonArray data = servers_answer.array()[0].toArray();
 
-            farmer->nickname_ = json_obj["0"].toString();
-            farmer->gender_ = json_obj["1"].toInt();
-            farmer->coins_ = json_obj["2"].toInt();
-            farmer->level_ = json_obj["3"].toInt();
-            farmer->xp_ = json_obj["4"].toInt();
-            farmer->max_xp_ = json_obj["5"].toInt();
-            farmer->joining_date_ = static_cast<uint>(json_obj["6"].toInt());
-            farmer->farm_id_ = json_obj["7"].toInt();
-            farmer->account_id_ = json_obj["8"].toInt();
+            farmer->nickname_ = data[0].toString();
+            farmer->gender_ = data[1].toInt();
+            farmer->coins_ = data[2].toInt();
+            farmer->level_ = data[3].toInt();
+            farmer->xp_ = data[4].toInt();
+            farmer->max_xp_ = data[5].toInt();
+            farmer->joining_date_ = static_cast<uint>(data[6].toInt());
+            farmer->farm_id_ = data[7].toInt();
+            farmer->account_id_ = data[8].toInt();
         }
         else
         {
@@ -67,7 +67,7 @@ Farmer &Farmer::getByAccountId(int account_id)
 
     if (!servers_answer.isNull())
     {
-        return get(servers_answer.object()["0"].toObject()["0"].toInt());
+        return get(servers_answer.array()[0].toArray()[0].toInt());
     }
     else
     {

@@ -1,5 +1,5 @@
 #include "livingplaces.h"
-#include <QJsonObject>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include "globals.h"
 #include <QDateTime>
@@ -26,17 +26,17 @@ void LivingPlace::get(LivingPlace &living_place, int living_place_id)
 
     if (!servers_answer.isNull())
     {
-        QJsonObject json_obj = servers_answer.object()["0"].toObject();
+        QJsonArray data = servers_answer.array()[0].toArray();
 
-        living_place.type_ = json_obj["0"].toInt();
-        living_place.storage_ = json_obj["1"].toInt();
-        living_place.max_storage_ = json_obj["2"].toInt();
-        living_place.animals_condition_ = json_obj["3"].toInt();
-        living_place.feeding_day_ = json_obj["4"].toInt();
-        living_place.upgrade_day_ = json_obj["5"].toInt();
-        living_place.is_upgrading_ = json_obj["6"].toInt();
-        living_place.level_ = json_obj["7"].toInt();
-        living_place.farm_id_ = json_obj["8"].toInt();
+        living_place.type_ = data[0].toInt();
+        living_place.storage_ = data[1].toInt();
+        living_place.max_storage_ = data[2].toInt();
+        living_place.animals_condition_ = data[3].toInt();
+        living_place.feeding_day_ = data[4].toInt();
+        living_place.upgrade_day_ = data[5].toInt();
+        living_place.is_upgrading_ = data[6].toInt();
+        living_place.level_ = data[7].toInt();
+        living_place.farm_id_ = data[8].toInt();
     }
     else
     {
@@ -57,8 +57,7 @@ int LivingPlace::getLivingPlaceIdByFarmId(int farm_id, int type)
 
     if (!servers_answer.isNull())
     {
-        QJsonObject json_obj = servers_answer.object();
-        return json_obj["0"].toInt();
+        return servers_answer.array()[0].toArray()[0].toInt();
     }
     else
     {

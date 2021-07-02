@@ -1,5 +1,5 @@
 #include "silo.h"
-#include <QJsonObject>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include "globals.h"
 #include <QDateTime>
@@ -62,13 +62,13 @@ Silo &Silo::get(int silo_id)
 
         if (!servers_answer.isNull())
         {
-            QJsonObject json_obj = servers_answer.object()["0"].toObject();
+            QJsonArray json_obj = servers_answer.array()[0].toArray();
 
-            silo->storage_ = json_obj["0"].toInt();
-            silo->max_storage_ = json_obj["1"].toInt();
-            silo->upgrade_day_ = json_obj["2"].toInt();
-            silo->is_upgrading_ = json_obj["3"].toInt();
-            silo->level_ = json_obj["4"].toInt();
+            silo->storage_ = json_obj[0].toInt();
+            silo->max_storage_ = json_obj[1].toInt();
+            silo->upgrade_day_ = json_obj[2].toInt();
+            silo->is_upgrading_ = json_obj[3].toInt();
+            silo->level_ = json_obj[4].toInt();
         }
         else
         {
