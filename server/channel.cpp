@@ -13,15 +13,7 @@ int Channel::login(const QString& username, const QString& password)
     query.exec();
 
     if (query.first())
-    {
-        int account_id = query.value(0).toInt();
-        query.clear();
-        query.prepare("SELECT id FROM Farmers WHERE account_id=:account_id");
-        query.bindValue(":account_id", account_id);
-        query.exec();
-        query.first();
         return query.value(0).toInt();
-    }
 
     return 0;
 }
@@ -89,8 +81,8 @@ void Channel::readyRead()
         password.chop(1);
         qDebug() << "Logging in " << username << ":" << password;
 
-        int farmer_id = login(username, password);
-        data.setNum(farmer_id);
+        int account_id = login(username, password);
+        data.setNum(account_id);
     }
     else if(data.startsWith("Signup"))
     {

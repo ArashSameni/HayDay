@@ -9,6 +9,7 @@ class Farmer
     static Farmer *farmer;
 
     QString nickname_;
+    int gender_;
     int coins_;
     int level_;
     int xp_;
@@ -20,12 +21,11 @@ class Farmer
     Farmer();
 
 public:
-    Farmer(Farmer const &) = delete;
     void operator=(Farmer const &) = delete;
 
     static Farmer &get(int farmer_id);
     static Farmer &getByAccountId(int account_id);
-    static Farmer &create(const QString &nickname, int account_id, int farm_id);
+    static Farmer &create(const QString &nickname, int gender_, int account_id, int farm_id);
     static int id() { return id_; }
     void save() const;
 

@@ -18,31 +18,12 @@
   </property>
   <property name="styleSheet">
    <string notr="true">*{
-	font: 18pt &quot;IRANSans Light&quot;;
+	font: &quot;IRANSans Light&quot;;
 	color: #494949;
 }
 
-QLineEdit, QComboBox{
-	color: #6c6c6c;
-	padding: 8px 12px;
-	border-radius: 9px;
-	background-color: #f1f1f1;
-	font: 14pt &quot;IRANSans&quot;;
-}
-
-QPushButton#btnLogin, QPushButton#btnSignup{
-	color: #fff;
-	background-color: #45b649;
-	border-radius: 10px;
-	font: 15pt &quot;IRANSans&quot;;
-}
-
-QPushButton#btnLogin:hover, QPushButton#btnSignup:hover{
-	background-color: rgb(63, 166, 66);
-}
-
 #LoginWindow {
-	background-color: rgb(255, 255, 255);
+	background-color: #fff;
 }</string>
   </property>
   <widget class="QFrame" name="frame">
@@ -68,10 +49,10 @@ QPushButton#btnLogin:hover, QPushButton#btnSignup:hover{
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>160</y>
-      <width>311</width>
-      <height>261</height>
+      <x>65</x>
+      <y>177</y>
+      <width>310</width>
+      <height>235</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -95,7 +76,30 @@ QPushButton#btnLogin:hover, QPushButton#btnSignup:hover{
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">*{
+	font: 18pt &quot;IRANSans Light&quot;;
+}
+
+QLineEdit{
+	color: #6c6c6c;
+	padding: 8px 12px;
+	border-radius: 9px;
+	background-color: #f1f1f1;
+	font: 14pt &quot;IRANSans&quot;;
+}
+
+QPushButton#btnLogin{
+	color: #fff;
+	background-color: #45b649;
+	border-radius: 10px;
+	font: 15pt &quot;IRANSans&quot;;
+}
+
+QPushButton#btnLogin:hover{
+	background-color: rgb(63, 166, 66);
+}
+
+</string>
    </property>
    <property name="title">
     <string>Login</string>
@@ -103,7 +107,7 @@ QPushButton#btnLogin:hover, QPushButton#btnSignup:hover{
    <property name="flat">
     <bool>false</bool>
    </property>
-   <widget class="QLineEdit" name="txtUsername">
+   <widget class="QLineEdit" name="txtLoginUsername">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -161,7 +165,7 @@ QPushButton#btnLogin:hover, QPushButton#btnSignup:hover{
      <string>Username</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="txtPassword">
+   <widget class="QLineEdit" name="txtLoginPassword">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -215,10 +219,36 @@ QPushButton:hover{
      <height>551</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">*{
+	font: 18pt &quot;IRANSans Light&quot;;
+}
+
+QLineEdit, QComboBox{
+	color: #6c6c6c;
+	padding: 8px 12px;
+	border-radius: 9px;
+	background-color: #f1f1f1;
+	font: 14pt &quot;IRANSans&quot;;
+}
+
+QPushButton#btnSignup{
+	color: #fff;
+	background-color: #45b649;
+	border-radius: 10px;
+	font: 15pt &quot;IRANSans&quot;;
+}
+
+QPushButton#btnSignup:hover{
+	background-color: rgb(63, 166, 66);
+}
+
+</string>
+   </property>
    <property name="title">
     <string>Signup</string>
    </property>
-   <widget class="QLineEdit" name="txtUsername_2">
+   <widget class="QLineEdit" name="txtSignupUsername">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -276,7 +306,7 @@ QPushButton:hover{
      <string>Username</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="txtPassword_2">
+   <widget class="QLineEdit" name="txtSignupPassword">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -305,7 +335,7 @@ QPushButton:hover{
      <string>Nickname</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="txtUsername_3">
+   <widget class="QLineEdit" name="txtNickName">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -334,7 +364,7 @@ QPushButton:hover{
      <string>Gender</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="cmbGender">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -388,8 +418,8 @@ QPushButton:hover{
   <zorder>frame</zorder>
  </widget>
  <tabstops>
-  <tabstop>txtUsername</tabstop>
-  <tabstop>txtPassword</tabstop>
+  <tabstop>txtLoginUsername</tabstop>
+  <tabstop>txtLoginPassword</tabstop>
   <tabstop>btnLogin</tabstop>
  </tabstops>
  <resources/>

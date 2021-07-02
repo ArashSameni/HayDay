@@ -8,7 +8,7 @@
 class Auth
 {
 public:
-    int loginAndGetFarmerId(const QString &username, const QString &password);
+    int login(const QString &username, const QString &password);
     int signup(const QString &username, const QString &password);
 };
 

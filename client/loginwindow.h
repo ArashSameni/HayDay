@@ -20,8 +20,13 @@ private slots:
 
     void on_lblLogin_clicked();
 
+    void on_btnSignup_clicked();
+
+    void on_btnLogin_clicked();
+
 private:
     Ui::LoginWindow *ui;
+    bool isPasswordStrong(const QString& password);
 };
 
 #endif // LOGINWINDOW_H
