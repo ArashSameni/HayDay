@@ -96,9 +96,8 @@ void LoginWindow::on_btnLogin_clicked()
     int account_id = auth.login(username, password);
     if(account_id)
     {
-        QMessageBox::warning(this, "Error", QString::number(account_id));
         Farmer farmer = Farmer::getByAccountId(account_id);
-        QMessageBox::warning(this, "Error", farmer.nickname());
+        QMessageBox::warning(this, "Error", QString::number(farmer.coins()));
         //...
     }
     else

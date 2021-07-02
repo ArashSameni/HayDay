@@ -41,16 +41,16 @@ Barn &Barn::get(int barn_id)
         if (!servers_answer.isNull())
         {
             QJsonArray datas = servers_answer.array()[0].toArray();
-            barn->storage_ = datas[0].toInt();
-            barn->max_storage_ = datas[1].toInt();
-            barn->shovels_ = datas[2].toInt();
-            barn->nails_ = datas[3].toInt();
-            barn->alfalfas_ = datas[4].toInt();
-            barn->eggs_ = datas[5].toInt();
-            barn->wools_ = datas[6].toInt();
-            barn->upgrade_day_ = datas[7].toInt();
-            barn->is_upgrading_ = datas[8].toInt();
-            barn->level_ = datas[9].toInt();
+            barn->storage_ = datas[0].toString().toInt();
+            barn->max_storage_ = datas[1].toString().toInt();
+            barn->shovels_ = datas[2].toString().toInt();
+            barn->nails_ = datas[3].toString().toInt();
+            barn->alfalfas_ = datas[4].toString().toInt();
+            barn->eggs_ = datas[5].toString().toInt();
+            barn->wools_ = datas[6].toString().toInt();
+            barn->upgrade_day_ = datas[7].toString().toInt();
+            barn->is_upgrading_ = datas[8].toString().toInt();
+            barn->level_ = datas[9].toString().toInt();
 
             query.clear();
             query = "SELECT id, manufacture_day, expiration_day"
@@ -66,9 +66,9 @@ Barn &Barn::get(int barn_id)
                 for (int i = 0; i < datas.size(); i++)
                 {
                     QJsonArray data = datas[i].toArray();
-                    milk.setId(data[0].toInt());
-                    milk.setManufactureDay(data[1].toInt());
-                    milk.setExpirationDay(data[2].toInt());
+                    milk.setId(data[0].toString().toInt());
+                    milk.setManufactureDay(data[1].toString().toInt());
+                    milk.setExpirationDay(data[2].toString().toInt());
 
                     barn->milks_.push_back(milk);
                 }

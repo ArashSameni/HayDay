@@ -45,13 +45,13 @@ WheatField &WheatField::get(int wheat_field_id)
         {
             QJsonArray data = servers_answer.array()[0].toArray();
 
-            wheat_field->area_ = data[0].toInt();
-            wheat_field->planted_area_ = data[1].toInt();
-            wheat_field->plants_condition_ = data[2].toInt();
-            wheat_field->planting_day_ = data[3].toInt();
-            wheat_field->upgrade_day_ = data[4].toInt();
-            wheat_field->is_upgrading_ = data[5].toInt();
-            wheat_field->level_ = data[6].toInt();
+            wheat_field->area_ = data[0].toString().toInt();
+            wheat_field->planted_area_ = data[1].toString().toInt();
+            wheat_field->plants_condition_ = data[2].toString().toInt();
+            wheat_field->planting_day_ = data[3].toString().toInt();
+            wheat_field->upgrade_day_ = data[4].toString().toInt();
+            wheat_field->is_upgrading_ = data[5].toString().toInt();
+            wheat_field->level_ = data[6].toString().toInt();
         }
         else
         {
@@ -129,15 +129,15 @@ AlfalfaField &AlfalfaField::get(int alfalfa_field_id)
         {
             QJsonArray data = servers_answer.array()[0].toArray();
 
-            alfalfa_field->area_ = data[0].toInt();
-            alfalfa_field->planted_area_ = data[1].toInt();
-            alfalfa_field->plants_condition_ = data[2].toInt();
-            alfalfa_field->planting_day_ = data[3].toInt();
-            alfalfa_field->upgrade_day_ = data[4].toInt();
-            alfalfa_field->is_upgrading_ = data[5].toInt();
-            alfalfa_field->level_ = data[6].toInt();
-            alfalfa_field->plowing_condition_ = data[7].toInt();
-            alfalfa_field->plowing_day_ = data[8].toInt();
+            alfalfa_field->area_ = data[0].toString().toInt();
+            alfalfa_field->planted_area_ = data[1].toString().toInt();
+            alfalfa_field->plants_condition_ = data[2].toString().toInt();
+            alfalfa_field->planting_day_ = data[3].toString().toInt();
+            alfalfa_field->upgrade_day_ = data[4].toString().toInt();
+            alfalfa_field->is_upgrading_ = data[5].toString().toInt();
+            alfalfa_field->level_ = data[6].toString().toInt();
+            alfalfa_field->plowing_condition_ = data[7].toString().toInt();
+            alfalfa_field->plowing_day_ = data[8].toString().toInt();
         }
         else
         {

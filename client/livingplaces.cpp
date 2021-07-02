@@ -28,15 +28,15 @@ void LivingPlace::get(LivingPlace &living_place, int living_place_id)
     {
         QJsonArray data = servers_answer.array()[0].toArray();
 
-        living_place.type_ = data[0].toInt();
-        living_place.storage_ = data[1].toInt();
-        living_place.max_storage_ = data[2].toInt();
-        living_place.animals_condition_ = data[3].toInt();
-        living_place.feeding_day_ = data[4].toInt();
-        living_place.upgrade_day_ = data[5].toInt();
-        living_place.is_upgrading_ = data[6].toInt();
-        living_place.level_ = data[7].toInt();
-        living_place.farm_id_ = data[8].toInt();
+        living_place.type_ = data[0].toString().toInt();
+        living_place.storage_ = data[1].toString().toInt();
+        living_place.max_storage_ = data[2].toString().toInt();
+        living_place.animals_condition_ = data[3].toString().toInt();
+        living_place.feeding_day_ = data[4].toString().toInt();
+        living_place.upgrade_day_ = data[5].toString().toInt();
+        living_place.is_upgrading_ = data[6].toString().toInt();
+        living_place.level_ = data[7].toString().toInt();
+        living_place.farm_id_ = data[8].toString().toInt();
     }
     else
     {
@@ -57,7 +57,7 @@ int LivingPlace::getLivingPlaceIdByFarmId(int farm_id, int type)
 
     if (!servers_answer.isNull())
     {
-        return servers_answer.array()[0].toArray()[0].toInt();
+        return servers_answer.array()[0].toArray()[0].toString().toInt();
     }
     else
     {

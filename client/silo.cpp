@@ -64,11 +64,11 @@ Silo &Silo::get(int silo_id)
         {
             QJsonArray json_obj = servers_answer.array()[0].toArray();
 
-            silo->storage_ = json_obj[0].toInt();
-            silo->max_storage_ = json_obj[1].toInt();
-            silo->upgrade_day_ = json_obj[2].toInt();
-            silo->is_upgrading_ = json_obj[3].toInt();
-            silo->level_ = json_obj[4].toInt();
+            silo->storage_ = json_obj[0].toString().toInt();
+            silo->max_storage_ = json_obj[1].toString().toInt();
+            silo->upgrade_day_ = json_obj[2].toString().toInt();
+            silo->is_upgrading_ = json_obj[3].toString().toInt();
+            silo->level_ = json_obj[4].toString().toInt();
         }
         else
         {

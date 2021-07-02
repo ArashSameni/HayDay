@@ -26,10 +26,10 @@ Farm &Farm::get(int farm_id)
         {
             QJsonArray data = servers_answer.array()[0].toArray();
 
-            farm->barn_id_ = data[0].toInt();
-            farm->silo_id_ = data[1].toInt();
-            farm->alfalfa_field_id_ = data[2].toInt();
-            farm->wheat_field_id_ = data[3].toInt();
+            farm->barn_id_ = data[0].toString().toInt();
+            farm->silo_id_ = data[1].toString().toInt();
+            farm->alfalfa_field_id_ = data[2].toString().toInt();
+            farm->wheat_field_id_ = data[3].toString().toInt();
         }
         else
         {

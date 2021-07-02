@@ -38,14 +38,14 @@ Farmer &Farmer::get(int farmer_id)
             QJsonArray data = servers_answer.array()[0].toArray();
 
             farmer->nickname_ = data[0].toString();
-            farmer->gender_ = data[1].toInt();
-            farmer->coins_ = data[2].toInt();
-            farmer->level_ = data[3].toInt();
-            farmer->xp_ = data[4].toInt();
-            farmer->max_xp_ = data[5].toInt();
-            farmer->joining_date_ = static_cast<uint>(data[6].toInt());
-            farmer->farm_id_ = data[7].toInt();
-            farmer->account_id_ = data[8].toInt();
+            farmer->gender_ = data[1].toString().toInt();
+            farmer->coins_ = data[2].toString().toInt();
+            farmer->level_ = data[3].toString().toInt();
+            farmer->xp_ = data[4].toString().toInt();
+            farmer->max_xp_ = data[5].toString().toInt();
+            farmer->joining_date_ = data[6].toString().toUInt();
+            farmer->farm_id_ = data[7].toString().toInt();
+            farmer->account_id_ = data[8].toString().toInt();
         }
         else
         {
@@ -67,7 +67,7 @@ Farmer &Farmer::getByAccountId(int account_id)
 
     if (!servers_answer.isNull())
     {
-        return get(servers_answer.array()[0].toArray()[0].toInt());
+        return get(servers_answer.array()[0].toArray()[0].toString().toInt());
     }
     else
     {
