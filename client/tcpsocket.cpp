@@ -2,7 +2,7 @@
 
 TcpSocket::TcpSocket()
 {
-    connectToServer();
+    //connectToServer();
 }
 
 TcpSocket::~TcpSocket()
