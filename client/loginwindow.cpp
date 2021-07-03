@@ -26,22 +26,12 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::on_lblSignup_clicked()
 {
-    ui->txtLoginUsername->clear();
-    ui->txtLoginPassword->clear();
-
-    ui->gboxLogin->setVisible(false);
-    ui->gboxSignup->setVisible(true);
+    showSignup();
 }
 
 void LoginWindow::on_lblLogin_clicked()
 {
-    ui->txtSignupUsername->clear();
-    ui->txtSignupPassword->clear();
-    ui->txtNickName->clear();
-    ui->cmbGender->setCurrentIndex(0);
-
-    ui->gboxSignup->setVisible(false);
-    ui->gboxLogin->setVisible(true);
+    showLogin();
 }
 
 void LoginWindow::on_btnSignup_clicked()
@@ -79,6 +69,9 @@ void LoginWindow::on_btnSignup_clicked()
 
 
         QMessageBox::information(this, "Info", "Account has been created successfully.");
+
+        showLogin();
+        ui->txtLoginUsername->setText(username);
     }
     else
         QMessageBox::warning(this, "Error", "Username already exists.");
@@ -114,4 +107,24 @@ void LoginWindow::on_btnLogin_clicked()
 bool LoginWindow::isPasswordStrong(const QString &password)
 {
     return password.size() >= 4;
+}
+
+void LoginWindow::showSignup()
+{
+    ui->txtLoginUsername->clear();
+    ui->txtLoginPassword->clear();
+
+    ui->gboxLogin->setVisible(false);
+    ui->gboxSignup->setVisible(true);
+}
+
+void LoginWindow::showLogin()
+{
+    ui->txtSignupUsername->clear();
+    ui->txtSignupPassword->clear();
+    ui->txtNickName->clear();
+    ui->cmbGender->setCurrentIndex(0);
+
+    ui->gboxSignup->setVisible(false);
+    ui->gboxLogin->setVisible(true);
 }

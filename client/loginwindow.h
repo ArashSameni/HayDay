@@ -27,6 +27,8 @@ private slots:
 private:
     Ui::LoginWindow *ui;
     bool isPasswordStrong(const QString& password);
+    void showSignup();
+    void showLogin();
 };
 
 #endif // LOGINWINDOW_H
