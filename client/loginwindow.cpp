@@ -6,6 +6,8 @@
 #include "farm.h"
 #include "farmer.h"
 #include <QMessageBox>
+#include "mainwindow.h"
+#include <QDateTime>
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QWidget(parent),
@@ -97,8 +99,13 @@ void LoginWindow::on_btnLogin_clicked()
     if(account_id)
     {
         Farmer farmer = Farmer::getByAccountId(account_id);
-        QMessageBox::warning(this, "Error", QString::number(farmer.coins()));
-        //...
+        Farm farm = Farm::get(farmer.farm_id());
+
+        CURRENT_DAY = (QDateTime::currentDateTime().toTime_t() - farmer.joining_date()) / SECONDS_PER_DAY;
+
+        MainWindow* main_window = new MainWindow(farmer, farm);
+        main_window->show();
+        this->close();
     }
     else
         QMessageBox::warning(this, "Error", "Username or password is incorrect.");

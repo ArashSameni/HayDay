@@ -3,7 +3,8 @@
 
 #include <tcpsocket.h>
 
-extern int CURRENT_DAY;
+extern uint CURRENT_DAY;
+extern const uint SECONDS_PER_DAY;
 extern TcpSocket socket;
 
 #endif // GLOBALS_H

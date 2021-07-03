@@ -4,7 +4,8 @@
 #include <QMessageBox>
 #include <QApplication>
 
-int CURRENT_DAY;
+uint CURRENT_DAY;
+const uint SECONDS_PER_DAY = 30;
 TcpSocket socket;
 
 bool initDatabase()
