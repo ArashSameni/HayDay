@@ -1,5 +1,14 @@
 <RCC>
     <qresource prefix="/">
         <file>img/hero_logo.png</file>
+        <file>img/barn.png</file>
+        <file>img/silo.png</file>
+        <file>img/scarecrow.png</file>
+        <file>img/field.png</file>
+        <file>img/shop.png</file>
+        <file>img/chicken_coop.png</file>
+        <file>img/pasture.png</file>
+        <file>img/background.png</file>
+        <file>img/mill.png</file>
     </qresource>
 </RCC>
