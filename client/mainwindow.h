@@ -28,6 +28,8 @@ private:
     void unlockChickenCoop();
     void unlockCowPasture();
     void unlockSheepPasture();
-    void showSheep(int count);
+    void showChickens(int count);
+    void showCows(int count);
+    void showSheeps(int count);
 };
 #endif // MAINWINDOW_H

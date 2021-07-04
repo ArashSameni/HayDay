@@ -81,7 +81,35 @@ void MainWindow::unlockSheepPasture()
     ui->btnSheepPasture->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/pasture-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/pasture.png);\n}");
 }
 
-void MainWindow::showSheep(int count)
+void MainWindow::showChickens(int count)
+{
+    if(count >= 1)
+        ui->btnChicken_1->setVisible(true);
+    if(count >= 2)
+        ui->btnChicken_2->setVisible(true);
+    if(count >= 3)
+        ui->btnChicken_3->setVisible(true);
+    if(count >= 4)
+        ui->btnChicken_4->setVisible(true);
+    if(count >= 5)
+        ui->btnChicken_5->setVisible(true);
+    if(count >= 6)
+        ui->btnChicken_6->setVisible(true);
+}
+
+void MainWindow::showCows(int count)
+{
+    if(count >= 1)
+        ui->btnCow_1->setVisible(true);
+    if(count >= 2)
+        ui->btnCow_2->setVisible(true);
+    if(count >= 3)
+        ui->btnCow_3->setVisible(true);
+    if(count >= 4)
+        ui->btnCow_4->setVisible(true);
+}
+
+void MainWindow::showSheeps(int count)
 {
     if(count >= 1)
         ui->btnSheep_1->setVisible(true);
