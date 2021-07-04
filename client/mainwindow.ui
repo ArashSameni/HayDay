@@ -30,8 +30,13 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: none;
-background-image: url(:/img/barn.png);</string>
+     <string notr="true">QPushButton{
+	background-image: url(:/img/barn-dark.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/barn.png);
+}</string>
     </property>
     <property name="text">
      <string/>
@@ -50,8 +55,14 @@ background-image: url(:/img/barn.png);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: none;
-background-image: url(:/img/silo.png);</string>
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/silo-dark.png);
+}
+
+QPushButton:hover{
+	background-image: url(:/img/silo.png);
+}</string>
     </property>
     <property name="text">
      <string/>
@@ -86,8 +97,14 @@ background-image: url(:/img/silo.png);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: none;
-background-image: url(:/img/field.png);</string>
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/field-dark.png);
+}
+
+QPushButton:hover{
+	background-image: url(:/img/field.png);
+}</string>
     </property>
     <property name="text">
      <string/>
@@ -106,8 +123,14 @@ background-image: url(:/img/field.png);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: none;
-background-image: url(:/img/field.png);</string>
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/field-dark.png);
+}
+
+QPushButton:hover{
+	background-image: url(:/img/field.png);
+}</string>
     </property>
     <property name="text">
      <string/>
@@ -126,8 +149,14 @@ background-image: url(:/img/field.png);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: none;
-background-image: url(:/img/shop.png);</string>
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/shop-dark.png);
+}
+
+QPushButton:hover{
+	background-image: url(:/img/shop.png);
+}</string>
     </property>
     <property name="text">
      <string/>
@@ -146,8 +175,14 @@ background-image: url(:/img/shop.png);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: none;
-background-image: url(:/img/pasture.png);</string>
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/pasture-dark.png);
+}
+
+QPushButton:hover{
+	background-image: url(:/img/pasture.png);
+}</string>
     </property>
     <property name="text">
      <string/>
@@ -166,8 +201,14 @@ background-image: url(:/img/pasture.png);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: none;
-background-image: url(:/img/pasture.png);</string>
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/pasture-dark.png);
+}
+
+QPushButton:hover{
+	background-image: url(:/img/pasture.png);
+}</string>
     </property>
     <property name="text">
      <string/>
@@ -186,8 +227,14 @@ background-image: url(:/img/pasture.png);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: none;
-background-image: url(:/img/chicken_coop.png);</string>
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/chicken_coop-dark.png);
+}
+
+QPushButton:hover{
+	background-image: url(:/img/chicken_coop.png);
+}</string>
     </property>
     <property name="text">
      <string/>
@@ -206,8 +253,14 @@ background-image: url(:/img/chicken_coop.png);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: none;
-background-image: url(:/img/mill.png);</string>
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/mill-dark.png);
+}
+
+QPushButton:hover{
+	background-image: url(:/img/mill.png);
+}</string>
     </property>
     <property name="text">
      <string/>

@@ -13,5 +13,12 @@
         <file>img/chicken.png</file>
         <file>img/cow.png</file>
         <file>img/sheep.png</file>
+        <file>img/barn-dark.png</file>
+        <file>img/chicken_coop-dark.png</file>
+        <file>img/field-dark.png</file>
+        <file>img/mill-dark.png</file>
+        <file>img/pasture-dark.png</file>
+        <file>img/shop-dark.png</file>
+        <file>img/silo-dark.png</file>
     </qresource>
 </RCC>
