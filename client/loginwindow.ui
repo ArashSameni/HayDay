@@ -18,7 +18,8 @@
   </property>
   <property name="styleSheet">
    <string notr="true">*{
-	font: &quot;IRANSans Light&quot;;
+
+	font: url(:/fonts/IRANSans_Light.ttf);
 	color: #494949;
 }
 
@@ -134,6 +135,9 @@ QPushButton#btnLogin:hover{
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 15pt url(:/fonts/IRANSans.ttf);</string>
     </property>
     <property name="text">
      <string>Login</string>
@@ -288,6 +292,9 @@ QPushButton#btnSignup:hover{
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 15pt url(:/fonts/IRANSans.ttf);</string>
     </property>
     <property name="text">
      <string>Signup</string>

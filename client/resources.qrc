@@ -20,5 +20,7 @@
         <file>img/shop-dark.png</file>
         <file>img/silo-dark.png</file>
         <file>img/lock.png</file>
+        <file>fonts/IRANSans_Light.ttf</file>
+        <file>fonts/IRANSans.ttf</file>
     </qresource>
 </RCC>
