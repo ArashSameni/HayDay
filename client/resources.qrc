@@ -10,5 +10,8 @@
         <file>img/pasture.png</file>
         <file>img/background.png</file>
         <file>img/mill.png</file>
+        <file>img/chicken.png</file>
+        <file>img/cow.png</file>
+        <file>img/sheep.png</file>
     </qresource>
 </RCC>

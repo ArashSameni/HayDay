@@ -21,5 +21,7 @@ private:
     Ui::MainWindow *ui;
     Farmer& farmer;
     Farm& farm;
+
+    void hideAnimals();
 };
 #endif // MAINWINDOW_H

@@ -213,6 +213,326 @@ background-image: url(:/img/mill.png);</string>
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnSheep_1">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>390</y>
+      <width>36</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/sheep.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSheep_2">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>400</y>
+      <width>36</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/sheep.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSheep_3">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>430</y>
+      <width>36</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/sheep.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSheep_4">
+    <property name="geometry">
+     <rect>
+      <x>377</x>
+      <y>420</y>
+      <width>36</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/sheep.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSheep_5">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>450</y>
+      <width>36</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/sheep.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSheep_6">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>420</y>
+      <width>36</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/sheep.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnCow_1">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>460</y>
+      <width>53</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/cow.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnChicken_1">
+    <property name="geometry">
+     <rect>
+      <x>860</x>
+      <y>550</y>
+      <width>18</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/chicken.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnCow_2">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>480</y>
+      <width>53</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/cow.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnCow_3">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>520</y>
+      <width>53</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/cow.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnCow_4">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>500</y>
+      <width>53</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/cow.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnChicken_2">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>580</y>
+      <width>18</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/chicken.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnChicken_3">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>540</y>
+      <width>18</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/chicken.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnChicken_4">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>570</y>
+      <width>18</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/chicken.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnChicken_5">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>560</y>
+      <width>18</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/chicken.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnChicken_6">
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>580</y>
+      <width>18</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;
+background-image: url(:/img/chicken.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>btnChickenCoop</zorder>
    <zorder>btnAlfalfaField</zorder>
    <zorder>btnWheatField</zorder>
@@ -223,6 +543,22 @@ background-image: url(:/img/mill.png);</string>
    <zorder>btnCowPasture</zorder>
    <zorder>btnSheepPasture</zorder>
    <zorder>btnMill</zorder>
+   <zorder>btnSheep_1</zorder>
+   <zorder>btnSheep_2</zorder>
+   <zorder>btnSheep_3</zorder>
+   <zorder>btnSheep_4</zorder>
+   <zorder>btnSheep_6</zorder>
+   <zorder>btnSheep_5</zorder>
+   <zorder>btnCow_1</zorder>
+   <zorder>btnChicken_1</zorder>
+   <zorder>btnCow_2</zorder>
+   <zorder>btnCow_3</zorder>
+   <zorder>btnCow_4</zorder>
+   <zorder>btnChicken_2</zorder>
+   <zorder>btnChicken_3</zorder>
+   <zorder>btnChicken_4</zorder>
+   <zorder>btnChicken_5</zorder>
+   <zorder>btnChicken_6</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -236,5 +572,262 @@ background-image: url(:/img/mill.png);</string>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btnCow_3</sender>
+   <signal>clicked()</signal>
+   <receiver>btnCowPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>626</x>
+     <y>561</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>712</x>
+     <y>559</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCow_2</sender>
+   <signal>clicked()</signal>
+   <receiver>btnCowPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>659</x>
+     <y>522</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>697</x>
+     <y>510</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCow_1</sender>
+   <signal>clicked()</signal>
+   <receiver>btnCowPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>608</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>557</x>
+     <y>510</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCow_4</sender>
+   <signal>clicked()</signal>
+   <receiver>btnCowPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>584</x>
+     <y>549</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>525</x>
+     <y>567</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnChicken_3</sender>
+   <signal>clicked()</signal>
+   <receiver>btnChickenCoop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>849</x>
+     <y>577</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>822</x>
+     <y>559</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnChicken_1</sender>
+   <signal>clicked()</signal>
+   <receiver>btnChickenCoop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>874</x>
+     <y>583</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>968</x>
+     <y>642</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnChicken_4</sender>
+   <signal>clicked()</signal>
+   <receiver>btnChickenCoop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>916</x>
+     <y>611</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>936</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnChicken_6</sender>
+   <signal>clicked()</signal>
+   <receiver>btnChickenCoop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>876</x>
+     <y>630</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>890</x>
+     <y>659</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnChicken_2</sender>
+   <signal>clicked()</signal>
+   <receiver>btnChickenCoop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>841</x>
+     <y>616</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>760</x>
+     <y>653</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnChicken_5</sender>
+   <signal>clicked()</signal>
+   <receiver>btnChickenCoop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>803</x>
+     <y>595</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>790</x>
+     <y>538</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnSheep_1</sender>
+   <signal>clicked()</signal>
+   <receiver>btnSheepPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>400</x>
+     <y>418</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>426</x>
+     <y>390</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnSheep_2</sender>
+   <signal>clicked()</signal>
+   <receiver>btnSheepPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>441</x>
+     <y>431</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>460</x>
+     <y>430</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnSheep_3</sender>
+   <signal>clicked()</signal>
+   <receiver>btnSheepPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>444</x>
+     <y>469</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>504</x>
+     <y>432</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnSheep_5</sender>
+   <signal>clicked()</signal>
+   <receiver>btnSheepPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>402</x>
+     <y>483</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>433</x>
+     <y>522</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnSheep_4</sender>
+   <signal>clicked()</signal>
+   <receiver>btnSheepPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>389</x>
+     <y>455</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>522</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnSheep_6</sender>
+   <signal>clicked()</signal>
+   <receiver>btnSheepPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>337</x>
+     <y>457</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>302</x>
+     <y>443</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
