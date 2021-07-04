@@ -22,6 +22,12 @@ private:
     Farmer& farmer;
     Farm& farm;
 
+    void initUI();
     void hideAnimals();
+    void unlockAlfalfaField();
+    void unlockChickenCoop();
+    void unlockCowPasture();
+    void unlockSheepPasture();
+    void showSheep(int count);
 };
 #endif // MAINWINDOW_H

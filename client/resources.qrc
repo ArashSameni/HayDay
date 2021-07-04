@@ -9,7 +9,6 @@
         <file>img/chicken_coop.png</file>
         <file>img/pasture.png</file>
         <file>img/background.png</file>
-        <file>img/mill.png</file>
         <file>img/chicken.png</file>
         <file>img/cow.png</file>
         <file>img/sheep.png</file>
@@ -20,5 +19,6 @@
         <file>img/pasture-dark.png</file>
         <file>img/shop-dark.png</file>
         <file>img/silo-dark.png</file>
+        <file>img/lock.png</file>
     </qresource>
 </RCC>

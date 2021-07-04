@@ -120,16 +120,12 @@ QPushButton:hover{
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{
 	border: none;
 	background-image: url(:/img/field-dark.png);
-}
-
-QPushButton:hover{
-	background-image: url(:/img/field.png);
 }</string>
     </property>
     <property name="text">
@@ -163,6 +159,9 @@ QPushButton:hover{
     </property>
    </widget>
    <widget class="QPushButton" name="btnSheepPasture">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -172,16 +171,12 @@ QPushButton:hover{
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{
 	border: none;
 	background-image: url(:/img/pasture-dark.png);
-}
-
-QPushButton:hover{
-	background-image: url(:/img/pasture.png);
 }</string>
     </property>
     <property name="text">
@@ -189,6 +184,9 @@ QPushButton:hover{
     </property>
    </widget>
    <widget class="QPushButton" name="btnCowPasture">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -198,16 +196,12 @@ QPushButton:hover{
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{
 	border: none;
 	background-image: url(:/img/pasture-dark.png);
-}
-
-QPushButton:hover{
-	background-image: url(:/img/pasture.png);
 }</string>
     </property>
     <property name="text">
@@ -215,6 +209,9 @@ QPushButton:hover{
     </property>
    </widget>
    <widget class="QPushButton" name="btnChickenCoop">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>750</x>
@@ -224,16 +221,12 @@ QPushButton:hover{
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{
 	border: none;
 	background-image: url(:/img/chicken_coop-dark.png);
-}
-
-QPushButton:hover{
-	background-image: url(:/img/chicken_coop.png);
 }</string>
     </property>
     <property name="text">
@@ -241,6 +234,9 @@ QPushButton:hover{
     </property>
    </widget>
    <widget class="QPushButton" name="btnMill">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>59</x>
@@ -250,16 +246,12 @@ QPushButton:hover{
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{
 	border: none;
 	background-image: url(:/img/mill-dark.png);
-}
-
-QPushButton:hover{
-	background-image: url(:/img/mill.png);
 }</string>
     </property>
     <property name="text">
@@ -586,6 +578,116 @@ background-image: url(:/img/chicken.png);</string>
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="sheepLock">
+    <property name="geometry">
+     <rect>
+      <x>375</x>
+      <y>409</y>
+      <width>55</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/lock.png);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="millLock">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>557</y>
+      <width>55</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/lock.png);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cowLock">
+    <property name="geometry">
+     <rect>
+      <x>596</x>
+      <y>490</y>
+      <width>55</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/lock.png);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="chickenLock">
+    <property name="geometry">
+     <rect>
+      <x>835</x>
+      <y>552</y>
+      <width>55</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/lock.png);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="alfalfaLock">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>422</y>
+      <width>55</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/lock.png);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>btnChickenCoop</zorder>
    <zorder>btnAlfalfaField</zorder>
    <zorder>btnWheatField</zorder>
@@ -612,6 +714,11 @@ background-image: url(:/img/chicken.png);</string>
    <zorder>btnChicken_4</zorder>
    <zorder>btnChicken_5</zorder>
    <zorder>btnChicken_6</zorder>
+   <zorder>sheepLock</zorder>
+   <zorder>millLock</zorder>
+   <zorder>cowLock</zorder>
+   <zorder>chickenLock</zorder>
+   <zorder>alfalfaLock</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
