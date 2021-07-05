@@ -72,8 +72,8 @@ Silo &Silo::get(int silo_id)
         }
         else
         {
-            std::string err = "Silo with id " + std::to_string(silo_id) + " doesn't exist!";
-            throw std::exception(err.c_str());
+            QString err = "Silo with id " + QString::number(silo_id) + " doesn't exist!";
+            throw err.toStdString().c_str();
         }
     }
 

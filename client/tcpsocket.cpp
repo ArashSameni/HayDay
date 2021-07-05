@@ -31,5 +31,5 @@ void TcpSocket::connectToServer()
 {
     socket_.connectToHost("127.0.0.1", 8500);
     if (!socket_.waitForConnected(3000))
-        throw std::exception("Failed to connect to server.");
+        throw "Failed to connect to server.";
 }

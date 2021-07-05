@@ -49,8 +49,8 @@ Farmer &Farmer::get(int farmer_id)
         }
         else
         {
-            std::string err = "Farmer with id " + std::to_string(farmer_id) + " doesn't exist!";
-            throw std::exception(err.c_str());
+            QString err = "Farmer with id " + QString::number(farmer_id) + " doesn't exist!";
+            throw err.toStdString().c_str();
         }
     }
 
@@ -71,8 +71,8 @@ Farmer &Farmer::getByAccountId(int account_id)
     }
     else
     {
-        std::string err = "Farmer with accountId " + std::to_string(account_id) + " doesn't exist!";
-        throw std::exception(err.c_str());
+        QString err = "Farmer with accountId " + QString::number(account_id) + " doesn't exist!";
+        throw err.toStdString().c_str();
     }
 }
 

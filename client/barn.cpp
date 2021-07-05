@@ -76,8 +76,8 @@ Barn &Barn::get(int barn_id)
         }
         else
         {
-            std::string err = "Barn with id " + std::to_string(barn_id) + " doesn't exist!";
-            throw std::exception(err.c_str());
+            QString err = "Barn with id " + QString::number(barn_id) + " doesn't exist!";
+            throw err.toStdString().c_str();
         }
     }
 

@@ -33,8 +33,8 @@ Farm &Farm::get(int farm_id)
         }
         else
         {
-            std::string err = "Farm with id " + std::to_string(farm_id) + " doesn't exist!";
-            throw std::exception(err.c_str());
+            QString err = "Farm with id " + QString::number(farm_id) + " doesn't exist!";
+            throw err.toStdString().c_str();
         }
     }
 

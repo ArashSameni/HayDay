@@ -4,7 +4,6 @@
 #include "globals.h"
 #include <QDateTime>
 #include <string>
-#include <exception>
 
 int WheatField::id_ = 0;
 WheatField *WheatField::wheat_field = nullptr;
@@ -55,8 +54,8 @@ WheatField &WheatField::get(int wheat_field_id)
         }
         else
         {
-            std::string err = "WheatField with id " + std::to_string(wheat_field_id) + " doesn't exist!";
-            throw std::exception(err.c_str());
+            QString err = "WheatField with id " + QString::number(wheat_field_id) + " doesn't exist!";
+            throw err.toStdString().c_str();
         }
     }
 
@@ -141,8 +140,8 @@ AlfalfaField &AlfalfaField::get(int alfalfa_field_id)
         }
         else
         {
-            std::string err = "AlfalfaField with id " + std::to_string(alfalfa_field_id) + " doesn't exist!";
-            throw std::exception(err.c_str());
+            QString err = "AlfalfaField with id " + QString::number(alfalfa_field_id) + " doesn't exist!";
+            throw err.toStdString().c_str();
         }
     }
 

@@ -40,8 +40,8 @@ void LivingPlace::get(LivingPlace &living_place, int living_place_id)
     }
     else
     {
-        std::string err = "LivingPlace with id " + std::to_string(living_place_id) + " doesn't exist!";
-        throw std::exception(err.c_str());
+        QString err = "LivingPlace with id " + QString::number(living_place_id) + " doesn't exist!";
+        throw err.toStdString().c_str();
     }
 }
 
@@ -61,8 +61,8 @@ int LivingPlace::getLivingPlaceIdByFarmId(int farm_id, int type)
     }
     else
     {
-        std::string err = "LivingPlace with farmId " + std::to_string(farm_id) + " and type " + std::to_string(type) + " doesn't exist!";
-        throw std::exception(err.c_str());
+        QString err = "LivingPlace with farmId " + QString::number(farm_id) + " and type " + QString::number(type) + " doesn't exist!";
+        throw err.toStdString().c_str();
     }
 }
 
