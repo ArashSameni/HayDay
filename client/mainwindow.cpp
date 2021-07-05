@@ -94,6 +94,13 @@ void MainWindow::unlockSheepPasture()
 
 void MainWindow::showChickens(int count)
 {
+    ui->btnChicken_1->setVisible(false);
+    ui->btnChicken_2->setVisible(false);
+    ui->btnChicken_3->setVisible(false);
+    ui->btnChicken_4->setVisible(false);
+    ui->btnChicken_5->setVisible(false);
+    ui->btnChicken_6->setVisible(false);
+
     if(count >= 1)
         ui->btnChicken_1->setVisible(true);
     if(count >= 2)
@@ -110,6 +117,11 @@ void MainWindow::showChickens(int count)
 
 void MainWindow::showCows(int count)
 {
+    ui->btnCow_1->setVisible(false);
+    ui->btnCow_2->setVisible(false);
+    ui->btnCow_3->setVisible(false);
+    ui->btnCow_4->setVisible(false);
+
     if(count >= 1)
         ui->btnCow_1->setVisible(true);
     if(count >= 2)
@@ -122,6 +134,13 @@ void MainWindow::showCows(int count)
 
 void MainWindow::showSheeps(int count)
 {
+    ui->btnSheep_1->setVisible(false);
+    ui->btnSheep_2->setVisible(false);
+    ui->btnSheep_3->setVisible(false);
+    ui->btnSheep_4->setVisible(false);
+    ui->btnSheep_5->setVisible(false);
+    ui->btnSheep_6->setVisible(false);
+
     if(count >= 1)
         ui->btnSheep_1->setVisible(true);
     if(count >= 2)
