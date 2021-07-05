@@ -8,11 +8,22 @@ MainWindow::MainWindow(Farmer& farmer, Farm& farm, QWidget *parent)
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
 
     initUI();
+
+    //Connect Timer
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MainWindow::anotherDayPassed);
+    timer->start(static_cast<int>(SECONDS_PER_DAY) * 1000);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::anotherDayPassed()
+{
+    CURRENT_DAY += 1;
+    //check time related functions
 }
 
 void MainWindow::initUI()

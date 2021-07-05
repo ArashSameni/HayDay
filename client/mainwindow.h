@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
+#include "globals.h"
 #include "farmer.h"
 #include "farm.h"
 
@@ -17,10 +19,14 @@ public:
     MainWindow(Farmer& farmer, Farm& farm, QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void anotherDayPassed();
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;
     Farm& farm;
+    QTimer* timer;
 
     void initUI();
     void hideAnimals();
