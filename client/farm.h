@@ -34,6 +34,7 @@ public:
     static int id() { return id_; }
 
     ~Farm() {}
+
 };
 
 #endif // FARM_H

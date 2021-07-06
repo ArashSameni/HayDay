@@ -54,11 +54,13 @@ public:
     void save() const;
 
     ////////////// Not implemented
-    bool checkUpgrade() { return false; }
-    bool isUpgradable() const { return 0; }
-    int neededNailsToUpgrade() const { return 0; }
-    int neededShovelsToUpgrade() const { return 0; }
-    int neededCoinsToUpgrade() const { return 0; }
+    int upgradeXp() {return 0;}
+    bool isUpgradeFinished() const { return true;}
+    void finishUpgrade(){}
+    bool isUpgradable(int farmer_id) const{return true;}
+    int neededNailsToUpgrade(int barn_id) const{return 0;}
+    int neededShovelsToUpgrade(int barn_id) const{return 0;}
+    int neededCoinsToUpgrade(int barn_id) const{return 0;}
     void upgrade() {}
 
     void plant(int) {}
@@ -92,11 +94,13 @@ public:
     int neededCoinsToPlow() const { return area_ * 5; }
 
     ////////////// Not implemented
-    bool checkUpgrade() { return false; }
-    bool isUpgradable() const { return 0; }
-    int neededNailsToUpgrade() const { return 0; }
-    int neededShovelsToUpgrade() const { return 0; }
-    int neededCoinsToUpgrade() const { return 0; }
+    int upgradeXp() {return 0;}
+    bool isUpgradeFinished() const { return true;}
+    void finishUpgrade(){}
+    bool isUpgradable(int farmer_id) const{return true;}
+    int neededNailsToUpgrade(int barn_id) const{return 0;}
+    int neededShovelsToUpgrade(int barn_id) const{return 0;}
+    int neededCoinsToUpgrade(int barn_id) const{return 0;}
     void upgrade() {}
 
     void plant(int) {}

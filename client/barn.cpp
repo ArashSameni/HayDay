@@ -240,3 +240,49 @@ Milk::Milk(int barn_id)
     expiration_day_ = CURRENT_DAY + 10;
     barn_id_ = barn_id;
 }
+int Barn::upgradeXp()
+{
+    return (level_ - 1) * 3;
+}
+bool Barn::isUpgradeFinished() const
+{
+    return upgrade_day_ - CURRENT_DAY >= 5;
+}
+
+void Barn::finishUpgrade()
+{
+    max_storage_ =round(1.5*max_storage_);
+    level_ += 1;
+    is_upgrading_= false;
+    save();
+}
+bool Barn::isUpgradable(int farmer_id) const
+{
+    return level_ < Farmer::get(farmer_id).level();
+}
+
+void Barn::upgrade()
+{
+    if(!is_upgrading_)
+    {
+        upgrade_day_ = CURRENT_DAY;
+        is_upgrading_ = true;
+    }
+}
+
+int Barn::neededNailsToUpgrade(int barn_id) const{
+
+    return level();
+
+}
+int Barn::neededShovelsToUpgrade(int barn_id) const{
+
+    return level()-1;
+
+}
+int Barn::neededCoinsToUpgrade(int barn_id) const{
+
+    return (pow(level(),3)*10);
+}
+
+
