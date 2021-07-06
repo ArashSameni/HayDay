@@ -28,32 +28,21 @@ void MainWindow::anotherDayPassed()
 
 void MainWindow::initUI()
 {
-    hideAnimals();
+    showAnimals();
 }
 
-void MainWindow::hideAnimals()
+void MainWindow::showAnimals()
 {
-    //Hide chickens
-    ui->btnChicken_1->setVisible(false);
-    ui->btnChicken_2->setVisible(false);
-    ui->btnChicken_3->setVisible(false);
-    ui->btnChicken_4->setVisible(false);
-    ui->btnChicken_5->setVisible(false);
-    ui->btnChicken_6->setVisible(false);
+    if(farm.chicken_coop().storage() > 0)
+        unlockChickenCoop();
+    if(farm.cow_pasure().storage() > 0)
+        unlockCowPasture();
+    if(farm.sheep_pasture().storage() > 0)
+        unlockSheepPasture();
 
-    //Hide cows
-    ui->btnCow_1->setVisible(false);
-    ui->btnCow_2->setVisible(false);
-    ui->btnCow_3->setVisible(false);
-    ui->btnCow_4->setVisible(false);
-
-    //Hide sheeps
-    ui->btnSheep_1->setVisible(false);
-    ui->btnSheep_2->setVisible(false);
-    ui->btnSheep_3->setVisible(false);
-    ui->btnSheep_4->setVisible(false);
-    ui->btnSheep_5->setVisible(false);
-    ui->btnSheep_6->setVisible(false);
+    showChickens(farm.chicken_coop().storage());
+    showCows(farm.cow_pasure().storage());
+    showSheeps(farm.cow_pasure().storage());
 }
 
 void MainWindow::unlockAlfalfaField()
