@@ -29,7 +29,7 @@ private:
     QTimer* timer;
 
     void initUI();
-    void hideAnimals();
+    void showAnimals();
     void unlockAlfalfaField();
     void unlockChickenCoop();
     void unlockCowPasture();
