@@ -23,7 +23,7 @@ public:
     int upgradeXp();
     bool isUpgradeFinished() const;
     void finishUpgrade();
-    bool isUpgradable(int farmer_id) const;
+    int isUpgradable(int farmer_id) const;
     int neededNailsToUpgrade(int barn_id) const;
     int neededShovelsToUpgrade(int barn_id) const;
     int neededCoinsToUpgrade(int barn_id) const;

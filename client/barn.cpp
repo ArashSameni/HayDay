@@ -256,9 +256,19 @@ void Barn::finishUpgrade()
     is_upgrading_= false;
     save();
 }
-bool Barn::isUpgradable(int farmer_id) const
+int Barn::isUpgradable(int farmer_id) const
 {
-    return level_ < Farmer::get(farmer_id).level();
+     Farmer farmer = Farmer::get(farmer_id);
+    if(farmer.coins() < neededCoinsToUpgrade())
+        return LACK_OF_COINS;
+    if(nails() < neededNailsToUpgrade())
+        return LACK_OF_NAILS;
+    if(shovels_ < neededShovelsToUpgrade())
+        return LACK_OF_SHOVELS;
+    if(level_ >= Farmer::get(farmer_id).level())
+        return LACK_OF_LEVEL;
+
+    return OK;
 }
 
 void Barn::upgrade()

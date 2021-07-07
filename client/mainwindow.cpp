@@ -35,7 +35,31 @@ void MainWindow::anotherDayPassed()
         farm.barn().finishUpgrade();
         xp_to_add += farm.barn().upgradeXp();
     }
-
+    if(farm.chicken_coop().is_upgrading() && farm.chicken_coop().isUpgradeFinished())
+    {
+        farm.chicken_coop().finishUpgrade();
+        xp_to_add += farm.chicken_coop().upgradeXp();
+    }
+    if(farm.cow_pasure().is_upgrading() && farm.cow_pasure().isUpgradeFinished())
+    {
+        farm.cow_pasure().finishUpgrade();
+        xp_to_add += farm.cow_pasure().upgradeXp();
+    }
+    if(farm.sheep_pasture().is_upgrading() && farm.sheep_pasture().isUpgradeFinished())
+    {
+        farm.sheep_pasture().finishUpgrade();
+        xp_to_add += farm.sheep_pasture().upgradeXp();
+    }
+    if(farm.alfalfa_field().is_upgrading() && farm.alfalfa_field().isUpgradeFinished())
+    {
+        farm.alfalfa_field().finishUpgrade();
+        xp_to_add += farm.alfalfa_field().upgradeXp();
+    }
+    if(farm.wheat_field().is_upgrading() && farm.wheat_field().isUpgradeFinished())
+    {
+        farm.wheat_field().finishUpgrade();
+        xp_to_add += farm.wheat_field().upgradeXp();
+    }
     if(farmer.addXpAndIsLevelFinished(xp_to_add))
         farmer.goNextLevel();
 }

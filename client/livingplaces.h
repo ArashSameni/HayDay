@@ -44,6 +44,9 @@ public:
     int farm_id() const { return farm_id_; }
     void addAnimal(int amount) { storage_ += amount; }
 
+
+
+
     virtual bool checkFeeding() = 0;
     virtual void feed(int) = 0;
     virtual void collect() = 0;
@@ -66,15 +69,15 @@ public:
     static ChickenCoop &create(int farm_id);
     static int id() { return id_; }
 
-    ////////////// Not implemented
-    int upgradeXp() {return 0;}
-    bool isUpgradeFinished() const { return true;}
-    void finishUpgrade(){}
-    bool isUpgradable(int farmer_id) const{return true;}
-    int neededNailsToUpgrade(int barn_id) const{return 0;}
-    int neededShovelsToUpgrade(int barn_id) const{return 0;}
-    int neededCoinsToUpgrade(int barn_id) const{return 0;}
-    void upgrade() {}
+////upgrade functions
+    int upgradeXp() ;
+    bool isUpgradeFinished() const;
+    void finishUpgrade();
+    int isUpgradable(int farmer_id=0) const;
+    int neededNailsToUpgrade(int barn_id=0) const;
+    int neededShovelsToUpgrade(int barn_id=0) const;
+    int neededCoinsToUpgrade(int barn_id=0) const;
+    void upgrade() ;
 
     bool checkFeeding() { return false; }
     void feed(int) {}
@@ -100,14 +103,14 @@ public:
     static int id() { return id_; }
 
     ////////////// Not implemented
-    int upgradeXp() {return 0;}
-    bool isUpgradeFinished() const { return true;}
-    void finishUpgrade(){}
-    bool isUpgradable(int farmer_id) const{return true;}
-    int neededNailsToUpgrade(int barn_id) const{return 0;}
-    int neededShovelsToUpgrade(int barn_id) const{return 0;}
-    int neededCoinsToUpgrade(int barn_id) const{return 0;}
-    void upgrade() {}
+    int upgradeXp() ;
+    bool isUpgradeFinished() const;
+    void finishUpgrade();
+    int isUpgradable(int farmer_id=0) const;
+    int neededNailsToUpgrade(int barn_id=0) const;
+    int neededShovelsToUpgrade(int barn_id=0) const;
+    int neededCoinsToUpgrade(int barn_id=0) const;
+    void upgrade() ;
 
     bool checkFeeding() { return false; }
     void feed(int) {}
@@ -133,14 +136,14 @@ public:
     static int id() { return id_; }
 
     ////////////// Not implemented
-    int upgradeXp() {return 0;}
-    bool isUpgradeFinished() const { return true;}
-    void finishUpgrade(){}
-    bool isUpgradable(int farmer_id) const{return true;}
-    int neededNailsToUpgrade(int barn_id) const{return 0;}
-    int neededShovelsToUpgrade(int barn_id) const{return 0;}
-    int neededCoinsToUpgrade(int barn_id) const{return 0;}
-    void upgrade() {}
+    int upgradeXp() ;
+    bool isUpgradeFinished() const;
+    void finishUpgrade();
+    int isUpgradable(int farmer_id=0) const;
+    int neededNailsToUpgrade(int barn_id=0) const;
+    int neededShovelsToUpgrade(int barn_id=0) const;
+    int neededCoinsToUpgrade(int barn_id=0) const;
+    void upgrade() ;
 
     bool checkFeeding() { return false; }
     void feed(int) {}

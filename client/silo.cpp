@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include "barn.h"
 #include "farmer.h"
+#include "farm.h"
 
 int Silo::id_ = 0;
 Silo *Silo::silo = nullptr;
@@ -65,9 +66,21 @@ void Silo::finishUpgrade()
     save();
 }
 
-bool Silo::isUpgradable(int farmer_id) const
+int Silo::isUpgradable(int farmer_id) const
 {
-    return level_ < Farmer::get(farmer_id).level() - 1;
+    Farmer farmer = Farmer::get(farmer_id);
+    Barn barn = Farm::get(farmer.farm_id()).barn();
+
+    if(farmer.coins() < neededCoinsToUpgrade(barn.id()))
+        return LACK_OF_COINS;
+    if(barn.nails() < neededNailsToUpgrade(barn.id()))
+        return LACK_OF_NAILS;
+    if(barn.shovels() < neededShovelsToUpgrade(barn.id()))
+        return LACK_OF_SHOVELS;
+    if(level_ >= Farmer::get(farmer_id).level() - 1)
+        return LACK_OF_LEVEL;
+
+    return OK;
 }
 
 Silo &Silo::get(int silo_id)
