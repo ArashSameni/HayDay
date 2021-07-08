@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include "barn.h"
 #include "farm.h"
+
 int ChickenCoop::id_ = 0;
 ChickenCoop *ChickenCoop::chicken_coop = nullptr;
 
@@ -159,62 +160,69 @@ int ChickenCoop::upgradeXp()
 {
     return 5;
 }
+
 bool ChickenCoop::isUpgradeFinished() const
 {
-    return upgrade_day_-CURRENT_DAY>=3;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 3;
 }
+
 void ChickenCoop::finishUpgrade()
 {
-    level_+=1;
-    is_upgrading_= false;
+    if(level_)
+        max_storage_ *= 2;
+    else
+        max_storage_ = 2;
+
+    level_ += 1;
+    is_upgrading_ = false;
     save(id_);
 }
+
 void ChickenCoop::upgrade()
 {
-    if(!is_upgrading_)
+    if (!is_upgrading_)
     {
-        upgrade_day_ = CURRENT_DAY;
+        upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
+        save(id_);
     }
 }
+
 int ChickenCoop::isUpgradable(int farmer_id) const
 {
     Farmer farmer = Farmer::get(farmer_id);
     Barn barn = Farm::get(farmer.farm_id()).barn();
 
-    if(farmer.coins() < neededCoinsToUpgrade())
+    if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;
-    if(barn.nails() < neededNailsToUpgrade())
+    if (barn.nails() < neededNailsToUpgrade())
         return LACK_OF_NAILS;
-    if(barn.shovels() < neededShovelsToUpgrade())
+    if (barn.shovels() < neededShovelsToUpgrade())
         return LACK_OF_SHOVELS;
-    if(level_ == 0)
-    {
-        if(farmer.level()<4)
+    if ((level_ && farmer.level() < 3) || (!level_ && farmer.level() < 2))
         return LACK_OF_LEVEL;
-    }
-    else
-    {
-        if(farmer.level()<5)
-        return LACK_OF_LEVEL;
-    }
+
     return OK;
 }
-int ChickenCoop::neededNailsToUpgrade(int barn_id) const
-{
-    if(level_==0)
-        return 2;
 
+int ChickenCoop::neededNailsToUpgrade(int) const
+{
+    if (level_)
         return 1;
+
+    return 2;
 }
-int ChickenCoop::neededShovelsToUpgrade(int barn_id) const
+
+int ChickenCoop::neededShovelsToUpgrade(int) const
 {
     return 0;
 }
-int ChickenCoop::neededCoinsToUpgrade(int barn_id) const
+
+int ChickenCoop::neededCoinsToUpgrade(int) const
 {
     return 10;
 }
+
 CowPasture::CowPasture()
 {
     type_ = LivingPlace::COW_PASTURE;
@@ -260,79 +268,81 @@ CowPasture &CowPasture::create(int farm_id)
     id_ = LivingPlace::create(farm_id, LivingPlace::COW_PASTURE);
     return *cow_pasture;
 }
+
 int CowPasture::upgradeXp()
 {
-   if(level_==0)
-      return 10;
+    if (level_)
+        return 6;
 
-   return 6;
+    return 10;
 }
+
 bool CowPasture::isUpgradeFinished() const
 {
-    return upgrade_day_-CURRENT_DAY>=5;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 5;
 }
+
 void CowPasture::finishUpgrade()
 {
+    if(level_)
+        max_storage_ *= 2;
+    else
+        max_storage_ = 2;
 
-    level_+=1;
-    is_upgrading_= false;
+    level_ += 1;
+    is_upgrading_ = false;
     save(id_);
-
 }
+
 int CowPasture::isUpgradable(int farmer_id) const
 {
     Farmer farmer = Farmer::get(farmer_id);
     Barn barn = Farm::get(farmer.farm_id()).barn();
 
-    if(farmer.coins() < neededCoinsToUpgrade())
+    if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;
-    if(barn.nails() < neededNailsToUpgrade())
+    if (barn.nails() < neededNailsToUpgrade())
         return LACK_OF_NAILS;
-    if(barn.shovels() < neededShovelsToUpgrade())
+    if (barn.shovels() < neededShovelsToUpgrade())
         return LACK_OF_SHOVELS;
-
-    if(level_ == 0)
-    {
-        if(farmer.level()<4)
+    if ((level_ && farmer.level() < 5) || (!level_ && farmer.level() < 4))
         return LACK_OF_LEVEL;
-    }
 
-    else
-    {
-        if(farmer.level()<5)
-        return LACK_OF_LEVEL;
-    }
     return OK;
 }
+
 void CowPasture::upgrade()
 {
-    if(!is_upgrading_)
+    if (!is_upgrading_)
     {
-        upgrade_day_ = CURRENT_DAY;
+        upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
+        save(id_);
     }
 }
-int CowPasture::neededNailsToUpgrade(int barn_id) const
-{
-    if(level_==0)
-        return 3;
 
+int CowPasture::neededNailsToUpgrade(int) const
+{
+    if (level_)
         return 2;
+
+    return 3;
 }
-int CowPasture::neededShovelsToUpgrade(int barn_id) const
-{
-    if(level_==0)
-        return 2;
 
+int CowPasture::neededShovelsToUpgrade(int) const
+{
+    if (level_)
         return 0;
 
+    return 1;
 }
-int CowPasture::neededCoinsToUpgrade(int barn_id) const
-{
-    if(level_==0)
-        return 20;
 
-        return 10;
+int CowPasture::neededCoinsToUpgrade(int) const
+{
+    if (level_)
+        return 15;
+
+    return 20;
 }
 
 SheepPasture::SheepPasture()
@@ -380,78 +390,80 @@ SheepPasture &SheepPasture::create(int farm_id)
     id_ = LivingPlace::create(farm_id, LivingPlace::SHEEP_PASTURE);
     return *sheep_pasture;
 }
+
 int SheepPasture::upgradeXp()
 {
-   if(level_==0)
-     return 20;
+    if (level_)
+        return 15;
 
-   return 15;
+    return 20;
 }
+
 bool SheepPasture::isUpgradeFinished() const
 {
-    if(level_==0)
-      return upgrade_day_-CURRENT_DAY>=10;
+    uint elapsed_days = CURRENT_DAY - static_cast<uint>(upgrade_day_);
+    if (level_)
+        return elapsed_days >= 9;
 
-    return upgrade_day_-CURRENT_DAY>=9;
+    return elapsed_days >= 10;
 }
+
 void SheepPasture::finishUpgrade()
 {
+    if(level_)
+        max_storage_ *= 2;
+    else
+        max_storage_ = 2;
 
-    level_+=1;
-    is_upgrading_= false;
+    level_ += 1;
+    is_upgrading_ = false;
     save(id_);
-
 }
+
 int SheepPasture::isUpgradable(int farmer_id) const
 {
     Farmer farmer = Farmer::get(farmer_id);
     Barn barn = Farm::get(farmer.farm_id()).barn();
 
-    if(farmer.coins() < neededCoinsToUpgrade())
+    if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;
-    if(barn.nails() < neededNailsToUpgrade())
+    if (barn.nails() < neededNailsToUpgrade())
         return LACK_OF_NAILS;
-    if(barn.shovels() < neededShovelsToUpgrade())
+    if (barn.shovels() < neededShovelsToUpgrade())
         return LACK_OF_SHOVELS;
-
-    if(level_ == 0)
-    {
-        if(farmer.level()<6)
+    if ((level_ && farmer.level() < 7) || (!level_ && farmer.level() < 6))
         return LACK_OF_LEVEL;
-    }
 
-    else
-    {
-        if(farmer.level()<7)
-        return LACK_OF_LEVEL;
-    }
     return OK;
 }
+
 void SheepPasture::upgrade()
 {
-    if(!is_upgrading_)
+    if (!is_upgrading_)
     {
-        upgrade_day_ = CURRENT_DAY;
+        upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
+        save(id_);
     }
 }
-int SheepPasture::neededNailsToUpgrade(int barn_id) const
-{
-    if(level_==0)
-        return 4;
 
+int SheepPasture::neededNailsToUpgrade(int) const
+{
+    if (level_)
         return 3;
-}
-int SheepPasture::neededShovelsToUpgrade(int barn_id) const
-{
-    if(level_==0)
-        return 2;
 
+    return 4;
+}
+
+int SheepPasture::neededShovelsToUpgrade(int) const
+{
+    if (level_)
         return 1;
 
-}
-int SheepPasture::neededCoinsToUpgrade(int barn_id) const
-{
-   return 50;
+    return 2;
 }
 
+int SheepPasture::neededCoinsToUpgrade(int) const
+{
+    return 50;
+}
