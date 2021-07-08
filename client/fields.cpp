@@ -6,6 +6,7 @@
 #include <string>
 #include "farm.h"
 #include "barn.h"
+
 int WheatField::id_ = 0;
 WheatField *WheatField::wheat_field = nullptr;
 
@@ -94,58 +95,65 @@ void WheatField::save() const
 
     socket.write(query);
 }
+
 int WheatField::upgradeXp()
 {
-   return 3;
+    return 3;
 }
+
 bool WheatField::isUpgradeFinished() const
 {
-    return upgrade_day_-CURRENT_DAY>=2;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 2;
 }
+
 void WheatField::finishUpgrade()
 {
-
-    level_+=1;
-    area_*=2;
-    is_upgrading_= false;
+    level_ += 1;
+    area_ *= 2;
+    is_upgrading_ = false;
     save();
-
 }
+
 int WheatField::isUpgradable(int farmer_id) const
 {
     Farmer farmer = Farmer::get(farmer_id);
     Barn barn = Farm::get(farmer.farm_id()).barn();
 
-    if(farmer.coins() < neededCoinsToUpgrade())
+    if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;
-    if(barn.nails() < neededNailsToUpgrade())
+    if (barn.nails() < neededNailsToUpgrade())
         return LACK_OF_NAILS;
-    if(barn.shovels() < neededShovelsToUpgrade())
+    if (barn.shovels() < neededShovelsToUpgrade())
         return LACK_OF_SHOVELS;
-    if(farmer.level()<2)
+    if (farmer.level() < 2)
         return LACK_OF_LEVEL;
 
     return OK;
 }
+
 void WheatField::upgrade()
 {
-    if(!is_upgrading_)
+    if (!is_upgrading_)
     {
-        upgrade_day_ = CURRENT_DAY;
+        upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
+        save();
     }
 }
-int WheatField::neededNailsToUpgrade(int barn_id) const
+
+int WheatField::neededNailsToUpgrade(int) const
 {
-   return 0;
+    return 0;
 }
-int WheatField::neededShovelsToUpgrade(int barn_id) const
+
+int WheatField::neededShovelsToUpgrade(int) const
 {
-   return 1;
+    return 1;
 }
-int WheatField::neededCoinsToUpgrade(int barn_id) const
+
+int WheatField::neededCoinsToUpgrade(int) const
 {
-   return 5;
+    return 5;
 }
 
 AlfalfaField::AlfalfaField()
@@ -236,68 +244,78 @@ void AlfalfaField::save() const
 
     socket.write(query);
 }
+
 int AlfalfaField::upgradeXp()
 {
-   if(level_==0)
-       return 6;
-   return 3;
+    if (level_)
+        return 3;
+    return 6;
 }
+
 bool AlfalfaField::isUpgradeFinished() const
 {
-    return upgrade_day_-CURRENT_DAY > 3;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 3;
 }
+
 void AlfalfaField::finishUpgrade()
 {
-
-    level_+=1;
-    if(level_==0)
-       area_=4;
+    if (level_)
+        area_ *= 2;
     else
-       area_*=2;
-    is_upgrading_= false;
-    save();
+        area_ = 4;
 
+    level_ += 1;
+    is_upgrading_ = false;
+    save();
 }
+
 int AlfalfaField::isUpgradable(int farmer_id) const
 {
     Farmer farmer = Farmer::get(farmer_id);
     Barn barn = Farm::get(farmer.farm_id()).barn();
 
-    if(farmer.coins() < neededCoinsToUpgrade())
+    if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;
-    if(barn.nails() < neededNailsToUpgrade())
+    if (barn.nails() < neededNailsToUpgrade())
         return LACK_OF_NAILS;
-    if(barn.shovels() < neededShovelsToUpgrade())
+    if (barn.shovels() < neededShovelsToUpgrade())
         return LACK_OF_SHOVELS;
-    if(farmer.level()<2)
+    if ((level_ && farmer.level() < 4) || (!level_ && farmer.level() < 3))
         return LACK_OF_LEVEL;
 
     return OK;
 }
+
 void AlfalfaField::upgrade()
 {
-    if(!is_upgrading_)
+    if (!is_upgrading_)
     {
-        upgrade_day_ = CURRENT_DAY;
+        upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
+        save();
     }
 }
-int AlfalfaField::neededNailsToUpgrade(int barn_id) const
+
+int AlfalfaField::neededNailsToUpgrade(int) const
 {
-   if(level_==0)
-       return 1;
-   return 0;
-}
-int AlfalfaField::neededShovelsToUpgrade(int barn_id) const
-{
-    if(level_==0)
-        return 1;
-    return 2;
-}
-int AlfalfaField::neededCoinsToUpgrade(int barn_id) const
-{
-    if(level_==0)
-        return 15;
-    return 5;
+    if (level_)
+        return 0;
+
+    return 1;
 }
 
+int AlfalfaField::neededShovelsToUpgrade(int) const
+{
+    if (level_)
+        return 2;
+
+    return 1;
+}
+
+int AlfalfaField::neededCoinsToUpgrade(int) const
+{
+    if (level_)
+        return 5;
+
+    return 15;
+}
