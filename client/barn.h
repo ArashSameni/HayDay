@@ -12,6 +12,7 @@ class Milk
     int barn_id_;
 
 public:
+    Milk(){}
     explicit Milk(int barn_id);
 
     int id() const { return id_; }
@@ -55,14 +56,16 @@ public:
     static int id() { return id_; }
     void save() const;
 
-    ////////////// Not implemented
-    bool checkUpgrade() { return false; }
-    bool isUpgradable() const { return 0; }
-    int neededNailsToUpgrade() const { return 0; }
-    int neededShovelsToUpgrade() const { return 0; }
-    int neededCoinsToUpgrade() const { return 0; }
-    void upgrade() {}
-    //////////////
+    int upgradeXp();
+    bool isUpgradeFinished() const;
+    void finishUpgrade();
+    int isUpgradable(int farm_id) const;
+    int neededNailsToUpgrade(int barn_id = 0) const;
+    int neededShovelsToUpgrade(int barn_id = 0) const;
+    int neededCoinsToUpgrade(int barn_id = 0) const;
+    void upgrade();
+
+
 
     void checkMilksExpiration();
 

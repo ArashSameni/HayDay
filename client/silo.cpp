@@ -3,6 +3,9 @@
 #include <QJsonDocument>
 #include "globals.h"
 #include <QDateTime>
+#include "barn.h"
+#include "farmer.h"
+#include "farm.h"
 
 int Silo::id_ = 0;
 Silo *Silo::silo = nullptr;
@@ -45,6 +48,41 @@ void Silo::save()
     socket.write(query);
 }
 
+int Silo::upgradeXp()
+{
+    return (level_ - 1) * 2;
+}
+
+bool Silo::isUpgradeFinished() const
+{
+    return upgrade_day_ - CURRENT_DAY >= 4;
+}
+
+void Silo::finishUpgrade()
+{
+    max_storage_ *= 2;
+    level_ += 1;
+    is_upgrading_= false;
+    save();
+}
+
+int Silo::isUpgradable(int farmer_id) const
+{
+    Farmer farmer = Farmer::get(farmer_id);
+    Barn barn = Farm::get(farmer.farm_id()).barn();
+
+    if(farmer.coins() < neededCoinsToUpgrade(barn.id()))
+        return LACK_OF_COINS;
+    if(barn.nails() < neededNailsToUpgrade(barn.id()))
+        return LACK_OF_NAILS;
+    if(barn.shovels() < neededShovelsToUpgrade(barn.id()))
+        return LACK_OF_SHOVELS;
+    if(level_ >= Farmer::get(farmer_id).level() - 1)
+        return LACK_OF_LEVEL;
+
+    return OK;
+}
+
 Silo &Silo::get(int silo_id)
 {
     if (silo == nullptr)
@@ -78,4 +116,28 @@ Silo &Silo::get(int silo_id)
     }
 
     return *silo;
+}
+
+int Silo::neededNailsToUpgrade(int barn_id) const
+{
+    return Barn::get(barn_id).level() * 2;
+}
+
+int Silo::neededShovelsToUpgrade(int barn_id) const
+{
+    return Barn::get(barn_id).level() - 2;
+}
+
+int Silo::neededCoinsToUpgrade(int barn_id) const
+{
+    return pow((Barn::get(barn_id).level() * 2), 2) * 100;
+}
+
+void Silo::upgrade()
+{
+    if(!is_upgrading_)
+    {
+        upgrade_day_ = CURRENT_DAY;
+        is_upgrading_ = true;
+    }
 }

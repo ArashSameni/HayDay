@@ -50,7 +50,7 @@ public:
     bool isLevelFinished() const { return xp_ >= max_xp_; }
 
     // Not implemented
-    void goNextLevel();
+    void goNextLevel(){}
 };
 
 #endif // FARMER_H

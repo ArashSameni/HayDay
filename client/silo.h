@@ -3,7 +3,7 @@
 
 #include "place.h"
 
-class Silo : Place
+class Silo : public Place
 {
     static int id_;
     int storage_;
@@ -20,14 +20,14 @@ public:
     static int id() { return id_; }
     void save();
 
-    ////////////// Not implemented
-    bool checkUpgrade() { return false; }
-    bool isUpgradable() const { return 0; }
-    int neededNailsToUpgrade() const { return 0; }
-    int neededShovelsToUpgrade() const { return 0; }
-    int neededCoinsToUpgrade() const { return 0; }
-    void upgrade() {}
-    //////////////
+    int upgradeXp();
+    bool isUpgradeFinished() const;
+    void finishUpgrade();
+    int isUpgradable(int farmer_id) const;
+    int neededNailsToUpgrade(int barn_id) const;
+    int neededShovelsToUpgrade(int barn_id) const;
+    int neededCoinsToUpgrade(int barn_id) const;
+    void upgrade();
 
     int storage() const { return storage_; }
     int max_storage() const { return max_storage_; }
