@@ -55,7 +55,7 @@ int Silo::upgradeXp()
 
 bool Silo::isUpgradeFinished() const
 {
-    return upgrade_day_ - CURRENT_DAY >= 4;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 4;
 }
 
 void Silo::finishUpgrade()
@@ -130,14 +130,15 @@ int Silo::neededShovelsToUpgrade(int barn_id) const
 
 int Silo::neededCoinsToUpgrade(int barn_id) const
 {
-    return pow((Barn::get(barn_id).level() * 2), 2) * 100;
+    return static_cast<int>(pow((Barn::get(barn_id).level() * 2), 2) * 100);
 }
 
 void Silo::upgrade()
 {
     if(!is_upgrading_)
     {
-        upgrade_day_ = CURRENT_DAY;
+        upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
+        save();
     }
 }
