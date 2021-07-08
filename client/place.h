@@ -1,6 +1,8 @@
 #ifndef PLACE_H
 #define PLACE_H
+
 #include "farmer.h"
+
 class Place
 {
 protected:

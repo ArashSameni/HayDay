@@ -1,4 +1,4 @@
-#ifndef LIVINGPLACES_H
+﻿#ifndef LIVINGPLACES_H
 #define LIVINGPLACES_H
 
 #include "place.h"
@@ -44,12 +44,13 @@ public:
     int farm_id() const { return farm_id_; }
     void addAnimal(int amount) { storage_ += amount; }
 
-
-
-
-    virtual bool checkFeeding() = 0;
+    virtual int isFeedable(int) = 0;
+    virtual int feedXp() = 0;
     virtual void feed(int) = 0;
-    virtual void collect() = 0;
+    virtual bool isCollectTime() = 0;
+    virtual bool isCollectable(int) = 0;
+    virtual void collect(int) = 0;
+    virtual int collectXp() = 0;
 
     virtual ~LivingPlace() = 0;
 };
@@ -62,6 +63,12 @@ class ChickenCoop : public LivingPlace
     ChickenCoop();
 
 public:
+    enum
+    {
+        ALREADY_FED,
+        LACK_OF_WHEAT
+    };
+
     void operator=(ChickenCoop const &) = delete;
 
     static ChickenCoop &get(int chicken_coop_id);
@@ -69,20 +76,22 @@ public:
     static ChickenCoop &create(int farm_id);
     static int id() { return id_; }
 
-////upgrade functions
-    int upgradeXp() ;
+    int upgradeXp();
     bool isUpgradeFinished() const;
     void finishUpgrade();
-    int isUpgradable(int farmer_id=0) const;
-    int neededNailsToUpgrade(int barn_id=0) const;
-    int neededShovelsToUpgrade(int barn_id=0) const;
-    int neededCoinsToUpgrade(int barn_id=0) const;
-    void upgrade() ;
+    int isUpgradable(int farmer_id = 0) const;
+    int neededNailsToUpgrade(int barn_id = 0) const;
+    int neededShovelsToUpgrade(int barn_id = 0) const;
+    int neededCoinsToUpgrade(int barn_id = 0) const;
+    void upgrade();
 
-    bool checkFeeding() { return false; }
-    void feed(int) {}
-    void collect() {}
-    //////////////
+    int isFeedable(int silo_id);
+    int feedXp();
+    void feed(int silo_id);
+    bool isCollectTime();
+    bool isCollectable(int barn_id);
+    void collect(int barn_id);
+    int collectXp();
 
     ~ChickenCoop() {}
 };
@@ -95,6 +104,12 @@ class CowPasture : public LivingPlace
     CowPasture();
 
 public:
+    enum
+    {
+        ALREADY_FED,
+        LACK_OF_ALFALFA
+    };
+
     void operator=(CowPasture const &) = delete;
 
     static CowPasture &get(int cow_pasture_id);
@@ -103,14 +118,14 @@ public:
     static int id() { return id_; }
 
     ////////////// Not implemented
-    int upgradeXp() ;
+    int upgradeXp();
     bool isUpgradeFinished() const;
     void finishUpgrade();
-    int isUpgradable(int farmer_id=0) const;
-    int neededNailsToUpgrade(int barn_id=0) const;
-    int neededShovelsToUpgrade(int barn_id=0) const;
-    int neededCoinsToUpgrade(int barn_id=0) const;
-    void upgrade() ;
+    int isUpgradable(int farmer_id = 0) const;
+    int neededNailsToUpgrade(int barn_id = 0) const;
+    int neededShovelsToUpgrade(int barn_id = 0) const;
+    int neededCoinsToUpgrade(int barn_id = 0) const;
+    void upgrade();
 
     bool checkFeeding() { return false; }
     void feed(int) {}
@@ -128,6 +143,12 @@ class SheepPasture : public LivingPlace
     SheepPasture();
 
 public:
+    enum
+    {
+        ALREADY_FED,
+        LACK_OF_ALFALFA
+    };
+
     void operator=(SheepPasture const &) = delete;
 
     static SheepPasture &get(int sheep_pasture_id);
@@ -136,14 +157,14 @@ public:
     static int id() { return id_; }
 
     ////////////// Not implemented
-    int upgradeXp() ;
+    int upgradeXp();
     bool isUpgradeFinished() const;
     void finishUpgrade();
-    int isUpgradable(int farmer_id=0) const;
-    int neededNailsToUpgrade(int barn_id=0) const;
-    int neededShovelsToUpgrade(int barn_id=0) const;
-    int neededCoinsToUpgrade(int barn_id=0) const;
-    void upgrade() ;
+    int isUpgradable(int farmer_id = 0) const;
+    int neededNailsToUpgrade(int barn_id = 0) const;
+    int neededShovelsToUpgrade(int barn_id = 0) const;
+    int neededCoinsToUpgrade(int barn_id = 0) const;
+    void upgrade();
 
     bool checkFeeding() { return false; }
     void feed(int) {}

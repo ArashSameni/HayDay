@@ -4,6 +4,7 @@
 #include "globals.h"
 #include <QDateTime>
 #include "barn.h"
+#include "silo.h"
 #include "farm.h"
 
 int ChickenCoop::id_ = 0;
@@ -186,6 +187,59 @@ void ChickenCoop::upgrade()
         is_upgrading_ = true;
         save(id_);
     }
+}
+
+int ChickenCoop::isFeedable(int silo_id)
+{
+    Silo silo = Silo::get(silo_id);
+    if(animals_condition_ != HUNGRY)
+       return ALREADY_FED;
+    if(silo.storage() < storage_)
+       return LACK_OF_WHEAT;
+
+    return OK;
+}
+
+int ChickenCoop::feedXp()
+{
+    return 1;
+}
+
+void ChickenCoop::feed(int silo_id)
+{
+    Silo silo = Silo::get(silo_id);
+    animals_condition_ = FED;
+    feeding_day_ = static_cast<int>(CURRENT_DAY);
+    silo.removeWheat(storage_);
+    silo.save();
+    save(id_);
+}
+
+bool ChickenCoop::isCollectTime()
+{
+    return CURRENT_DAY - static_cast<uint>(feeding_day_) >= 2;
+}
+
+bool ChickenCoop::isCollectable(int barn_id)
+{
+    Barn barn = Barn::get(barn_id);
+    return barn.max_storage() - barn.storage() >= storage_;
+}
+
+void ChickenCoop::collect(int barn_id)
+{
+    Barn barn = Barn::get(barn_id);
+
+    barn.addEgg(storage_);
+    barn.save();
+
+    animals_condition_ = HUNGRY;
+    save(id_);
+}
+
+int ChickenCoop::collectXp()
+{
+    return 2;
 }
 
 int ChickenCoop::isUpgradable(int farmer_id) const
