@@ -54,7 +54,7 @@ Barn &Barn::get(int barn_id)
 
             query.clear();
             query = "SELECT id, manufacture_day, expiration_day"
-                          " WHERE barn_id=:barn_id";
+                    " WHERE barn_id=:barn_id";
             query.replace(":barn_id", QString::number(barn_id));
 
             socket.write(query);
@@ -159,7 +159,7 @@ void Barn::addWool(int amount)
     storage_ += amount;
 }
 
-void Barn::addMilk(const Milk& milk)
+void Barn::addMilk(const Milk &milk)
 {
     milks_.push_back(milk);
     storage_ += 1;
@@ -205,7 +205,7 @@ void Barn::removeMilk(int milk_id)
     storage_ -= 1;
 }
 
-void Barn::removeMilk(const Milk& milk)
+void Barn::removeMilk(const Milk &milk)
 {
     removeMilk(milk.id());
 }
@@ -231,41 +231,44 @@ void Milk::remove()
 
 bool Milk::isExpired()
 {
-    return expiration_day_ > CURRENT_DAY;
+    return static_cast<uint>(expiration_day_) <= CURRENT_DAY;
 }
 
 Milk::Milk(int barn_id)
 {
-    manufacture_day_ = CURRENT_DAY;
-    expiration_day_ = CURRENT_DAY + 10;
+    manufacture_day_ = static_cast<int>(CURRENT_DAY);
+    expiration_day_ = manufacture_day_ + 10;
     barn_id_ = barn_id;
 }
+
 int Barn::upgradeXp()
 {
     return (level_ - 1) * 3;
 }
+
 bool Barn::isUpgradeFinished() const
 {
-    return upgrade_day_ - CURRENT_DAY >= 5;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 5;
 }
 
 void Barn::finishUpgrade()
 {
-    max_storage_ =round(1.5*max_storage_);
+    max_storage_ = qRound(1.5 * max_storage_);
     level_ += 1;
-    is_upgrading_= false;
+    is_upgrading_ = false;
     save();
 }
+
 int Barn::isUpgradable(int farmer_id) const
 {
-     Farmer farmer = Farmer::get(farmer_id);
-    if(farmer.coins() < neededCoinsToUpgrade())
+    Farmer farmer = Farmer::get(farmer_id);
+    if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;
-    if(nails() < neededNailsToUpgrade())
+    if (nails_ < neededNailsToUpgrade())
         return LACK_OF_NAILS;
-    if(shovels_ < neededShovelsToUpgrade())
+    if (shovels_ < neededShovelsToUpgrade())
         return LACK_OF_SHOVELS;
-    if(level_ >= Farmer::get(farmer_id).level())
+    if (level_ >= Farmer::get(farmer_id).level())
         return LACK_OF_LEVEL;
 
     return OK;
@@ -273,26 +276,25 @@ int Barn::isUpgradable(int farmer_id) const
 
 void Barn::upgrade()
 {
-    if(!is_upgrading_)
+    if (!is_upgrading_)
     {
-        upgrade_day_ = CURRENT_DAY;
+        upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
+        save();
     }
 }
 
-int Barn::neededNailsToUpgrade(int barn_id) const{
-
-    return level();
-
-}
-int Barn::neededShovelsToUpgrade(int barn_id) const{
-
-    return level()-1;
-
-}
-int Barn::neededCoinsToUpgrade(int barn_id) const{
-
-    return (pow(level(),3)*10);
+int Barn::neededNailsToUpgrade(int) const
+{
+    return level_;
 }
 
+int Barn::neededShovelsToUpgrade(int) const
+{
+    return level_ - 1;
+}
 
+int Barn::neededCoinsToUpgrade(int) const
+{
+    return static_cast<int>(pow(level_, 3) * 10);
+}
