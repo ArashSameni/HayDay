@@ -84,6 +84,7 @@ public:
     void addEgg(int amount);
     void addWool(int amount);
     void addMilk(const Milk &milk);
+    void addMilk(int amount);
 
     void removeShovel(int amount);
     void removeNail(int amount);

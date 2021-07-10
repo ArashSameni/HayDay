@@ -220,10 +220,13 @@ bool ChickenCoop::isCollectTime()
     return CURRENT_DAY - static_cast<uint>(feeding_day_) >= 2;
 }
 
-bool ChickenCoop::isCollectable(int barn_id)
+int ChickenCoop::isCollectable(int barn_id)
 {
     Barn barn = Barn::get(barn_id);
-    return barn.max_storage() - barn.storage() >= storage_;
+    if( barn.max_storage() - barn.storage() < storage_)
+            return LACK_OF_STORAGE;
+    
+    return OK;
 }
 
 void ChickenCoop::collect(int barn_id)
@@ -399,6 +402,60 @@ int CowPasture::neededCoinsToUpgrade(int) const
     return 20;
 }
 
+int CowPasture::isFeedable(int barn_id)
+{
+    Barn barn =Barn::get(barn_id);
+    if(animals_condition_ != HUNGRY)
+       return ALREADY_FED;
+    if(barn.storage() < storage_*2)
+       return LACK_OF_ALFALFA;
+
+    return OK;
+}
+
+int CowPasture::feedXp()
+{
+    return 3;
+}
+
+void CowPasture::feed(int barn_id)
+{
+    Barn barn =Barn::get(barn_id);
+    animals_condition_ = FED;
+    feeding_day_ = static_cast<int>(CURRENT_DAY);
+    barn.removeAlfalfa(storage_*2);
+    barn.save();
+    save(id_);
+}
+
+bool CowPasture::isCollectTime()
+{
+    return CURRENT_DAY - static_cast<uint>(feeding_day_) >= 3;
+}
+
+int CowPasture::isCollectable(int barn_id)
+{
+    Barn barn = Barn::get(barn_id);
+    if( barn.max_storage() - barn.storage() < storage_)
+            return LACK_OF_STORAGE;
+    return OK;
+}
+
+void CowPasture::collect(int barn_id)
+{
+    Barn barn = Barn::get(barn_id);
+    barn.addMilk(storage_);
+        
+    barn.save();
+    animals_condition_ = HUNGRY;
+    save(id_);
+}
+
+int CowPasture::collectXp()
+{
+    return 5;
+}
+
 SheepPasture::SheepPasture()
 {
     type_ = LivingPlace::SHEEP_PASTURE;
@@ -520,4 +577,64 @@ int SheepPasture::neededShovelsToUpgrade(int) const
 int SheepPasture::neededCoinsToUpgrade(int) const
 {
     return 50;
+}
+
+int SheepPasture::isFeedable(int barn_id)
+{
+    Barn barn =Barn::get(barn_id);
+    if(animals_condition_ != HUNGRY)
+       return ALREADY_FED;
+    if(barn.storage() < storage_)
+       return LACK_OF_ALFALFA;
+
+    return OK;
+}
+
+int SheepPasture::feedXp()
+{
+    return 7;
+}
+
+void SheepPasture::feed(int barn_id)
+{
+    Barn barn =Barn::get(barn_id);
+    animals_condition_ = FED;
+    feeding_day_ = static_cast<int>(CURRENT_DAY);
+    barn.removeAlfalfa(storage_*2);
+    barn.save();
+    save(id_);
+}
+
+bool SheepPasture::isCollectTime()
+{
+    return CURRENT_DAY - static_cast<uint>(feeding_day_) >= 10;
+}
+
+int SheepPasture::isCollectable(int farmer_id)
+{
+    Farmer farmer = Farmer::get(farmer_id);
+    Barn barn = Farm::get(farmer.farm_id()).barn();
+    
+    if(barn.max_storage() - barn.storage() < storage_)
+        return LACK_OF_STORAGE;
+
+    if( farmer.coins() < storage_ ) 
+        return LACK_OF_COINS;
+    
+    return OK;
+}
+
+void SheepPasture::collect(int barn_id)
+{
+    Barn barn = Barn::get(barn_id);
+    barn.addWool(storage_);
+        
+    barn.save();
+    animals_condition_ = HUNGRY;
+    save(id_);
+}
+
+int SheepPasture::collectXp()
+{
+    return 9;
 }

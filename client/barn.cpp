@@ -165,6 +165,16 @@ void Barn::addMilk(const Milk &milk)
     storage_ += 1;
 }
 
+void Barn::addMilk(int amount)
+{
+    for(int i=0;i<amount;i++)
+    {
+       Milk milk(id_);
+       addMilk(milk);
+       milk.save();
+    }
+}
+
 void Barn::removeShovel(int amount)
 {
     shovels_ -= amount;
@@ -248,6 +258,7 @@ int Barn::upgradeXp()
 
 bool Barn::isUpgradeFinished() const
 {
+
     return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 5;
 }
 
