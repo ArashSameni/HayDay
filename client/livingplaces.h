@@ -48,7 +48,7 @@ public:
     virtual int feedXp() = 0;
     virtual void feed(int) = 0;
     virtual bool isCollectTime() = 0;
-    virtual bool isCollectable(int) = 0;
+    virtual int isCollectable(int) = 0;
     virtual void collect(int) = 0;
     virtual int collectXp() = 0;
 
@@ -66,7 +66,8 @@ public:
     enum
     {
         ALREADY_FED,
-        LACK_OF_WHEAT
+        LACK_OF_WHEAT,
+        LACK_OF_STORAGE
     };
 
     void operator=(ChickenCoop const &) = delete;
@@ -89,7 +90,7 @@ public:
     int feedXp();
     void feed(int silo_id);
     bool isCollectTime();
-    bool isCollectable(int barn_id);
+    int isCollectable(int barn_id);
     void collect(int barn_id);
     int collectXp();
 
@@ -107,7 +108,8 @@ public:
     enum
     {
         ALREADY_FED,
-        LACK_OF_ALFALFA
+        LACK_OF_ALFALFA,
+        LACK_OF_STORAGE
     };
 
     void operator=(CowPasture const &) = delete;
@@ -117,7 +119,6 @@ public:
     static CowPasture &create(int farm_id);
     static int id() { return id_; }
 
-    ////////////// Not implemented
     int upgradeXp();
     bool isUpgradeFinished() const;
     void finishUpgrade();
@@ -126,11 +127,16 @@ public:
     int neededShovelsToUpgrade(int barn_id = 0) const;
     int neededCoinsToUpgrade(int barn_id = 0) const;
     void upgrade();
+    
+    
+    int isFeedable(int barn_id);
+    int feedXp();
+    void feed(int barn_id);
+    bool isCollectTime();
+    int isCollectable(int barn_id);
+    void collect(int barn_id);
+    int collectXp();
 
-    bool checkFeeding() { return false; }
-    void feed(int) {}
-    void collect() {}
-    //////////////
 
     ~CowPasture() {}
 };
@@ -146,7 +152,8 @@ public:
     enum
     {
         ALREADY_FED,
-        LACK_OF_ALFALFA
+        LACK_OF_ALFALFA,
+        LACK_OF_STORAGE
     };
 
     void operator=(SheepPasture const &) = delete;
@@ -156,7 +163,7 @@ public:
     static SheepPasture &create(int farm_id);
     static int id() { return id_; }
 
-    ////////////// Not implemented
+
     int upgradeXp();
     bool isUpgradeFinished() const;
     void finishUpgrade();
@@ -166,10 +173,13 @@ public:
     int neededCoinsToUpgrade(int barn_id = 0) const;
     void upgrade();
 
-    bool checkFeeding() { return false; }
-    void feed(int) {}
-    void collect() {}
-    //////////////
+    int isFeedable(int barn_id);
+    int feedXp();
+    void feed(int barn_id);
+    bool isCollectTime();
+    int isCollectable(int farmer_id);
+    void collect(int barn_id);
+    int collectXp();
 
     ~SheepPasture() {}
 };
