@@ -116,8 +116,8 @@ void WheatField::finishUpgrade()
 
 int WheatField::isUpgradable(int farmer_id) const
 {
-    Farmer farmer = Farmer::get(farmer_id);
-    Barn barn = Farm::get(farmer.farm_id()).barn();
+    Farmer& farmer = Farmer::get(farmer_id);
+    Barn& barn = Farm::get(farmer.farm_id()).barn();
 
     if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;
@@ -271,8 +271,8 @@ void AlfalfaField::finishUpgrade()
 
 int AlfalfaField::isUpgradable(int farmer_id) const
 {
-    Farmer farmer = Farmer::get(farmer_id);
-    Barn barn = Farm::get(farmer.farm_id()).barn();
+    Farmer& farmer = Farmer::get(farmer_id);
+    Barn& barn = Farm::get(farmer.farm_id()).barn();
 
     if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;

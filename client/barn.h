@@ -49,6 +49,7 @@ class Barn : public Place
     Barn();
 
 public:
+    Barn(Barn const &) = delete;
     void operator=(Barn const &) = delete;
 
     static Barn &get(int barn_id);

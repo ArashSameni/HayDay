@@ -68,8 +68,8 @@ void Silo::finishUpgrade()
 
 int Silo::isUpgradable(int farmer_id) const
 {
-    Farmer farmer = Farmer::get(farmer_id);
-    Barn barn = Farm::get(farmer.farm_id()).barn();
+    Farmer& farmer = Farmer::get(farmer_id);
+    Barn& barn = Farm::get(farmer.farm_id()).barn();
 
     if(farmer.coins() < neededCoinsToUpgrade(barn.id()))
         return LACK_OF_COINS;

@@ -191,7 +191,7 @@ void ChickenCoop::upgrade()
 
 int ChickenCoop::isFeedable(int silo_id)
 {
-    Silo silo = Silo::get(silo_id);
+    Silo& silo = Silo::get(silo_id);
     if(animals_condition_ != HUNGRY)
        return ALREADY_FED;
     if(silo.storage() < storage_)
@@ -207,7 +207,7 @@ int ChickenCoop::feedXp()
 
 void ChickenCoop::feed(int silo_id)
 {
-    Silo silo = Silo::get(silo_id);
+    Silo& silo = Silo::get(silo_id);
     animals_condition_ = FED;
     feeding_day_ = static_cast<int>(CURRENT_DAY);
     silo.removeWheat(storage_);
@@ -222,7 +222,7 @@ bool ChickenCoop::isCollectTime()
 
 int ChickenCoop::isCollectable(int barn_id)
 {
-    Barn barn = Barn::get(barn_id);
+    Barn& barn = Barn::get(barn_id);
     if( barn.max_storage() - barn.storage() < storage_)
             return LACK_OF_STORAGE;
     
@@ -231,7 +231,7 @@ int ChickenCoop::isCollectable(int barn_id)
 
 void ChickenCoop::collect(int barn_id)
 {
-    Barn barn = Barn::get(barn_id);
+    Barn& barn = Barn::get(barn_id);
 
     barn.addEgg(storage_);
     barn.save();
@@ -247,8 +247,8 @@ int ChickenCoop::collectXp()
 
 int ChickenCoop::isUpgradable(int farmer_id) const
 {
-    Farmer farmer = Farmer::get(farmer_id);
-    Barn barn = Farm::get(farmer.farm_id()).barn();
+    Farmer& farmer = Farmer::get(farmer_id);
+    Barn& barn = Farm::get(farmer.farm_id()).barn();
 
     if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;
@@ -353,8 +353,8 @@ void CowPasture::finishUpgrade()
 
 int CowPasture::isUpgradable(int farmer_id) const
 {
-    Farmer farmer = Farmer::get(farmer_id);
-    Barn barn = Farm::get(farmer.farm_id()).barn();
+    Farmer& farmer = Farmer::get(farmer_id);
+    Barn& barn = Farm::get(farmer.farm_id()).barn();
 
     if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;
@@ -404,7 +404,7 @@ int CowPasture::neededCoinsToUpgrade(int) const
 
 int CowPasture::isFeedable(int barn_id)
 {
-    Barn barn =Barn::get(barn_id);
+    Barn& barn = Barn::get(barn_id);
     if(animals_condition_ != HUNGRY)
        return ALREADY_FED;
     if(barn.storage() < storage_*2)
@@ -420,7 +420,7 @@ int CowPasture::feedXp()
 
 void CowPasture::feed(int barn_id)
 {
-    Barn barn =Barn::get(barn_id);
+    Barn& barn = Barn::get(barn_id);
     animals_condition_ = FED;
     feeding_day_ = static_cast<int>(CURRENT_DAY);
     barn.removeAlfalfa(storage_*2);
@@ -435,7 +435,7 @@ bool CowPasture::isCollectTime()
 
 int CowPasture::isCollectable(int barn_id)
 {
-    Barn barn = Barn::get(barn_id);
+    Barn& barn = Barn::get(barn_id);
     if( barn.max_storage() - barn.storage() < storage_)
             return LACK_OF_STORAGE;
     return OK;
@@ -443,7 +443,7 @@ int CowPasture::isCollectable(int barn_id)
 
 void CowPasture::collect(int barn_id)
 {
-    Barn barn = Barn::get(barn_id);
+    Barn& barn = Barn::get(barn_id);
     barn.addMilk(storage_);
         
     barn.save();
@@ -533,8 +533,8 @@ void SheepPasture::finishUpgrade()
 
 int SheepPasture::isUpgradable(int farmer_id) const
 {
-    Farmer farmer = Farmer::get(farmer_id);
-    Barn barn = Farm::get(farmer.farm_id()).barn();
+    Farmer& farmer = Farmer::get(farmer_id);
+    Barn& barn = Farm::get(farmer.farm_id()).barn();
 
     if (farmer.coins() < neededCoinsToUpgrade())
         return LACK_OF_COINS;
@@ -581,7 +581,7 @@ int SheepPasture::neededCoinsToUpgrade(int) const
 
 int SheepPasture::isFeedable(int barn_id)
 {
-    Barn barn =Barn::get(barn_id);
+    Barn& barn = Barn::get(barn_id);
     if(animals_condition_ != HUNGRY)
        return ALREADY_FED;
     if(barn.storage() < storage_)
@@ -597,7 +597,7 @@ int SheepPasture::feedXp()
 
 void SheepPasture::feed(int barn_id)
 {
-    Barn barn =Barn::get(barn_id);
+    Barn& barn = Barn::get(barn_id);
     animals_condition_ = FED;
     feeding_day_ = static_cast<int>(CURRENT_DAY);
     barn.removeAlfalfa(storage_*2);
@@ -612,8 +612,8 @@ bool SheepPasture::isCollectTime()
 
 int SheepPasture::isCollectable(int farmer_id)
 {
-    Farmer farmer = Farmer::get(farmer_id);
-    Barn barn = Farm::get(farmer.farm_id()).barn();
+    Farmer& farmer = Farmer::get(farmer_id);
+    Barn& barn = Farm::get(farmer.farm_id()).barn();
     
     if(barn.max_storage() - barn.storage() < storage_)
         return LACK_OF_STORAGE;
@@ -626,7 +626,7 @@ int SheepPasture::isCollectable(int farmer_id)
 
 void SheepPasture::collect(int barn_id)
 {
-    Barn barn = Barn::get(barn_id);
+    Barn& barn = Barn::get(barn_id);
     barn.addWool(storage_);
         
     barn.save();

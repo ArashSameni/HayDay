@@ -19,6 +19,7 @@ class Farm
     Farm() {}
 
 public:
+    Farm(Farm const &) = delete;
     void operator=(Farm const &) = delete;
 
     Barn &barn() const { return Barn::get(barn_id_); }

@@ -13,6 +13,7 @@ class Silo : public Place
     Silo();
 
 public:
+    Silo(Silo const &) = delete;
     void operator=(Silo const &) = delete;
 
     static Silo &get(int silo_id);

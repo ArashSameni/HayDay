@@ -21,6 +21,7 @@ class Farmer
     Farmer();
 
 public:
+    Farmer(Farmer const &) = delete;
     void operator=(Farmer const &) = delete;
 
     static Farmer &get(int farmer_id);

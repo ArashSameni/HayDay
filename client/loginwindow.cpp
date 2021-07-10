@@ -55,17 +55,17 @@ void LoginWindow::on_btnSignup_clicked()
     int account_id = auth.signup(username, password);
     if(account_id)
     {
-        AlfalfaField alfalfa_field = AlfalfaField::create();
-        WheatField wheat_field = WheatField::create();
-        Barn barn = Barn::create();
-        Silo silo = Silo::create();
-        Farm farm = Farm::create(barn.id(), silo.id(), alfalfa_field.id(), wheat_field.id());
+        AlfalfaField& alfalfa_field = AlfalfaField::create();
+        WheatField& wheat_field = WheatField::create();
+        Barn& barn = Barn::create();
+        Silo& silo = Silo::create();
+        Farm& farm = Farm::create(barn.id(), silo.id(), alfalfa_field.id(), wheat_field.id());
 
-        ChickenCoop chicken_coop = ChickenCoop::create(farm.id());
-        CowPasture cow_pasture = CowPasture::create(farm.id());
-        SheepPasture sheep_pasture = SheepPasture::create(farm.id());
+        ChickenCoop::create(farm.id());
+        CowPasture::create(farm.id());
+        SheepPasture::create(farm.id());
 
-        Farmer farmer = Farmer::create(nickname, gender, account_id, farm.id());
+        Farmer::create(nickname, gender, account_id, farm.id());
 
 
         QMessageBox::information(this, "Info", "Account has been created successfully.");
@@ -91,8 +91,8 @@ void LoginWindow::on_btnLogin_clicked()
     int account_id = auth.login(username, password);
     if(account_id)
     {
-        Farmer farmer = Farmer::getByAccountId(account_id);
-        Farm farm = Farm::get(farmer.farm_id());
+        Farmer& farmer = Farmer::getByAccountId(account_id);
+        Farm& farm = Farm::get(farmer.farm_id());
 
         CURRENT_DAY = (QDateTime::currentDateTime().toTime_t() - farmer.joining_date()) / SECONDS_PER_DAY;
 
