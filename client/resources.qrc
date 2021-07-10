@@ -26,5 +26,7 @@
         <file>img/xp_pbar_left_corner.png</file>
         <file>img/xp_pbar_center.png</file>
         <file>img/xp_pbar_right_corner.png</file>
+        <file>img/coin-box.png</file>
+        <file>img/day-box.png</file>
     </qresource>
 </RCC>

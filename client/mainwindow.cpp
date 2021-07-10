@@ -67,11 +67,14 @@ void MainWindow::anotherDayPassed()
         showLevel();
     }
     showXP();
+    showDay();
     //farmer.save();
 }
 
 void MainWindow::initUI()
 {
+    showCoin();
+    showDay();
     showLevel();
     showXP();
     showAnimals();
@@ -188,6 +191,16 @@ void MainWindow::showSheeps(int count)
         ui->btnSheep_5->setVisible(true);
     if(count >= 6)
         ui->btnSheep_6->setVisible(true);
+}
+
+void MainWindow::showDay()
+{
+    ui->lblDay->setNum(static_cast<int>(CURRENT_DAY));
+}
+
+void MainWindow::showCoin()
+{
+    ui->lblCoin->setNum(farmer.coins());
 }
 
 void MainWindow::showXP()

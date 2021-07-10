@@ -37,6 +37,8 @@ private:
     void showChickens(int count);
     void showCows(int count);
     void showSheeps(int count);
+    void showDay();
+    void showCoin();
     void showXP();
     void showLevel();
 };
