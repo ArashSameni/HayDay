@@ -77,7 +77,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">*{
-	font: 18pt &quot;IRANSans Light&quot;;
+	font: 24px &quot;IRANSans Light&quot;;
 }
 
 QLineEdit{
@@ -224,7 +224,7 @@ QPushButton:hover{
    </property>
    <property name="styleSheet">
     <string notr="true">*{
-	font: 18pt &quot;IRANSans Light&quot;;
+	font: 24px &quot;IRANSans Light&quot;;
 }
 
 QLineEdit, QComboBox{

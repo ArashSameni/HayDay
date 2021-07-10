@@ -14,7 +14,13 @@
    <string>HayDay</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/img/background.png);</string>
+   <string notr="true">*{
+	font: 23px url(:/fonts/IRANSans.ttf)
+}
+
+QMainWindow{
+	background-image: url(:/img/background.png);
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btnBarn">
@@ -688,6 +694,92 @@ background-image: url(:/img/chicken.png);</string>
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="lblXpProgress">
+    <property name="geometry">
+     <rect>
+      <x>397</x>
+      <y>16</y>
+      <width>307</width>
+      <height>73</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/img/xp_pbar_bg.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="pbar_left_corner">
+    <property name="geometry">
+     <rect>
+      <x>473</x>
+      <y>37</y>
+      <width>8</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/img/xp_pbar_left_corner.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="pbar_center">
+    <property name="geometry">
+     <rect>
+      <x>481</x>
+      <y>37</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/img/xp_pbar_center.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblLevel">
+    <property name="geometry">
+     <rect>
+      <x>422</x>
+      <y>35</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #fff;</string>
+    </property>
+    <property name="text">
+     <string>5</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblXP">
+    <property name="geometry">
+     <rect>
+      <x>545</x>
+      <y>35</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #fff;</string>
+    </property>
+    <property name="text">
+     <string>5 / 50</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>btnChickenCoop</zorder>
    <zorder>btnAlfalfaField</zorder>
    <zorder>btnWheatField</zorder>
@@ -719,16 +811,11 @@ background-image: url(:/img/chicken.png);</string>
    <zorder>cowLock</zorder>
    <zorder>chickenLock</zorder>
    <zorder>alfalfaLock</zorder>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1100</width>
-     <height>20</height>
-    </rect>
-   </property>
+   <zorder>lblXpProgress</zorder>
+   <zorder>pbar_left_corner</zorder>
+   <zorder>pbar_center</zorder>
+   <zorder>lblLevel</zorder>
+   <zorder>lblXP</zorder>
   </widget>
  </widget>
  <resources/>
