@@ -1,6 +1,6 @@
 #ifndef PLACE_H
 #define PLACE_H
-
+#include "enums.h"
 #include "farmer.h"
 
 class Place
@@ -15,14 +15,7 @@ protected:
     virtual int neededCoinsToUpgrade(int barn_id = 0) const = 0;
 
 public:
-    enum
-    {
-        LACK_OF_COINS,
-        LACK_OF_NAILS,
-        LACK_OF_SHOVELS,
-        LACK_OF_LEVEL,
-        OK
-    };
+
     int level() const { return level_; }
     int upgrade_day() const { return upgrade_day_; }
     bool is_upgrading() const { return is_upgrading_; }

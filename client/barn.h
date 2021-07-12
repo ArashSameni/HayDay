@@ -1,6 +1,6 @@
 #ifndef BARN_H
 #define BARN_H
-
+#include "enums.h"
 #include "place.h"
 #include <QVector>
 

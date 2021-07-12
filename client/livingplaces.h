@@ -1,14 +1,8 @@
 ﻿#ifndef LIVINGPLACES_H
 #define LIVINGPLACES_H
-
+#include "enums.h"
 #include "place.h"
 
-enum AnimalsCondition
-{
-    HUNGRY,
-    FED,
-    COLLECTABLE
-};
 
 class LivingPlace : public Place
 {
@@ -24,7 +18,7 @@ protected:
     int type_;
     int storage_;
     int max_storage_;
-    int animals_condition_ = AnimalsCondition::HUNGRY;
+    int animals_condition_ = Enums::HUNGRY;
     int feeding_day_ = -1;
     int farm_id_;
 
