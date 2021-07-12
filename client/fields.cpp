@@ -116,8 +116,8 @@ void WheatField::finishUpgrade()
 
 int WheatField::isUpgradable(int farmer_id) const
 {
-    Farmer& farmer = Farmer::get(farmer_id);
-    Barn& barn = Farm::get(farmer.farm_id()).barn();
+    Farmer &farmer = Farmer::get(farmer_id);
+    Barn &barn = Farm::get(farmer.farm_id()).barn();
 
     if (farmer.coins() < neededCoinsToUpgrade())
         return Enums::LACK_OF_COINS;
@@ -148,23 +148,23 @@ int WheatField::plantXp()
 
 int WheatField::isPlantable(int silo_id, int amount)
 {
-    Silo silo=Silo::get(silo_id);
-    if( amount<=0 || amount>area_)
+    Silo &silo = Silo::get(silo_id);
+    if (amount <= 0 || amount > area_)
         return Enums::AREA_ERROR;
-    if(silo.storage()<amount)
+    if (silo.storage() < amount)
         return Enums::LACK_OF_SEED;
-    if(plants_condition_ != Enums::NOT_PLANTED)
+    if (plants_condition_ != Enums::NOT_PLANTED)
         return Enums::ALREADY_PLANTED;
 
     return Enums::OK;
 }
 
-void WheatField::plant(int silo_id,int amount)
+void WheatField::plant(int silo_id, int amount)
 {
-    plants_condition_=Enums::PLANTED;
-    planting_day_=CURRENT_DAY;
-    planted_area_=amount;
-    Silo silo=Silo::get(silo_id);
+    plants_condition_ = Enums::PLANTED;
+    planting_day_ = CURRENT_DAY;
+    planted_area_ = amount;
+    Silo &silo = Silo::get(silo_id);
     silo.removeWheat(amount);
     silo.save();
     save();
@@ -177,28 +177,26 @@ int WheatField::reapXp()
 
 bool WheatField::isReapTime()
 {
-    return CURRENT_DAY- static_cast<uint>(planting_day_)>=2;
+    return CURRENT_DAY - static_cast<uint>(planting_day_) >= 2;
 }
 
 int WheatField::isReapable(int silo_id)
 {
-    Silo silo=Silo::get(silo_id);
-    if(silo.max_storage()-silo.storage()<planted_area_*2)
+    Silo &silo = Silo::get(silo_id);
+    if (silo.max_storage() - silo.storage() < planted_area_ * 2)
         return Enums::LACK_OF_SPACE;
     return Enums::OK;
-
 }
 
 void WheatField::reap(int silo_id)
 {
-    Silo silo = Silo::get(silo_id);
-    silo.addWheat(2*planted_area_);
-    plants_condition_=Enums::NOT_PLANTED;
-    planted_area_=0;
+    Silo &silo = Silo::get(silo_id);
+    silo.addWheat(2 * planted_area_);
+    plants_condition_ = Enums::NOT_PLANTED;
+    planted_area_ = 0;
     save();
     silo.save();
 }
-
 
 int WheatField::neededNailsToUpgrade(int) const
 {
@@ -330,8 +328,8 @@ void AlfalfaField::finishUpgrade()
 
 int AlfalfaField::isUpgradable(int farmer_id) const
 {
-    Farmer& farmer = Farmer::get(farmer_id);
-    Barn& barn = Farm::get(farmer.farm_id()).barn();
+    Farmer &farmer = Farmer::get(farmer_id);
+    Barn &barn = Farm::get(farmer.farm_id()).barn();
 
     if (farmer.coins() < neededCoinsToUpgrade())
         return Enums::LACK_OF_COINS;
@@ -362,12 +360,12 @@ int AlfalfaField::plowXp()
 
 int AlfalfaField::isPlowable(int farmer_id)
 {
-    Farmer farmer=Farmer::get(farmer_id);
-    if(farmer.coins() < 5*area_)
+    Farmer &farmer = Farmer::get(farmer_id);
+    if (farmer.coins() < 5 * area_)
         return Enums::LACK_OF_COINS;
-    if(plants_condition_==Enums::PLOWING || plants_condition_==Enums::PLOWED)
+    if (plants_condition_ == Enums::PLOWING || plants_condition_ == Enums::PLOWED)
         return Enums::ALREADY_PLOWED;
-    if(plants_condition_ ==Enums::PLANTED)
+    if (plants_condition_ == Enums::PLANTED)
         return Enums::PLANTED;
 
     return Enums::OK;
@@ -375,20 +373,20 @@ int AlfalfaField::isPlowable(int farmer_id)
 
 void AlfalfaField::plow()
 {
-    plants_condition_=Enums::PLOWING;
-    plowing_day_=CURRENT_DAY;
-    planted_area_=0;
+    plants_condition_ = Enums::PLOWING;
+    plowing_day_ = CURRENT_DAY;
+    planted_area_ = 0;
     save();
 }
 
 bool AlfalfaField::isPlowingFinished()
 {
-    return CURRENT_DAY - static_cast<uint>(plowing_day_) >=1;
+    return CURRENT_DAY - static_cast<uint>(plowing_day_) >= 1;
 }
 
 void AlfalfaField::finishPlowing()
 {
-    plants_condition_=Enums::PLOWED;
+    plants_condition_ = Enums::PLOWED;
 }
 
 int AlfalfaField::plantXp()
@@ -398,31 +396,30 @@ int AlfalfaField::plantXp()
 
 int AlfalfaField::isPlantable(int barn_id, int amount)
 {
-    Barn barn=Barn::get(barn_id);
-    if( amount<=0 || amount>area_)
+    Barn &barn = Barn::get(barn_id);
+    if (amount <= 0 || amount > area_)
         return Enums::AREA_ERROR;
-    if(barn.storage()<amount)
+    if (barn.storage() < amount)
         return Enums::LACK_OF_SEED;
-    if(plants_condition_ != Enums::PLOWED)
+    if (plants_condition_ != Enums::PLOWED)
     {
-        if(plants_condition_== Enums::NOT_PLOWED)
-           return Enums::NOT_PLOWED;
-        if(plants_condition_== Enums::PLOWING)
-           return Enums::PLOWING;
-        if(plants_condition_== Enums::PLANTED)
-           return Enums::ALREADY_PLANTED;
-
+        if (plants_condition_ == Enums::NOT_PLOWED)
+            return Enums::NOT_PLOWED;
+        if (plants_condition_ == Enums::PLOWING)
+            return Enums::PLOWING;
+        if (plants_condition_ == Enums::PLANTED)
+            return Enums::ALREADY_PLANTED;
     }
 
     return Enums::OK;
 }
 
-void AlfalfaField::plant(int barn_id,int amount)
+void AlfalfaField::plant(int barn_id, int amount)
 {
-    plants_condition_=Enums::PLANTED;
-    planting_day_=CURRENT_DAY;
-    planted_area_=amount;
-    Barn barn=Barn::get(barn_id);
+    plants_condition_ = Enums::PLANTED;
+    planting_day_ = CURRENT_DAY;
+    planted_area_ = amount;
+    Barn &barn = Barn::get(barn_id);
     barn.removeAlfalfa(amount);
     barn.save();
     save();
@@ -435,27 +432,26 @@ int AlfalfaField::reapXp()
 
 bool AlfalfaField::isReapTime()
 {
-    return CURRENT_DAY- static_cast<uint>(planting_day_)>=4;
+    return CURRENT_DAY - static_cast<uint>(planting_day_) >= 4;
 }
 
 int AlfalfaField::isReapable(int barn_id)
 {
-    Barn barn=Barn::get(barn_id);
-    if((barn.max_storage()-barn.storage())<planted_area_*2)
+    Barn &barn = Barn::get(barn_id);
+    if ((barn.max_storage() - barn.storage()) < planted_area_ * 2)
         return Enums::LACK_OF_SPACE;
     return Enums::OK;
-
 }
+
 void AlfalfaField::reap(int barn_id)
 {
-    Barn barn=Barn::get(barn_id);
-    barn.addAlfalfa(planted_area_*2);
-    plants_condition_=Enums::NOT_PLOWED;
-    planted_area_=0;
+    Barn &barn = Barn::get(barn_id);
+    barn.addAlfalfa(planted_area_ * 2);
+    plants_condition_ = Enums::NOT_PLOWED;
+    planted_area_ = 0;
     save();
     barn.save();
 }
-
 
 int AlfalfaField::neededNailsToUpgrade(int) const
 {

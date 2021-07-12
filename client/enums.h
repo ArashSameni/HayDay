@@ -24,6 +24,10 @@ namespace Enums
         HUNGRY,
         FED,
         COLLECTABLE,
+        ALREADY_FED,
+        LACK_OF_ALFALFA,
+        LACK_OF_WHEAT,
+        LACK_OF_STORAGE,
 
 
         LACK_OF_COINS,

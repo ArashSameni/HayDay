@@ -57,12 +57,6 @@ class ChickenCoop : public LivingPlace
     ChickenCoop();
 
 public:
-    enum
-    {
-        ALREADY_FED,
-        LACK_OF_WHEAT,
-        LACK_OF_STORAGE
-    };
 
     ChickenCoop(ChickenCoop const &) = delete;
     void operator=(ChickenCoop const &) = delete;
@@ -100,12 +94,6 @@ class CowPasture : public LivingPlace
     CowPasture();
 
 public:
-    enum
-    {
-        ALREADY_FED,
-        LACK_OF_ALFALFA,
-        LACK_OF_STORAGE
-    };
 
     CowPasture(CowPasture const &) = delete;
     void operator=(CowPasture const &) = delete;
@@ -145,12 +133,6 @@ class SheepPasture : public LivingPlace
     SheepPasture();
 
 public:
-    enum
-    {
-        ALREADY_FED,
-        LACK_OF_ALFALFA,
-        LACK_OF_STORAGE
-    };
 
     SheepPasture(SheepPasture const &) = delete;
     void operator=(SheepPasture const &) = delete;
