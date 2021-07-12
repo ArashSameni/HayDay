@@ -60,12 +60,23 @@ void MainWindow::anotherDayPassed()
         farm.wheat_field().finishUpgrade();
         xp_to_add += farm.wheat_field().upgradeXp();
     }
+
     if(farmer.addXpAndIsLevelFinished(xp_to_add))
+    {
         farmer.goNextLevel();
+        showLevel();
+    }
+    showXP();
+    showDay();
+    //farmer.save();
 }
 
 void MainWindow::initUI()
 {
+    showCoin();
+    showDay();
+    showLevel();
+    showXP();
     showAnimals();
 }
 
@@ -180,4 +191,39 @@ void MainWindow::showSheeps(int count)
         ui->btnSheep_5->setVisible(true);
     if(count >= 6)
         ui->btnSheep_6->setVisible(true);
+}
+
+void MainWindow::showDay()
+{
+    ui->lblDay->setNum(static_cast<int>(CURRENT_DAY));
+}
+
+void MainWindow::showCoin()
+{
+    ui->lblCoin->setNum(farmer.coins());
+}
+
+void MainWindow::showXP()
+{
+    ui->lblXP->setText(QString::number(farmer.xp()) + " / " + QString::number(farmer.max_xp()));
+
+    if(farmer.xp())
+        ui->pbar_left_corner->setVisible(true);
+    else
+        ui->pbar_left_corner->setVisible(false);
+
+    if(farmer.xp() > 1)
+    {
+        const int progress = static_cast<int>((static_cast<float>(farmer.xp()) / farmer.max_xp()) * 100);
+        const int width_of_center_pbar = 196;
+        ui->pbar_center->resize(width_of_center_pbar * (progress - 1) / 98, 20);
+        ui->pbar_center->setVisible(true);
+    }
+    else
+        ui->pbar_center->setVisible(false);
+}
+
+void MainWindow::showLevel()
+{
+    ui->lblLevel->setText(QString::number(farmer.level()));
 }

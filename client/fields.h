@@ -39,6 +39,7 @@ class WheatField : public Field
     WheatField();
 
 public:
+    WheatField(WheatField const &) = delete;
     void operator=(WheatField const &) = delete;
 
     static WheatField &get(int wheat_field_id);
@@ -80,6 +81,7 @@ class AlfalfaField : public Field
     AlfalfaField();
 
 public:
+    AlfalfaField(AlfalfaField const &) = delete;
     void operator=(AlfalfaField const &) = delete;
 
     static AlfalfaField &get(int alfalfa_field_id);

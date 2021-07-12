@@ -64,6 +64,7 @@ public:
         LACK_OF_STORAGE
     };
 
+    ChickenCoop(ChickenCoop const &) = delete;
     void operator=(ChickenCoop const &) = delete;
 
     static ChickenCoop &get(int chicken_coop_id);
@@ -106,6 +107,7 @@ public:
         LACK_OF_STORAGE
     };
 
+    CowPasture(CowPasture const &) = delete;
     void operator=(CowPasture const &) = delete;
 
     static CowPasture &get(int cow_pasture_id);
@@ -150,6 +152,7 @@ public:
         LACK_OF_STORAGE
     };
 
+    SheepPasture(SheepPasture const &) = delete;
     void operator=(SheepPasture const &) = delete;
 
     static SheepPasture &get(int sheep_pasture_id);

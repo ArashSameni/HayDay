@@ -22,5 +22,11 @@
         <file>img/lock.png</file>
         <file>fonts/IRANSans_Light.ttf</file>
         <file>fonts/IRANSans.ttf</file>
+        <file>img/xp_pbar_bg.png</file>
+        <file>img/xp_pbar_left_corner.png</file>
+        <file>img/xp_pbar_center.png</file>
+        <file>img/xp_pbar_right_corner.png</file>
+        <file>img/coin-box.png</file>
+        <file>img/day-box.png</file>
     </qresource>
 </RCC>

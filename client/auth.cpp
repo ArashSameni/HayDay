@@ -1,6 +1,5 @@
 #include "auth.h"
 #include <QVariant>
-#include <QSqlQuery>
 #include "tcpsocket.h"
 
 int Auth::login(const QString &username, const QString &password)
