@@ -1,39 +1,32 @@
 #ifndef FIELDS_H
 #define FIELDS_H
-
+#include "enums.h"
 #include "place.h"
-
-enum PlantsCondition
-{
-    NOT_PLANTED,
-    PLANTED,
-    REAPABLE
-};
-
-enum PlowingCondition
-{
-    NOT_PLOWED,
-    PLOWING,
-    PLOWED
-};
 
 class Field : public Place
 {
 protected:
     int area_;
     int planted_area_;
-    int plants_condition_ = PlantsCondition::NOT_PLANTED;
+    int plants_condition_ = Enums::NOT_PLANTED;
     int planting_day_ = -1;
 
 public:
+
     int area() const { return area_; }
     int planted_area() const { return planted_area_; }
     int plants_condition() const { return plants_condition_; }
     int planting_day() const { return planting_day_; }
 
+
     virtual bool checkPlanting() = 0;
-    virtual void plant(int) = 0;
-    virtual void reap() = 0;
+    virtual int plantXp()=0;
+    virtual int isPlantable(int id, int amount)=0;
+    virtual void plant(int id,int amount) = 0;
+    virtual int reapXp()=0;
+    virtual bool isReapTime()=0;
+    virtual int isReapable(int id)=0;
+    virtual void reap(int id) = 0;
 
     virtual ~Field() = 0;
 };
@@ -64,8 +57,13 @@ public:
     int neededCoinsToUpgrade(int barn_id=0) const;
     void upgrade();
 
-    void plant(int) {}
-    void reap() {}
+    int plantXp();
+    int isPlantable(int silo_id, int amount);
+    void plant(int silo_id,int amount);
+    int reapXp();
+    bool isReapTime();
+    int isReapable(int silo_id);
+    void reap(int silo_id);
     bool checkPlanting() { return false; }
     //////////////
 
@@ -77,7 +75,7 @@ class AlfalfaField : public Field
     static int id_;
     static AlfalfaField *alfalfa_field;
 
-    int plowing_condition_ = PlowingCondition::NOT_PLOWED;
+    int plowing_condition_ = Enums::NOT_PLOWED;
     int plowing_day_ = -1;
 
     AlfalfaField();
@@ -105,12 +103,22 @@ public:
     int neededCoinsToUpgrade(int barn_id=0) const;
     void upgrade();
 
-    void plant(int) {}
-    void reap() {}
+    int plantXp();
+    int isPlantable(int barn_id, int amount);
+    void plant(int barn_id,int amount);
+    int reapXp();
+    bool isReapTime();
+    int isReapable(int barn_id);
+    void reap(int barn_id);
     bool checkPlanting() { return false; }
 
-    bool checkPlowing();
+    int plowXp();
+    int isPlowable(int farmer_id);
     void plow();
+    bool isPlowingFinished();
+    void finishPlowing();
+    bool checkPlowing();
+
     //////////////
 
     ~AlfalfaField() {}

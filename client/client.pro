@@ -31,6 +31,7 @@ SOURCES += \
 HEADERS += \
     auth.h \
     barn.h \
+    enums.h \
     farm.h \
     farmer.h \
     fields.h \

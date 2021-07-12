@@ -1,14 +1,8 @@
 ﻿#ifndef LIVINGPLACES_H
 #define LIVINGPLACES_H
-
+#include "enums.h"
 #include "place.h"
 
-enum AnimalsCondition
-{
-    HUNGRY,
-    FED,
-    COLLECTABLE
-};
 
 class LivingPlace : public Place
 {
@@ -24,7 +18,7 @@ protected:
     int type_;
     int storage_;
     int max_storage_;
-    int animals_condition_ = AnimalsCondition::HUNGRY;
+    int animals_condition_ = Enums::HUNGRY;
     int feeding_day_ = -1;
     int farm_id_;
 
@@ -63,12 +57,6 @@ class ChickenCoop : public LivingPlace
     ChickenCoop();
 
 public:
-    enum
-    {
-        ALREADY_FED,
-        LACK_OF_WHEAT,
-        LACK_OF_STORAGE
-    };
 
     ChickenCoop(ChickenCoop const &) = delete;
     void operator=(ChickenCoop const &) = delete;
@@ -106,12 +94,6 @@ class CowPasture : public LivingPlace
     CowPasture();
 
 public:
-    enum
-    {
-        ALREADY_FED,
-        LACK_OF_ALFALFA,
-        LACK_OF_STORAGE
-    };
 
     CowPasture(CowPasture const &) = delete;
     void operator=(CowPasture const &) = delete;
@@ -151,12 +133,6 @@ class SheepPasture : public LivingPlace
     SheepPasture();
 
 public:
-    enum
-    {
-        ALREADY_FED,
-        LACK_OF_ALFALFA,
-        LACK_OF_STORAGE
-    };
 
     SheepPasture(SheepPasture const &) = delete;
     void operator=(SheepPasture const &) = delete;

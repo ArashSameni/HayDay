@@ -274,15 +274,15 @@ int Barn::isUpgradable(int farmer_id) const
 {
     Farmer& farmer = Farmer::get(farmer_id);
     if (farmer.coins() < neededCoinsToUpgrade())
-        return LACK_OF_COINS;
+        return Enums::LACK_OF_COINS;
     if (nails_ < neededNailsToUpgrade())
-        return LACK_OF_NAILS;
+        return Enums::LACK_OF_NAILS;
     if (shovels_ < neededShovelsToUpgrade())
-        return LACK_OF_SHOVELS;
+        return Enums::LACK_OF_SHOVELS;
     if (level_ >= Farmer::get(farmer_id).level())
-        return LACK_OF_LEVEL;
+        return Enums::LACK_OF_LEVEL;
 
-    return OK;
+    return Enums::OK;
 }
 
 void Barn::upgrade()
