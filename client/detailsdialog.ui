@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DetailsDialog</class>
+ <widget class="QDialog" name="DetailsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>380</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Details</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+	font: 24px &quot;IRANSans Light&quot;;
+	color: #494949;
+}
+
+#DetailsDialog {
+	background-image: url(:/img/details-bg.png);
+}</string>
+  </property>
+  <widget class="QLabel" name="lblLevel">
+   <property name="geometry">
+    <rect>
+     <x>25</x>
+     <y>24</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Level: 1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblShovel">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>220</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1/5</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTime">
+   <property name="geometry">
+    <rect>
+     <x>355</x>
+     <y>220</y>
+     <width>71</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>2 Days</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblNail">
+   <property name="geometry">
+    <rect>
+     <x>207</x>
+     <y>220</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1/5</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblStorage">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>24</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Storage: 5/50</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblUpgradeInfo">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>268</y>
+     <width>450</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #3fa542;</string>
+   </property>
+   <property name="text">
+    <string>Max-storage will be 15</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnUpgrade">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>313</y>
+     <width>162</width>
+     <height>49</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border: none;
+	color: #fff;
+	background-image: url(:/img/upgrade-btn-disabled.png);
+}
+QPushButton:hover{
+	background-image: url(:/img/upgrade-btn-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string>2000</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblDaysLeft">
+   <property name="geometry">
+    <rect>
+     <x>25</x>
+     <y>94</y>
+     <width>391</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 18px url(:/fonts/IRANSans.ttf);
+color: #818181;
+background-image: url(:/img/clock_icon.png);
+background-repeat: no-repeat;
+padding-left: 28px;</string>
+   </property>
+   <property name="text">
+    <string>2 Days Left</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

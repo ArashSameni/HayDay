@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     auth.cpp \
     barn.cpp \
+    detailsdialog.cpp \
     farm.cpp \
     farmer.cpp \
     fields.cpp \
@@ -31,6 +32,7 @@ SOURCES += \
 HEADERS += \
     auth.h \
     barn.h \
+    detailsdialog.h \
     enums.h \
     farm.h \
     farmer.h \
@@ -44,6 +46,7 @@ HEADERS += \
     tcpsocket.h
 
 FORMS += \
+    detailsdialog.ui \
     loginwindow.ui \
     mainwindow.ui
 
