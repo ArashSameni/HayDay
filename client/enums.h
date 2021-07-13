@@ -35,6 +35,19 @@ namespace Enums
         LACK_OF_SHOVELS,
         LACK_OF_LEVEL,
 
+        //shop
+        WHEAT,
+        ALFALFA,
+        CHICKEN,
+        EGG,
+        COW,
+        MILK,
+        SHEEP,
+        WOOL,
+        NAIL,
+        SHOVEL,
+
+
         OK
     };
 }
