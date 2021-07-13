@@ -37,6 +37,7 @@ public:
     int feeding_day() const { return feeding_day_; }
     int farm_id() const { return farm_id_; }
     void addAnimal(int amount) { storage_ += amount; }
+    void removeAnimal(int amount) { storage_ -= amount; }
 
     virtual int isFeedable(int) = 0;
     virtual int feedXp() = 0;
