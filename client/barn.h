@@ -66,8 +66,6 @@ public:
     int neededCoinsToUpgrade(int barn_id = 0) const;
     void upgrade();
 
-
-
     void checkMilksExpiration();
 
     int storage() const { return storage_; }
@@ -93,7 +91,7 @@ public:
     void removeEgg(int amount);
     void removeWool(int amount);
 
-    void removeMilk(int milk_id);
+    void removeMilk(int amount);
     void removeMilk(const Milk &milk);
 
     ~Barn() {}

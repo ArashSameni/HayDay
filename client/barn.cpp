@@ -138,21 +138,25 @@ void Barn::addShovel(int amount)
     shovels_ += amount;
     storage_ += amount;
 }
+
 void Barn::addNail(int amount)
 {
     nails_ += amount;
     storage_ += amount;
 }
+
 void Barn::addAlfalfa(int amount)
 {
     alfalfas_ += amount;
     storage_ += amount;
 }
+
 void Barn::addEgg(int amount)
 {
     eggs_ += amount;
     storage_ += amount;
 }
+
 void Barn::addWool(int amount)
 {
     wools_ += amount;
@@ -180,32 +184,46 @@ void Barn::removeShovel(int amount)
     shovels_ -= amount;
     storage_ -= amount;
 }
+
 void Barn::removeNail(int amount)
 {
     nails_ -= amount;
     storage_ -= amount;
 }
+
 void Barn::removeAlfalfa(int amount)
 {
     alfalfas_ -= amount;
     storage_ -= amount;
 }
+
 void Barn::removeEgg(int amount)
 {
     eggs_ -= amount;
     storage_ -= amount;
 }
+
 void Barn::removeWool(int amount)
 {
     wools_ -= amount;
     storage_ -= amount;
 }
 
-void Barn::removeMilk(int milk_id)
+void Barn::removeMilk(int amount)
+{
+    for (int i = 0; i < amount; i++)
+    {
+        milks_[i].remove();
+        milks_.remove(i);
+    }
+    storage_ -= amount;
+}
+
+void Barn::removeMilk(const Milk &milk)
 {
     for (int i = 0; i < milks_.size(); i++)
     {
-        if (milks_[i].id() == milk_id)
+        if (milks_[i].id() == milk.id())
         {
             milks_[i].remove();
             milks_.remove(i);
@@ -213,11 +231,6 @@ void Barn::removeMilk(int milk_id)
         }
     }
     storage_ -= 1;
-}
-
-void Barn::removeMilk(const Milk &milk)
-{
-    removeMilk(milk.id());
 }
 
 void Milk::save()
@@ -258,7 +271,6 @@ int Barn::upgradeXp()
 
 bool Barn::isUpgradeFinished() const
 {
-
     return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 5;
 }
 
