@@ -12,6 +12,7 @@ const int Shop::milk_sell_coins = 12;
 const int Shop::wool_sell_coins = 23;
 const int Shop::nail_sell_coins = 20;
 const int Shop::shovel_sell_coins = 30;
+const int Shop::chicken_sell_coins = 15;
 
 const int Shop::wheat_buy_coins = 3;
 const int Shop::alfalfa_buy_coins = 6;
@@ -47,6 +48,7 @@ int Shop::isWheatBuyable(int farmer_id, int count) const
 {
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
+
     if (farmer.coins() < wheat_buy_coins)
         return Enums::LACK_OF_COINS;
     if (farm.silo().max_storage() < (farm.silo().storage() + count))
@@ -59,6 +61,7 @@ int Shop::isAlfalfaBuyable(int farmer_id, int count) const
 {
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
+
     if (farmer.coins() < alfalfa_buy_coins)
         return Enums::LACK_OF_COINS;
     if (farm.barn().max_storage() < (farm.barn().storage() + count))
@@ -73,6 +76,7 @@ int Shop::isChickenBuyable(int farmer_id, int count) const
 {
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
+
     if (farmer.coins() < chicken_buy_coins)
         return Enums::LACK_OF_COINS;
     if (farm.chicken_coop().max_storage() < (farm.chicken_coop().storage() + count))
@@ -101,6 +105,7 @@ int Shop::isSheepBuyable(int farmer_id, int count) const
 {
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
+
     if (farmer.coins() < sheep_buy_coins)
         return Enums::LACK_OF_COINS;
     if (farm.sheep_pasture().max_storage() < (farm.sheep_pasture().storage() + count))
@@ -115,6 +120,7 @@ int Shop::isNailBuyable(int farmer_id, int count) const
 {
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
+
     if (farmer.coins() < nail_buy_coins)
         return Enums::LACK_OF_COINS;
     if (farm.barn().max_storage() < (farm.barn().storage() + count))
@@ -129,6 +135,7 @@ int Shop::isShovelBuyable(int farmer_id, int count) const
 {
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
+
     if (farmer.coins() < shovel_buy_coins)
         return Enums::LACK_OF_COINS;
     if (farm.barn().max_storage() < (farm.barn().storage() + count))
@@ -523,7 +530,7 @@ void Shop::sellCow(int farmer_id, int count)
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
 
-    farm.chicken_coop().removeAnimal(count);
+    farm.cow_pasure().removeAnimal(count);
 
     farmer.addCoin(count * cow_sell_coins);
 }
@@ -543,7 +550,7 @@ void Shop::sellNail(int farmer_id, int count)
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
 
-    farm.barn().addNail(count);
+    farm.barn().removeNail(count);
 
     farmer.addCoin(count * nail_sell_coins);
 }
@@ -553,7 +560,7 @@ void Shop::sellShovel(int farmer_id, int count)
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
 
-    farm.barn().addShovel(count);
+    farm.barn().removeShovel(count);
 
     farmer.addCoin(count * shovel_sell_coins);
 }
@@ -563,7 +570,7 @@ void Shop::sellMilk(int farmer_id, int count)
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
 
-    farm.barn().addMilk(count);
+    farm.barn().removeMilk(count);
 
     farmer.addCoin(count * milk_sell_coins);
 }
@@ -573,7 +580,7 @@ void Shop::sellEgg(int farmer_id, int count)
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
 
-    farm.barn().addEgg(count);
+    farm.barn().removeEgg(count);
 
     farmer.addCoin(count * egg_sell_coins);
 }
@@ -583,7 +590,7 @@ void Shop::sellWool(int farmer_id, int count)
     Farmer &farmer = Farmer::get(farmer_id);
     Farm &farm = Farm::get(farmer.farm_id());
 
-    farm.barn().addWool(count);
+    farm.barn().removeWool(count);
 
     farmer.addCoin(count * wool_sell_coins);
 }
