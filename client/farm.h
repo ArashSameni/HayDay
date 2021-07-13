@@ -25,7 +25,7 @@ public:
     Barn &barn() const { return Barn::get(barn_id_); }
     Silo &silo() const { return Silo::get(silo_id_); }
     ChickenCoop &chicken_coop() const { return ChickenCoop::getByFarmId(id_); }
-    CowPasture &cow_pasure() const { return CowPasture::getByFarmId(id_); }
+    CowPasture &cow_pasture() const { return CowPasture::getByFarmId(id_); }
     SheepPasture &sheep_pasture() const { return SheepPasture::getByFarmId(id_); }
     WheatField &wheat_field() const { return WheatField::get(wheat_field_id_); }
     AlfalfaField &alfalfa_field() const { return AlfalfaField::get(alfalfa_field_id_); }
