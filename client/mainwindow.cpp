@@ -40,10 +40,10 @@ void MainWindow::anotherDayPassed()
         farm.chicken_coop().finishUpgrade();
         xp_to_add += farm.chicken_coop().upgradeXp();
     }
-    if(farm.cow_pasure().is_upgrading() && farm.cow_pasure().isUpgradeFinished())
+    if(farm.cow_pasture().is_upgrading() && farm.cow_pasture().isUpgradeFinished())
     {
-        farm.cow_pasure().finishUpgrade();
-        xp_to_add += farm.cow_pasure().upgradeXp();
+        farm.cow_pasture().finishUpgrade();
+        xp_to_add += farm.cow_pasture().upgradeXp();
     }
     if(farm.sheep_pasture().is_upgrading() && farm.sheep_pasture().isUpgradeFinished())
     {
@@ -84,14 +84,14 @@ void MainWindow::showAnimals()
 {
     if(farm.chicken_coop().storage() > 0)
         unlockChickenCoop();
-    if(farm.cow_pasure().storage() > 0)
+    if(farm.cow_pasture().storage() > 0)
         unlockCowPasture();
     if(farm.sheep_pasture().storage() > 0)
         unlockSheepPasture();
 
     showChickens(farm.chicken_coop().storage());
-    showCows(farm.cow_pasure().storage());
-    showSheeps(farm.cow_pasure().storage());
+    showCows(farm.cow_pasture().storage());
+    showSheeps(farm.cow_pasture().storage());
 }
 
 void MainWindow::unlockAlfalfaField()
