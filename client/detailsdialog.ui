@@ -27,7 +27,7 @@
    <property name="geometry">
     <rect>
      <x>25</x>
-     <y>24</y>
+     <y>18</y>
      <width>111</width>
      <height>31</height>
     </rect>
@@ -35,12 +35,15 @@
    <property name="text">
     <string>Level: 1</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
   </widget>
   <widget class="QLabel" name="lblShovel">
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>220</y>
+     <y>210</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -53,7 +56,7 @@
    <property name="geometry">
     <rect>
      <x>355</x>
-     <y>220</y>
+     <y>210</y>
      <width>71</width>
      <height>41</height>
     </rect>
@@ -66,7 +69,7 @@
    <property name="geometry">
     <rect>
      <x>207</x>
-     <y>220</y>
+     <y>210</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -79,7 +82,7 @@
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>24</y>
+     <y>18</y>
      <width>171</width>
      <height>31</height>
     </rect>
@@ -92,7 +95,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>268</y>
+     <y>263</y>
      <width>450</width>
      <height>31</height>
     </rect>
@@ -123,7 +126,7 @@
     <string notr="true">QPushButton{
 	border: none;
 	color: #fff;
-	background-image: url(:/img/upgrade-btn-disabled.png);
+	background-image: url(:/img/upgrade-btn.png);
 }
 QPushButton:hover{
 	background-image: url(:/img/upgrade-btn-hover.png);
@@ -137,7 +140,7 @@ QPushButton:hover{
    <property name="geometry">
     <rect>
      <x>25</x>
-     <y>94</y>
+     <y>80</y>
      <width>391</width>
      <height>24</height>
     </rect>
