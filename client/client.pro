@@ -27,6 +27,7 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
+    scoreboarddialog.cpp \
     shop.cpp \
     shopdialog.cpp \
     silo.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     loginwindow.h \
     mainwindow.h \
     place.h \
+    scoreboarddialog.h \
     shop.h \
     shopdialog.h \
     silo.h \
@@ -56,6 +58,7 @@ FORMS += \
     detailsdialog.ui \
     loginwindow.ui \
     mainwindow.ui \
+    scoreboarddialog.ui \
     shopdialog.ui
 
 # Default rules for deployment.

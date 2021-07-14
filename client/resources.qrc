@@ -39,5 +39,13 @@
         <file>img/minus-hover.png</file>
         <file>img/plus.png</file>
         <file>img/plus-hover.png</file>
+        <file>img/left-arrow.png</file>
+        <file>img/left-arrow-hover.png</file>
+        <file>img/right-arrow.png</file>
+        <file>img/right-arrow-hover.png</file>
+        <file>img/scoreboard-bg.png</file>
+        <file>img/farmer-man.png</file>
+        <file>img/farmer-woman.png</file>
+        <file>img/star.png</file>
     </qresource>
 </RCC>

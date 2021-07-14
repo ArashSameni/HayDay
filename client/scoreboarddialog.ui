@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ScoreboardDialog</class>
+ <widget class="QDialog" name="ScoreboardDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>880</width>
+    <height>590</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Scoreboard</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+	font: 24px &quot;IRANSans Light&quot;;
+	color: #494949;
+}
+
+#ScoreboardDialog {
+	background-image: url(:/img/scoreboard-bg.png);
+}</string>
+  </property>
+  <widget class="QPushButton" name="btnRightArrow">
+   <property name="geometry">
+    <rect>
+     <x>548</x>
+     <y>511</y>
+     <width>72</width>
+     <height>56</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/right-arrow.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/right-arrow-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnLeftArrow">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>511</y>
+     <width>72</width>
+     <height>56</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/left-arrow.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/left-arrow-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblCurrentPage">
+   <property name="geometry">
+    <rect>
+     <x>336</x>
+     <y>523</y>
+     <width>208</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size: 30px;</string>
+   </property>
+   <property name="text">
+    <string>1/1</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
