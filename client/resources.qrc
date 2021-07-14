@@ -33,5 +33,6 @@
         <file>img/upgrade-btn-disabled.png</file>
         <file>img/upgrade-btn-hover.png</file>
         <file>img/details-bg.png</file>
+        <file>img/barn-bg.png</file>
     </qresource>
 </RCC>
