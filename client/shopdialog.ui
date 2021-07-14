@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ShopDialog</class>
+ <widget class="QDialog" name="ShopDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>880</width>
+    <height>495</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Shop</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+	font: 24px &quot;IRANSans Light&quot;;
+	color: #494949;
+}
+
+QDialog { background-image: url(:/img/shop-bg.png) }
+</string>
+  </property>
+  <widget class="QPushButton" name="btnWheatPlus">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>148</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/plus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/plus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnWheatMinus">
+   <property name="geometry">
+    <rect>
+     <x>77</x>
+     <y>148</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/minus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/minus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWheat">
+   <property name="geometry">
+    <rect>
+     <x>104</x>
+     <y>148</y>
+     <width>40</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnShovelMinus">
+   <property name="geometry">
+    <rect>
+     <x>219</x>
+     <y>148</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/minus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/minus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblShovel">
+   <property name="geometry">
+    <rect>
+     <x>246</x>
+     <y>148</y>
+     <width>40</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnShovelPlus">
+   <property name="geometry">
+    <rect>
+     <x>286</x>
+     <y>148</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/plus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/plus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnNailMinus">
+   <property name="geometry">
+    <rect>
+     <x>377</x>
+     <y>148</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/minus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/minus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnNailPlus">
+   <property name="geometry">
+    <rect>
+     <x>444</x>
+     <y>148</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/plus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/plus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblNail">
+   <property name="geometry">
+    <rect>
+     <x>404</x>
+     <y>148</y>
+     <width>40</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblChicken">
+   <property name="geometry">
+    <rect>
+     <x>572</x>
+     <y>148</y>
+     <width>40</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnChickenPlus">
+   <property name="geometry">
+    <rect>
+     <x>612</x>
+     <y>148</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/plus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/plus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnChickenMinus">
+   <property name="geometry">
+    <rect>
+     <x>545</x>
+     <y>148</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/minus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/minus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblEgg">
+   <property name="geometry">
+    <rect>
+     <x>737</x>
+     <y>148</y>
+     <width>40</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnEggMinus">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>148</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/minus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/minus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnEggPlus">
+   <property name="geometry">
+    <rect>
+     <x>777</x>
+     <y>148</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/plus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/plus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCowMinus">
+   <property name="geometry">
+    <rect>
+     <x>219</x>
+     <y>316</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/minus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/minus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblSheep">
+   <property name="geometry">
+    <rect>
+     <x>572</x>
+     <y>316</y>
+     <width>40</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWool">
+   <property name="geometry">
+    <rect>
+     <x>737</x>
+     <y>316</y>
+     <width>40</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCowPlus">
+   <property name="geometry">
+    <rect>
+     <x>286</x>
+     <y>316</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/plus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/plus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnAlfalfaMinus">
+   <property name="geometry">
+    <rect>
+     <x>77</x>
+     <y>316</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/minus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/minus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnWoolMinus">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>316</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/minus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/minus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblMilk">
+   <property name="geometry">
+    <rect>
+     <x>404</x>
+     <y>316</y>
+     <width>40</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSheepMinus">
+   <property name="geometry">
+    <rect>
+     <x>545</x>
+     <y>316</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/minus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/minus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnMilkPlus">
+   <property name="geometry">
+    <rect>
+     <x>444</x>
+     <y>316</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/plus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/plus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnWoolPlus">
+   <property name="geometry">
+    <rect>
+     <x>777</x>
+     <y>316</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/plus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/plus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblCow">
+   <property name="geometry">
+    <rect>
+     <x>246</x>
+     <y>316</y>
+     <width>40</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblAlfalfa">
+   <property name="geometry">
+    <rect>
+     <x>104</x>
+     <y>316</y>
+     <width>40</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnMilkMinus">
+   <property name="geometry">
+    <rect>
+     <x>377</x>
+     <y>316</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/minus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/minus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnAlfalfaPlus">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>316</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/plus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/plus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSheepPlus">
+   <property name="geometry">
+    <rect>
+     <x>612</x>
+     <y>316</y>
+     <width>26</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-image: url(:/img/plus.png);
+	border: none;
+}
+QPushButton:hover{
+	background-image: url(:/img/plus-hover.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnBuy">
+   <property name="geometry">
+    <rect>
+     <x>481</x>
+     <y>398</y>
+     <width>141</width>
+     <height>45</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	font: 20px &quot;IRANSans&quot;;
+	border: none;
+	border-radius: 10px;
+	background-color: #45b649;
+	color: #fff;
+}
+
+QPushButton:hover{
+	background-color: rgb(63, 166, 66);
+}</string>
+   </property>
+   <property name="text">
+    <string>Buy</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSell">
+   <property name="geometry">
+    <rect>
+     <x>237</x>
+     <y>398</y>
+     <width>141</width>
+     <height>45</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	font: 20px &quot;IRANSans&quot;;;
+	border: none;
+	border-radius: 10px;
+	background-color: #e2535a;
+	color: #fff;
+}
+
+QPushButton:hover{
+	background-color: #d4454c;
+}</string>
+   </property>
+   <property name="text">
+    <string>Sell</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

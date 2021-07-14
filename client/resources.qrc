@@ -34,5 +34,10 @@
         <file>img/upgrade-btn-hover.png</file>
         <file>img/details-bg.png</file>
         <file>img/barn-bg.png</file>
+        <file>img/shop-bg.png</file>
+        <file>img/minus.png</file>
+        <file>img/minus-hover.png</file>
+        <file>img/plus.png</file>
+        <file>img/plus-hover.png</file>
     </qresource>
 </RCC>

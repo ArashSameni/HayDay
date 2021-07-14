@@ -6,6 +6,7 @@ BarnDetailsDialog::BarnDetailsDialog(QWidget *parent) :
     ui(new Ui::BarnDetailsDialog)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
     initUI();
 }

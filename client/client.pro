@@ -27,6 +27,8 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
+    shop.cpp \
+    shopdialog.cpp \
     silo.cpp \
     tcpsocket.cpp
 
@@ -44,6 +46,8 @@ HEADERS += \
     loginwindow.h \
     mainwindow.h \
     place.h \
+    shop.h \
+    shopdialog.h \
     silo.h \
     tcpsocket.h
 
@@ -51,7 +55,8 @@ FORMS += \
     barndetailsdialog.ui \
     detailsdialog.ui \
     loginwindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    shopdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
