@@ -42,7 +42,7 @@ void BarnDetailsDialog::initUpgrade()
 {
     Barn& barn = farm.barn();
 
-    ui->lblLevel->setText("Level: " + QString::number(farmer.level()));
+    ui->lblLevel->setText("Level: " + QString::number(barn.level()));
 
     ui->lblStorage->setText("Storage: " + QString::number(barn.storage()) + "/" + QString::number(barn.max_storage()));
 
