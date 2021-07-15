@@ -61,9 +61,9 @@ public:
     bool isUpgradeFinished() const;
     void finishUpgrade();
     int isUpgradable(int farm_id) const;
-    int neededNailsToUpgrade(int barn_id = 0) const;
-    int neededShovelsToUpgrade(int barn_id = 0) const;
-    int neededCoinsToUpgrade(int barn_id = 0) const;
+    int neededNailsToUpgrade() const;
+    int neededShovelsToUpgrade() const;
+    int neededCoinsToUpgrade() const;
     void upgrade();
 
     void checkMilksExpiration();

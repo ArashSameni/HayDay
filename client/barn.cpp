@@ -7,7 +7,7 @@
 int Barn::id_ = 0;
 Barn *Barn::barn = nullptr;
 
-Barn::Barn()
+Barn::Barn() : Place(5)
 {
     storage_ = 1;
     max_storage_ = 5;
@@ -59,6 +59,7 @@ Barn &Barn::get(int barn_id)
 
             socket.write(query);
             servers_answer = QJsonDocument::fromJson(socket.read());
+
             Milk milk(barn_id);
             if (!servers_answer.isNull())
             {
@@ -271,7 +272,7 @@ int Barn::upgradeXp()
 
 bool Barn::isUpgradeFinished() const
 {
-    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 5;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= upgrade_time;
 }
 
 void Barn::finishUpgrade()
@@ -307,17 +308,17 @@ void Barn::upgrade()
     }
 }
 
-int Barn::neededNailsToUpgrade(int) const
+int Barn::neededNailsToUpgrade() const
 {
     return level_;
 }
 
-int Barn::neededShovelsToUpgrade(int) const
+int Barn::neededShovelsToUpgrade() const
 {
     return level_ - 1;
 }
 
-int Barn::neededCoinsToUpgrade(int) const
+int Barn::neededCoinsToUpgrade() const
 {
     return static_cast<int>(pow(level_, 3) * 10);
 }

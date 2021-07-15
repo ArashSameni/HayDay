@@ -116,6 +116,7 @@ void LoginWindow::showSignup()
 
     ui->gboxLogin->setVisible(false);
     ui->gboxSignup->setVisible(true);
+    this->setWindowTitle("HayDay - Signup");
 }
 
 void LoginWindow::showLogin()
@@ -127,4 +128,5 @@ void LoginWindow::showLogin()
 
     ui->gboxSignup->setVisible(false);
     ui->gboxLogin->setVisible(true);
+    this->setWindowTitle("HayDay - Login");
 }

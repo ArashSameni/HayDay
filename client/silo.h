@@ -25,9 +25,9 @@ public:
     bool isUpgradeFinished() const;
     void finishUpgrade();
     int isUpgradable(int farmer_id) const;
-    int neededNailsToUpgrade(int barn_id) const;
-    int neededShovelsToUpgrade(int barn_id) const;
-    int neededCoinsToUpgrade(int barn_id) const;
+    int neededNailsToUpgrade() const;
+    int neededShovelsToUpgrade() const;
+    int neededCoinsToUpgrade() const;
     void upgrade();
 
     int storage() const { return storage_; }

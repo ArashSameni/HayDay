@@ -26,7 +26,7 @@ protected:
     static int getLivingPlaceIdByFarmId(int farm_id, int type);
     static int create(int farm_id, int type);
 
-    LivingPlace();
+    LivingPlace(uint upgrade_time);
 
 public:
     void save(int id) const;
@@ -71,9 +71,9 @@ public:
     bool isUpgradeFinished() const;
     void finishUpgrade();
     int isUpgradable(int farmer_id = 0) const;
-    int neededNailsToUpgrade(int barn_id = 0) const;
-    int neededShovelsToUpgrade(int barn_id = 0) const;
-    int neededCoinsToUpgrade(int barn_id = 0) const;
+    int neededNailsToUpgrade() const;
+    int neededShovelsToUpgrade() const;
+    int neededCoinsToUpgrade() const;
     void upgrade();
 
     int isFeedable(int silo_id);
@@ -108,9 +108,9 @@ public:
     bool isUpgradeFinished() const;
     void finishUpgrade();
     int isUpgradable(int farmer_id = 0) const;
-    int neededNailsToUpgrade(int barn_id = 0) const;
-    int neededShovelsToUpgrade(int barn_id = 0) const;
-    int neededCoinsToUpgrade(int barn_id = 0) const;
+    int neededNailsToUpgrade() const;
+    int neededShovelsToUpgrade() const;
+    int neededCoinsToUpgrade() const;
     void upgrade();
     
     
@@ -148,9 +148,9 @@ public:
     bool isUpgradeFinished() const;
     void finishUpgrade();
     int isUpgradable(int farmer_id = 0) const;
-    int neededNailsToUpgrade(int barn_id = 0) const;
-    int neededShovelsToUpgrade(int barn_id = 0) const;
-    int neededCoinsToUpgrade(int barn_id = 0) const;
+    int neededNailsToUpgrade() const;
+    int neededShovelsToUpgrade() const;
+    int neededCoinsToUpgrade() const;
     void upgrade();
 
     int isFeedable(int barn_id);

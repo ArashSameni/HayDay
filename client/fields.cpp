@@ -15,7 +15,7 @@ AlfalfaField *AlfalfaField::alfalfa_field = nullptr;
 
 Field::~Field() {}
 
-WheatField::WheatField()
+WheatField::WheatField() : Field(2)
 {
     level_ = 1;
     upgrade_day_ = -1;
@@ -103,7 +103,7 @@ int WheatField::upgradeXp()
 
 bool WheatField::isUpgradeFinished() const
 {
-    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 2;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= upgrade_time;
 }
 
 void WheatField::finishUpgrade()
@@ -198,22 +198,22 @@ void WheatField::reap(int silo_id)
     silo.save();
 }
 
-int WheatField::neededNailsToUpgrade(int) const
+int WheatField::neededNailsToUpgrade() const
 {
     return 0;
 }
 
-int WheatField::neededShovelsToUpgrade(int) const
+int WheatField::neededShovelsToUpgrade() const
 {
     return 1;
 }
 
-int WheatField::neededCoinsToUpgrade(int) const
+int WheatField::neededCoinsToUpgrade() const
 {
     return 5;
 }
 
-AlfalfaField::AlfalfaField()
+AlfalfaField::AlfalfaField() : Field(3)
 {
     level_ = 0;
     upgrade_day_ = -1;
@@ -311,7 +311,7 @@ int AlfalfaField::upgradeXp()
 
 bool AlfalfaField::isUpgradeFinished() const
 {
-    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 3;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= upgrade_time;
 }
 
 void AlfalfaField::finishUpgrade()
@@ -453,7 +453,7 @@ void AlfalfaField::reap(int barn_id)
     barn.save();
 }
 
-int AlfalfaField::neededNailsToUpgrade(int) const
+int AlfalfaField::neededNailsToUpgrade() const
 {
     if (level_)
         return 0;
@@ -461,7 +461,7 @@ int AlfalfaField::neededNailsToUpgrade(int) const
     return 1;
 }
 
-int AlfalfaField::neededShovelsToUpgrade(int) const
+int AlfalfaField::neededShovelsToUpgrade() const
 {
     if (level_)
         return 2;
@@ -469,7 +469,7 @@ int AlfalfaField::neededShovelsToUpgrade(int) const
     return 1;
 }
 
-int AlfalfaField::neededCoinsToUpgrade(int) const
+int AlfalfaField::neededCoinsToUpgrade() const
 {
     if (level_)
         return 5;

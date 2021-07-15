@@ -10,7 +10,7 @@
 int Silo::id_ = 0;
 Silo *Silo::silo = nullptr;
 
-Silo::Silo()
+Silo::Silo() : Place(4)
 {
     level_ = 1;
     upgrade_day_ = -1;
@@ -55,7 +55,7 @@ int Silo::upgradeXp()
 
 bool Silo::isUpgradeFinished() const
 {
-    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 4;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= upgrade_time;
 }
 
 void Silo::finishUpgrade()
@@ -71,11 +71,11 @@ int Silo::isUpgradable(int farmer_id) const
     Farmer& farmer = Farmer::get(farmer_id);
     Barn& barn = Farm::get(farmer.farm_id()).barn();
 
-    if(farmer.coins() < neededCoinsToUpgrade(barn.id()))
+    if(farmer.coins() < neededCoinsToUpgrade())
         return Enums::LACK_OF_COINS;
-    if(barn.nails() < neededNailsToUpgrade(barn.id()))
+    if(barn.nails() < neededNailsToUpgrade())
         return Enums::LACK_OF_NAILS;
-    if(barn.shovels() < neededShovelsToUpgrade(barn.id()))
+    if(barn.shovels() < neededShovelsToUpgrade())
         return Enums::LACK_OF_SHOVELS;
     if(level_ >= Farmer::get(farmer_id).level() - 1)
         return Enums::LACK_OF_LEVEL;
@@ -118,19 +118,19 @@ Silo &Silo::get(int silo_id)
     return *silo;
 }
 
-int Silo::neededNailsToUpgrade(int barn_id) const
+int Silo::neededNailsToUpgrade() const
 {
-    return Barn::get(barn_id).level() * 2;
+    return level_ * 2;
 }
 
-int Silo::neededShovelsToUpgrade(int barn_id) const
+int Silo::neededShovelsToUpgrade() const
 {
-    return Barn::get(barn_id).level() - 2;
+    return level_ - 1;
 }
 
-int Silo::neededCoinsToUpgrade(int barn_id) const
+int Silo::neededCoinsToUpgrade() const
 {
-    return static_cast<int>(pow((Barn::get(barn_id).level() * 2), 2) * 100);
+    return static_cast<int>(pow((level_ * 2), 2) * 100);
 }
 
 void Silo::upgrade()

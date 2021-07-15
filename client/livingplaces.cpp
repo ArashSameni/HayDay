@@ -79,7 +79,7 @@ int LivingPlace::create(int farm_id, int type)
     return socket.read().toInt();
 }
 
-LivingPlace::LivingPlace()
+LivingPlace::LivingPlace(uint upgrade_time) : Place(upgrade_time)
 {
     storage_ = 0;
     max_storage_ = 0;
@@ -111,7 +111,7 @@ void LivingPlace::save(int id) const
     socket.write(query);
 }
 
-ChickenCoop::ChickenCoop()
+ChickenCoop::ChickenCoop() : LivingPlace(3)
 {
     type_ = LivingPlace::CHICKEN_COOP;
 }
@@ -135,9 +135,9 @@ ChickenCoop &ChickenCoop::getByFarmId(int farm_id)
     if (chicken_coop == nullptr)
         chicken_coop = new ChickenCoop;
 
-    int chicken_coop_id = getLivingPlaceIdByFarmId(farm_id, LivingPlace::CHICKEN_COOP);
-    if (chicken_coop_id != chicken_coop->id_)
+    if (farm_id != chicken_coop->farm_id_)
     {
+        int chicken_coop_id = getLivingPlaceIdByFarmId(farm_id, LivingPlace::CHICKEN_COOP);
         chicken_coop->id_ = chicken_coop_id;
         LivingPlace::get(*chicken_coop, chicken_coop_id);
     }
@@ -164,7 +164,7 @@ int ChickenCoop::upgradeXp()
 
 bool ChickenCoop::isUpgradeFinished() const
 {
-    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 3;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= upgrade_time;
 }
 
 void ChickenCoop::finishUpgrade()
@@ -262,7 +262,7 @@ int ChickenCoop::isUpgradable(int farmer_id) const
     return Enums::OK;
 }
 
-int ChickenCoop::neededNailsToUpgrade(int) const
+int ChickenCoop::neededNailsToUpgrade() const
 {
     if (level_)
         return 1;
@@ -270,17 +270,17 @@ int ChickenCoop::neededNailsToUpgrade(int) const
     return 2;
 }
 
-int ChickenCoop::neededShovelsToUpgrade(int) const
+int ChickenCoop::neededShovelsToUpgrade() const
 {
     return 0;
 }
 
-int ChickenCoop::neededCoinsToUpgrade(int) const
+int ChickenCoop::neededCoinsToUpgrade() const
 {
     return 10;
 }
 
-CowPasture::CowPasture()
+CowPasture::CowPasture() : LivingPlace(5)
 {
     type_ = LivingPlace::COW_PASTURE;
 }
@@ -304,9 +304,9 @@ CowPasture &CowPasture::getByFarmId(int farm_id)
     if (cow_pasture == nullptr)
         cow_pasture = new CowPasture;
 
-    int cow_pasture_id = getLivingPlaceIdByFarmId(farm_id, LivingPlace::COW_PASTURE);
-    if (cow_pasture_id != cow_pasture->id_)
+    if (farm_id != cow_pasture->farm_id_)
     {
+        int cow_pasture_id = getLivingPlaceIdByFarmId(farm_id, LivingPlace::COW_PASTURE);
         cow_pasture->id_ = cow_pasture_id;
         LivingPlace::get(*cow_pasture, cow_pasture_id);
     }
@@ -336,7 +336,7 @@ int CowPasture::upgradeXp()
 
 bool CowPasture::isUpgradeFinished() const
 {
-    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= 5;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= upgrade_time;
 }
 
 void CowPasture::finishUpgrade()
@@ -378,7 +378,7 @@ void CowPasture::upgrade()
     }
 }
 
-int CowPasture::neededNailsToUpgrade(int) const
+int CowPasture::neededNailsToUpgrade() const
 {
     if (level_)
         return 2;
@@ -386,7 +386,7 @@ int CowPasture::neededNailsToUpgrade(int) const
     return 3;
 }
 
-int CowPasture::neededShovelsToUpgrade(int) const
+int CowPasture::neededShovelsToUpgrade() const
 {
     if (level_)
         return 0;
@@ -394,7 +394,7 @@ int CowPasture::neededShovelsToUpgrade(int) const
     return 1;
 }
 
-int CowPasture::neededCoinsToUpgrade(int) const
+int CowPasture::neededCoinsToUpgrade() const
 {
     if (level_)
         return 15;
@@ -456,7 +456,7 @@ int CowPasture::collectXp()
     return 5;
 }
 
-SheepPasture::SheepPasture()
+SheepPasture::SheepPasture() : LivingPlace(10)
 {
     type_ = LivingPlace::SHEEP_PASTURE;
 }
@@ -480,9 +480,9 @@ SheepPasture &SheepPasture::getByFarmId(int farm_id)
     if (sheep_pasture == nullptr)
         sheep_pasture = new SheepPasture;
 
-    int sheep_pasture_id = getLivingPlaceIdByFarmId(farm_id, LivingPlace::SHEEP_PASTURE);
-    if (sheep_pasture_id != sheep_pasture->id_)
+    if (farm_id != sheep_pasture->farm_id_)
     {
+        int sheep_pasture_id = getLivingPlaceIdByFarmId(farm_id, LivingPlace::SHEEP_PASTURE);
         sheep_pasture->id_ = sheep_pasture_id;
         LivingPlace::get(*sheep_pasture, sheep_pasture_id);
     }
@@ -512,11 +512,7 @@ int SheepPasture::upgradeXp()
 
 bool SheepPasture::isUpgradeFinished() const
 {
-    uint elapsed_days = CURRENT_DAY - static_cast<uint>(upgrade_day_);
-    if (level_)
-        return elapsed_days >= 9;
-
-    return elapsed_days >= 10;
+    return CURRENT_DAY - static_cast<uint>(upgrade_day_) >= upgrade_time;
 }
 
 void SheepPasture::finishUpgrade()
@@ -558,7 +554,7 @@ void SheepPasture::upgrade()
     }
 }
 
-int SheepPasture::neededNailsToUpgrade(int) const
+int SheepPasture::neededNailsToUpgrade() const
 {
     if (level_)
         return 3;
@@ -566,7 +562,7 @@ int SheepPasture::neededNailsToUpgrade(int) const
     return 4;
 }
 
-int SheepPasture::neededShovelsToUpgrade(int) const
+int SheepPasture::neededShovelsToUpgrade() const
 {
     if (level_)
         return 1;
@@ -574,7 +570,7 @@ int SheepPasture::neededShovelsToUpgrade(int) const
     return 2;
 }
 
-int SheepPasture::neededCoinsToUpgrade(int) const
+int SheepPasture::neededCoinsToUpgrade() const
 {
     return 50;
 }

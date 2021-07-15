@@ -12,6 +12,7 @@ protected:
     int planting_day_ = -1;
 
 public:
+    Field(uint upgrade_time) : Place(upgrade_time) {}
 
     int area() const { return area_; }
     int planted_area() const { return planted_area_; }
@@ -52,9 +53,9 @@ public:
     bool isUpgradeFinished() const;
     void finishUpgrade();
     int isUpgradable(int farmer_id=0) const;
-    int neededNailsToUpgrade(int barn_id=0) const;
-    int neededShovelsToUpgrade(int barn_id=0) const;
-    int neededCoinsToUpgrade(int barn_id=0) const;
+    int neededNailsToUpgrade() const;
+    int neededShovelsToUpgrade() const;
+    int neededCoinsToUpgrade() const;
     void upgrade();
 
     int plantXp();
@@ -98,9 +99,9 @@ public:
     bool isUpgradeFinished() const;
     void finishUpgrade();
     int isUpgradable(int farmer_id=0) const;
-    int neededNailsToUpgrade(int barn_id=0) const;
-    int neededShovelsToUpgrade(int barn_id=0) const;
-    int neededCoinsToUpgrade(int barn_id=0) const;
+    int neededNailsToUpgrade() const;
+    int neededShovelsToUpgrade() const;
+    int neededCoinsToUpgrade() const;
     void upgrade();
 
     int plantXp();

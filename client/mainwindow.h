@@ -22,6 +22,8 @@ public:
 private slots:
     void anotherDayPassed();
 
+    void on_btnSilo_clicked();
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;

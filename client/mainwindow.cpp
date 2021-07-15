@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "detailsdialog.h"
 
 MainWindow::MainWindow(Farmer& farmer, Farm& farm, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), farmer(farmer), farm(farm)
@@ -63,12 +64,12 @@ void MainWindow::anotherDayPassed()
 
     if(farmer.addXpAndIsLevelFinished(xp_to_add))
     {
-        farmer.goNextLevel();
+        //farmer.goNextLevel();
         showLevel();
     }
     showXP();
     showDay();
-    //farmer.save();
+    farmer.save();
 }
 
 void MainWindow::initUI()
@@ -226,4 +227,10 @@ void MainWindow::showXP()
 void MainWindow::showLevel()
 {
     ui->lblLevel->setText(QString::number(farmer.level()));
+}
+
+void MainWindow::on_btnSilo_clicked()
+{
+    DetailsDialog details("Silo", farmer, farm, this);
+    details.exec();
 }
