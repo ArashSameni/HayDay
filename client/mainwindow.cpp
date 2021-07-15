@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "detailsdialog.h"
+#include "barndetailsdialog.h"
 #include <QMessageBox>
 #include <QThread>
 
@@ -292,4 +293,10 @@ void MainWindow::on_sheepLock_clicked()
         on_btnSheepPasture_clicked();
     else
         QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
+}
+
+void MainWindow::on_btnBarn_clicked()
+{
+    BarnDetailsDialog details(farmer, farm, this);
+    details.exec();
 }
