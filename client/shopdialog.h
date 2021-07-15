@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "shop.h"
+#include "farmer.h"
 
 namespace Ui {
 class ShopDialog;
@@ -13,7 +14,7 @@ class ShopDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ShopDialog(QWidget *parent = nullptr);
+    explicit ShopDialog(Farmer& farmer,QWidget *parent = nullptr);
     ~ShopDialog();
 
 private slots:
@@ -49,7 +50,6 @@ private slots:
 
     void on_btnMilkMinus_clicked();
 
-
     void on_btnSheepPlus_clicked();
 
     void on_btnSheepMinus_clicked();
@@ -62,10 +62,19 @@ private:
     Ui::ShopDialog *ui;
     int buyAmount = 0;
     int sellAmount = 0;
+    Farmer& farmer;
 
     void showAmount();
     void showBuyButton();
     void showSellButton();
+
+    void checkLock();
+    void lockSheepWool();
+    void lockCowMilk();
+    void lockAlfalfa();
+    void openLockSheepWool();
+    void openLockCowMilk();
+    void openLockAlfalfa();
 };
 
 #endif // SHOPDIALOG_H
