@@ -36,6 +36,8 @@ private slots:
 
     void on_sheepLock_clicked();
 
+    void on_btnBarn_clicked();
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;
