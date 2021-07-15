@@ -19,7 +19,7 @@
 	color: #494949;
 }
 
-QDialog { background-image: url(:/img/barn-bg.png) }</string>
+#BarnDetailsDialog { background-image: url(:/img/barn-bg.png) }</string>
   </property>
   <widget class="QPushButton" name="lblUpgrade">
    <property name="geometry">

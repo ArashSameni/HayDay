@@ -115,6 +115,7 @@ void Barn::save() const
     query.replace(":upgrade_day", QString::number(upgrade_day_));
     query.replace(":is_upgrading", QString::number(is_upgrading_));
     query.replace(":level", QString::number(level_));
+    query.replace(":id", QString::number(id_));
 
     socket.write(query);
 }

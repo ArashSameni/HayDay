@@ -89,7 +89,7 @@ void BarnDetailsDialog::initBarn()
 
 void BarnDetailsDialog::showUpgrade()
 {
-    this->setStyleSheet("*{\n	font: 24px \"IRANSans Light\";\n	color: #494949;\n}\n\nQDialog { background-image: url(:/img/details-bg.png) }");
+    this->setStyleSheet("*{\n	font: 24px \"IRANSans Light\";\n	color: #494949;\n}\n\n#BarnDetailsDialog { background-image: url(:/img/details-bg.png) }");
 
     ui->lblEgg->hide();
     ui->lblMilk->hide();
@@ -111,7 +111,7 @@ void BarnDetailsDialog::showUpgrade()
 
 void BarnDetailsDialog::showBarn()
 {
-    this->setStyleSheet("*{\n	font: 24px \"IRANSans Light\";\n	color: #494949;\n}\n\nQDialog { background-image: url(:/img/barn-bg.png) }");
+    this->setStyleSheet("*{\n	font: 24px \"IRANSans Light\";\n	color: #494949;\n}\n\n#BarnDetailsDialog { background-image: url(:/img/barn-bg.png) }");
 
     ui->lblEgg->show();
     ui->lblMilk->show();
