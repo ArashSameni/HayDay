@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "detailsdialog.h"
+#include <QMessageBox>
+#include <QThread>
 
 MainWindow::MainWindow(Farmer& farmer, Farm& farm, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), farmer(farmer), farm(farm)
@@ -9,6 +11,7 @@ MainWindow::MainWindow(Farmer& farmer, Farm& farm, QWidget *parent)
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
 
     initUI();
+    checkTimeRelatedFunctions(false);
 
     //Connect Timer
     timer = new QTimer(this);
@@ -24,52 +27,10 @@ MainWindow::~MainWindow()
 void MainWindow::anotherDayPassed()
 {
     CURRENT_DAY += 1;
-    int xp_to_add = 1;
 
-    if(farm.silo().is_upgrading() && farm.silo().isUpgradeFinished())
-    {
-        farm.silo().finishUpgrade();
-        xp_to_add += farm.silo().upgradeXp();
-    }
-    if(farm.barn().is_upgrading() && farm.barn().isUpgradeFinished())
-    {
-        farm.barn().finishUpgrade();
-        xp_to_add += farm.barn().upgradeXp();
-    }
-    if(farm.chicken_coop().is_upgrading() && farm.chicken_coop().isUpgradeFinished())
-    {
-        farm.chicken_coop().finishUpgrade();
-        xp_to_add += farm.chicken_coop().upgradeXp();
-    }
-    if(farm.cow_pasture().is_upgrading() && farm.cow_pasture().isUpgradeFinished())
-    {
-        farm.cow_pasture().finishUpgrade();
-        xp_to_add += farm.cow_pasture().upgradeXp();
-    }
-    if(farm.sheep_pasture().is_upgrading() && farm.sheep_pasture().isUpgradeFinished())
-    {
-        farm.sheep_pasture().finishUpgrade();
-        xp_to_add += farm.sheep_pasture().upgradeXp();
-    }
-    if(farm.alfalfa_field().is_upgrading() && farm.alfalfa_field().isUpgradeFinished())
-    {
-        farm.alfalfa_field().finishUpgrade();
-        xp_to_add += farm.alfalfa_field().upgradeXp();
-    }
-    if(farm.wheat_field().is_upgrading() && farm.wheat_field().isUpgradeFinished())
-    {
-        farm.wheat_field().finishUpgrade();
-        xp_to_add += farm.wheat_field().upgradeXp();
-    }
+    checkTimeRelatedFunctions(true);
 
-    if(farmer.addXpAndIsLevelFinished(xp_to_add))
-    {
-        //farmer.goNextLevel();
-        showLevel();
-    }
-    showXP();
     showDay();
-    farmer.save();
 }
 
 void MainWindow::initUI()
@@ -81,13 +42,69 @@ void MainWindow::initUI()
     showAnimals();
 }
 
+void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
+{
+    int xp_to_add = add_day_xp;
+
+    if(farm.silo().is_upgrading() && farm.silo().isUpgradeFinished())
+    {
+        farm.silo().finishUpgrade();
+        xp_to_add += farm.silo().upgradeXp();
+        QThread::msleep(10);
+    }
+    if(farm.barn().is_upgrading() && farm.barn().isUpgradeFinished())
+    {
+        farm.barn().finishUpgrade();
+        xp_to_add += farm.barn().upgradeXp();
+        QThread::msleep(10);
+    }
+    if(farm.chicken_coop().is_upgrading() && farm.chicken_coop().isUpgradeFinished())
+    {
+        farm.chicken_coop().finishUpgrade();
+        xp_to_add += farm.chicken_coop().upgradeXp();
+        QThread::msleep(10);
+    }
+    if(farm.cow_pasture().is_upgrading() && farm.cow_pasture().isUpgradeFinished())
+    {
+        farm.cow_pasture().finishUpgrade();
+        xp_to_add += farm.cow_pasture().upgradeXp();
+        QThread::msleep(10);
+    }
+    if(farm.sheep_pasture().is_upgrading() && farm.sheep_pasture().isUpgradeFinished())
+    {
+        farm.sheep_pasture().finishUpgrade();
+        xp_to_add += farm.sheep_pasture().upgradeXp();
+        QThread::msleep(10);
+    }
+    if(farm.alfalfa_field().is_upgrading() && farm.alfalfa_field().isUpgradeFinished())
+    {
+        farm.alfalfa_field().finishUpgrade();
+        xp_to_add += farm.alfalfa_field().upgradeXp();
+        QThread::msleep(10);
+    }
+    if(farm.wheat_field().is_upgrading() && farm.wheat_field().isUpgradeFinished())
+    {
+        farm.wheat_field().finishUpgrade();
+        xp_to_add += farm.wheat_field().upgradeXp();
+        QThread::msleep(10);
+    }
+
+    if(farmer.addXpAndIsLevelFinished(xp_to_add))
+    {
+        //farmer.goNextLevel();
+        showLevel();
+    }
+    showXP();
+    farmer.save();
+}
+
 void MainWindow::showAnimals()
 {
-    if(farm.chicken_coop().storage() > 0)
+    if(farm.chicken_coop().level() > 0)
         unlockChickenCoop();
-    if(farm.cow_pasture().storage() > 0)
+    if(farm.cow_pasture().level() > 0)
         unlockCowPasture();
-    if(farm.sheep_pasture().storage() > 0)
+    if(farm.sheep_pasture().level() > 0)
         unlockSheepPasture();
 
     showChickens(farm.chicken_coop().storage());
@@ -233,4 +250,46 @@ void MainWindow::on_btnSilo_clicked()
 {
     DetailsDialog details("Silo", farmer, farm, this);
     details.exec();
+}
+
+void MainWindow::on_btnChickenCoop_clicked()
+{
+    DetailsDialog details("Chicken Coop", farmer, farm, this);
+    details.exec();
+}
+
+void MainWindow::on_btnCowPasture_clicked()
+{
+    DetailsDialog details("Cow Pasture", farmer, farm, this);
+    details.exec();
+}
+
+void MainWindow::on_btnSheepPasture_clicked()
+{
+    DetailsDialog details("Sheep Pasture", farmer, farm, this);
+    details.exec();
+}
+
+void MainWindow::on_chickenLock_clicked()
+{
+    if(farmer.level() >= 2)
+        on_btnChickenCoop_clicked();
+    else
+        QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
+}
+
+void MainWindow::on_cowLock_clicked()
+{
+    if(farmer.level() >= 4)
+        on_btnCowPasture_clicked();
+    else
+        QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
+}
+
+void MainWindow::on_sheepLock_clicked()
+{
+    if(farmer.level() >= 6)
+        on_btnSheepPasture_clicked();
+    else
+        QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
 }

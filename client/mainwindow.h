@@ -24,6 +24,18 @@ private slots:
 
     void on_btnSilo_clicked();
 
+    void on_btnChickenCoop_clicked();
+
+    void on_btnCowPasture_clicked();
+
+    void on_btnSheepPasture_clicked();
+
+    void on_chickenLock_clicked();
+
+    void on_cowLock_clicked();
+
+    void on_sheepLock_clicked();
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;
@@ -31,6 +43,7 @@ private:
     QTimer* timer;
 
     void initUI();
+    void checkTimeRelatedFunctions(bool add_day_xp);
     void showAnimals();
     void unlockAlfalfaField();
     void unlockChickenCoop();

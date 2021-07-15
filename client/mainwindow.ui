@@ -1150,5 +1150,69 @@ background-image: url(:/img/chicken.png);</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>chickenLock</sender>
+   <signal>clicked()</signal>
+   <receiver>btnChickenCoop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>868</x>
+     <y>578</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>972</x>
+     <y>532</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cowLock</sender>
+   <signal>clicked()</signal>
+   <receiver>btnCowPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>621</x>
+     <y>520</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>590</x>
+     <y>582</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sheepLock</sender>
+   <signal>clicked()</signal>
+   <receiver>btnSheepPasture</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>414</x>
+     <y>443</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>498</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chickenLock</sender>
+   <signal>clicked()</signal>
+   <receiver>btnChickenCoop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>866</x>
+     <y>593</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>858</x>
+     <y>645</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>

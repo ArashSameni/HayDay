@@ -16,6 +16,21 @@ DetailsDialog::DetailsDialog(QString title, Farmer& farmer, Farm& farm, QWidget 
         current_place = SILO;
         initialSilo();
     }
+    else if(title == "Chicken Coop")
+    {
+        current_place = CHICKEN_COOP;
+        initialLivingPlace(farm.chicken_coop());
+    }
+    else if(title == "Cow Pasture")
+    {
+        current_place = COW_PASTURE;
+        initialLivingPlace(farm.cow_pasture());
+    }
+    else if(title == "Sheep Pasture")
+    {
+        current_place = SHEEP_PASTURE;
+        initialLivingPlace(farm.sheep_pasture());
+    }
 }
 
 DetailsDialog::~DetailsDialog()
@@ -25,7 +40,7 @@ DetailsDialog::~DetailsDialog()
 
 void DetailsDialog::initialByPlace(const Place &place)
 {
-    ui->lblLevel->setText("Level: " + QString::number(farmer.level()));
+    ui->lblLevel->setText("Level: " + QString::number(place.level()));
 
     ui->lblUpgradeShovel->setText(QString::number(farm.barn().shovels()) + "/" +
                                   QString::number(place.neededShovelsToUpgrade()));
@@ -83,11 +98,57 @@ void DetailsDialog::upgradeSilo()
         else if(res == Enums::LACK_OF_SHOVELS)
             err = "You don't have enough shovels!";
         else if(res == Enums::LACK_OF_LEVEL)
-            err = "you have not reached required level to upgrade";
+            err = "You have not reached required level to upgrade";
 
         QMessageBox::warning(this, "Error", err);
     }
+}
 
+void DetailsDialog::initialLivingPlace(const LivingPlace& place)
+{
+    initialByPlace(place);
+
+    ui->lblStorage->setText("Storage: " + QString::number(place.storage()) + "/" + QString::number(place.max_storage()));
+    int new_storage = 2 * place.max_storage();
+    if(new_storage == 0)
+        new_storage = 2;
+    ui->lblUpgradeInfo->setText("Max-storage will be " + QString::number(new_storage));
+
+    //Show Feed/Collect Button
+    ui->btnUpgrade->move(46, 313);
+    btnFeedCollect = new QPushButton(this);
+    btnFeedCollect->setStyleSheet("QPushButton{\n	border: none;\n	border-radius: 10px;\n	background-color: #e0b943;\n	color: #fff;\n}\n\nQPushButton:hover{\n	background-color: #c9a63c;\n}");
+    btnFeedCollect->setCursor(Qt::PointingHandCursor);
+    if(place.animals_condition() == Enums::HUNGRY)
+        btnFeedCollect->setText("Feed");
+    else
+        btnFeedCollect->setText("Collect");
+    btnFeedCollect->setGeometry(241, 313, 162, 49);
+}
+
+void DetailsDialog::upgradeLivingPlace(LivingPlace &place)
+{
+    int res = place.isUpgradable(farmer.id());
+    if(res == Enums::OK)
+    {
+        place.upgrade();
+        QMessageBox::information(this, "Info", "Place is now upgrading");
+        initialLivingPlace(place);
+    }
+    else
+    {
+        QString err;
+        if(res == Enums::LACK_OF_COINS)
+            err = "You don't have enough coins!";
+        else if(res == Enums::LACK_OF_NAILS)
+            err = "You don't have enough nails!";
+        else if(res == Enums::LACK_OF_SHOVELS)
+            err = "You don't have enough shovels!";
+        else if(res == Enums::LACK_OF_LEVEL)
+            err = "You have not reached required level to upgrade";
+
+        QMessageBox::warning(this, "Error", err);
+    }
 }
 
 void DetailsDialog::on_btnUpgrade_clicked()
@@ -96,6 +157,16 @@ void DetailsDialog::on_btnUpgrade_clicked()
     {
     case SILO:
         upgradeSilo();
+        break;
+    case CHICKEN_COOP:
+    case COW_PASTURE:
+    case SHEEP_PASTURE:
+        if(current_place == CHICKEN_COOP)
+            upgradeLivingPlace(farm.chicken_coop());
+        else if(current_place == COW_PASTURE)
+            upgradeLivingPlace(farm.cow_pasture());
+        else if(current_place == SHEEP_PASTURE)
+            upgradeLivingPlace(farm.sheep_pasture());
         break;
     default:
         break;
