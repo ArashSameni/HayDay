@@ -31,6 +31,16 @@ DetailsDialog::DetailsDialog(QString title, Farmer& farmer, Farm& farm, QWidget 
         current_place = SHEEP_PASTURE;
         initialLivingPlace(farm.sheep_pasture());
     }
+    else if(title == "Wheat Field")
+    {
+        current_place = WHEAT_FIELD;
+        initialField(farm.wheat_field());
+    }
+    else if(title == "Alfalfa Field")
+    {
+        current_place = ALFALFA_FIELD;
+        initialField(farm.alfalfa_field());
+    }
 }
 
 DetailsDialog::~DetailsDialog()
@@ -151,6 +161,61 @@ void DetailsDialog::upgradeLivingPlace(LivingPlace &place)
     }
 }
 
+void DetailsDialog::initialField(const Field &field)
+{
+    initialByPlace(field);
+
+    ui->lblStorage->setText("Planted area: " + QString::number(field.planted_area()) + "/" + QString::number(field.area()));
+    int new_area = 2 * field.area();
+    if(new_area == 0)
+        new_area = 4;
+    ui->lblUpgradeInfo->setText("New area will be " + QString::number(new_area));
+
+    //Show Plant/Reap Button
+    ui->btnUpgrade->move(46, 313);
+    btnFeedCollect = new QPushButton(this);
+    btnFeedCollect->setStyleSheet("QPushButton{\n	border: none;\n	border-radius: 10px;\n	background-color: #e0b943;\n	color: #fff;\n}\n\nQPushButton:hover{\n	background-color: #c9a63c;\n}");
+    btnFeedCollect->setCursor(Qt::PointingHandCursor);
+    if(current_place == WHEAT_FIELD && field.plants_condition() == Enums::NOT_PLANTED)
+        btnFeedCollect->setText("Plant");
+    else if(current_place == ALFALFA_FIELD)
+    {
+        const AlfalfaField& alfalfa_field = *dynamic_cast<const AlfalfaField*>(&field);
+        if(alfalfa_field.plowing_condition() == Enums::NOT_PLOWED)
+            btnFeedCollect->setText("Plow");
+        else if(field.plants_condition() == Enums::NOT_PLANTED)
+            btnFeedCollect->setText("Plant");
+    }
+    else
+        btnFeedCollect->setText("Reap");
+    btnFeedCollect->setGeometry(241, 313, 162, 49);
+}
+
+void DetailsDialog::upgradeField(Field &field)
+{
+    int res = field.isUpgradable(farmer.id());
+    if(res == Enums::OK)
+    {
+        field.upgrade();
+        QMessageBox::information(this, "Info", "Field is now upgrading");
+        initialField(field);
+    }
+    else
+    {
+        QString err;
+        if(res == Enums::LACK_OF_COINS)
+            err = "You don't have enough coins!";
+        else if(res == Enums::LACK_OF_NAILS)
+            err = "You don't have enough nails!";
+        else if(res == Enums::LACK_OF_SHOVELS)
+            err = "You don't have enough shovels!";
+        else if(res == Enums::LACK_OF_LEVEL)
+            err = "You have not reached required level to upgrade";
+
+        QMessageBox::warning(this, "Error", err);
+    }
+}
+
 void DetailsDialog::on_btnUpgrade_clicked()
 {
     switch (current_place)
@@ -167,6 +232,13 @@ void DetailsDialog::on_btnUpgrade_clicked()
             upgradeLivingPlace(farm.cow_pasture());
         else if(current_place == SHEEP_PASTURE)
             upgradeLivingPlace(farm.sheep_pasture());
+        break;
+    case WHEAT_FIELD:
+    case ALFALFA_FIELD:
+        if(current_place == WHEAT_FIELD)
+            upgradeField(farm.wheat_field());
+        else if(current_place == ALFALFA_FIELD)
+            upgradeField(farm.alfalfa_field());
         break;
     default:
         break;

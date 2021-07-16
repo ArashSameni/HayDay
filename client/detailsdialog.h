@@ -27,7 +27,9 @@ private:
         SILO,
         CHICKEN_COOP,
         COW_PASTURE,
-        SHEEP_PASTURE
+        SHEEP_PASTURE,
+        WHEAT_FIELD,
+        ALFALFA_FIELD
     };
 
     Ui::DetailsDialog *ui;
@@ -36,10 +38,15 @@ private:
     Farm& farm;
     int current_place;
     void initialByPlace(const Place& place);
+
     void initialSilo();
     void upgradeSilo();
+
     void initialLivingPlace(const LivingPlace& place);
     void upgradeLivingPlace(LivingPlace& place);
+
+    void initialField(const Field& field);
+    void upgradeField(Field& field);
 };
 
 #endif // DETAILSDIALOG_H

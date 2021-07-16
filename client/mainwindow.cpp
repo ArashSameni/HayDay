@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "detailsdialog.h"
 #include "barndetailsdialog.h"
+#include "shopdialog.h"
 #include <QMessageBox>
 #include <QThread>
 
@@ -41,6 +42,8 @@ void MainWindow::initUI()
     showLevel();
     showXP();
     showAnimals();
+    if(farm.alfalfa_field().level())
+        unlockAlfalfaField();
 }
 
 void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
@@ -299,4 +302,24 @@ void MainWindow::on_btnBarn_clicked()
 {
     BarnDetailsDialog details(farmer, farm, this);
     details.exec();
+}
+
+void MainWindow::on_btnWheatField_clicked()
+{
+    DetailsDialog details("Wheat Field", farmer, farm, this);
+    details.exec();
+}
+
+void MainWindow::on_btnAlfalfaField_clicked()
+{
+    DetailsDialog details("Alfalfa Field", farmer, farm, this);
+    details.exec();
+}
+
+void MainWindow::on_alfalfaLock_clicked()
+{
+    if(farmer.level() >= 3)
+        on_btnAlfalfaField_clicked();
+    else
+        QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
 }

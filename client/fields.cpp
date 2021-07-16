@@ -285,7 +285,7 @@ void AlfalfaField::save() const
 {
     QString query = "UPDATE AlfalfaFields SET area=:area, planted_area=:planted_area, "
                     "plants_condition=:plants_condition, planting_day=:planting_day, "
-                    "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level "
+                    "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level, "
                     "plowing_condition=:plowing_condition, plowing_day=:plowing_day "
                     "WHERE id=:id";
     query.replace(":id", QString::number(id_));

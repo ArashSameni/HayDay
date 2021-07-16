@@ -38,6 +38,12 @@ private slots:
 
     void on_btnBarn_clicked();
 
+    void on_btnWheatField_clicked();
+
+    void on_btnAlfalfaField_clicked();
+
+    void on_alfalfaLock_clicked();
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;

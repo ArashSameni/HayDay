@@ -117,6 +117,9 @@ QPushButton:hover{
     </property>
    </widget>
    <widget class="QPushButton" name="btnAlfalfaField">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>790</x>
