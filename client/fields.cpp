@@ -233,7 +233,6 @@ AlfalfaField::AlfalfaField() : Field(3)
     planted_area_ = 0;
     plants_condition_ = Enums::NOT_PLANTED;
     planting_day_ = -1;
-    plowing_condition_ = Enums::NOT_PLOWED;
     plowing_day_ = -1;
 }
 
@@ -247,7 +246,7 @@ AlfalfaField &AlfalfaField::get(int alfalfa_field_id)
         alfalfa_field->id_ = alfalfa_field_id;
 
         QString query = "SELECT area, planted_area, plants_condition, planting_day, upgrade_day, is_upgrading, level"
-                        ", plowing_condition, plowing_day"
+                        ", plowing_day"
                         " FROM AlfalfaFields WHERE id=:id";
         query.replace(":id", QString::number(alfalfa_field_id));
 
@@ -265,8 +264,7 @@ AlfalfaField &AlfalfaField::get(int alfalfa_field_id)
             alfalfa_field->upgrade_day_ = data[4].toString().toInt();
             alfalfa_field->is_upgrading_ = data[5].toString().toInt();
             alfalfa_field->level_ = data[6].toString().toInt();
-            alfalfa_field->plowing_condition_ = data[7].toString().toInt();
-            alfalfa_field->plowing_day_ = data[8].toString().toInt();
+            alfalfa_field->plowing_day_ = data[7].toString().toInt();
         }
         else
         {
@@ -297,7 +295,7 @@ void AlfalfaField::save() const
     QString query = "UPDATE AlfalfaFields SET area=:area, planted_area=:planted_area, "
                     "plants_condition=:plants_condition, planting_day=:planting_day, "
                     "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level, "
-                    "plowing_condition=:plowing_condition, plowing_day=:plowing_day "
+                    "plowing_day=:plowing_day "
                     "WHERE id=:id";
     query.replace(":id", QString::number(id_));
     query.replace(":area", QString::number(area_));
@@ -307,7 +305,6 @@ void AlfalfaField::save() const
     query.replace(":upgrade_day", QString::number(upgrade_day_));
     query.replace(":is_upgrading", QString::number(is_upgrading_));
     query.replace(":level", QString::number(level_));
-    query.replace(":plowing_condition", QString::number(plowing_condition_));
     query.replace(":plowing_day", QString::number(plowing_day_));
 
     socket.write(query);
@@ -395,7 +392,6 @@ int AlfalfaField::isPlowable(int farmer_id)
 void AlfalfaField::plow()
 {
     plants_condition_ = Enums::PLOWING;
-    plowing_condition_=Enums::PLOWING;
     plowing_day_ = CURRENT_DAY;
     save();
 }
@@ -408,7 +404,6 @@ bool AlfalfaField::isPlowingFinished()
 void AlfalfaField::finishPlowing()
 {
     plants_condition_ = Enums::PLOWED;
-    plowing_condition_ = Enums::PLOWED;
     save();
 }
 
@@ -439,7 +434,6 @@ void AlfalfaField::plant(int barn_id, int amount)
     plants_condition_ = Enums::PLANTED;
     planting_day_ = CURRENT_DAY;
     planted_area_ = amount;
-    plowing_condition_=Enums::NOT_PLOWED;
     Barn &barn = Barn::get(barn_id);
     barn.removeAlfalfa(amount);
     barn.save();

@@ -71,7 +71,6 @@ class AlfalfaField : public Field
     static int id_;
     static AlfalfaField *alfalfa_field;
 
-    int plowing_condition_ = Enums::NOT_PLOWED;
     int plowing_day_ = -1;
 
     AlfalfaField();
@@ -85,7 +84,6 @@ public:
     static int id() { return id_; }
     void save() const;
 
-    int plowing_condition() const { return plowing_condition_; }
     int plowing_day() const { return plowing_day_; }
 
     int upgradeXp() ;
