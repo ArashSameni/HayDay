@@ -2,9 +2,9 @@
 #include "ui_detailsdialog.h"
 #include "globals.h"
 #include "messagedialog.h"
-
+#include "levelupdialog.h"
 DetailsDialog::DetailsDialog(QString title, Farmer &farmer, Farm &farm, QWidget *parent) : QDialog(parent), ui(new Ui::DetailsDialog),
-                                                                                           farmer(farmer), farm(farm)
+    farmer(farmer), farm(farm)
 {
     ui->setupUi(this);
     this->setWindowTitle(title);
@@ -183,6 +183,13 @@ void DetailsDialog::feedLivingPlace(LivingPlace &place)
         place.feed(storage_place_id);
         MessageDialog w("Animals are now fed.", "Info", this);
         w.exec();
+
+        if(farmer.addXp(place.feedXp()))
+        {
+            LevelUpDialog dialog(farmer.level(), this);
+            dialog.exec();
+        }
+
         initialLivingPlace(place);
     }
     else
@@ -216,6 +223,13 @@ void DetailsDialog::collectLivingPlace(LivingPlace &place)
             place.collect(storage_place_id);
             MessageDialog w("Products are collected!", "Info", this);
             w.exec();
+
+            if(farmer.addXp(place.collectXp()))
+            {
+                LevelUpDialog dialog(farmer.level(), this);
+                dialog.exec();
+            }
+
             initialLivingPlace(place);
         }
         else
@@ -309,6 +323,13 @@ void DetailsDialog::plowField(AlfalfaField &field)
         field.plow();
         MessageDialog w("Field is now plowing", "Info", this);
         w.exec();
+
+        if(farmer.addXp(field.plowXp()))
+        {
+            LevelUpDialog dialog(farmer.level(), this);
+            dialog.exec();
+        }
+
         initialField(field);
     }
     else
@@ -345,6 +366,13 @@ void DetailsDialog::plantField(int amount, Field &field)
         field.plant(storage_place_id, amount);
         MessageDialog w("Field is now planted", "Info", this);
         w.exec();
+
+        if(farmer.addXp(field.plantXp()))
+        {
+            LevelUpDialog dialog(farmer.level(), this);
+            dialog.exec();
+        }
+
         initialField(field);
     }
     else
@@ -380,6 +408,13 @@ void DetailsDialog::reapField(Field &field)
             field.reap(storage_place_id);
             MessageDialog w("Field is reaped", "Info", this);
             w.exec();
+
+            if(farmer.addXp(field.reapXp()))
+            {
+                LevelUpDialog dialog(farmer.level(), this);
+                dialog.exec();
+            }
+
             initialField(field);
         }
         else
