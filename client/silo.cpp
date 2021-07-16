@@ -7,6 +7,7 @@
 #include "farmer.h"
 #include "farm.h"
 #include <QtMath>
+#include <QThread>
 
 int Silo::id_ = 0;
 Silo *Silo::silo = nullptr;
@@ -134,10 +135,20 @@ int Silo::neededCoinsToUpgrade() const
     return static_cast<int>(qPow((level_ * 2), 2) * 100);
 }
 
-void Silo::upgrade()
+void Silo::upgrade(Farmer& farmer, int barn_id)
 {
     if(!is_upgrading_)
     {
+        Barn& barn = Barn::get(barn_id);
+        farmer.removeCoin(neededCoinsToUpgrade());
+        farmer.save();
+        QThread::msleep(10);
+
+        barn.removeShovel(neededShovelsToUpgrade());
+        barn.removeNail(neededNailsToUpgrade());
+        barn.save();
+        QThread::msleep(10);
+
         upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
         save();

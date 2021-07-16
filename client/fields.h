@@ -56,7 +56,7 @@ public:
     int neededNailsToUpgrade() const;
     int neededShovelsToUpgrade() const;
     int neededCoinsToUpgrade() const;
-    void upgrade();
+    void upgrade(Farmer& farmer, int barn_id);
 
     int plantXp();
     int isPlantable(int silo_id, int amount);
@@ -102,7 +102,7 @@ public:
     int neededNailsToUpgrade() const;
     int neededShovelsToUpgrade() const;
     int neededCoinsToUpgrade() const;
-    void upgrade();
+    void upgrade(Farmer& farmer, int barn_id);
 
     int plantXp();
     int isPlantable(int barn_id, int amount);

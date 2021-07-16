@@ -64,7 +64,7 @@ public:
     int neededNailsToUpgrade() const;
     int neededShovelsToUpgrade() const;
     int neededCoinsToUpgrade() const;
-    void upgrade();
+    void upgrade(Farmer& farmer, int barn_id);
 
     void checkMilksExpiration();
 

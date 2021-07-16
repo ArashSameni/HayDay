@@ -6,7 +6,7 @@
 #include "barn.h"
 #include "silo.h"
 #include "farm.h"
-
+#include <QThread>
 int ChickenCoop::id_ = 0;
 ChickenCoop *ChickenCoop::chicken_coop = nullptr;
 
@@ -179,10 +179,20 @@ void ChickenCoop::finishUpgrade()
     save(id_);
 }
 
-void ChickenCoop::upgrade()
+void ChickenCoop::upgrade(Farmer& farmer, int barn_id)
 {
     if (!is_upgrading_)
     {
+        Barn& barn = Barn::get(barn_id);
+        farmer.removeCoin(neededCoinsToUpgrade());
+        farmer.save();
+        QThread::msleep(10);
+
+        barn.removeShovel(neededShovelsToUpgrade());
+        barn.removeNail(neededNailsToUpgrade());
+        barn.save();
+        QThread::msleep(10);
+
         upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
         save(id_);
@@ -193,9 +203,9 @@ int ChickenCoop::isFeedable(int silo_id)
 {
     Silo& silo = Silo::get(silo_id);
     if(animals_condition_ != Enums::HUNGRY)
-       return Enums::ALREADY_FED;
+        return Enums::ALREADY_FED;
     if(silo.storage() < storage_)
-       return Enums::LACK_OF_WHEAT;
+        return Enums::LACK_OF_WHEAT;
 
     return Enums::OK;
 }
@@ -224,7 +234,7 @@ int ChickenCoop::isCollectable(int barn_id)
 {
     Barn& barn = Barn::get(barn_id);
     if( barn.max_storage() - barn.storage() < storage_)
-            return Enums::LACK_OF_STORAGE;
+        return Enums::LACK_OF_STORAGE;
     
     return Enums::OK;
 }
@@ -368,10 +378,20 @@ int CowPasture::isUpgradable(int farmer_id) const
     return Enums::OK;
 }
 
-void CowPasture::upgrade()
+void CowPasture::upgrade(Farmer& farmer, int barn_id)
 {
     if (!is_upgrading_)
     {
+        Barn& barn = Barn::get(barn_id);
+        farmer.removeCoin(neededCoinsToUpgrade());
+        farmer.save();
+        QThread::msleep(10);
+
+        barn.removeShovel(neededShovelsToUpgrade());
+        barn.removeNail(neededNailsToUpgrade());
+        barn.save();
+        QThread::msleep(10);
+
         upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
         save(id_);
@@ -406,9 +426,9 @@ int CowPasture::isFeedable(int barn_id)
 {
     Barn& barn = Barn::get(barn_id);
     if(animals_condition_ != Enums::HUNGRY)
-       return Enums::ALREADY_FED;
+        return Enums::ALREADY_FED;
     if(barn.storage() < storage_*2)
-       return Enums::LACK_OF_ALFALFA;
+        return Enums::LACK_OF_ALFALFA;
 
     return Enums::OK;
 }
@@ -437,7 +457,7 @@ int CowPasture::isCollectable(int barn_id)
 {
     Barn& barn = Barn::get(barn_id);
     if( barn.max_storage() - barn.storage() < storage_)
-            return Enums::LACK_OF_STORAGE;
+        return Enums::LACK_OF_STORAGE;
     return Enums::OK;
 }
 
@@ -445,7 +465,7 @@ void CowPasture::collect(int barn_id)
 {
     Barn& barn = Barn::get(barn_id);
     barn.addMilk(storage_);
-        
+
     barn.save();
     animals_condition_ = Enums::HUNGRY;
     save(id_);
@@ -544,10 +564,20 @@ int SheepPasture::isUpgradable(int farmer_id) const
     return Enums::OK;
 }
 
-void SheepPasture::upgrade()
+void SheepPasture::upgrade(Farmer& farmer, int barn_id)
 {
     if (!is_upgrading_)
     {
+        Barn& barn = Barn::get(barn_id);
+        farmer.removeCoin(neededCoinsToUpgrade());
+        farmer.save();
+        QThread::msleep(10);
+
+        barn.removeShovel(neededShovelsToUpgrade());
+        barn.removeNail(neededNailsToUpgrade());
+        barn.save();
+        QThread::msleep(10);
+
         upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
         save(id_);
@@ -579,9 +609,9 @@ int SheepPasture::isFeedable(int barn_id)
 {
     Barn& barn = Barn::get(barn_id);
     if(animals_condition_ != Enums::HUNGRY)
-       return Enums::ALREADY_FED;
+        return Enums::ALREADY_FED;
     if(barn.storage() < storage_)
-       return Enums::LACK_OF_ALFALFA;
+        return Enums::LACK_OF_ALFALFA;
 
     return Enums::OK;
 }
@@ -614,7 +644,7 @@ int SheepPasture::isCollectable(int farmer_id)
     if(barn.max_storage() - barn.storage() < storage_)
         return Enums::LACK_OF_STORAGE;
 
-    if( farmer.coins() < storage_ ) 
+    if( farmer.coins() < storage_ )
         return Enums::LACK_OF_COINS;
     
     return Enums::OK;
@@ -624,7 +654,7 @@ void SheepPasture::collect(int barn_id)
 {
     Barn& barn = Barn::get(barn_id);
     barn.addWool(storage_);
-        
+
     barn.save();
     animals_condition_ = Enums::HUNGRY;
     save(id_);

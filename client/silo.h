@@ -28,7 +28,7 @@ public:
     int neededNailsToUpgrade() const;
     int neededShovelsToUpgrade() const;
     int neededCoinsToUpgrade() const;
-    void upgrade();
+    void upgrade(Farmer& farmer, int barn_id);
 
     int storage() const { return storage_; }
     int max_storage() const { return max_storage_; }

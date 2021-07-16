@@ -94,7 +94,7 @@ void DetailsDialog::upgradeSilo()
     int res = silo.isUpgradable(farmer.id());
     if(res == Enums::OK)
     {
-        silo.upgrade();
+        silo.upgrade(farmer,farm.barn().id());
         QMessageBox::information(this, "Info", "Silo is now upgrading");
         initialSilo();
     }
@@ -141,7 +141,7 @@ void DetailsDialog::upgradeLivingPlace(LivingPlace &place)
     int res = place.isUpgradable(farmer.id());
     if(res == Enums::OK)
     {
-        place.upgrade();
+        place.upgrade(farmer, farm.barn().id());
         QMessageBox::information(this, "Info", "Place is now upgrading");
         initialLivingPlace(place);
     }
@@ -196,7 +196,7 @@ void DetailsDialog::upgradeField(Field &field)
     int res = field.isUpgradable(farmer.id());
     if(res == Enums::OK)
     {
-        field.upgrade();
+        field.upgrade(farmer, farm.barn().id());
         QMessageBox::information(this, "Info", "Field is now upgrading");
         initialField(field);
     }

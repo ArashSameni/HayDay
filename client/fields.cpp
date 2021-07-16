@@ -6,6 +6,7 @@
 #include <string>
 #include "farm.h"
 #include "barn.h"
+#include <QThread>
 
 int WheatField::id_ = 0;
 WheatField *WheatField::wheat_field = nullptr;
@@ -131,10 +132,20 @@ int WheatField::isUpgradable(int farmer_id) const
     return Enums::OK;
 }
 
-void WheatField::upgrade()
+void WheatField::upgrade(Farmer& farmer, int barn_id)
 {
     if (!is_upgrading_)
     {
+        Barn& barn = Barn::get(barn_id);
+        farmer.removeCoin(neededCoinsToUpgrade());
+        farmer.save();
+        QThread::msleep(10);
+
+        barn.removeShovel(neededShovelsToUpgrade());
+        barn.removeNail(neededNailsToUpgrade());
+        barn.save();
+        QThread::msleep(10);
+
         upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
         save();
@@ -343,10 +354,20 @@ int AlfalfaField::isUpgradable(int farmer_id) const
     return Enums::OK;
 }
 
-void AlfalfaField::upgrade()
+void AlfalfaField::upgrade(Farmer& farmer, int barn_id)
 {
     if (!is_upgrading_)
     {
+        Barn& barn = Barn::get(barn_id);
+        farmer.removeCoin(neededCoinsToUpgrade());
+        farmer.save();
+        QThread::msleep(10);
+
+        barn.removeShovel(neededShovelsToUpgrade());
+        barn.removeNail(neededNailsToUpgrade());
+        barn.save();
+        QThread::msleep(10);
+
         upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;
         save();
