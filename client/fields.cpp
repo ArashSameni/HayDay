@@ -71,7 +71,8 @@ WheatField &WheatField::create()
         delete wheat_field;
 
     wheat_field = new WheatField;
-    QString query = "INSERT INTO WheatFields DEFAULT VALUES";
+    QString query = "INSERT INTO WheatFields(plants_condition) VALUES(:plants_condition)";
+    query.replace(":plants_condition", QString::number(wheat_field->plants_condition_));
 
     socket.write(query);
     id_ = socket.read().toInt();
@@ -160,7 +161,7 @@ int WheatField::plantXp()
 int WheatField::isPlantable(int silo_id, int amount)
 {
     Silo &silo = Silo::get(silo_id);
-    if (amount <= 0 || amount > area_)
+    if (amount < 0 || amount > area_)
         return Enums::AREA_ERROR;
     if (silo.storage() < amount)
         return Enums::LACK_OF_SEED;
@@ -195,7 +196,7 @@ int WheatField::isReapable(int silo_id)
 {
     Silo &silo = Silo::get(silo_id);
     if (silo.max_storage() - silo.storage() < planted_area_ * 2)
-        return Enums::LACK_OF_SPACE;
+        return Enums::LACK_OF_STORAGE;
     return Enums::OK;
 }
 
@@ -231,7 +232,7 @@ AlfalfaField::AlfalfaField() : Field(3)
     is_upgrading_ = false;
     area_ = 0;
     planted_area_ = 0;
-    plants_condition_ = Enums::NOT_PLANTED;
+    plants_condition_ = Enums::NOT_PLOWED;
     planting_day_ = -1;
     plowing_day_ = -1;
 }
@@ -282,7 +283,8 @@ AlfalfaField &AlfalfaField::create()
         delete alfalfa_field;
 
     alfalfa_field = new AlfalfaField;
-    QString query = "INSERT INTO AlfalfaFields DEFAULT VALUES";
+    QString query = "INSERT INTO AlfalfaFields(plants_condition) VALUES(:plants_condition)";
+    query.replace(":plants_condition", QString::number(alfalfa_field->plants_condition_));
 
     socket.write(query);
     id_ = socket.read().toInt();
@@ -454,7 +456,7 @@ int AlfalfaField::isReapable(int barn_id)
 {
     Barn &barn = Barn::get(barn_id);
     if ((barn.max_storage() - barn.storage()) < planted_area_ * 2)
-        return Enums::LACK_OF_SPACE;
+        return Enums::LACK_OF_STORAGE;
     return Enums::OK;
 }
 

@@ -16,7 +16,6 @@ namespace Enums
         //planting contdition
         AREA_ERROR,
         LACK_OF_SEED,
-        LACK_OF_SPACE,
         ALREADY_PLANTED,
         ALREADY_PLOWED,
 
@@ -28,6 +27,7 @@ namespace Enums
         LACK_OF_ALFALFA,
         LACK_OF_WHEAT,
         LACK_OF_STORAGE,
+        NO_ANIMALS,
 
 
         LACK_OF_COINS,

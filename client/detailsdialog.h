@@ -21,6 +21,7 @@ public:
 private slots:
     void on_btnUpgrade_clicked();
     void on_btnFeed_clicked();
+    void on_btnPlant_clicked();
 
 private:
     enum
@@ -45,6 +46,8 @@ private:
 
     void initialLivingPlace(const LivingPlace& place);
     void upgradeLivingPlace(LivingPlace& place);
+    void feedLivingPlace(LivingPlace& place);
+    void collectLivingPlace(LivingPlace& place);
 
     void initialField(const Field& field);
     void upgradeField(Field& field);

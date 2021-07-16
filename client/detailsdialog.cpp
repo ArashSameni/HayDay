@@ -124,15 +124,20 @@ void DetailsDialog::initialLivingPlace(const LivingPlace &place)
     ui->lblUpgradeInfo->setText("Max-storage will be " + QString::number(new_storage));
 
     //Show Feed/Collect Button
-    ui->btnUpgrade->move(46, 313);
-    btnFeedCollect = new QPushButton(this);
-    btnFeedCollect->setStyleSheet("QPushButton{\n	border: none;\n	border-radius: 10px;\n	background-color: #e0b943;\n	color: #fff;\n}\n\nQPushButton:hover{\n	background-color: #c9a63c;\n}");
-    btnFeedCollect->setCursor(Qt::PointingHandCursor);
+    if (btnFeedCollect == nullptr)
+    {
+        ui->btnUpgrade->move(46, 313);
+        btnFeedCollect = new QPushButton(this);
+        btnFeedCollect->setStyleSheet("QPushButton{\n	border: none;\n	border-radius: 10px;\n	background-color: #e0b943;\n	color: #fff;\n}\n\nQPushButton:hover{\n	background-color: #c9a63c;\n}");
+        btnFeedCollect->setCursor(Qt::PointingHandCursor);
+        btnFeedCollect->setGeometry(241, 313, 162, 49);
+        connect(btnFeedCollect, &QPushButton::clicked, this, &DetailsDialog::on_btnPlant_clicked);
+    }
+
     if (place.animals_condition() == Enums::HUNGRY)
         btnFeedCollect->setText("Feed");
     else
         btnFeedCollect->setText("Collect");
-    btnFeedCollect->setGeometry(241, 313, 162, 49);
 }
 
 void DetailsDialog::upgradeLivingPlace(LivingPlace &place)
@@ -160,6 +165,67 @@ void DetailsDialog::upgradeLivingPlace(LivingPlace &place)
     }
 }
 
+void DetailsDialog::feedLivingPlace(LivingPlace &place)
+{
+    int res = 0, storage_place_id = 0;
+    if (current_place == CHICKEN_COOP)
+        storage_place_id = farm.silo().id();
+    else
+        storage_place_id = farm.barn().id();
+
+    res = place.isFeedable(storage_place_id);
+    if (res == Enums::OK)
+    {
+        place.feed(storage_place_id);
+        QMessageBox::information(this, "Info", "Animals are now fed.");
+        initialLivingPlace(place);
+    }
+    else
+    {
+        QString err;
+        if(res == Enums::NO_ANIMALS)
+            err = "You don't have any animals!";
+        else if (res == Enums::ALREADY_FED)
+            err = "Animals are already fed!";
+        else
+            err = "You don't have enough sotrage to feed animals!";
+
+        QMessageBox::warning(this, "Error", err);
+    }
+}
+
+void DetailsDialog::collectLivingPlace(LivingPlace &place)
+{
+    int res, storage_place_id = 0;
+    if (place.isCollectTime())
+    {
+        if (current_place == SHEEP_PASTURE)
+            storage_place_id = farmer.id();
+        else
+            storage_place_id = farm.barn().id();
+
+        res = place.isCollectable(storage_place_id);
+        if (res == Enums::OK)
+        {
+            place.collect(storage_place_id);
+            QMessageBox::information(this, "Info", "Products are collected!");
+            initialLivingPlace(place);
+        }
+        else
+        {
+            QString err;
+            if (res == Enums::LACK_OF_STORAGE)
+                err = "You don't have enough space in barn!";
+            else
+                err = "You don't have enough money to breed the sheeps!";
+
+            QMessageBox::warning(this, "Error", err);
+        }
+    }
+    else
+        QMessageBox::warning(this, "Error", "Product is not collectable yet!");
+}
+
 void DetailsDialog::initialField(const Field &field)
 {
     initialByPlace(field);
@@ -171,13 +237,14 @@ void DetailsDialog::initialField(const Field &field)
     ui->lblUpgradeInfo->setText("New area will be " + QString::number(new_area));
 
     //Show Plant/Reap Button
-    ui->btnUpgrade->move(46, 313);
-    if(btnFeedCollect == nullptr)
+    if (btnFeedCollect == nullptr)
     {
+        ui->btnUpgrade->move(46, 313);
         btnFeedCollect = new QPushButton(this);
         btnFeedCollect->setStyleSheet("QPushButton{\n	border: none;\n	border-radius: 10px;\n	background-color: #e0b943;\n	color: #fff;\n}\n\nQPushButton:hover{\n	background-color: #c9a63c;\n}");
         btnFeedCollect->setCursor(Qt::PointingHandCursor);
         btnFeedCollect->setGeometry(241, 313, 162, 49);
+        connect(btnFeedCollect, &QPushButton::clicked, this, &DetailsDialog::on_btnPlant_clicked);
     }
 
     if (current_place == WHEAT_FIELD && field.plants_condition() == Enums::NOT_PLANTED)
@@ -194,8 +261,6 @@ void DetailsDialog::initialField(const Field &field)
     }
     else
         btnFeedCollect->setText("Reap");
-
-    connect(btnFeedCollect, &QPushButton::clicked, this, &DetailsDialog::on_btnFeed_clicked);
 }
 
 void DetailsDialog::upgradeField(Field &field)
@@ -229,7 +294,7 @@ void DetailsDialog::plowField(AlfalfaField &field)
     if (res == Enums::OK)
     {
         field.plow();
-        QMessageBox::information(this, "Info", "field is now plowing");
+        QMessageBox::information(this, "Info", "Field is now plowing");
         initialField(field);
     }
     else
@@ -237,9 +302,9 @@ void DetailsDialog::plowField(AlfalfaField &field)
         QString err;
         if (res == Enums::LACK_OF_COINS)
             err = "You don't have enough coins!";
-        else if (err == Enums::PLOWING || err == Enums::PLOWED)
+        else if (res == Enums::PLOWING || res == Enums::PLOWED)
             err = "You have already plowed this filed!";
-        else if (err == Enums::PLANTED)
+        else if (res == Enums::PLANTED)
             err = "You have planted alfalfa in this field!";
 
         QMessageBox::warning(this, "Error", err);
@@ -251,7 +316,6 @@ void DetailsDialog::plantField(int amount, Field &field)
     //    if(current_place==ALFALFA_FIELD && !farm.alfalfa_field().isPlowingFinished())
     //        err="Plowing is not finished yet!";
     //xpxpxpxpxpx
-
     int res = 0, storage_place_id = 0;
     QString err;
     if (current_place == WHEAT_FIELD)
@@ -269,15 +333,15 @@ void DetailsDialog::plantField(int amount, Field &field)
     }
     else
     {
-        if (err == Enums::AREA_ERROR)
+        if (res == Enums::AREA_ERROR)
             err = "You don't have enough space for planting!";
-        else if (err == Enums::LACK_OF_SEED)
+        else if (res == Enums::LACK_OF_SEED)
             err = "You don't have enough seed for planting!";
-        else if (err == Enums::NOT_PLOWED)
+        else if (res == Enums::NOT_PLOWED)
             err = "This field should be plowed first!";
-        else if (err == Enums::PLOWING)
+        else if (res == Enums::PLOWING)
             err = "Plowing is not finished!";
-        else if (err == Enums::PLANTED)
+        else if (res == Enums::PLANTED)
             err = "Field is already planted!";
 
         QMessageBox::warning(this, "Error", err);
@@ -286,8 +350,7 @@ void DetailsDialog::plantField(int amount, Field &field)
 
 void DetailsDialog::reapField(Field &field)
 {
-    int storage_place_id = 0;
-    int res;
+    int res, storage_place_id = 0;
     if (field.isReapTime())
     {
         if (current_place == WHEAT_FIELD)
@@ -304,12 +367,11 @@ void DetailsDialog::reapField(Field &field)
         else
         {
             QString err;
-            if (current_place == WHEAT_FIELD )
+            if (current_place == WHEAT_FIELD)
                 err = "You don't have enough space in your silo!";
 
             else if (current_place == ALFALFA_FIELD)
                 err = "You don't have enough space in barn!";
-
 
             QMessageBox::warning(this, "Error", err);
         }
@@ -349,7 +411,23 @@ void DetailsDialog::on_btnUpgrade_clicked()
 
 void DetailsDialog::on_btnFeed_clicked()
 {
-    int amount = 0; //get from user,it should be less than max area
+    switch (current_place)
+    {
+    case CHICKEN_COOP:
+        feedLivingPlace(farm.chicken_coop());
+        break;
+    case COW_PASTURE:
+        feedLivingPlace(farm.cow_pasture());
+        break;
+    case SHEEP_PASTURE:
+        feedLivingPlace(farm.sheep_pasture());
+        break;
+    }
+}
+
+void DetailsDialog::on_btnPlant_clicked()
+{
+    int amount = 1; //get from user,it should be less than max area
     switch (current_place)
     {
     case WHEAT_FIELD:

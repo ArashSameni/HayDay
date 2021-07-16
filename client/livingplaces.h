@@ -157,7 +157,7 @@ public:
     void feed(int barn_id);
     bool isCollectTime();
     int isCollectable(int farmer_id);
-    void collect(int barn_id);
+    void collect(int farmer_id);
     int collectXp();
 
     ~SheepPasture() {}
