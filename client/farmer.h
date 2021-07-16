@@ -20,6 +20,8 @@ class Farmer
 
     Farmer();
 
+    void goNextLevel();
+
 public:
     Farmer(Farmer const &) = delete;
     void operator=(Farmer const &) = delete;
@@ -43,15 +45,7 @@ public:
 
     void addCoin(int amount) { coins_ += amount; }
     void removeCoin(int amount) { coins_ -= amount; }
-    bool addXpAndIsLevelFinished(int amount)
-    {
-        xp_ += amount;
-        return isLevelFinished();
-    }
-    bool isLevelFinished() const { return xp_ >= max_xp_; }
-
-    // Not implemented
-    void goNextLevel(){}
+    bool addXp(int amount);
 };
 
 #endif // FARMER_H
