@@ -4,7 +4,7 @@
 #include "barndetailsdialog.h"
 #include "shopdialog.h"
 #include "levelupdialog.h"
-#include <QMessageBox>
+#include "messagedialog.h"
 #include <QThread>
 
 MainWindow::MainWindow(Farmer& farmer, Farm& farm, QWidget *parent)
@@ -319,7 +319,10 @@ void MainWindow::on_chickenLock_clicked()
     if(farmer.level() >= 2)
         on_btnChickenCoop_clicked();
     else
-        QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
+    {
+        MessageDialog w("You have not reached required level to unlock", "Error", this);
+        w.exec();
+    }
 }
 
 void MainWindow::on_cowLock_clicked()
@@ -327,7 +330,10 @@ void MainWindow::on_cowLock_clicked()
     if(farmer.level() >= 4)
         on_btnCowPasture_clicked();
     else
-        QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
+    {
+        MessageDialog w("You have not reached required level to unlock", "Error", this);
+        w.exec();
+    }
 }
 
 void MainWindow::on_sheepLock_clicked()
@@ -335,7 +341,10 @@ void MainWindow::on_sheepLock_clicked()
     if(farmer.level() >= 6)
         on_btnSheepPasture_clicked();
     else
-        QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
+    {
+        MessageDialog w("You have not reached required level to unlock", "Error", this);
+        w.exec();
+    }
 }
 
 void MainWindow::on_btnBarn_clicked()
@@ -371,7 +380,10 @@ void MainWindow::on_alfalfaLock_clicked()
     if(farmer.level() >= 3)
         on_btnAlfalfaField_clicked();
     else
-        QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
+    {
+        MessageDialog w("You have not reached required level to unlock", "Error", this);
+        w.exec();
+    }
 }
 
 void MainWindow::on_shopLock_clicked()
@@ -379,7 +391,10 @@ void MainWindow::on_shopLock_clicked()
     if(farmer.level() >= 2)
         on_btnShop_clicked();
     else
-        QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
+    {
+        MessageDialog w("You have not reached required level to unlock", "Error", this);
+        w.exec();
+    }
 }
 
 void MainWindow::on_btnShop_clicked()

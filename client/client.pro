@@ -28,6 +28,7 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
+    messagedialog.cpp \
     scoreboarddialog.cpp \
     shop.cpp \
     shopdialog.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
     livingplaces.h \
     loginwindow.h \
     mainwindow.h \
+    messagedialog.h \
     place.h \
     scoreboarddialog.h \
     shop.h \
@@ -61,6 +63,7 @@ FORMS += \
     levelupdialog.ui \
     loginwindow.ui \
     mainwindow.ui \
+    messagedialog.ui \
     scoreboarddialog.ui \
     shopdialog.ui
 

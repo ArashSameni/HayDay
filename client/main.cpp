@@ -1,6 +1,5 @@
 #include "loginwindow.h"
 #include "globals.h"
-#include <QMessageBox>
 #include <QApplication>
 
 uint CURRENT_DAY;

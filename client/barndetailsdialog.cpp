@@ -1,7 +1,7 @@
 #include "barndetailsdialog.h"
 #include "ui_barndetailsdialog.h"
 #include "globals.h"
-#include <QMessageBox>
+#include "messagedialog.h"
 #include <QtMath>
 
 BarnDetailsDialog::BarnDetailsDialog(Farmer& farmer, Farm& farm, QWidget *parent) :
@@ -137,7 +137,8 @@ void BarnDetailsDialog::upgradeBarn()
     if(res == Enums::OK)
     {
         barn.upgrade(farmer, barn.id());
-        QMessageBox::information(this, "Info", "Barn is now upgrading");
+        MessageDialog w("Barn is now upgrading", "Info", this);
+        w.exec();
         initUpgrade();
     }
     else
@@ -152,7 +153,8 @@ void BarnDetailsDialog::upgradeBarn()
         else if(res == Enums::LACK_OF_LEVEL)
             err = "You have not reached required level to upgrade";
 
-        QMessageBox::warning(this, "Error", err);
+        MessageDialog w(err, "Error", this);
+        w.exec();
     }
 }
 

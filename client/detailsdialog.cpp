@@ -1,7 +1,7 @@
 #include "detailsdialog.h"
 #include "ui_detailsdialog.h"
 #include "globals.h"
-#include <QMessageBox>
+#include "messagedialog.h"
 
 DetailsDialog::DetailsDialog(QString title, Farmer &farmer, Farm &farm, QWidget *parent) : QDialog(parent), ui(new Ui::DetailsDialog),
                                                                                            farmer(farmer), farm(farm)
@@ -94,7 +94,8 @@ void DetailsDialog::upgradeSilo()
     if (res == Enums::OK)
     {
         silo.upgrade(farmer, farm.barn().id());
-        QMessageBox::information(this, "Info", "Silo is now upgrading");
+        MessageDialog w("Silo is now upgrading", "Info", this);
+        w.exec();
         initialSilo();
     }
     else
@@ -109,7 +110,8 @@ void DetailsDialog::upgradeSilo()
         else if (res == Enums::LACK_OF_LEVEL)
             err = "You have not reached required level to upgrade";
 
-        QMessageBox::warning(this, "Error", err);
+        MessageDialog w(err, "Error", this);
+        w.exec();
     }
 }
 
@@ -146,7 +148,8 @@ void DetailsDialog::upgradeLivingPlace(LivingPlace &place)
     if (res == Enums::OK)
     {
         place.upgrade(farmer, farm.barn().id());
-        QMessageBox::information(this, "Info", "Place is now upgrading");
+        MessageDialog w("Place is now upgrading", "Info", this);
+        w.exec();
         initialLivingPlace(place);
     }
     else
@@ -161,7 +164,8 @@ void DetailsDialog::upgradeLivingPlace(LivingPlace &place)
         else if (res == Enums::LACK_OF_LEVEL)
             err = "You have not reached required level to upgrade";
 
-        QMessageBox::warning(this, "Error", err);
+        MessageDialog w(err, "Error", this);
+        w.exec();
     }
 }
 
@@ -177,7 +181,8 @@ void DetailsDialog::feedLivingPlace(LivingPlace &place)
     if (res == Enums::OK)
     {
         place.feed(storage_place_id);
-        QMessageBox::information(this, "Info", "Animals are now fed.");
+        MessageDialog w("Animals are now fed.", "Info", this);
+        w.exec();
         initialLivingPlace(place);
     }
     else
@@ -190,7 +195,8 @@ void DetailsDialog::feedLivingPlace(LivingPlace &place)
         else
             err = "You don't have enough sotrage to feed animals!";
 
-        QMessageBox::warning(this, "Error", err);
+        MessageDialog w(err, "Error", this);
+        w.exec();
     }
 }
 
@@ -208,7 +214,8 @@ void DetailsDialog::collectLivingPlace(LivingPlace &place)
         if (res == Enums::OK)
         {
             place.collect(storage_place_id);
-            QMessageBox::information(this, "Info", "Products are collected!");
+            MessageDialog w("Products are collected!", "Info", this);
+            w.exec();
             initialLivingPlace(place);
         }
         else
@@ -219,11 +226,15 @@ void DetailsDialog::collectLivingPlace(LivingPlace &place)
             else
                 err = "You don't have enough money to breed the sheeps!";
 
-            QMessageBox::warning(this, "Error", err);
+            MessageDialog w(err, "Error", this);
+            w.exec();
         }
     }
     else
-        QMessageBox::warning(this, "Error", "Product is not collectable yet!");
+    {
+        MessageDialog w("Product is not collectable yet!", "Error", this);
+        w.exec();
+    }
 }
 
 void DetailsDialog::initialField(const Field &field)
@@ -269,7 +280,8 @@ void DetailsDialog::upgradeField(Field &field)
     if (res == Enums::OK)
     {
         field.upgrade(farmer, farm.barn().id());
-        QMessageBox::information(this, "Info", "Field is now upgrading");
+        MessageDialog w("Field is now upgrading", "Info", this);
+        w.exec();
         initialField(field);
     }
     else
@@ -284,7 +296,8 @@ void DetailsDialog::upgradeField(Field &field)
         else if (res == Enums::LACK_OF_LEVEL)
             err = "You have not reached required level to upgrade";
 
-        QMessageBox::warning(this, "Error", err);
+        MessageDialog w(err, "Error", this);
+        w.exec();
     }
 }
 
@@ -294,7 +307,8 @@ void DetailsDialog::plowField(AlfalfaField &field)
     if (res == Enums::OK)
     {
         field.plow();
-        QMessageBox::information(this, "Info", "Field is now plowing");
+        MessageDialog w("Field is now plowing", "Info", this);
+        w.exec();
         initialField(field);
     }
     else
@@ -307,7 +321,8 @@ void DetailsDialog::plowField(AlfalfaField &field)
         else if (res == Enums::PLANTED)
             err = "You have planted alfalfa in this field!";
 
-        QMessageBox::warning(this, "Error", err);
+        MessageDialog w(err, "Error", this);
+        w.exec();
     }
 }
 
@@ -328,7 +343,8 @@ void DetailsDialog::plantField(int amount, Field &field)
     if (res == Enums::OK)
     {
         field.plant(storage_place_id, amount);
-        QMessageBox::information(this, "Info", "Field is now planted");
+        MessageDialog w("Field is now planted", "Info", this);
+        w.exec();
         initialField(field);
     }
     else
@@ -344,7 +360,8 @@ void DetailsDialog::plantField(int amount, Field &field)
         else if (res == Enums::PLANTED)
             err = "Field is already planted!";
 
-        QMessageBox::warning(this, "Error", err);
+        MessageDialog w(err, "Error", this);
+        w.exec();
     }
 }
 
@@ -361,7 +378,8 @@ void DetailsDialog::reapField(Field &field)
         if (res == Enums::OK)
         {
             field.reap(storage_place_id);
-            QMessageBox::information(this, "Info", "Field is reaped");
+            MessageDialog w("Field is reaped", "Info", this);
+            w.exec();
             initialField(field);
         }
         else
@@ -373,11 +391,15 @@ void DetailsDialog::reapField(Field &field)
             else if (current_place == ALFALFA_FIELD)
                 err = "You don't have enough space in barn!";
 
-            QMessageBox::warning(this, "Error", err);
+            MessageDialog w(err, "Error", this);
+            w.exec();
         }
     }
     else
-        QMessageBox::warning(this, "Error", "Plants' growing is not finished yet!");
+    {
+        MessageDialog w("Plants' growing is not finished yet!", "Error", this);
+        w.exec();
+    }
 }
 
 void DetailsDialog::on_btnUpgrade_clicked()

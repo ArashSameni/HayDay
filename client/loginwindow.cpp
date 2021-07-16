@@ -5,7 +5,7 @@
 #include "barn.h"
 #include "farm.h"
 #include "farmer.h"
-#include <QMessageBox>
+#include "messagedialog.h"
 #include "mainwindow.h"
 #include <QDateTime>
 
@@ -42,12 +42,14 @@ void LoginWindow::on_btnSignup_clicked()
     const int gender = ui->cmbGender->currentIndex();
     if(username.isEmpty() || password.isEmpty() || nickname.isEmpty())
     {
-        QMessageBox::warning(this, "Error", "Please fill the form.");
+        MessageDialog w("Please fill the form.", "Error", this);
+        w.exec();
         return;
     }
     if(!isPasswordStrong(password))
     {
-        QMessageBox::warning(this, "Error", "Password isn't strong enough.");
+        MessageDialog w("Password isn't strong enough.", "Error", this);
+        w.exec();
         return;
     }
 
@@ -67,14 +69,17 @@ void LoginWindow::on_btnSignup_clicked()
 
         Farmer::create(nickname, gender, account_id, farm.id());
 
-
-        QMessageBox::information(this, "Info", "Account has been created successfully.");
+        MessageDialog w("Account has been created successfully.", "Info", this);
+        w.exec();
 
         showLogin();
         ui->txtLoginUsername->setText(username);
     }
     else
-        QMessageBox::warning(this, "Error", "Username already exists.");
+    {
+        MessageDialog w("Username already exists.", "Error", this);
+        w.exec();
+    }
 }
 
 void LoginWindow::on_btnLogin_clicked()
@@ -83,7 +88,8 @@ void LoginWindow::on_btnLogin_clicked()
     const QString& password = ui->txtLoginPassword->text();
     if(username.isEmpty() || password.isEmpty())
     {
-        QMessageBox::warning(this, "Error", "Please enter username and password.");
+        MessageDialog w("Please enter username and password.", "Error", this);
+        w.exec();
         return;
     }
 
@@ -101,7 +107,10 @@ void LoginWindow::on_btnLogin_clicked()
         this->close();
     }
     else
-        QMessageBox::warning(this, "Error", "Username or password is incorrect.");
+    {
+        MessageDialog w("Username or password is incorrect.", "Error", this);
+        w.exec();
+    }
 }
 
 bool LoginWindow::isPasswordStrong(const QString &password)
