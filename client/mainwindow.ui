@@ -142,6 +142,9 @@ QPushButton:hover{
     </property>
    </widget>
    <widget class="QPushButton" name="btnShop">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>134</x>
@@ -151,17 +154,14 @@ QPushButton:hover{
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{
 	border: none;
 	background-image: url(:/img/shop-dark.png);
 }
-
-QPushButton:hover{
-	background-image: url(:/img/shop.png);
-}</string>
+</string>
     </property>
     <property name="text">
      <string/>
@@ -853,6 +853,28 @@ background-image: url(:/img/chicken.png);</string>
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="shopLock">
+    <property name="geometry">
+     <rect>
+      <x>228</x>
+      <y>297</y>
+      <width>55</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	border: none;
+	background-image: url(:/img/lock.png);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>label_2</zorder>
    <zorder>btnChickenCoop</zorder>
    <zorder>btnAlfalfaField</zorder>
@@ -893,6 +915,7 @@ background-image: url(:/img/chicken.png);</string>
    <zorder>label</zorder>
    <zorder>lblCoin</zorder>
    <zorder>lblDay</zorder>
+   <zorder>shopLock</zorder>
   </widget>
  </widget>
  <resources/>

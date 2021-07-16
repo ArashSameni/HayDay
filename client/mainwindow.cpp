@@ -42,8 +42,12 @@ void MainWindow::initUI()
     showLevel();
     showXP();
     showAnimals();
+
     if(farm.alfalfa_field().level())
         unlockAlfalfaField();
+
+    if(farmer.level() >= 2)
+        unlockShop();
 }
 
 void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
@@ -150,6 +154,15 @@ void MainWindow::unlockSheepPasture()
     ui->btnSheepPasture->setCursor(Qt::PointingHandCursor);
     //Change picture from dark to light on focus
     ui->btnSheepPasture->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/pasture-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/pasture.png);\n}");
+}
+
+void MainWindow::unlockShop()
+{
+    ui->shopLock->deleteLater();
+    ui->btnShop->setEnabled(true);
+    ui->btnShop->setCursor(Qt::PointingHandCursor);
+    //Change picture from dark to light on focus
+    ui->btnShop->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/shop-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/shop.png);\n}");
 }
 
 void MainWindow::showChickens(int count)
@@ -322,4 +335,23 @@ void MainWindow::on_alfalfaLock_clicked()
         on_btnAlfalfaField_clicked();
     else
         QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
+}
+
+void MainWindow::on_shopLock_clicked()
+{
+    if(farmer.level() >= 2)
+        on_btnShop_clicked();
+    else
+        QMessageBox::warning(this, "Error", "You have not reached required level to unlock");
+}
+
+void MainWindow::on_btnShop_clicked()
+{
+    ShopDialog details(farmer, this);
+    details.exec();
+    showCoin();
+    showDay();
+    showLevel();
+    showXP();
+    showAnimals();
 }
