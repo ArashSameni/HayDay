@@ -142,12 +142,10 @@ void Silo::upgrade(Farmer& farmer, int barn_id)
         Barn& barn = Barn::get(barn_id);
         farmer.removeCoin(neededCoinsToUpgrade());
         farmer.save();
-        QThread::msleep(10);
 
         barn.removeShovel(neededShovelsToUpgrade());
         barn.removeNail(neededNailsToUpgrade());
         barn.save();
-        QThread::msleep(10);
 
         upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;

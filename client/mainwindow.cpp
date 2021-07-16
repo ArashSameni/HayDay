@@ -58,43 +58,36 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     {
         farm.silo().finishUpgrade();
         xp_to_add += farm.silo().upgradeXp();
-        QThread::msleep(10);
     }
     if(farm.barn().is_upgrading() && farm.barn().isUpgradeFinished())
     {
         farm.barn().finishUpgrade();
         xp_to_add += farm.barn().upgradeXp();
-        QThread::msleep(10);
     }
     if(farm.chicken_coop().is_upgrading() && farm.chicken_coop().isUpgradeFinished())
     {
         farm.chicken_coop().finishUpgrade();
         xp_to_add += farm.chicken_coop().upgradeXp();
-        QThread::msleep(10);
     }
     if(farm.cow_pasture().is_upgrading() && farm.cow_pasture().isUpgradeFinished())
     {
         farm.cow_pasture().finishUpgrade();
         xp_to_add += farm.cow_pasture().upgradeXp();
-        QThread::msleep(10);
     }
     if(farm.sheep_pasture().is_upgrading() && farm.sheep_pasture().isUpgradeFinished())
     {
         farm.sheep_pasture().finishUpgrade();
         xp_to_add += farm.sheep_pasture().upgradeXp();
-        QThread::msleep(10);
     }
     if(farm.alfalfa_field().is_upgrading() && farm.alfalfa_field().isUpgradeFinished())
     {
         farm.alfalfa_field().finishUpgrade();
         xp_to_add += farm.alfalfa_field().upgradeXp();
-        QThread::msleep(10);
     }
     if(farm.wheat_field().is_upgrading() && farm.wheat_field().isUpgradeFinished())
     {
         farm.wheat_field().finishUpgrade();
         xp_to_add += farm.wheat_field().upgradeXp();
-        QThread::msleep(10);
     }
 
     if(farmer.addXpAndIsLevelFinished(xp_to_add))

@@ -1,4 +1,5 @@
 #include "tcpsocket.h"
+#include "QThread"
 
 TcpSocket::TcpSocket()
 {
@@ -25,6 +26,7 @@ void TcpSocket::write(const QByteArray &data)
 {
     socket_.write(data);
     socket_.waitForBytesWritten(1500);
+    QThread::msleep(15);
 }
 
 void TcpSocket::connectToServer()

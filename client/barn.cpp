@@ -306,7 +306,6 @@ void Barn::upgrade(Farmer& farmer, int barn_id)
     {
         farmer.removeCoin(neededCoinsToUpgrade());
         farmer.save();
-        QThread::msleep(10);
 
         removeShovel(neededShovelsToUpgrade());
         removeNail(neededNailsToUpgrade());
