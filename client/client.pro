@@ -23,6 +23,7 @@ SOURCES += \
     farm.cpp \
     farmer.cpp \
     fields.cpp \
+    levelupdialog.cpp \
     livingplaces.cpp \
     loginwindow.cpp \
     main.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     farmer.h \
     fields.h \
     globals.h \
+    levelupdialog.h \
     livingplaces.h \
     loginwindow.h \
     mainwindow.h \
@@ -56,6 +58,7 @@ HEADERS += \
 FORMS += \
     barndetailsdialog.ui \
     detailsdialog.ui \
+    levelupdialog.ui \
     loginwindow.ui \
     mainwindow.ui \
     scoreboarddialog.ui \
@@ -67,4 +70,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    resources.qrc \
     resources.qrc

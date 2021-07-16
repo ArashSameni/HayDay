@@ -20,6 +20,7 @@ public:
 
 private slots:
     void on_btnUpgrade_clicked();
+    void on_btnFeed_clicked();
 
 private:
     enum
@@ -33,7 +34,7 @@ private:
     };
 
     Ui::DetailsDialog *ui;
-    QPushButton *btnFeedCollect;
+    QPushButton *btnFeedCollect = nullptr;
     Farmer& farmer;
     Farm& farm;
     int current_place;
@@ -47,6 +48,9 @@ private:
 
     void initialField(const Field& field);
     void upgradeField(Field& field);
+    void plowField(AlfalfaField& field);
+    void plantField(int amount,Field& field);
+    void reapField(Field& field);
 };
 
 #endif // DETAILSDIALOG_H
