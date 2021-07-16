@@ -44,6 +44,10 @@ private slots:
 
     void on_alfalfaLock_clicked();
 
+    void on_shopLock_clicked();
+
+    void on_btnShop_clicked();
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;
@@ -57,6 +61,7 @@ private:
     void unlockChickenCoop();
     void unlockCowPasture();
     void unlockSheepPasture();
+    void unlockShop();
     void showChickens(int count);
     void showCows(int count);
     void showSheeps(int count);
