@@ -22,7 +22,7 @@ public:
     virtual bool isUpgradeFinished() const = 0;
     virtual void finishUpgrade() = 0;
     virtual int isUpgradable(int farmer_id) const = 0;
-    virtual void upgrade() = 0;
+    virtual void upgrade(Farmer& farmer, int barn_id) = 0;
 
     virtual int neededNailsToUpgrade() const = 0;
     virtual int neededShovelsToUpgrade() const = 0;

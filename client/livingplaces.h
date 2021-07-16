@@ -3,7 +3,6 @@
 #include "enums.h"
 #include "place.h"
 
-
 class LivingPlace : public Place
 {
 public:
@@ -74,7 +73,7 @@ public:
     int neededNailsToUpgrade() const;
     int neededShovelsToUpgrade() const;
     int neededCoinsToUpgrade() const;
-    void upgrade();
+    void upgrade(Farmer& farmer, int barn_id);
 
     int isFeedable(int silo_id);
     int feedXp();
@@ -111,7 +110,7 @@ public:
     int neededNailsToUpgrade() const;
     int neededShovelsToUpgrade() const;
     int neededCoinsToUpgrade() const;
-    void upgrade();
+    void upgrade(Farmer& farmer, int barn_id);
     
     
     int isFeedable(int barn_id);
@@ -151,7 +150,7 @@ public:
     int neededNailsToUpgrade() const;
     int neededShovelsToUpgrade() const;
     int neededCoinsToUpgrade() const;
-    void upgrade();
+    void upgrade(Farmer& farmer, int barn_id);
 
     int isFeedable(int barn_id);
     int feedXp();
