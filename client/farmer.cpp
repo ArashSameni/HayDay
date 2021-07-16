@@ -22,7 +22,6 @@ void Farmer::goNextLevel()
     xp_ -= max_xp_;
     max_xp_ += 10;
     level_ += 1;
-    save();
 }
 
 Farmer &Farmer::get(int farmer_id)
@@ -137,5 +136,6 @@ bool Farmer::addXp(int amount)
     if(is_level_finished)
         goNextLevel();
 
+    save();
     return is_level_finished;
 }

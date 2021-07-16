@@ -3,6 +3,7 @@
 #include "detailsdialog.h"
 #include "barndetailsdialog.h"
 #include "shopdialog.h"
+#include "levelupdialog.h"
 #include <QMessageBox>
 #include <QThread>
 
@@ -90,13 +91,13 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
         xp_to_add += farm.wheat_field().upgradeXp();
     }
 
-    if(farmer.addXpAndIsLevelFinished(xp_to_add))
+    if(farmer.addXp(xp_to_add))
     {
-        //farmer.goNextLevel();
         showLevel();
+        LevelUpDialog dialog(farmer.level(), this);
+        dialog.exec();
     }
     showXP();
-    farmer.save();
 }
 
 void MainWindow::showAnimals()
