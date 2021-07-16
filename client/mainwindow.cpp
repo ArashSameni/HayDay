@@ -254,24 +254,37 @@ void MainWindow::on_btnSilo_clicked()
 {
     DetailsDialog details("Silo", farmer, farm, this);
     details.exec();
+    showCoin();
 }
 
 void MainWindow::on_btnChickenCoop_clicked()
 {
     DetailsDialog details("Chicken Coop", farmer, farm, this);
     details.exec();
+    showCoin();
+    showLevel();
+    showXP();
+    showAnimals();
 }
 
 void MainWindow::on_btnCowPasture_clicked()
 {
     DetailsDialog details("Cow Pasture", farmer, farm, this);
     details.exec();
+    showCoin();
+    showLevel();
+    showXP();
+    showAnimals();
 }
 
 void MainWindow::on_btnSheepPasture_clicked()
 {
     DetailsDialog details("Sheep Pasture", farmer, farm, this);
     details.exec();
+    showCoin();
+    showLevel();
+    showXP();
+    showAnimals();
 }
 
 void MainWindow::on_chickenLock_clicked()
@@ -302,18 +315,27 @@ void MainWindow::on_btnBarn_clicked()
 {
     BarnDetailsDialog details(farmer, farm, this);
     details.exec();
+    showCoin();
 }
 
 void MainWindow::on_btnWheatField_clicked()
 {
     DetailsDialog details("Wheat Field", farmer, farm, this);
     details.exec();
+    showCoin();
+    showLevel();
+    showXP();
 }
 
 void MainWindow::on_btnAlfalfaField_clicked()
 {
     DetailsDialog details("Alfalfa Field", farmer, farm, this);
     details.exec();
+    showCoin();
+    showLevel();
+    showXP();
+    if(farm.alfalfa_field().level())
+        unlockAlfalfaField();
 }
 
 void MainWindow::on_alfalfaLock_clicked()
