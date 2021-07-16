@@ -304,15 +304,12 @@ void Barn::upgrade(Farmer& farmer, int barn_id)
 {
     if (!is_upgrading_)
     {
-        Barn& barn=Barn::get(barn_id);
         farmer.removeCoin(neededCoinsToUpgrade());
         farmer.save();
         QThread::msleep(10);
 
-        barn.removeShovel(neededShovelsToUpgrade());
-        barn.removeNail(neededNailsToUpgrade());
-        barn.save();
-        QThread::msleep(10);
+        removeShovel(neededShovelsToUpgrade());
+        removeNail(neededNailsToUpgrade());
 
         upgrade_day_ = static_cast<int>(CURRENT_DAY);
         is_upgrading_ = true;

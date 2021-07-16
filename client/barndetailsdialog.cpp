@@ -136,7 +136,7 @@ void BarnDetailsDialog::upgradeBarn()
     int res = barn.isUpgradable(farmer.id());
     if(res == Enums::OK)
     {
-        barn.upgrade(farmer, farm.barn().id());
+        barn.upgrade(farmer, barn.id());
         QMessageBox::information(this, "Info", "Barn is now upgrading");
         initUpgrade();
     }
