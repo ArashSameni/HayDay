@@ -19,8 +19,6 @@ public:
     int plants_condition() const { return plants_condition_; }
     int planting_day() const { return planting_day_; }
 
-
-    virtual bool checkPlanting() = 0;
     virtual int plantXp()=0;
     virtual int isPlantable(int id, int amount)=0;
     virtual void plant(int id,int amount) = 0;
@@ -48,7 +46,6 @@ public:
     static int id() { return id_; }
     void save() const;
 
-    ////////////// Not implemented
     int upgradeXp() ;
     bool isUpgradeFinished() const;
     void finishUpgrade();
@@ -65,8 +62,6 @@ public:
     bool isReapTime();
     int isReapable(int silo_id);
     void reap(int silo_id);
-    bool checkPlanting() { return false; }
-    //////////////
 
     ~WheatField() {}
 };
@@ -92,9 +87,7 @@ public:
 
     int plowing_condition() const { return plowing_condition_; }
     int plowing_day() const { return plowing_day_; }
-    int neededCoinsToPlow() const { return area_ * 5; }
 
-    ////////////// Not implemented
     int upgradeXp() ;
     bool isUpgradeFinished() const;
     void finishUpgrade();
@@ -111,16 +104,13 @@ public:
     bool isReapTime();
     int isReapable(int barn_id);
     void reap(int barn_id);
-    bool checkPlanting() { return false; }
 
+    int neededCoinsToPlow() const { return area_ * 5; }
     int plowXp();
     int isPlowable(int farmer_id);
     void plow();
     bool isPlowingFinished();
     void finishPlowing();
-    bool checkPlowing();
-
-    //////////////
 
     ~AlfalfaField() {}
 };

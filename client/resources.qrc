@@ -47,5 +47,13 @@
         <file>img/farmer-man.png</file>
         <file>img/farmer-woman.png</file>
         <file>img/star.png</file>
+        <file>img/wool-lbl.png</file>
+        <file>img/new-level-bg.png</file>
+        <file>img/chicken-lbl.png</file>
+        <file>img/cow-lbl.png</file>
+        <file>img/egg-lbl.png</file>
+        <file>img/milk-lbl.png</file>
+        <file>img/sheep-lbl.png</file>
+        <file>img/alfalfa-lbl.png</file>
     </qresource>
 </RCC>

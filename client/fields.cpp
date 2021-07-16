@@ -395,8 +395,8 @@ int AlfalfaField::isPlowable(int farmer_id)
 void AlfalfaField::plow()
 {
     plants_condition_ = Enums::PLOWING;
+    plowing_condition_=Enums::PLOWING;
     plowing_day_ = CURRENT_DAY;
-    planted_area_ = 0;
     save();
 }
 
@@ -408,6 +408,8 @@ bool AlfalfaField::isPlowingFinished()
 void AlfalfaField::finishPlowing()
 {
     plants_condition_ = Enums::PLOWED;
+    plowing_condition_ = Enums::PLOWED;
+    save();
 }
 
 int AlfalfaField::plantXp()
@@ -422,15 +424,12 @@ int AlfalfaField::isPlantable(int barn_id, int amount)
         return Enums::AREA_ERROR;
     if (barn.storage() < amount)
         return Enums::LACK_OF_SEED;
-    if (plants_condition_ != Enums::PLOWED)
-    {
-        if (plants_condition_ == Enums::NOT_PLOWED)
-            return Enums::NOT_PLOWED;
-        if (plants_condition_ == Enums::PLOWING)
-            return Enums::PLOWING;
-        if (plants_condition_ == Enums::PLANTED)
-            return Enums::ALREADY_PLANTED;
-    }
+    if (plants_condition_ == Enums::NOT_PLOWED)
+        return Enums::NOT_PLOWED;
+    if (plants_condition_ == Enums::PLOWING)
+        return Enums::PLOWING;
+    if (plants_condition_ == Enums::PLANTED)
+        return Enums::ALREADY_PLANTED;
 
     return Enums::OK;
 }
@@ -440,6 +439,7 @@ void AlfalfaField::plant(int barn_id, int amount)
     plants_condition_ = Enums::PLANTED;
     planting_day_ = CURRENT_DAY;
     planted_area_ = amount;
+    plowing_condition_=Enums::NOT_PLOWED;
     Barn &barn = Barn::get(barn_id);
     barn.removeAlfalfa(amount);
     barn.save();

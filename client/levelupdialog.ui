@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LevelUpDialog</class>
+ <widget class="QDialog" name="LevelUpDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>380</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+	font: 24px &quot;IRANSans Light&quot;;
+	color: #494949;
+}
+
+QDialog { background-image: url(:/img/new-level-bg.png) }
+</string>
+  </property>
+  <widget class="QPushButton" name="btnContinue">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>308</y>
+     <width>140</width>
+     <height>45</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	font: 20px &quot;IRANSans&quot;;
+	border: none;
+	border-radius: 10px;
+	background-color: #45b649;
+	color: #fff;
+}
+
+QPushButton:hover{
+	background-color: rgb(63, 166, 66);
+}</string>
+   </property>
+   <property name="text">
+    <string>Continue</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblCongrates">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>80</y>
+     <width>450</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size: 20px;</string>
+   </property>
+   <property name="text">
+    <string>Congratulations, You are now a level 2 farmer!!</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
