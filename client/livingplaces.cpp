@@ -228,7 +228,7 @@ void ChickenCoop::feed(int silo_id)
     save(id_);
 }
 
-bool ChickenCoop::isCollectTime()
+bool ChickenCoop::isCollectTime() const
 {
     return CURRENT_DAY - static_cast<uint>(feeding_day_) >= 2;
 }
@@ -452,7 +452,7 @@ void CowPasture::feed(int barn_id)
     save(id_);
 }
 
-bool CowPasture::isCollectTime()
+bool CowPasture::isCollectTime() const
 {
     return CURRENT_DAY - static_cast<uint>(feeding_day_) >= 3;
 }
@@ -635,7 +635,7 @@ void SheepPasture::feed(int barn_id)
     save(id_);
 }
 
-bool SheepPasture::isCollectTime()
+bool SheepPasture::isCollectTime() const
 {
     return CURRENT_DAY - static_cast<uint>(feeding_day_) >= 10;
 }

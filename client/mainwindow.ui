@@ -767,9 +767,9 @@ background-image: url(:/img/chicken.png);</string>
    <widget class="QLabel" name="lblXP">
     <property name="geometry">
      <rect>
-      <x>545</x>
+      <x>475</x>
       <y>35</y>
-      <width>71</width>
+      <width>210</width>
       <height>25</height>
      </rect>
     </property>

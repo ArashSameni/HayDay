@@ -22,6 +22,7 @@ private slots:
     void on_btnUpgrade_clicked();
     void on_btnFeed_clicked();
     void on_btnPlant_clicked();
+    void on_plantAmountChoosed(int amount);
 
 private:
     enum
@@ -39,6 +40,9 @@ private:
     Farmer& farmer;
     Farm& farm;
     int current_place;
+    void disableUpgradeButton();
+    void disableFeedCollectButton();
+
     void initialByPlace(const Place& place);
 
     void initialSilo();

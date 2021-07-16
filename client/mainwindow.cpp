@@ -67,16 +67,22 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     }
     if(farm.chicken_coop().is_upgrading() && farm.chicken_coop().isUpgradeFinished())
     {
+        if(farm.chicken_coop().level() == 0)
+            showAnimals();
         farm.chicken_coop().finishUpgrade();
         xp_to_add += farm.chicken_coop().upgradeXp();
     }
     if(farm.cow_pasture().is_upgrading() && farm.cow_pasture().isUpgradeFinished())
     {
+        if(farm.cow_pasture().level() == 0)
+            showAnimals();
         farm.cow_pasture().finishUpgrade();
         xp_to_add += farm.cow_pasture().upgradeXp();
     }
     if(farm.sheep_pasture().is_upgrading() && farm.sheep_pasture().isUpgradeFinished())
     {
+        if(farm.sheep_pasture().level() == 0)
+            showAnimals();
         farm.sheep_pasture().finishUpgrade();
         xp_to_add += farm.sheep_pasture().upgradeXp();
     }
@@ -84,12 +90,15 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     {
         farm.alfalfa_field().finishUpgrade();
         xp_to_add += farm.alfalfa_field().upgradeXp();
+        unlockAlfalfaField();
     }
     if(farm.wheat_field().is_upgrading() && farm.wheat_field().isUpgradeFinished())
     {
         farm.wheat_field().finishUpgrade();
         xp_to_add += farm.wheat_field().upgradeXp();
     }
+    if(farm.alfalfa_field().plants_condition() == Enums::PLOWING && farm.alfalfa_field().isPlowingFinished())
+        farm.alfalfa_field().finishPlowing();
 
     if(farmer.addXp(xp_to_add))
     {

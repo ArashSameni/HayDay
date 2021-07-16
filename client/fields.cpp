@@ -151,12 +151,12 @@ void WheatField::upgrade(Farmer& farmer, int barn_id)
     }
 }
 
-int WheatField::plantXp()
+int WheatField::plantXp() const
 {
     return 1;
 }
 
-int WheatField::isPlantable(int silo_id, int amount)
+int WheatField::isPlantable(int silo_id, int amount) const
 {
     Silo &silo = Silo::get(silo_id);
     if (amount < 0 || amount > area_)
@@ -180,17 +180,17 @@ void WheatField::plant(int silo_id, int amount)
     save();
 }
 
-int WheatField::reapXp()
+int WheatField::reapXp() const
 {
     return 1;
 }
 
-bool WheatField::isReapTime()
+bool WheatField::isReapTime() const
 {
     return CURRENT_DAY - static_cast<uint>(planting_day_) >= 2;
 }
 
-int WheatField::isReapable(int silo_id)
+int WheatField::isReapable(int silo_id) const
 {
     Silo &silo = Silo::get(silo_id);
     if (silo.max_storage() - silo.storage() < planted_area_ * 2)
@@ -369,12 +369,12 @@ void AlfalfaField::upgrade(Farmer& farmer, int barn_id)
     }
 }
 
-int AlfalfaField::plowXp()
+int AlfalfaField::plowXp() const
 {
     return 1;
 }
 
-int AlfalfaField::isPlowable(int farmer_id)
+int AlfalfaField::isPlowable(int farmer_id) const
 {
     Farmer &farmer = Farmer::get(farmer_id);
     if (farmer.coins() < 5 * area_)
@@ -394,7 +394,7 @@ void AlfalfaField::plow()
     save();
 }
 
-bool AlfalfaField::isPlowingFinished()
+bool AlfalfaField::isPlowingFinished() const
 {
     return CURRENT_DAY - static_cast<uint>(plowing_day_) >= 1;
 }
@@ -405,12 +405,12 @@ void AlfalfaField::finishPlowing()
     save();
 }
 
-int AlfalfaField::plantXp()
+int AlfalfaField::plantXp() const
 {
     return 2;
 }
 
-int AlfalfaField::isPlantable(int barn_id, int amount)
+int AlfalfaField::isPlantable(int barn_id, int amount) const
 {
     Barn &barn = Barn::get(barn_id);
     if (amount <= 0 || amount > area_)
@@ -438,17 +438,17 @@ void AlfalfaField::plant(int barn_id, int amount)
     save();
 }
 
-int AlfalfaField::reapXp()
+int AlfalfaField::reapXp() const
 {
     return 2;
 }
 
-bool AlfalfaField::isReapTime()
+bool AlfalfaField::isReapTime() const
 {
     return CURRENT_DAY - static_cast<uint>(planting_day_) >= 4;
 }
 
-int AlfalfaField::isReapable(int barn_id)
+int AlfalfaField::isReapable(int barn_id) const
 {
     Barn &barn = Barn::get(barn_id);
     if ((barn.max_storage() - barn.storage()) < planted_area_ * 2)

@@ -19,12 +19,12 @@ public:
     int plants_condition() const { return plants_condition_; }
     int planting_day() const { return planting_day_; }
 
-    virtual int plantXp()=0;
-    virtual int isPlantable(int id, int amount)=0;
-    virtual void plant(int id,int amount) = 0;
-    virtual int reapXp()=0;
-    virtual bool isReapTime()=0;
-    virtual int isReapable(int id)=0;
+    virtual int plantXp() const = 0;
+    virtual int isPlantable(int id, int amount) const = 0;
+    virtual void plant(int id, int amount) = 0;
+    virtual int reapXp() const = 0;
+    virtual bool isReapTime() const = 0;
+    virtual int isReapable(int id) const = 0;
     virtual void reap(int id) = 0;
 
     virtual ~Field() = 0;
@@ -46,21 +46,21 @@ public:
     static int id() { return id_; }
     void save() const;
 
-    int upgradeXp() ;
+    int upgradeXp();
     bool isUpgradeFinished() const;
     void finishUpgrade();
-    int isUpgradable(int farmer_id=0) const;
+    int isUpgradable(int farmer_id = 0) const;
     int neededNailsToUpgrade() const;
     int neededShovelsToUpgrade() const;
     int neededCoinsToUpgrade() const;
-    void upgrade(Farmer& farmer, int barn_id);
+    void upgrade(Farmer &farmer, int barn_id);
 
-    int plantXp();
-    int isPlantable(int silo_id, int amount);
-    void plant(int silo_id,int amount);
-    int reapXp();
-    bool isReapTime();
-    int isReapable(int silo_id);
+    int plantXp() const;
+    int isPlantable(int silo_id, int amount) const;
+    void plant(int silo_id, int amount);
+    int reapXp() const;
+    bool isReapTime() const;
+    int isReapable(int silo_id) const;
     void reap(int silo_id);
 
     ~WheatField() {}
@@ -86,28 +86,28 @@ public:
 
     int plowing_day() const { return plowing_day_; }
 
-    int upgradeXp() ;
+    int upgradeXp();
     bool isUpgradeFinished() const;
     void finishUpgrade();
-    int isUpgradable(int farmer_id=0) const;
+    int isUpgradable(int farmer_id = 0) const;
     int neededNailsToUpgrade() const;
     int neededShovelsToUpgrade() const;
     int neededCoinsToUpgrade() const;
-    void upgrade(Farmer& farmer, int barn_id);
+    void upgrade(Farmer &farmer, int barn_id);
 
-    int plantXp();
-    int isPlantable(int barn_id, int amount);
-    void plant(int barn_id,int amount);
-    int reapXp();
-    bool isReapTime();
-    int isReapable(int barn_id);
+    int plantXp() const;
+    int isPlantable(int barn_id, int amount) const;
+    void plant(int barn_id, int amount);
+    int reapXp() const;
+    bool isReapTime() const;
+    int isReapable(int barn_id) const;
     void reap(int barn_id);
 
     int neededCoinsToPlow() const { return area_ * 5; }
-    int plowXp();
-    int isPlowable(int farmer_id);
+    int plowXp() const;
+    int isPlowable(int farmer_id) const;
     void plow();
-    bool isPlowingFinished();
+    bool isPlowingFinished() const;
     void finishPlowing();
 
     ~AlfalfaField() {}

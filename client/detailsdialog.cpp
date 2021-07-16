@@ -3,6 +3,7 @@
 #include "globals.h"
 #include "messagedialog.h"
 #include "levelupdialog.h"
+
 DetailsDialog::DetailsDialog(QString title, Farmer &farmer, Farm &farm, QWidget *parent) : QDialog(parent), ui(new Ui::DetailsDialog),
     farmer(farmer), farm(farm)
 {
@@ -63,10 +64,7 @@ void DetailsDialog::initialByPlace(const Place &place)
 
     if (place.is_upgrading())
     {
-        //Disable upgrade button
-        ui->btnUpgrade->setCursor(Qt::ArrowCursor);
-        ui->btnUpgrade->setStyleSheet("QPushButton{\n	border: none;\n	color: #fff;\n	background-image: url(:/img/upgrade-btn-disabled.png);\n}");
-        ui->btnUpgrade->setEnabled(false);
+        disableUpgradeButton();
 
         //Show Remaining Days of upgrade
         int remaining_days = place.upgrade_time + place.upgrade_day() - CURRENT_DAY;
@@ -136,10 +134,16 @@ void DetailsDialog::initialLivingPlace(const LivingPlace &place)
         connect(btnFeedCollect, &QPushButton::clicked, this, &DetailsDialog::on_btnPlant_clicked);
     }
 
-    if (place.animals_condition() == Enums::HUNGRY)
-        btnFeedCollect->setText("Feed");
+    if(place.level() == 0)
+        disableFeedCollectButton();
+    else if (place.animals_condition() == Enums::HUNGRY)
+            btnFeedCollect->setText("Feed");
     else
+    {
         btnFeedCollect->setText("Collect");
+        if(!place.isCollectTime())
+            disableFeedCollectButton();
+    }
 }
 
 void DetailsDialog::upgradeLivingPlace(LivingPlace &place)
@@ -272,20 +276,40 @@ void DetailsDialog::initialField(const Field &field)
         connect(btnFeedCollect, &QPushButton::clicked, this, &DetailsDialog::on_btnPlant_clicked);
     }
 
-    if (current_place == WHEAT_FIELD && field.plants_condition() == Enums::NOT_PLANTED)
-        btnFeedCollect->setText("Plant");
-    else if (current_place == ALFALFA_FIELD)
-    {
-        const AlfalfaField &alfalfa_field = *dynamic_cast<const AlfalfaField *>(&field);
-        if (alfalfa_field.plants_condition() == Enums::NOT_PLOWED)
-            btnFeedCollect->setText("Plow");
-        else if (field.plants_condition() == Enums::NOT_PLANTED)
-            btnFeedCollect->setText("Plant");
-        else
-            btnFeedCollect->setText("Reap");
-    }
+    if(field.level() == 0)
+        disableFeedCollectButton();
     else
-        btnFeedCollect->setText("Reap");
+    {
+        if (current_place == WHEAT_FIELD)
+        {
+            if(field.plants_condition() == Enums::NOT_PLANTED)
+                btnFeedCollect->setText("Plant");
+            else if(field.plants_condition() == Enums::PLANTED)
+            {
+                btnFeedCollect->setText("Reap");
+                disableFeedCollectButton();
+            }
+        }
+        else if (current_place == ALFALFA_FIELD)
+        {
+            const AlfalfaField &alfalfa_field = *dynamic_cast<const AlfalfaField *>(&field);
+            if (alfalfa_field.plants_condition() == Enums::NOT_PLOWED)
+                btnFeedCollect->setText("Plow");
+            else if(field.plants_condition() == Enums::PLOWING)
+            {
+                btnFeedCollect->setText("Plant");
+                disableFeedCollectButton();
+            }
+            else if (field.plants_condition() == Enums::PLOWED)
+                btnFeedCollect->setText("Plant");
+            else
+            {
+                btnFeedCollect->setText("Reap");
+                if(!alfalfa_field.isReapTime())
+                    disableFeedCollectButton();
+            }
+        }
+    }\
 }
 
 void DetailsDialog::upgradeField(Field &field)
@@ -349,9 +373,6 @@ void DetailsDialog::plowField(AlfalfaField &field)
 
 void DetailsDialog::plantField(int amount, Field &field)
 {
-    //    if(current_place==ALFALFA_FIELD && !farm.alfalfa_field().isPlowingFinished())
-    //        err="Plowing is not finished yet!";
-    //xpxpxpxpxpx
     int res = 0, storage_place_id = 0;
     QString err;
     if (current_place == WHEAT_FIELD)
@@ -484,23 +505,51 @@ void DetailsDialog::on_btnFeed_clicked()
 
 void DetailsDialog::on_btnPlant_clicked()
 {
-    int amount = 1; //get from user,it should be less than max area
+    MessageDialog dialog("Area you want to plant", "Input", this, true);
+    connect(&dialog, &MessageDialog::entered_number, this, &DetailsDialog::on_plantAmountChoosed);
+
     switch (current_place)
     {
     case WHEAT_FIELD:
         if (farm.wheat_field().plants_condition() == Enums::NOT_PLANTED)
-            plantField(amount, farm.wheat_field());
+            dialog.exec();
         else if (farm.wheat_field().plants_condition() == Enums::PLANTED)
             reapField(farm.wheat_field());
         break;
 
     case ALFALFA_FIELD:
-        if (farm.alfalfa_field().plants_condition() == Enums::NOT_PLANTED)
+        if (farm.alfalfa_field().plants_condition() == Enums::NOT_PLOWED)
             plowField(farm.alfalfa_field());
         else if (farm.alfalfa_field().plants_condition() == Enums::PLOWED)
-            plantField(amount, farm.alfalfa_field());
+            dialog.exec();
         else if (farm.alfalfa_field().plants_condition() == Enums::PLANTED)
             reapField(farm.alfalfa_field());
+        else if (farm.alfalfa_field().plants_condition() == Enums::PLOWING)
+        {
+            MessageDialog w("Plowing is not finished!", "Error", this);
+            w.exec();
+        }
         break;
     }
+}
+
+void DetailsDialog::on_plantAmountChoosed(int amount)
+{
+    if(current_place == WHEAT_FIELD)
+        plantField(amount, farm.wheat_field());
+    else if(current_place == ALFALFA_FIELD)
+        plantField(amount, farm.alfalfa_field());
+}
+
+void DetailsDialog::disableUpgradeButton()
+{
+    ui->btnUpgrade->setCursor(Qt::ArrowCursor);
+    ui->btnUpgrade->setStyleSheet("QPushButton{\n	border: none;\n	color: #fff;\n	background-image: url(:/img/upgrade-btn-disabled.png);\n}");
+    ui->btnUpgrade->setEnabled(false);
+}
+
+void DetailsDialog::disableFeedCollectButton()
+{
+    btnFeedCollect->setStyleSheet("border: none;\n	border-radius: 10px;\n	background-color: #7d7d7d;\n	color: #fff;");
+    btnFeedCollect->setEnabled(false);
 }

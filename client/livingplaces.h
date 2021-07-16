@@ -41,7 +41,7 @@ public:
     virtual int isFeedable(int) = 0;
     virtual int feedXp() = 0;
     virtual void feed(int) = 0;
-    virtual bool isCollectTime() = 0;
+    virtual bool isCollectTime() const = 0;
     virtual int isCollectable(int) = 0;
     virtual void collect(int) = 0;
     virtual int collectXp() = 0;
@@ -78,7 +78,7 @@ public:
     int isFeedable(int silo_id);
     int feedXp();
     void feed(int silo_id);
-    bool isCollectTime();
+    bool isCollectTime() const;
     int isCollectable(int barn_id);
     void collect(int barn_id);
     int collectXp();
@@ -116,7 +116,7 @@ public:
     int isFeedable(int barn_id);
     int feedXp();
     void feed(int barn_id);
-    bool isCollectTime();
+    bool isCollectTime() const;
     int isCollectable(int barn_id);
     void collect(int barn_id);
     int collectXp();
@@ -155,7 +155,7 @@ public:
     int isFeedable(int barn_id);
     int feedXp();
     void feed(int barn_id);
-    bool isCollectTime();
+    bool isCollectTime() const;
     int isCollectable(int farmer_id);
     void collect(int farmer_id);
     int collectXp();
