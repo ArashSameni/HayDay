@@ -17,6 +17,14 @@ Farmer::Farmer()
     joining_date_ = QDateTime::currentDateTime().toTime_t();
 }
 
+void Farmer::goNextLevel()
+{
+    xp_ -= max_xp_;
+    max_xp_ += 10;
+    level_ += 1;
+    save();
+}
+
 Farmer &Farmer::get(int farmer_id)
 {
     if (farmer == nullptr)
@@ -120,4 +128,14 @@ void Farmer::save() const
     query.replace(":account_id", QString::number(account_id_));
 
     socket.write(query);
+}
+
+bool Farmer::addXp(int amount)
+{
+    xp_ += amount;
+    bool is_level_finished = xp_ >= max_xp_;
+    if(is_level_finished)
+        goNextLevel();
+
+    return is_level_finished;
 }
