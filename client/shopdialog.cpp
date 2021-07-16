@@ -1,12 +1,16 @@
 #include "shopdialog.h"
 #include "ui_shopdialog.h"
 
-ShopDialog::ShopDialog(QWidget *parent) :
+ShopDialog::ShopDialog(Farmer& farmer, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ShopDialog)
+    ui(new Ui::ShopDialog),
+    farmer(farmer)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Shop");
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+
+    checkLock();
 }
 
 ShopDialog::~ShopDialog()
@@ -34,6 +38,80 @@ void ShopDialog::showSellButton()
         ui->btnSell->setText("Sell + " + QString::number(sellAmount));
     else
         ui->btnSell->setText("Sell");
+}
+
+void ShopDialog::openLockAlfalfa()
+{
+    delete ui->alfalfaLock;
+
+    ui->btnAlfalfaPlus->setEnabled(true);
+    ui->btnAlfalfaMinus->setEnabled(true);
+}
+
+void ShopDialog::openLockCowMilk()
+{
+    delete ui->cowLock;
+    delete ui->milkLock;
+
+    ui->btnCowPlus->setEnabled(true);
+    ui->btnCowMinus->setEnabled(true);
+
+    ui->btnMilkPlus->setEnabled(true);
+    ui->btnMilkMinus->setEnabled(true);
+}
+
+void ShopDialog::openLockSheepWool()
+{
+    delete ui->sheepLock;
+    delete ui->woolLock;
+
+    ui->btnSheepPlus->setEnabled(true);
+    ui->btnSheepMinus->setEnabled(true);
+
+    ui->btnWoolPlus->setEnabled(true);
+    ui->btnWoolMinus->setEnabled(true);
+}
+
+void ShopDialog::checkLock()
+{
+    if(farmer.level() >= 3)
+        openLockAlfalfa();
+    else
+        lockAlfalfa();
+
+    if(farmer.level() >= 4)
+        openLockCowMilk();
+    else
+        lockCowMilk();
+
+    if(farmer.level() >= 6)
+        openLockSheepWool();
+    else
+        lockSheepWool();
+}
+
+void ShopDialog::lockSheepWool()
+{
+    ui->btnSheepPlus->setEnabled(false);
+    ui->btnSheepMinus->setEnabled(false);
+
+    ui->btnWoolPlus->setEnabled(false);
+    ui->btnWoolMinus->setEnabled(false);
+}
+
+void ShopDialog::lockCowMilk()
+{
+    ui->btnCowPlus->setEnabled(false);
+    ui->btnCowMinus->setEnabled(false);
+
+    ui->btnMilkPlus->setEnabled(false);
+    ui->btnMilkMinus->setEnabled(false);
+}
+
+void ShopDialog::lockAlfalfa()
+{
+    ui->btnAlfalfaPlus->setEnabled(false);
+    ui->btnAlfalfaMinus->setEnabled(false);
 }
 
 void ShopDialog::on_btnWheatPlus_clicked()
@@ -289,3 +367,4 @@ void ShopDialog::on_btnWoolMinus_clicked()
         showAmount();
     }
 }
+

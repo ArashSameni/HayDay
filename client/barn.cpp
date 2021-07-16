@@ -3,6 +3,7 @@
 #include <QJsonDocument>
 #include "globals.h"
 #include <QDateTime>
+#include <QtMath>
 
 int Barn::id_ = 0;
 Barn *Barn::barn = nullptr;
@@ -321,5 +322,5 @@ int Barn::neededShovelsToUpgrade() const
 
 int Barn::neededCoinsToUpgrade() const
 {
-    return static_cast<int>(pow(level_, 3) * 10);
+    return static_cast<int>(qPow(level_, 3) * 10);
 }

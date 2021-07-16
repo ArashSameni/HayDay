@@ -740,6 +740,86 @@ QPushButton:hover{
     <string>Sell</string>
    </property>
   </widget>
+  <widget class="QLabel" name="alfalfaLock">
+   <property name="geometry">
+    <rect>
+     <x>95</x>
+     <y>250</y>
+     <width>55</width>
+     <height>55</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/img/lock.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cowLock">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>250</y>
+     <width>55</width>
+     <height>55</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/img/lock.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="milkLock">
+   <property name="geometry">
+    <rect>
+     <x>396</x>
+     <y>250</y>
+     <width>55</width>
+     <height>55</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/img/lock.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="sheepLock">
+   <property name="geometry">
+    <rect>
+     <x>564</x>
+     <y>250</y>
+     <width>55</width>
+     <height>55</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/img/lock.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="woolLock">
+   <property name="geometry">
+    <rect>
+     <x>728</x>
+     <y>250</y>
+     <width>55</width>
+     <height>55</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/img/lock.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

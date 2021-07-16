@@ -6,6 +6,7 @@
 #include "barn.h"
 #include "farmer.h"
 #include "farm.h"
+#include <QtMath>
 
 int Silo::id_ = 0;
 Silo *Silo::silo = nullptr;
@@ -130,7 +131,7 @@ int Silo::neededShovelsToUpgrade() const
 
 int Silo::neededCoinsToUpgrade() const
 {
-    return static_cast<int>(pow((level_ * 2), 2) * 100);
+    return static_cast<int>(qPow((level_ * 2), 2) * 100);
 }
 
 void Silo::upgrade()
