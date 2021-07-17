@@ -202,7 +202,7 @@ void DetailsDialog::feedLivingPlace(LivingPlace &place)
         else if (res == Enums::ALREADY_FED)
             err = "Animals are already fed!";
         else
-            err = "You don't have enough sotrage to feed animals!";
+            err = "You don't have enough storage to feed animals!";
 
         MessageDialog w(err, "Error", this);
         w.exec();
