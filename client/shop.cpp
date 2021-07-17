@@ -32,6 +32,8 @@ const int Shop::sheep_xp = 15;
 const int Shop::wool_xp = 10;
 const int Shop::nail_xp = 4;
 const int Shop::shovel_xp = 8;
+const int Shop::sell_xp = 6;
+
 
 const int Shop::needed_level_for_wheat = 1;
 const int Shop::needed_level_for_alfalfa = 3;
