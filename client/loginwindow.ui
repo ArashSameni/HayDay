@@ -46,7 +46,7 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QLabel" name="label_3">
+   <widget class="QGraphicsView" name="hero_logo">
     <property name="geometry">
      <rect>
       <x>65</x>
@@ -56,10 +56,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">image: url(:/img/hero_logo.png);</string>
-    </property>
-    <property name="text">
-     <string/>
+     <string notr="true">border: none;
+border-image: url(:/img/hero_logo.png) 0 0 0 0 stretch stretch;</string>
     </property>
    </widget>
   </widget>

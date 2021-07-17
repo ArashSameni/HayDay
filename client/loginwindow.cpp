@@ -7,6 +7,8 @@
 #include "farmer.h"
 #include "messagedialog.h"
 #include "mainwindow.h"
+#include <QGraphicsOpacityEffect>
+#include <QPropertyAnimation>
 #include <QDateTime>
 
 LoginWindow::LoginWindow(QWidget *parent) :
@@ -15,7 +17,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Widget | Qt::MSWindowsFixedSizeDialogHint);
-
+    fadeInLogo();
     ui->gboxSignup->setVisible(false);
 }
 
@@ -138,4 +140,18 @@ void LoginWindow::showLogin()
     ui->gboxSignup->setVisible(false);
     ui->gboxLogin->setVisible(true);
     this->setWindowTitle("HayDay - Login");
+}
+
+void LoginWindow::fadeInLogo()
+{
+    QGraphicsOpacityEffect *effect = new QGraphicsOpacityEffect(this);
+    ui->hero_logo->setGraphicsEffect(effect);
+
+    QPropertyAnimation *animation = new QPropertyAnimation(effect, "opacity");
+    animation->setDuration(1000);
+    animation->setStartValue(0);
+    animation->setKeyValueAt(0.5, 0.9);
+    animation->setEndValue(1);
+    animation->setEasingCurve(QEasingCurve::InBack);
+    animation->start(QPropertyAnimation::DeleteWhenStopped);
 }

@@ -29,6 +29,7 @@ private:
     bool isPasswordStrong(const QString& password);
     void showSignup();
     void showLogin();
+    void fadeInLogo();
 };
 
 #endif // LOGINWINDOW_H
