@@ -58,11 +58,16 @@ private slots:
 
     void on_btnWoolMinus_clicked();
 
+    void on_btnBuy_clicked();
+
+    void on_btnSell_clicked();
+
 private:
     Ui::ShopDialog *ui;
     int buyAmount = 0;
     int sellAmount = 0;
     Farmer& farmer;
+    Shop shop;
 
     void showAmount();
     void showBuyButton();
@@ -75,6 +80,21 @@ private:
     void openLockSheepWool();
     void openLockCowMilk();
     void openLockAlfalfa();
+    void buy();
+    void sell();
+
+    int wheatCount();
+    int cowcount();
+    int milkCount();
+    int sheepCount();
+    int woolCount();
+    int alfalfaCount();
+    int chickenCount();
+    int eggCount();
+    int nailCount();
+    int shovelCount();
+
+    QString getNotEnoughError(int type, QString err_name);
 };
 
 #endif // SHOPDIALOG_H
