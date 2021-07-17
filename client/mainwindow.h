@@ -58,6 +58,10 @@ private slots:
     void on_xp_add(int amount);
     void on_show_coin();
 
+    void showChickens();
+    void showCows();
+    void showSheeps();
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;
@@ -72,9 +76,6 @@ private:
     void unlockCowPasture();
     void unlockSheepPasture();
     void unlockShop();
-    void showChickens(int count);
-    void showCows(int count);
-    void showSheeps(int count);
     void showDay();
     void showCoin();
     void showXP();

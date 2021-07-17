@@ -77,8 +77,6 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     }
     if(farm.chicken_coop().is_upgrading() && farm.chicken_coop().isUpgradeFinished())
     {
-        if(farm.chicken_coop().level() == 0)
-            showAnimals();
         farm.chicken_coop().finishUpgrade();
         xp_to_add += farm.chicken_coop().upgradeXp();
         if(farm.chicken_coop().level() == 1)
@@ -88,8 +86,6 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     }
     if(farm.cow_pasture().is_upgrading() && farm.cow_pasture().isUpgradeFinished())
     {
-        if(farm.cow_pasture().level() == 0)
-            showAnimals();
         farm.cow_pasture().finishUpgrade();
         xp_to_add += farm.cow_pasture().upgradeXp();
         if(farm.cow_pasture().level() == 1)
@@ -99,8 +95,6 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     }
     if(farm.sheep_pasture().is_upgrading() && farm.sheep_pasture().isUpgradeFinished())
     {
-        if(farm.sheep_pasture().level() == 0)
-            showAnimals();
         farm.sheep_pasture().finishUpgrade();
         xp_to_add += farm.sheep_pasture().upgradeXp();
         if(farm.sheep_pasture().level() == 1)
@@ -139,9 +133,9 @@ void MainWindow::showAnimals()
     if(farm.sheep_pasture().level() > 0)
         unlockSheepPasture();
 
-    showChickens(farm.chicken_coop().storage());
-    showCows(farm.cow_pasture().storage());
-    showSheeps(farm.sheep_pasture().storage());
+    showChickens();
+    showCows();
+    showSheeps();
 }
 
 void MainWindow::unlockAlfalfaField()
@@ -197,8 +191,9 @@ void MainWindow::unlockShop()
     }
 }
 
-void MainWindow::showChickens(int count)
+void MainWindow::showChickens()
 {
+    int count = farm.chicken_coop().storage();
     ui->btnChicken_1->setVisible(false);
     ui->btnChicken_2->setVisible(false);
     ui->btnChicken_3->setVisible(false);
@@ -220,8 +215,9 @@ void MainWindow::showChickens(int count)
         ui->btnChicken_6->setVisible(true);
 }
 
-void MainWindow::showCows(int count)
+void MainWindow::showCows()
 {
+    int count = farm.cow_pasture().storage();
     ui->btnCow_1->setVisible(false);
     ui->btnCow_2->setVisible(false);
     ui->btnCow_3->setVisible(false);
@@ -237,8 +233,9 @@ void MainWindow::showCows(int count)
         ui->btnCow_4->setVisible(true);
 }
 
-void MainWindow::showSheeps(int count)
+void MainWindow::showSheeps()
 {
+    int count = farm.sheep_pasture().storage();
     ui->btnSheep_1->setVisible(false);
     ui->btnSheep_2->setVisible(false);
     ui->btnSheep_3->setVisible(false);
@@ -308,7 +305,6 @@ void MainWindow::on_btnChickenCoop_clicked()
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
-    showAnimals();
 }
 
 void MainWindow::on_btnCowPasture_clicked()
@@ -317,7 +313,6 @@ void MainWindow::on_btnCowPasture_clicked()
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
-    showAnimals();
 }
 
 void MainWindow::on_btnSheepPasture_clicked()
@@ -326,7 +321,6 @@ void MainWindow::on_btnSheepPasture_clicked()
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
-    showAnimals();
 }
 
 void MainWindow::on_chickenLock_clicked()
@@ -419,8 +413,10 @@ void MainWindow::on_btnShop_clicked()
     ShopDialog shop(farmer, this);
     connect(&shop, &ShopDialog::AddXP, this, &MainWindow::on_xp_add);
     connect(&shop, &ShopDialog::ShowCoin, this, &MainWindow::on_show_coin);
+    connect(&shop, &ShopDialog::ShowChickens, this, &MainWindow::showChickens);
+    connect(&shop, &ShopDialog::ShowCows, this, &MainWindow::showCows);
+    connect(&shop, &ShopDialog::ShowSheeps, this, &MainWindow::showSheeps);
     shop.exec();
-    showAnimals();
 }
 
 void MainWindow::on_btnScoreBoard_clicked()

@@ -62,7 +62,7 @@ void ShopDialog::buy()
         err = getNotEnoughError(Enums::ALFALFA, "space");
     else if(shop.isBuyable(Enums::CHICKEN, farmer.id(), chickenCount())!= Enums::OK)
         err = getNotEnoughError(Enums::CHICKEN, " space");
-    else if(shop.isBuyable(Enums::COW, farmer.id(), cowcount())!= Enums::OK)
+    else if(shop.isBuyable(Enums::COW, farmer.id(), cowCount())!= Enums::OK)
         err = getNotEnoughError(Enums::COW, "space");
     else if(shop.isBuyable(Enums::SHEEP, farmer.id(), sheepCount())!= Enums::OK)
         err = getNotEnoughError(Enums::SHEEP, "space");
@@ -81,12 +81,18 @@ void ShopDialog::buy()
 
         shop.buy(Enums::CHICKEN, farmer.id(), chickenCount());
         xp_to_add += chickenCount() * Shop::chicken_xp;
+        if(chickenCount())
+            emit ShowChickens();
 
-        shop.buy(Enums::COW, farmer.id(), cowcount());
-        xp_to_add += cowcount() * Shop::cow_xp;
+        shop.buy(Enums::COW, farmer.id(), cowCount());
+        xp_to_add += cowCount() * Shop::cow_xp;
+        if(cowCount())
+            emit ShowCows();
 
         shop.buy(Enums::SHEEP, farmer.id(), sheepCount());
         xp_to_add += sheepCount() * Shop::sheep_xp;
+        if(sheepCount())
+            emit ShowSheeps();
 
         shop.buy(Enums::NAIL, farmer.id(), nailCount());
         xp_to_add += nailCount() * Shop::nail_xp;
@@ -120,7 +126,7 @@ void ShopDialog::sell()
         err = getNotEnoughError(Enums::ALFALFA, "storage");
     else if(shop.isSellable(Enums::CHICKEN, farmer.id(), chickenCount())!= Enums::OK)
         err = getNotEnoughError(Enums::CHICKEN, " storage");
-    else if(shop.isSellable(Enums::COW, farmer.id(), cowcount())!= Enums::OK)
+    else if(shop.isSellable(Enums::COW, farmer.id(), cowCount())!= Enums::OK)
         err = getNotEnoughError(Enums::COW, "storage");
     else if(shop.isSellable(Enums::SHEEP, farmer.id(), sheepCount())!= Enums::OK)
         err = getNotEnoughError(Enums::SHEEP, "storage");
@@ -136,6 +142,17 @@ void ShopDialog::sell()
         err = getNotEnoughError(Enums::WOOL, "storage");
     else
     {
+        shop.sell(Enums::WHEAT, farmer.id(), wheatCount());
+        shop.sell(Enums::ALFALFA, farmer.id(), alfalfaCount());
+        shop.sell(Enums::CHICKEN, farmer.id(), chickenCount());
+        shop.sell(Enums::COW, farmer.id(), cowCount());
+        shop.sell(Enums::SHEEP, farmer.id(), sheepCount());
+        shop.sell(Enums::NAIL, farmer.id(), nailCount());
+        shop.sell(Enums::SHOVEL, farmer.id(), shovelCount());
+        shop.sell(Enums::EGG, farmer.id(), eggCount());
+        shop.sell(Enums::MILK, farmer.id(), milkCount());
+        shop.sell(Enums::WOOL, farmer.id(), woolCount());
+
         int xp_to_add = 0;
 
         if(wheatCount() != 0)
@@ -143,32 +160,30 @@ void ShopDialog::sell()
         if(alfalfaCount() != 0)
             xp_to_add += Shop::sell_xp;
         if(chickenCount() != 0)
+        {
             xp_to_add += Shop::sell_xp;
+            emit ShowChickens();
+        }
         if(eggCount() != 0)
             xp_to_add += Shop::sell_xp;
-        if(cowcount() != 0)
+        if(cowCount() != 0)
+        {
             xp_to_add += Shop::sell_xp;
+            emit ShowCows();
+        }
         if(milkCount() != 0)
             xp_to_add += Shop::sell_xp;
         if(sheepCount() != 0)
+        {
             xp_to_add += Shop::sell_xp;
+            emit ShowSheeps();
+        }
         if(woolCount() != 0)
             xp_to_add += Shop::sell_xp;
         if(nailCount() != 0)
             xp_to_add += Shop::sell_xp;
         if(shovelCount() != 0)
             xp_to_add += Shop::sell_xp;
-
-        shop.sell(Enums::WHEAT, farmer.id(), wheatCount());
-        shop.sell(Enums::ALFALFA, farmer.id(), alfalfaCount());
-        shop.sell(Enums::CHICKEN, farmer.id(), chickenCount());
-        shop.sell(Enums::COW, farmer.id(), cowcount());
-        shop.sell(Enums::SHEEP, farmer.id(), sheepCount());
-        shop.sell(Enums::NAIL, farmer.id(), nailCount());
-        shop.sell(Enums::SHOVEL, farmer.id(), shovelCount());
-        shop.sell(Enums::EGG, farmer.id(), eggCount());
-        shop.sell(Enums::MILK, farmer.id(), milkCount());
-        shop.sell(Enums::WOOL, farmer.id(), woolCount());
 
         emit ShowCoin();
         MessageDialog w("The sale operation was successful!", "Info", this);
@@ -190,7 +205,7 @@ int ShopDialog::wheatCount()
     return ui->lblWheat->text().toInt();
 }
 
-int ShopDialog::cowcount()
+int ShopDialog::cowCount()
 {
     return ui->lblCow->text().toInt();
 }

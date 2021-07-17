@@ -65,6 +65,9 @@ private slots:
 signals:
     void AddXP(int);
     void ShowCoin();
+    void ShowChickens();
+    void ShowCows();
+    void ShowSheeps();
 
 private:
     Ui::ShopDialog *ui;
@@ -88,7 +91,7 @@ private:
     void sell();
 
     int wheatCount();
-    int cowcount();
+    int cowCount();
     int milkCount();
     int sheepCount();
     int woolCount();
