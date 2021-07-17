@@ -120,6 +120,8 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
         showLevel();
         LevelUpDialog dialog(farmer.level(), this);
         dialog.exec();
+        if(farmer.level() == 2)
+            unlockShop();
     }
     showXP();
 }
