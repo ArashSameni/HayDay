@@ -141,7 +141,7 @@ void MainWindow::showAnimals()
 
     showChickens(farm.chicken_coop().storage());
     showCows(farm.cow_pasture().storage());
-    showSheeps(farm.cow_pasture().storage());
+    showSheeps(farm.sheep_pasture().storage());
 }
 
 void MainWindow::unlockAlfalfaField()
