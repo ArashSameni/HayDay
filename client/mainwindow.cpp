@@ -120,15 +120,7 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     if(farm.alfalfa_field().plants_condition() == Enums::PLOWING && farm.alfalfa_field().isPlowingFinished())
         farm.alfalfa_field().finishPlowing();
 
-    if(farmer.addXp(xp_to_add))
-    {
-        showLevel();
-        LevelUpDialog dialog(farmer.level(), this);
-        dialog.exec();
-        if(farmer.level() == 2)
-            unlockShop();
-    }
-    showXP();
+    on_xp_add(xp_to_add);
 }
 
 void MainWindow::showAnimals()
@@ -318,30 +310,27 @@ void MainWindow::on_btnSilo_clicked()
 void MainWindow::on_btnChickenCoop_clicked()
 {
     DetailsDialog details("Chicken Coop", farmer, farm, this);
+    connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     details.exec();
     showCoin();
-    showLevel();
-    showXP();
     showAnimals();
 }
 
 void MainWindow::on_btnCowPasture_clicked()
 {
     DetailsDialog details("Cow Pasture", farmer, farm, this);
+    connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     details.exec();
     showCoin();
-    showLevel();
-    showXP();
     showAnimals();
 }
 
 void MainWindow::on_btnSheepPasture_clicked()
 {
     DetailsDialog details("Sheep Pasture", farmer, farm, this);
+    connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     details.exec();
     showCoin();
-    showLevel();
-    showXP();
     showAnimals();
 }
 
@@ -390,10 +379,9 @@ void MainWindow::on_btnWheatField_clicked()
     DetailsDialog details("Wheat Field", farmer, farm, this);
     connect(&details, &DetailsDialog::WheatFieldPlanted, this, &MainWindow::on_wheatFieldPlanted);
     connect(&details, &DetailsDialog::WheatFieldReaped, this, &MainWindow::on_wheatFieldReaped);
+    connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     details.exec();
     showCoin();
-    showLevel();
-    showXP();
 }
 
 void MainWindow::on_btnAlfalfaField_clicked()
@@ -402,10 +390,9 @@ void MainWindow::on_btnAlfalfaField_clicked()
     DetailsDialog details("Alfalfa Field", farmer, farm, this);
     connect(&details, &DetailsDialog::AlfalfaFieldPlanted, this, &MainWindow::on_alfalfaFieldPlanted);
     connect(&details, &DetailsDialog::AlfalfaFieldReaped, this, &MainWindow::on_alfalfaFieldReaped);
+    connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     details.exec();
     showCoin();
-    showLevel();
-    showXP();
     if(level == 0 && farm.alfalfa_field().level())
         unlockAlfalfaField();
 }
@@ -434,12 +421,10 @@ void MainWindow::on_shopLock_clicked()
 
 void MainWindow::on_btnShop_clicked()
 {
-    ShopDialog details(farmer, this);
-    details.exec();
+    ShopDialog shop(farmer, this);
+    connect(&shop, &ShopDialog::AddXP, this, &MainWindow::on_xp_add);
+    shop.exec();
     showCoin();
-    showDay();
-    showLevel();
-    showXP();
     showAnimals();
 }
 
@@ -467,4 +452,17 @@ void MainWindow::on_alfalfaFieldPlanted()
 void MainWindow::on_alfalfaFieldReaped()
 {
     ui->btnAlfalfaField->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/field-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/field.png);\n}");
+}
+
+void MainWindow::on_xp_add(int amount)
+{
+    if(farmer.addXp(amount))
+    {
+        showLevel();
+        LevelUpDialog dialog(farmer.level(), this);
+        dialog.exec();
+        if(farmer.level() == 2)
+            unlockShop();
+    }
+    showXP();
 }

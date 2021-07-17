@@ -188,11 +188,7 @@ void DetailsDialog::feedLivingPlace(LivingPlace &place)
         MessageDialog w("Animals are now fed.", "Info", this);
         w.exec();
 
-        if(farmer.addXp(place.feedXp()))
-        {
-            LevelUpDialog dialog(farmer.level(), this);
-            dialog.exec();
-        }
+        emit AddXP(place.feedXp());
 
         initialLivingPlace(place);
     }
@@ -228,11 +224,7 @@ void DetailsDialog::collectLivingPlace(LivingPlace &place)
             MessageDialog w("Products are collected!", "Info", this);
             w.exec();
 
-            if(farmer.addXp(place.collectXp()))
-            {
-                LevelUpDialog dialog(farmer.level(), this);
-                dialog.exec();
-            }
+            emit AddXP(place.collectXp());
 
             initialLivingPlace(place);
         }
@@ -349,11 +341,7 @@ void DetailsDialog::plowField(AlfalfaField &field)
         MessageDialog w("Field is now plowing", "Info", this);
         w.exec();
 
-        if(farmer.addXp(field.plowXp()))
-        {
-            LevelUpDialog dialog(farmer.level(), this);
-            dialog.exec();
-        }
+        emit AddXP(field.plowXp());
 
         initialField(field);
     }
@@ -389,11 +377,7 @@ void DetailsDialog::plantField(int amount, Field &field)
         MessageDialog w("Field is now planted", "Info", this);
         w.exec();
 
-        if(farmer.addXp(field.plantXp()))
-        {
-            LevelUpDialog dialog(farmer.level(), this);
-            dialog.exec();
-        }
+        emit AddXP(field.plantXp());
 
         if(current_place == WHEAT_FIELD)
             emit WheatFieldPlanted();
@@ -436,11 +420,7 @@ void DetailsDialog::reapField(Field &field)
             MessageDialog w("Field is reaped", "Info", this);
             w.exec();
 
-            if(farmer.addXp(field.reapXp()))
-            {
-                LevelUpDialog dialog(farmer.level(), this);
-                dialog.exec();
-            }
+            emit AddXP(field.reapXp());
 
             if(current_place == WHEAT_FIELD)
                 emit WheatFieldReaped();

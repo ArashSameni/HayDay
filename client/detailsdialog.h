@@ -30,6 +30,8 @@ signals:
     void AlfalfaFieldPlanted();
     void AlfalfaFieldReaped();
 
+    void AddXP(int);
+
 private:
     enum
     {

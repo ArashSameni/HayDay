@@ -97,11 +97,7 @@ void ShopDialog::buy()
         MessageDialog w("The purchase operation was successful!", "Info", this);
         w.exec();
 
-        if(farmer.addXp(xp_to_add))
-        {
-            LevelUpDialog dialog(farmer.level(), this);
-            dialog.exec();
-        }
+        emit AddXP(xp_to_add);
         show_error = false;
     }
 
@@ -176,11 +172,7 @@ void ShopDialog::sell()
         MessageDialog w("The sale operation was successful!", "Info", this);
         w.exec();
 
-        if(farmer.addXp(xp_to_add))
-        {
-            LevelUpDialog dialog(farmer.level(), this);
-            dialog.exec();
-        }
+        emit AddXP(xp_to_add);
         show_error = false;
     }
 

@@ -62,6 +62,9 @@ private slots:
 
     void on_btnSell_clicked();
 
+signals:
+    void AddXP(int);
+
 private:
     Ui::ShopDialog *ui;
     int buyAmount = 0;

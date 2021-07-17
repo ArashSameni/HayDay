@@ -55,6 +55,8 @@ private slots:
     void on_alfalfaFieldPlanted();
     void on_alfalfaFieldReaped();
 
+    void on_xp_add(int amount);
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;
