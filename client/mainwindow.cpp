@@ -59,11 +59,15 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     {
         farm.silo().finishUpgrade();
         xp_to_add += farm.silo().upgradeXp();
+        MessageDialog w("Silo is now level " + QString::number(farm.silo().level()), "Info", this);
+        w.exec();
     }
     if(farm.barn().is_upgrading() && farm.barn().isUpgradeFinished())
     {
         farm.barn().finishUpgrade();
         xp_to_add += farm.barn().upgradeXp();
+        MessageDialog w("Barn is now level " + QString::number(farm.barn().level()), "Info", this);
+        w.exec();
     }
     if(farm.chicken_coop().is_upgrading() && farm.chicken_coop().isUpgradeFinished())
     {
@@ -71,6 +75,8 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
             showAnimals();
         farm.chicken_coop().finishUpgrade();
         xp_to_add += farm.chicken_coop().upgradeXp();
+        MessageDialog w("Chicken Coop is now level " + QString::number(farm.chicken_coop().level()), "Info", this);
+        w.exec();
     }
     if(farm.cow_pasture().is_upgrading() && farm.cow_pasture().isUpgradeFinished())
     {
@@ -78,6 +84,8 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
             showAnimals();
         farm.cow_pasture().finishUpgrade();
         xp_to_add += farm.cow_pasture().upgradeXp();
+        MessageDialog w("Cow Pasture is now level " + QString::number(farm.cow_pasture().level()), "Info", this);
+        w.exec();
     }
     if(farm.sheep_pasture().is_upgrading() && farm.sheep_pasture().isUpgradeFinished())
     {
@@ -85,17 +93,23 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
             showAnimals();
         farm.sheep_pasture().finishUpgrade();
         xp_to_add += farm.sheep_pasture().upgradeXp();
+        MessageDialog w("Sheep Pasture is now level " + QString::number(farm.sheep_pasture().level()), "Info", this);
+        w.exec();
     }
     if(farm.alfalfa_field().is_upgrading() && farm.alfalfa_field().isUpgradeFinished())
     {
         farm.alfalfa_field().finishUpgrade();
         xp_to_add += farm.alfalfa_field().upgradeXp();
         unlockAlfalfaField();
+        MessageDialog w("Alfalfa Field is now level " + QString::number(farm.alfalfa_field().level()), "Info", this);
+        w.exec();
     }
     if(farm.wheat_field().is_upgrading() && farm.wheat_field().isUpgradeFinished())
     {
         farm.wheat_field().finishUpgrade();
         xp_to_add += farm.wheat_field().upgradeXp();
+        MessageDialog w("Wheat Field is now level " + QString::number(farm.wheat_field().level()), "Info", this);
+        w.exec();
     }
     if(farm.alfalfa_field().plants_condition() == Enums::PLOWING && farm.alfalfa_field().isPlowingFinished())
         farm.alfalfa_field().finishPlowing();

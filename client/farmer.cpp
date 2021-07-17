@@ -3,6 +3,7 @@
 #include <QJsonDocument>
 #include "globals.h"
 #include <QDateTime>
+#include "farm.h"
 
 int Farmer::id_ = 0;
 Farmer *Farmer::farmer = nullptr;
@@ -22,6 +23,12 @@ void Farmer::goNextLevel()
     xp_ -= max_xp_;
     max_xp_ += 10;
     level_ += 1;
+    if(level_ == 3)
+    {
+        Barn &barn = Farm::get(farm_id_).barn();
+        barn.addAlfalfa(1);
+        barn.save();
+    }
 }
 
 Farmer &Farmer::get(int farmer_id)
