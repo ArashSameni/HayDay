@@ -132,13 +132,13 @@ void DetailsDialog::initialLivingPlace(const LivingPlace &place)
         btnFeedCollect->setStyleSheet("QPushButton{\n	border: none;\n	border-radius: 10px;\n	background-color: #e0b943;\n	color: #fff;\n}\n\nQPushButton:hover{\n	background-color: #c9a63c;\n}");
         btnFeedCollect->setCursor(Qt::PointingHandCursor);
         btnFeedCollect->setGeometry(241, 313, 162, 49);
-        connect(btnFeedCollect, &QPushButton::clicked, this, &DetailsDialog::on_btnPlant_clicked);
+        connect(btnFeedCollect, &QPushButton::clicked, this, &DetailsDialog::on_btnFeed_clicked);
     }
 
-    if(place.level() == 0)
+    if(place.level() == 0 || place.storage() == 0)
         disableFeedCollectButton();
     else if (place.animals_condition() == Enums::HUNGRY)
-            btnFeedCollect->setText("Feed");
+        btnFeedCollect->setText("Feed");
     else
     {
         btnFeedCollect->setText("Collect");
@@ -488,13 +488,22 @@ void DetailsDialog::on_btnFeed_clicked()
     switch (current_place)
     {
     case CHICKEN_COOP:
-        feedLivingPlace(farm.chicken_coop());
+        if(farm.chicken_coop().animals_condition() == Enums::HUNGRY)
+            feedLivingPlace(farm.chicken_coop());
+        else
+            collectLivingPlace(farm.chicken_coop());
         break;
     case COW_PASTURE:
-        feedLivingPlace(farm.cow_pasture());
+        if(farm.cow_pasture().animals_condition() == Enums::HUNGRY)
+            feedLivingPlace(farm.cow_pasture());
+        else
+            collectLivingPlace(farm.cow_pasture());
         break;
     case SHEEP_PASTURE:
-        feedLivingPlace(farm.sheep_pasture());
+        if(farm.sheep_pasture().animals_condition() == Enums::HUNGRY)
+            feedLivingPlace(farm.sheep_pasture());
+        else
+            collectLivingPlace(farm.sheep_pasture());
         break;
     }
 }
