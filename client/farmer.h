@@ -34,6 +34,7 @@ public:
 
     QString nickname() const { return nickname_; }
     void setNickname(const QString &nickname) { nickname_ = nickname; }
+    void setJoiningDateToNow();
 
     int coins() const { return coins_; }
     int level() const { return level_; }

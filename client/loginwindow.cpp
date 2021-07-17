@@ -102,7 +102,13 @@ void LoginWindow::on_btnLogin_clicked()
         Farmer& farmer = Farmer::getByAccountId(account_id);
         Farm& farm = Farm::get(farmer.farm_id());
 
-        CURRENT_DAY = (QDateTime::currentDateTime().toTime_t() - farmer.joining_date()) / SECONDS_PER_DAY;
+        if(farmer.joining_date() == 0)
+        {
+            farmer.setJoiningDateToNow();
+            CURRENT_DAY = 0;
+        }
+        else
+            CURRENT_DAY = (QDateTime::currentDateTime().toTime_t() - farmer.joining_date()) / SECONDS_PER_DAY;
 
         MainWindow* main_window = new MainWindow(farmer, farm);
         main_window->show();
