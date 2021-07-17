@@ -2,6 +2,7 @@
 #include "ui_shopdialog.h"
 #include "levelupdialog.h"
 #include "messagedialog.h"
+#include <QDebug>
 
 ShopDialog::ShopDialog(Farmer& farmer, QWidget *parent) :
     QDialog(parent),
@@ -55,19 +56,19 @@ void ShopDialog::buy()
     QString err;
     bool show_error = true;
 
-    if(!shop.isBuyable(Enums::WHEAT, farmer.id(), wheatCount()))
+    if(shop.isBuyable(Enums::WHEAT, farmer.id(), wheatCount())!= Enums::OK)
         err = getNotEnoughError(Enums::WHEAT, "space");
-    else if(!shop.isBuyable(Enums::ALFALFA, farmer.id(), alfalfaCount()))
+    else if(shop.isBuyable(Enums::ALFALFA, farmer.id(), alfalfaCount())!= Enums::OK)
         err = getNotEnoughError(Enums::ALFALFA, "space");
-    else if(!shop.isBuyable(Enums::CHICKEN, farmer.id(), chickenCount()))
+    else if(shop.isBuyable(Enums::CHICKEN, farmer.id(), chickenCount())!= Enums::OK)
         err = getNotEnoughError(Enums::CHICKEN, " space");
-    else if(!shop.isBuyable(Enums::COW, farmer.id(), cowcount()))
+    else if(shop.isBuyable(Enums::COW, farmer.id(), cowcount())!= Enums::OK)
         err = getNotEnoughError(Enums::COW, "space");
-    else if(!shop.isBuyable(Enums::SHEEP, farmer.id(), sheepCount()))
+    else if(shop.isBuyable(Enums::SHEEP, farmer.id(), sheepCount())!= Enums::OK)
         err = getNotEnoughError(Enums::SHEEP, "space");
-    else if(!shop.isBuyable(Enums::NAIL, farmer.id(), nailCount()))
+    else if(shop.isBuyable(Enums::NAIL, farmer.id(), nailCount())!= Enums::OK)
         err = getNotEnoughError(Enums::NAIL, "space");
-    else if(!shop.isBuyable(Enums::SHOVEL, farmer.id(), shovelCount()))
+    else if(shop.isBuyable(Enums::SHOVEL, farmer.id(), shovelCount())!= Enums::OK)
         err = getNotEnoughError(Enums::SHOVEL, "space");
     else
     {
@@ -116,25 +117,25 @@ void ShopDialog::sell()
     QString err;
     bool show_error = true;
 
-    if(!shop.isSellable(Enums::WHEAT, farmer.id(), wheatCount()))
+    if(shop.isSellable(Enums::WHEAT, farmer.id(), wheatCount()) != Enums::OK)
         err = getNotEnoughError(Enums::WHEAT, "storage");
-    else if(!shop.isSellable(Enums::ALFALFA, farmer.id(), alfalfaCount()))
+    else if(shop.isSellable(Enums::ALFALFA, farmer.id(), alfalfaCount())!= Enums::OK)
         err = getNotEnoughError(Enums::ALFALFA, "storage");
-    else if(!shop.isSellable(Enums::CHICKEN, farmer.id(), chickenCount()))
+    else if(shop.isSellable(Enums::CHICKEN, farmer.id(), chickenCount())!= Enums::OK)
         err = getNotEnoughError(Enums::CHICKEN, " storage");
-    else if(!shop.isSellable(Enums::COW, farmer.id(), cowcount()))
+    else if(shop.isSellable(Enums::COW, farmer.id(), cowcount())!= Enums::OK)
         err = getNotEnoughError(Enums::COW, "storage");
-    else if(!shop.isSellable(Enums::SHEEP, farmer.id(), sheepCount()))
+    else if(shop.isSellable(Enums::SHEEP, farmer.id(), sheepCount())!= Enums::OK)
         err = getNotEnoughError(Enums::SHEEP, "storage");
-    else if(!shop.isSellable(Enums::NAIL, farmer.id(), nailCount()))
+    else if(shop.isSellable(Enums::NAIL, farmer.id(), nailCount())!= Enums::OK)
         err = getNotEnoughError(Enums::NAIL, "storage");
-    else if(!shop.isSellable(Enums::SHOVEL, farmer.id(), shovelCount()))
+    else if(shop.isSellable(Enums::SHOVEL, farmer.id(), shovelCount())!= Enums::OK)
         err = getNotEnoughError(Enums::SHOVEL, "storage");
-    else if(!shop.isSellable(Enums::EGG, farmer.id(), eggCount()))
+    else if(shop.isSellable(Enums::EGG, farmer.id(), eggCount())!= Enums::OK)
         err = getNotEnoughError(Enums::EGG , "storage");
-    else if(!shop.isSellable(Enums::MILK, farmer.id(), milkCount()))
+    else if(shop.isSellable(Enums::MILK, farmer.id(), milkCount())!= Enums::OK)
         err = getNotEnoughError(Enums::MILK , "storage");
-    else if(!shop.isSellable(Enums::WOOL, farmer.id(), woolCount()))
+    else if(shop.isSellable(Enums::WOOL, farmer.id(), woolCount())!= Enums::OK)
         err = getNotEnoughError(Enums::WOOL, "storage");
     else
     {
@@ -248,34 +249,23 @@ QString ShopDialog::getNotEnoughError(int type, QString err_name)
     case Enums::WHEAT:
         place = "Silo";
         break;
-    case Enums::ALFALFA:
-        place = "Barn";
-        break;
     case Enums::CHICKEN:
         place = "Chicken coop";
-        break;
-    case Enums::EGG:
-        place = "Barn";
         break;
     case Enums::COW:
         place = "Cow pasture";
         break;
-    case Enums::MILK:
-        place = "Barn";
-        break;
     case Enums::SHEEP:
         place = "Sheep pasture";
         break;
+    case Enums::ALFALFA:
+    case Enums::EGG:
+    case Enums::MILK:
     case Enums::WOOL:
-        place = "Barn";
-        break;
     case Enums::NAIL:
-        place = "Barn";
-        break;
     case Enums::SHOVEL:
         place = "Barn";
         break;
-
     default:
         break;
     }

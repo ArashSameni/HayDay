@@ -280,6 +280,9 @@ int Shop::isShovelSellable(int farmer_id, int count) const
 
 int Shop::isSellable(int type, int farmer_id, int count)
 {
+    if(count == 0)
+        return Enums::OK;
+
     switch (type)
     {
     case Enums::WHEAT:
@@ -319,6 +322,9 @@ int Shop::isSellable(int type, int farmer_id, int count)
 
 int Shop::isBuyable(int type, int farmer_id, int count)
 {
+    if(count == 0)
+        return Enums::OK;
+
     switch (type)
     {
     case Enums::WHEAT:
