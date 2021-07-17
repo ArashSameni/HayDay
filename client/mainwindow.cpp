@@ -48,6 +48,11 @@ void MainWindow::initUI()
     if(farm.alfalfa_field().level())
         unlockAlfalfaField();
 
+    if(farm.wheat_field().plants_condition() == Enums::PLANTED)
+        on_wheatFieldPlanted();
+    if(farm.alfalfa_field().plants_condition() == Enums::PLANTED)
+        on_alfalfaFieldPlanted();
+
     if(farmer.level() >= 2)
         unlockShop();
 }
@@ -383,6 +388,8 @@ void MainWindow::on_btnBarn_clicked()
 void MainWindow::on_btnWheatField_clicked()
 {
     DetailsDialog details("Wheat Field", farmer, farm, this);
+    connect(&details, &DetailsDialog::WheatFieldPlanted, this, &MainWindow::on_wheatFieldPlanted);
+    connect(&details, &DetailsDialog::WheatFieldReaped, this, &MainWindow::on_wheatFieldReaped);
     details.exec();
     showCoin();
     showLevel();
@@ -393,6 +400,8 @@ void MainWindow::on_btnAlfalfaField_clicked()
 {
     int level = farm.alfalfa_field().level();
     DetailsDialog details("Alfalfa Field", farmer, farm, this);
+    connect(&details, &DetailsDialog::AlfalfaFieldPlanted, this, &MainWindow::on_alfalfaFieldPlanted);
+    connect(&details, &DetailsDialog::AlfalfaFieldReaped, this, &MainWindow::on_alfalfaFieldReaped);
     details.exec();
     showCoin();
     showLevel();
@@ -438,4 +447,24 @@ void MainWindow::on_btnScoreBoard_clicked()
 {
     ScoreboardDialog board(this);
     board.exec();
+}
+
+void MainWindow::on_wheatFieldPlanted()
+{
+    ui->btnWheatField->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/wheat-field-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/wheat-field.png);\n}");
+}
+
+void MainWindow::on_wheatFieldReaped()
+{
+    ui->btnWheatField->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/field-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/field.png);\n}");
+}
+
+void MainWindow::on_alfalfaFieldPlanted()
+{
+    ui->btnAlfalfaField->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/alfalfa-field-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/alfalfa-field.png);\n}");
+}
+
+void MainWindow::on_alfalfaFieldReaped()
+{
+    ui->btnAlfalfaField->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/field-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/field.png);\n}");
 }

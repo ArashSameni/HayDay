@@ -24,6 +24,12 @@ private slots:
     void on_btnPlant_clicked();
     void on_plantAmountChoosed(int amount);
 
+signals:
+    void WheatFieldPlanted();
+    void WheatFieldReaped();
+    void AlfalfaFieldPlanted();
+    void AlfalfaFieldReaped();
+
 private:
     enum
     {

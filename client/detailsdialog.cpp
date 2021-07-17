@@ -395,6 +395,11 @@ void DetailsDialog::plantField(int amount, Field &field)
             dialog.exec();
         }
 
+        if(current_place == WHEAT_FIELD)
+            emit WheatFieldPlanted();
+        else
+            emit AlfalfaFieldPlanted();
+
         initialField(field);
     }
     else
@@ -436,6 +441,11 @@ void DetailsDialog::reapField(Field &field)
                 LevelUpDialog dialog(farmer.level(), this);
                 dialog.exec();
             }
+
+            if(current_place == WHEAT_FIELD)
+                emit WheatFieldReaped();
+            else
+                emit AlfalfaFieldReaped();
 
             initialField(field);
         }

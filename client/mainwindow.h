@@ -50,6 +50,11 @@ private slots:
 
     void on_btnScoreBoard_clicked();
 
+    void on_wheatFieldPlanted();
+    void on_wheatFieldReaped();
+    void on_alfalfaFieldPlanted();
+    void on_alfalfaFieldReaped();
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;
