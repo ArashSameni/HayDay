@@ -19,7 +19,7 @@
 	color: #494949;
 }
 
-QDialog { background-image: url(:/img/shop-bg.png) }
+QDialog#ShopDialog { background-image: url(:/img/shop-bg.png) }
 </string>
   </property>
   <widget class="QPushButton" name="btnWheatPlus">

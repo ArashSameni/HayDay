@@ -39,6 +39,7 @@ public:
     static const int wool_xp;
     static const int nail_xp;
     static const int shovel_xp;
+    static const int sell_xp;
 
     static const int needed_level_for_wheat;
     static const int needed_level_for_alfalfa;
@@ -55,7 +56,6 @@ public:
     int isBuyable(int type, int farmer_id, int count);
     void buy(int type, int farmer_id, int count);
     void sell(int type, int farmer_id, int count);
-    ~Shop();
 
 private:
     void buyWheat(int farmer_id,int count);
