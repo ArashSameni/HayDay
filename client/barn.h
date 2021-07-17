@@ -66,7 +66,7 @@ public:
     int neededCoinsToUpgrade() const;
     void upgrade(Farmer& farmer, int barn_id);
 
-    void checkMilksExpiration();
+    int checkMilksExpiration();
 
     int storage() const { return storage_; }
     int max_storage() const { return max_storage_; }

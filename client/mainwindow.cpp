@@ -121,6 +121,13 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     if(farm.alfalfa_field().plants_condition() == Enums::PLOWING && farm.alfalfa_field().isPlowingFinished())
         farm.alfalfa_field().finishPlowing();
 
+    int count_of_expired_milks = farm.barn().checkMilksExpiration();
+    if(count_of_expired_milks)
+    {
+        MessageDialog w(QString::number(count_of_expired_milks) + " milks expired!", "Info", this);
+        w.exec();
+    }
+
     on_xp_add(xp_to_add);
 }
 

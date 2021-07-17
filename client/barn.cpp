@@ -121,19 +121,24 @@ void Barn::save() const
     socket.write(query);
 }
 
-void Barn::checkMilksExpiration()
+int Barn::checkMilksExpiration()
 {
+    int count_of_expired = 0;
     QVector<Milk> milks;
 
     for (int i = 0; i < milks_.size(); i++)
     {
         if (milks_[i].isExpired())
+        {
             milks_[i].remove();
+            count_of_expired += 1;
+        }
         else
             milks.push_back(milks_[i]);
     }
 
     milks_ = milks;
+    return count_of_expired;
 }
 
 void Barn::addShovel(int amount)
