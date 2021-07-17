@@ -415,7 +415,7 @@ int AlfalfaField::isPlantable(int barn_id, int amount) const
     Barn &barn = Barn::get(barn_id);
     if (amount <= 0 || amount > area_)
         return Enums::AREA_ERROR;
-    if (barn.storage() < amount)
+    if (barn.alfalfas() < amount)
         return Enums::LACK_OF_SEED;
     if (plants_condition_ == Enums::NOT_PLOWED)
         return Enums::NOT_PLOWED;
