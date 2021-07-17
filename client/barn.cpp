@@ -106,7 +106,8 @@ void Barn::save() const
                     "upgrade_day=:upgrade_day, is_upgrading=:is_upgrading, level=:level "
                     "WHERE id=:id";
 
-    query.replace(":storage", QString::number(id_));
+    query.replace(":id", QString::number(id_));
+    query.replace(":storage", QString::number(storage_));
     query.replace(":max_storage", QString::number(max_storage_));
     query.replace(":shovels", QString::number(shovels_));
     query.replace(":nails", QString::number(nails_));
@@ -116,7 +117,6 @@ void Barn::save() const
     query.replace(":upgrade_day", QString::number(upgrade_day_));
     query.replace(":is_upgrading", QString::number(is_upgrading_));
     query.replace(":level", QString::number(level_));
-    query.replace(":id", QString::number(id_));
 
     socket.write(query);
 }
