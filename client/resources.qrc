@@ -55,5 +55,6 @@
         <file>img/milk-lbl.png</file>
         <file>img/sheep-lbl.png</file>
         <file>img/alfalfa-lbl.png</file>
+        <file>img/scoreboard-icon.png</file>
     </qresource>
 </RCC>

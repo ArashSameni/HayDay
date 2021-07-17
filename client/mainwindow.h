@@ -48,6 +48,8 @@ private slots:
 
     void on_btnShop_clicked();
 
+    void on_btnScoreBoard_clicked();
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;

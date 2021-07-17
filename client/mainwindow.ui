@@ -875,6 +875,28 @@ background-image: url(:/img/chicken.png);</string>
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnScoreBoard">
+    <property name="geometry">
+     <rect>
+      <x>1017</x>
+      <y>140</y>
+      <width>55</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	background-image: url(:/img/scoreboard-icon.png);
+	border: none;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>label_2</zorder>
    <zorder>btnChickenCoop</zorder>
    <zorder>btnAlfalfaField</zorder>
@@ -916,6 +938,7 @@ background-image: url(:/img/chicken.png);</string>
    <zorder>lblCoin</zorder>
    <zorder>lblDay</zorder>
    <zorder>shopLock</zorder>
+   <zorder>btnScoreBoard</zorder>
   </widget>
  </widget>
  <resources/>

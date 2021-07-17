@@ -6,6 +6,7 @@
 #include "levelupdialog.h"
 #include "messagedialog.h"
 #include <QThread>
+#include "scoreboarddialog.h"
 
 MainWindow::MainWindow(Farmer& farmer, Farm& farm, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), farmer(farmer), farm(farm)
@@ -429,4 +430,10 @@ void MainWindow::on_btnShop_clicked()
     showLevel();
     showXP();
     showAnimals();
+}
+
+void MainWindow::on_btnScoreBoard_clicked()
+{
+    ScoreboardDialog board(this);
+    board.exec();
 }
