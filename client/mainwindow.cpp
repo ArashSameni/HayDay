@@ -151,9 +151,6 @@ void MainWindow::unlockAlfalfaField()
         ui->alfalfaLock->deleteLater();
         ui->alfalfaLock = nullptr;
         ui->btnAlfalfaField->setEnabled(true);
-        ui->btnAlfalfaField->setCursor(Qt::PointingHandCursor);
-        //Change picture from dark to light on focus
-        ui->btnAlfalfaField->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/field-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/field.png);\n}");
     }
 }
 
@@ -164,9 +161,6 @@ void MainWindow::unlockChickenCoop()
         ui->chickenLock->deleteLater();
         ui->chickenLock = nullptr;
         ui->btnChickenCoop->setEnabled(true);
-        ui->btnChickenCoop->setCursor(Qt::PointingHandCursor);
-        //Change picture from dark to light on focus
-        ui->btnChickenCoop->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/chicken_coop-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/chicken_coop.png);\n}");
     }
 }
 
@@ -177,9 +171,6 @@ void MainWindow::unlockCowPasture()
         ui->cowLock->deleteLater();
         ui->cowLock = nullptr;
         ui->btnCowPasture->setEnabled(true);
-        ui->btnCowPasture->setCursor(Qt::PointingHandCursor);
-        //Change picture from dark to light on focus
-        ui->btnSheepPasture->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/pasture-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/pasture.png);\n}");
     }
 }
 
@@ -190,9 +181,6 @@ void MainWindow::unlockSheepPasture()
         ui->sheepLock->deleteLater();
         ui->sheepLock = nullptr;
         ui->btnSheepPasture->setEnabled(true);
-        ui->btnSheepPasture->setCursor(Qt::PointingHandCursor);
-        //Change picture from dark to light on focus
-        ui->btnSheepPasture->setStyleSheet("QPushButton{\n	border: none;\n	background-image: url(:/img/pasture-dark.png);\n}\n\nQPushButton:hover{\n	background-image: url(:/img/pasture.png);\n}");
     }
 }
 
