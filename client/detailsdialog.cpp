@@ -92,6 +92,7 @@ void DetailsDialog::upgradeSilo()
     if (res == Enums::OK)
     {
         silo.upgrade(farmer, farm.barn().id());
+        emit ShowCoin();
         MessageDialog w("Silo is now upgrading", "Info", this);
         w.exec();
         initialSilo();
@@ -152,6 +153,7 @@ void DetailsDialog::upgradeLivingPlace(LivingPlace &place)
     if (res == Enums::OK)
     {
         place.upgrade(farmer, farm.barn().id());
+        emit ShowCoin();
         MessageDialog w("Place is now upgrading", "Info", this);
         w.exec();
         initialLivingPlace(place);
@@ -221,6 +223,7 @@ void DetailsDialog::collectLivingPlace(LivingPlace &place)
         if (res == Enums::OK)
         {
             place.collect(storage_place_id);
+            emit ShowCoin();
             MessageDialog w("Products are collected!", "Info", this);
             w.exec();
 
@@ -311,6 +314,7 @@ void DetailsDialog::upgradeField(Field &field)
     if (res == Enums::OK)
     {
         field.upgrade(farmer, farm.barn().id());
+        emit ShowCoin();
         MessageDialog w("Field is now upgrading", "Info", this);
         w.exec();
         initialField(field);
@@ -338,6 +342,7 @@ void DetailsDialog::plowField(AlfalfaField &field)
     if (res == Enums::OK)
     {
         field.plow();
+        emit ShowCoin();
         MessageDialog w("Field is now plowing", "Info", this);
         w.exec();
 

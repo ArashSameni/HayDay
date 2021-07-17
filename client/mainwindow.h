@@ -56,6 +56,7 @@ private slots:
     void on_alfalfaFieldReaped();
 
     void on_xp_add(int amount);
+    void on_show_coin();
 
 private:
     Ui::MainWindow *ui;

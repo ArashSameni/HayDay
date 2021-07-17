@@ -303,16 +303,16 @@ void MainWindow::showLevel()
 void MainWindow::on_btnSilo_clicked()
 {
     DetailsDialog details("Silo", farmer, farm, this);
+    connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
-    showCoin();
 }
 
 void MainWindow::on_btnChickenCoop_clicked()
 {
     DetailsDialog details("Chicken Coop", farmer, farm, this);
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
+    connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
-    showCoin();
     showAnimals();
 }
 
@@ -320,8 +320,8 @@ void MainWindow::on_btnCowPasture_clicked()
 {
     DetailsDialog details("Cow Pasture", farmer, farm, this);
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
+    connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
-    showCoin();
     showAnimals();
 }
 
@@ -329,8 +329,8 @@ void MainWindow::on_btnSheepPasture_clicked()
 {
     DetailsDialog details("Sheep Pasture", farmer, farm, this);
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
+    connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
-    showCoin();
     showAnimals();
 }
 
@@ -370,8 +370,8 @@ void MainWindow::on_sheepLock_clicked()
 void MainWindow::on_btnBarn_clicked()
 {
     BarnDetailsDialog details(farmer, farm, this);
+    connect(&details, &BarnDetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
-    showCoin();
 }
 
 void MainWindow::on_btnWheatField_clicked()
@@ -380,8 +380,8 @@ void MainWindow::on_btnWheatField_clicked()
     connect(&details, &DetailsDialog::WheatFieldPlanted, this, &MainWindow::on_wheatFieldPlanted);
     connect(&details, &DetailsDialog::WheatFieldReaped, this, &MainWindow::on_wheatFieldReaped);
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
+    connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
-    showCoin();
 }
 
 void MainWindow::on_btnAlfalfaField_clicked()
@@ -391,8 +391,8 @@ void MainWindow::on_btnAlfalfaField_clicked()
     connect(&details, &DetailsDialog::AlfalfaFieldPlanted, this, &MainWindow::on_alfalfaFieldPlanted);
     connect(&details, &DetailsDialog::AlfalfaFieldReaped, this, &MainWindow::on_alfalfaFieldReaped);
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
+    connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
-    showCoin();
     if(level == 0 && farm.alfalfa_field().level())
         unlockAlfalfaField();
 }
@@ -423,8 +423,8 @@ void MainWindow::on_btnShop_clicked()
 {
     ShopDialog shop(farmer, this);
     connect(&shop, &ShopDialog::AddXP, this, &MainWindow::on_xp_add);
+    connect(&shop, &ShopDialog::ShowCoin, this, &MainWindow::on_show_coin);
     shop.exec();
-    showCoin();
     showAnimals();
 }
 
@@ -465,4 +465,9 @@ void MainWindow::on_xp_add(int amount)
             unlockShop();
     }
     showXP();
+}
+
+void MainWindow::on_show_coin()
+{
+    showCoin();
 }

@@ -94,6 +94,7 @@ void ShopDialog::buy()
         shop.buy(Enums::SHOVEL, farmer.id(), shovelCount());
         xp_to_add += shovelCount() * Shop::shovel_xp;
 
+        emit ShowCoin();
         MessageDialog w("The purchase operation was successful!", "Info", this);
         w.exec();
 
@@ -169,6 +170,7 @@ void ShopDialog::sell()
         shop.sell(Enums::MILK, farmer.id(), milkCount());
         shop.sell(Enums::WOOL, farmer.id(), woolCount());
 
+        emit ShowCoin();
         MessageDialog w("The sale operation was successful!", "Info", this);
         w.exec();
 

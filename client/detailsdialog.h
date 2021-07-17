@@ -31,6 +31,7 @@ signals:
     void AlfalfaFieldReaped();
 
     void AddXP(int);
+    void ShowCoin();
 
 private:
     enum

@@ -64,6 +64,7 @@ private slots:
 
 signals:
     void AddXP(int);
+    void ShowCoin();
 
 private:
     Ui::ShopDialog *ui;

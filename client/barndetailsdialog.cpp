@@ -137,6 +137,7 @@ void BarnDetailsDialog::upgradeBarn()
     if(res == Enums::OK)
     {
         barn.upgrade(farmer, barn.id());
+        emit ShowCoin();
         MessageDialog w("Barn is now upgrading", "Info", this);
         w.exec();
         initUpgrade();

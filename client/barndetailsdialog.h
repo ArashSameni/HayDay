@@ -23,6 +23,9 @@ private slots:
 
     void on_btnUpgrade_clicked();
 
+signals:
+    void ShowCoin();
+
 private:
     Ui::BarnDetailsDialog *ui;
     bool isBarnShown = true;
