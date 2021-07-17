@@ -591,7 +591,7 @@ void ShopDialog::on_btnBuy_clicked()
 {
     if(buyAmount != 0)
     {
-        if(farmer.coins() > buyAmount)
+        if(buyAmount <= farmer.coins())
             buy();
         else
         {
