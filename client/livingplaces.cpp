@@ -431,7 +431,7 @@ int CowPasture::isFeedable(int barn_id)
     Barn& barn = Barn::get(barn_id);
     if(animals_condition_ != Enums::HUNGRY)
         return Enums::ALREADY_FED;
-    if(barn.storage() < storage_*2)
+    if(barn.alfalfas() < storage_*2)
         return Enums::LACK_OF_ALFALFA;
 
     return Enums::OK;
