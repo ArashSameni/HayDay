@@ -460,7 +460,7 @@ bool CowPasture::isCollectTime() const
 int CowPasture::isCollectable(int barn_id)
 {
     Barn& barn = Barn::get(barn_id);
-    if( barn.max_storage() - barn.storage() < storage_)
+    if(barn.max_storage() - barn.storage() < storage_)
         return Enums::LACK_OF_STORAGE;
     return Enums::OK;
 }
@@ -614,7 +614,7 @@ int SheepPasture::isFeedable(int barn_id)
     Barn& barn = Barn::get(barn_id);
     if(animals_condition_ != Enums::HUNGRY)
         return Enums::ALREADY_FED;
-    if(barn.storage() < storage_)
+    if(barn.alfalfas() < storage_)
         return Enums::LACK_OF_ALFALFA;
 
     return Enums::OK;
