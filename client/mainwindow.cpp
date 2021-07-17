@@ -81,6 +81,8 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
             showAnimals();
         farm.chicken_coop().finishUpgrade();
         xp_to_add += farm.chicken_coop().upgradeXp();
+        if(farm.chicken_coop().level() == 1)
+            unlockChickenCoop();
         MessageDialog w("Chicken Coop is now level " + QString::number(farm.chicken_coop().level()), "Info", this);
         w.exec();
     }
@@ -90,6 +92,8 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
             showAnimals();
         farm.cow_pasture().finishUpgrade();
         xp_to_add += farm.cow_pasture().upgradeXp();
+        if(farm.cow_pasture().level() == 1)
+            unlockCowPasture();
         MessageDialog w("Cow Pasture is now level " + QString::number(farm.cow_pasture().level()), "Info", this);
         w.exec();
     }
@@ -99,6 +103,8 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
             showAnimals();
         farm.sheep_pasture().finishUpgrade();
         xp_to_add += farm.sheep_pasture().upgradeXp();
+        if(farm.sheep_pasture().level() == 1)
+            unlockSheepPasture();
         MessageDialog w("Sheep Pasture is now level " + QString::number(farm.sheep_pasture().level()), "Info", this);
         w.exec();
     }
@@ -106,7 +112,8 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     {
         farm.alfalfa_field().finishUpgrade();
         xp_to_add += farm.alfalfa_field().upgradeXp();
-        unlockAlfalfaField();
+        if(farm.alfalfa_field().level() == 1)
+            unlockAlfalfaField();
         MessageDialog w("Alfalfa Field is now level " + QString::number(farm.alfalfa_field().level()), "Info", this);
         w.exec();
     }
