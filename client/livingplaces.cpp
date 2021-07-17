@@ -236,7 +236,7 @@ bool ChickenCoop::isCollectTime() const
 int ChickenCoop::isCollectable(int barn_id)
 {
     Barn& barn = Barn::get(barn_id);
-    if( barn.max_storage() - barn.storage() < storage_)
+    if(barn.max_storage() - barn.storage() < storage_)
         return Enums::LACK_OF_STORAGE;
     
     return Enums::OK;

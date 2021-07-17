@@ -172,7 +172,7 @@ int WheatField::isPlantable(int silo_id, int amount) const
 void WheatField::plant(int silo_id, int amount)
 {
     plants_condition_ = Enums::PLANTED;
-    planting_day_ = CURRENT_DAY;
+    planting_day_ = static_cast<int>(CURRENT_DAY);
     planted_area_ = amount;
     Silo &silo = Silo::get(silo_id);
     silo.removeWheat(amount);

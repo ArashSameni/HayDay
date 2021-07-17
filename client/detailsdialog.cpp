@@ -287,7 +287,8 @@ void DetailsDialog::initialField(const Field &field)
             else if(field.plants_condition() == Enums::PLANTED)
             {
                 btnFeedCollect->setText("Reap");
-                disableFeedCollectButton();
+                if(!field.isReapTime())
+                    disableFeedCollectButton();
             }
         }
         else if (current_place == ALFALFA_FIELD)
@@ -309,7 +310,7 @@ void DetailsDialog::initialField(const Field &field)
                     disableFeedCollectButton();
             }
         }
-    }\
+    }
 }
 
 void DetailsDialog::upgradeField(Field &field)
