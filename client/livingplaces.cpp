@@ -630,7 +630,7 @@ void SheepPasture::feed(int barn_id)
     Barn& barn = Barn::get(barn_id);
     animals_condition_ = Enums::FED;
     feeding_day_ = static_cast<int>(CURRENT_DAY);
-    barn.removeAlfalfa(storage_*2);
+    barn.removeAlfalfa(storage_);
     barn.save();
     save(id_);
 }
