@@ -11,6 +11,7 @@ DetailsDialog::DetailsDialog(QString title, Farmer &farmer, Farm &farm, QWidget 
     this->setWindowTitle(title);
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
+    ui->lblWheatIcon->hide();
     if (title == "Silo")
     {
         current_place = SILO;
@@ -77,6 +78,7 @@ void DetailsDialog::initialByPlace(const Place &place)
 
 void DetailsDialog::initialSilo()
 {
+    ui->lblWheatIcon->show();
     Silo &silo = farm.silo();
     initialByPlace(silo);
 

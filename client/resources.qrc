@@ -60,5 +60,6 @@
         <file>img/alfalfa-field-dark.png</file>
         <file>img/wheat-field.png</file>
         <file>img/wheat-field-dark.png</file>
+        <file>img/wheat-icon.png</file>
     </qresource>
 </RCC>

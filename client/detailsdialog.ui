@@ -165,6 +165,31 @@ padding-left: 28px;</string>
     <string>2 Days Left</string>
    </property>
   </widget>
+  <widget class="QLabel" name="lblWheatIcon">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>7</y>
+     <width>32</width>
+     <height>49</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/img/wheat-icon.png)</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>lblWheatIcon</zorder>
+  <zorder>lblLevel</zorder>
+  <zorder>lblUpgradeShovel</zorder>
+  <zorder>lblUpgradeTime</zorder>
+  <zorder>lblUpgradeNail</zorder>
+  <zorder>lblStorage</zorder>
+  <zorder>lblUpgradeInfo</zorder>
+  <zorder>btnUpgrade</zorder>
+  <zorder>lblDaysLeft</zorder>
  </widget>
  <resources/>
  <connections/>
