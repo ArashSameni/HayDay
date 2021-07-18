@@ -1,6 +1,6 @@
 #ifndef LOGINWINDOW_H
 #define LOGINWINDOW_H
-#include <QSound>
+
 #include <QWidget>
 
 namespace Ui {
@@ -25,8 +25,6 @@ private slots:
     void on_btnLogin_clicked();
 
 private:
-    QSound* clickSound;
-
     Ui::LoginWindow *ui;
     bool isPasswordStrong(const QString& password);
     void showSignup();
