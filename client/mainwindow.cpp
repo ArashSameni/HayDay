@@ -62,7 +62,6 @@ void MainWindow::initUI()
 void MainWindow::initSounds()
 {
     clickSound = new QSound("://sounds/clickSound.wav", this);
-    errorSound = new QSound("://sounds/error.wav", this);
 
     backgroundSound = new QMediaPlaylist();
     backgroundSound->addMedia(QUrl("qrc:/sounds/background.mp3"));
@@ -376,8 +375,6 @@ void MainWindow::on_chickenLock_clicked()
         on_btnChickenCoop_clicked();
     else
     {
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w("You have not reached required level to unlock", "Error", this);
         w.exec();
     }
@@ -389,8 +386,6 @@ void MainWindow::on_cowLock_clicked()
         on_btnCowPasture_clicked();
     else
     {
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w("You have not reached required level to unlock", "Error", this);
         w.exec();
     }
@@ -402,8 +397,6 @@ void MainWindow::on_sheepLock_clicked()
         on_btnSheepPasture_clicked();
     else
     {
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w("You have not reached required level to unlock", "Error", this);
         w.exec();
     }
@@ -451,8 +444,6 @@ void MainWindow::on_alfalfaLock_clicked()
         on_btnAlfalfaField_clicked();
     else
     {
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w("You have not reached required level to unlock", "Error", this);
         w.exec();
     }
