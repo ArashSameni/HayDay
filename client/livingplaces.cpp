@@ -469,7 +469,6 @@ void CowPasture::collect(int barn_id)
 {
     Barn& barn = Barn::get(barn_id);
     barn.addMilk(storage_);
-    barn.save();
     animals_condition_ = Enums::HUNGRY;
     save(id_);
 }

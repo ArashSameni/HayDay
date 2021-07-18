@@ -182,8 +182,8 @@ void Barn::addMilk(int amount)
     for(int i=0;i<amount;i++)
     {
         Milk milk(id_);
-        addMilk(milk);
         milk.save();
+        addMilk(milk);
     }
 }
 
@@ -219,7 +219,7 @@ void Barn::removeWool(int amount)
 
 void Barn::removeMilk(int amount)
 {
-    for (int i = 0; i < amount; i++)
+    for (int i = amount - 1; i >= 0; i--)
     {
         milks_[i].remove();
         milks_.remove(i);

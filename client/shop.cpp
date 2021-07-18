@@ -608,7 +608,6 @@ void Shop::sellMilk(int farmer_id, int count)
     Barn &barn = Farm::get(farmer.farm_id()).barn();
 
     barn.removeMilk(count);
-    barn.save();
 
     farmer.addCoin(count * milk_sell_coins);
     farmer.save();
