@@ -10,6 +10,7 @@
 #include <QGraphicsOpacityEffect>
 #include <QPropertyAnimation>
 #include <QDateTime>
+#include <QtMultimedia/QSound>
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QWidget(parent),
@@ -18,6 +19,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::Widget | Qt::MSWindowsFixedSizeDialogHint);
     fadeInLogo();
+    clickSound = new QSound("://sounds/clickSound.wav", this);
     ui->gboxSignup->setVisible(false);
 }
 
@@ -38,6 +40,8 @@ void LoginWindow::on_lblLogin_clicked()
 
 void LoginWindow::on_btnSignup_clicked()
 {
+
+    clickSound->play();
     const QString& username = ui->txtSignupUsername->text();
     const QString& password = ui->txtSignupPassword->text();
     const QString& nickname = ui->txtNickName->text();
@@ -86,6 +90,7 @@ void LoginWindow::on_btnSignup_clicked()
 
 void LoginWindow::on_btnLogin_clicked()
 {
+    clickSound->play();
     const QString& username = ui->txtLoginUsername->text();
     const QString& password = ui->txtLoginPassword->text();
     if(username.isEmpty() || password.isEmpty())

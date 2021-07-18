@@ -3,7 +3,8 @@
 #include <vector>
 #include <QDialog>
 #include <QLabel>
-
+#include <QSound>
+#include "globals.h"
 namespace Ui {
 class LevelUpDialog;
 }
@@ -25,6 +26,7 @@ private slots:
     void on_btnContinue_clicked();
 
 private:
+    QSound* levelUpSound;
     Ui::LevelUpDialog *ui;
     QLabel* lblLeft;
     QLabel* lblRight;

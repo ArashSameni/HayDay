@@ -11,11 +11,13 @@
 MainWindow::MainWindow(Farmer& farmer, Farm& farm, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), farmer(farmer), farm(farm)
 {
+
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
 
     initUI();
     checkTimeRelatedFunctions(false);
+    initSounds();
 
     //Connect Timer
     timer = new QTimer(this);
@@ -55,6 +57,18 @@ void MainWindow::initUI()
 
     if(farmer.level() >= 2)
         unlockShop();
+}
+
+void MainWindow::initSounds()
+{
+    clickSound = new QSound("://sounds/clickSound.wav", this);
+    backgroundSound = new QMediaPlaylist();
+    backgroundSound->addMedia(QUrl("qrc:/sounds/background.mp3"));
+    backgroundSound->setPlaybackMode(QMediaPlaylist::Loop);
+    music = new QMediaPlayer();
+    music->setPlaylist(backgroundSound);
+    music->play();
+
 }
 
 void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
@@ -317,6 +331,8 @@ void MainWindow::showLevel()
 
 void MainWindow::on_btnSilo_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     DetailsDialog details("Silo", farmer, farm, this);
     connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
@@ -324,6 +340,8 @@ void MainWindow::on_btnSilo_clicked()
 
 void MainWindow::on_btnChickenCoop_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     DetailsDialog details("Chicken Coop", farmer, farm, this);
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
@@ -332,6 +350,8 @@ void MainWindow::on_btnChickenCoop_clicked()
 
 void MainWindow::on_btnCowPasture_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     DetailsDialog details("Cow Pasture", farmer, farm, this);
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
@@ -340,6 +360,8 @@ void MainWindow::on_btnCowPasture_clicked()
 
 void MainWindow::on_btnSheepPasture_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     DetailsDialog details("Sheep Pasture", farmer, farm, this);
     connect(&details, &DetailsDialog::AddXP, this, &MainWindow::on_xp_add);
     connect(&details, &DetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
@@ -381,6 +403,8 @@ void MainWindow::on_sheepLock_clicked()
 
 void MainWindow::on_btnBarn_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     BarnDetailsDialog details(farmer, farm, this);
     connect(&details, &BarnDetailsDialog::ShowCoin, this, &MainWindow::on_show_coin);
     details.exec();
@@ -388,6 +412,8 @@ void MainWindow::on_btnBarn_clicked()
 
 void MainWindow::on_btnWheatField_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     DetailsDialog details("Wheat Field", farmer, farm, this);
     connect(&details, &DetailsDialog::WheatFieldPlanted, this, &MainWindow::on_wheatFieldPlanted);
     connect(&details, &DetailsDialog::WheatFieldReaped, this, &MainWindow::on_wheatFieldReaped);
@@ -398,6 +424,8 @@ void MainWindow::on_btnWheatField_clicked()
 
 void MainWindow::on_btnAlfalfaField_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int level = farm.alfalfa_field().level();
     DetailsDialog details("Alfalfa Field", farmer, farm, this);
     connect(&details, &DetailsDialog::AlfalfaFieldPlanted, this, &MainWindow::on_alfalfaFieldPlanted);
@@ -433,6 +461,8 @@ void MainWindow::on_shopLock_clicked()
 
 void MainWindow::on_btnShop_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     ShopDialog shop(farmer, this);
     connect(&shop, &ShopDialog::AddXP, this, &MainWindow::on_xp_add);
     connect(&shop, &ShopDialog::ShowCoin, this, &MainWindow::on_show_coin);
@@ -444,6 +474,8 @@ void MainWindow::on_btnShop_clicked()
 
 void MainWindow::on_btnScoreBoard_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     ScoreboardDialog board(this);
     board.exec();
 }

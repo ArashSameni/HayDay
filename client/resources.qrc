@@ -61,5 +61,8 @@
         <file>img/wheat-field.png</file>
         <file>img/wheat-field-dark.png</file>
         <file>img/wheat-icon.png</file>
+        <file>sounds/clickSound.wav</file>
+        <file>sounds/levelUpSound.wav</file>
+        <file>sounds/background.mp3</file>
     </qresource>
 </RCC>

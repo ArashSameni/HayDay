@@ -6,7 +6,9 @@
 #include "globals.h"
 #include "farmer.h"
 #include "farm.h"
-
+#include <QSound>
+#include <qmediaplaylist.h>
+#include <QMediaPlayer>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -67,8 +69,12 @@ private:
     Farmer& farmer;
     Farm& farm;
     QTimer* timer;
+    QSound* clickSound;
+    QMediaPlaylist* backgroundSound;
+    QMediaPlayer * music;
 
     void initUI();
+    void initSounds();
     void checkTimeRelatedFunctions(bool add_day_xp);
     void showAnimals();
     void unlockAlfalfaField();
