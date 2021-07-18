@@ -103,6 +103,7 @@ void ShopDialog::buy()
         emit ShowCoin();
         MessageDialog w("The purchase operation was successful!", "Info", this);
         w.exec();
+        resetAmounts();
 
         emit AddXP(xp_to_add);
         show_error = false;
@@ -188,6 +189,7 @@ void ShopDialog::sell()
         emit ShowCoin();
         MessageDialog w("The sale operation was successful!", "Info", this);
         w.exec();
+        resetAmounts();
 
         emit AddXP(xp_to_add);
         show_error = false;
@@ -198,6 +200,25 @@ void ShopDialog::sell()
         MessageDialog dialog(err, "Error", this);
         dialog.exec();
     }
+}
+
+void ShopDialog::resetAmounts()
+{
+    ui->lblCow->setText("0");
+    ui->lblEgg->setText("0");
+    ui->lblMilk->setText("0");
+    ui->lblNail->setText("0");
+    ui->lblWool->setText("0");
+    ui->lblSheep->setText("0");
+    ui->lblWheat->setText("0");
+    ui->lblShovel->setText("0");
+    ui->lblAlfalfa->setText("0");
+    ui->lblChicken->setText("0");
+
+    buyAmount = 0;
+    sellAmount = 0;
+
+    showAmount();
 }
 
 int ShopDialog::wheatCount()
@@ -607,7 +628,9 @@ void ShopDialog::on_btnBuy_clicked()
     if(buyAmount != 0)
     {
         if(buyAmount <= farmer.coins())
+        {
             buy();
+        }
         else
         {
             MessageDialog w("You don't have enough coins!", "Error", this);

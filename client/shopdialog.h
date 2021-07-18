@@ -89,6 +89,7 @@ private:
     void openLockAlfalfa();
     void buy();
     void sell();
+    void resetAmounts();
 
     int wheatCount();
     int cowCount();
