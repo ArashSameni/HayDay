@@ -56,9 +56,10 @@ void ShopDialog::buy()
     QString err;
     bool show_error = true;
 
+    int barn_needed_space = alfalfaCount() + nailCount() + shovelCount();
     if(shop.isBuyable(Enums::WHEAT, farmer.id(), wheatCount())!= Enums::OK)
         err = getNotEnoughError(Enums::WHEAT, "space");
-    else if(shop.isBuyable(Enums::ALFALFA, farmer.id(), alfalfaCount())!= Enums::OK)
+    else if(!shop.isBarnSpaceEnough(farmer.id(), barn_needed_space))
         err = getNotEnoughError(Enums::ALFALFA, "space");
     else if(shop.isBuyable(Enums::CHICKEN, farmer.id(), chickenCount())!= Enums::OK)
         err = getNotEnoughError(Enums::CHICKEN, " space");
@@ -66,10 +67,6 @@ void ShopDialog::buy()
         err = getNotEnoughError(Enums::COW, "space");
     else if(shop.isBuyable(Enums::SHEEP, farmer.id(), sheepCount())!= Enums::OK)
         err = getNotEnoughError(Enums::SHEEP, "space");
-    else if(shop.isBuyable(Enums::NAIL, farmer.id(), nailCount())!= Enums::OK)
-        err = getNotEnoughError(Enums::NAIL, "space");
-    else if(shop.isBuyable(Enums::SHOVEL, farmer.id(), shovelCount())!= Enums::OK)
-        err = getNotEnoughError(Enums::SHOVEL, "space");
     else
     {
         int xp_to_add = 0;

@@ -54,17 +54,18 @@ public:
 
     int isSellable(int type, int farmer_id, int count);
     int isBuyable(int type, int farmer_id, int count);
+    bool isBarnSpaceEnough(int farmer_id, int count) const;
     void buy(int type, int farmer_id, int count);
     void sell(int type, int farmer_id, int count);
 
 private:
-    void buyWheat(int farmer_id,int count);
-    void buyAlfalfa(int farmer_id,int count);
-    void buyChicken(int farmer_id,int count);
-    void buyCow(int farmer_id,int count);
-    void buySheep(int farmer_id,int count);
-    void buyNail(int farmer_id,int count);
-    void buyShovel(int farmer_id,int count);
+    void buyWheat(int farmer_id, int count);
+    void buyAlfalfa(int farmer_id, int count);
+    void buyChicken(int farmer_id, int count);
+    void buyCow(int farmer_id, int count);
+    void buySheep(int farmer_id, int count);
+    void buyNail(int farmer_id, int count);
+    void buyShovel(int farmer_id, int count);
 
     void sellWheat(int farmer_id, int count);
     void sellAlfalfa(int farmer_id, int count);
@@ -77,25 +78,21 @@ private:
     void sellEgg(int farmer_id, int count);
     void sellWool(int farmer_id, int count);
 
-    int isWheatSellable(int farmer_id,int count)const;
-    int isAlfalfaSellable(int farmer_id,int count)const;
-    int isChickenSellable(int farmer_id,int count)const;
-    int isEggSellable(int farmer_id,int count)const;
-    int isCowSellable(int farmer_id,int count)const;
-    int isMilkSellable(int farmer_id,int count)const;
-    int isSheepSellable(int farmer_id,int count)const;
-    int isWoolSellable(int farmer_id,int count)const;
-    int isNailSellable(int farmer_id,int count)const;
-    int isShovelSellable(int farmer_id,int count)const;
+    int isWheatSellable(int farmer_id, int count) const;
+    int isAlfalfaSellable(int farmer_id, int count) const;
+    int isChickenSellable(int farmer_id, int count) const;
+    int isEggSellable(int farmer_id, int count) const;
+    int isCowSellable(int farmer_id, int count) const;
+    int isMilkSellable(int farmer_id, int count) const;
+    int isSheepSellable(int farmer_id, int count) const;
+    int isWoolSellable(int farmer_id, int count) const;
+    int isNailSellable(int farmer_id, int count) const;
+    int isShovelSellable(int farmer_id, int count) const;
 
-    int isWheatBuyable(int farmer_id, int count)const;
-    int isAlfalfaBuyable(int farmer_id, int count)const;
-    int isChickenBuyable(int farmer_id, int count)const;
-    int isCowBuyable(int farmer_id, int count)const;
-    int isSheepBuyable(int farmer_id, int count)const;
-    int isNailBuyable(int farmer_id, int count)const;
-    int isShovelBuyable(int farmer_id, int count)const;
-
+    int isWheatBuyable(int farmer_id, int count) const;
+    int isChickenBuyable(int farmer_id, int count) const;
+    int isCowBuyable(int farmer_id, int count) const;
+    int isSheepBuyable(int farmer_id, int count) const;
 };
 
 #endif // SHOP_H

@@ -59,21 +59,6 @@ int Shop::isWheatBuyable(int farmer_id, int count) const
     return Enums::OK;
 }
 
-int Shop::isAlfalfaBuyable(int farmer_id, int count) const
-{
-    Farmer &farmer = Farmer::get(farmer_id);
-    Barn &barn = Farm::get(farmer.farm_id()).barn();
-
-    if (farmer.coins() < alfalfa_buy_coins)
-        return Enums::LACK_OF_COINS;
-    if (barn.max_storage()-barn.storage() < count)
-        return Enums::LACK_OF_STORAGE;
-    if (farmer.level() < needed_level_for_alfalfa)
-        return Enums::LACK_OF_LEVEL;
-
-    return Enums::OK;
-}
-
 int Shop::isChickenBuyable(int farmer_id, int count) const
 {
     Farmer &farmer = Farmer::get(farmer_id);
@@ -113,36 +98,6 @@ int Shop::isSheepBuyable(int farmer_id, int count) const
     if (sheepPasture.max_storage() < sheepPasture.storage() + count)
         return Enums::LACK_OF_STORAGE;
     if (farmer.level() < needed_level_for_sheep)
-        return Enums::LACK_OF_LEVEL;
-
-    return Enums::OK;
-}
-
-int Shop::isNailBuyable(int farmer_id, int count) const
-{
-    Farmer &farmer = Farmer::get(farmer_id);
-    Barn &barn = Farm::get(farmer.farm_id()).barn();
-
-    if (farmer.coins() < nail_buy_coins)
-        return Enums::LACK_OF_COINS;
-    if (barn.max_storage() < barn.storage() + count)
-        return Enums::LACK_OF_STORAGE;
-    if (farmer.level() < needed_level_for_nail)
-        return Enums::LACK_OF_LEVEL;
-
-    return Enums::OK;
-}
-
-int Shop::isShovelBuyable(int farmer_id, int count) const
-{
-    Farmer &farmer = Farmer::get(farmer_id);
-    Barn &barn = Farm::get(farmer.farm_id()).barn();
-
-    if (farmer.coins() < shovel_buy_coins)
-        return Enums::LACK_OF_COINS;
-    if (barn.max_storage() < barn.storage() + count)
-        return Enums::LACK_OF_STORAGE;
-    if (farmer.level() < needed_level_for_shovel)
         return Enums::LACK_OF_LEVEL;
 
     return Enums::OK;
@@ -278,6 +233,14 @@ int Shop::isShovelSellable(int farmer_id, int count) const
     return Enums::OK;
 }
 
+bool Shop::isBarnSpaceEnough(int farmer_id, int count) const
+{
+    Farmer &farmer = Farmer::get(farmer_id);
+    Barn &barn = Farm::get(farmer.farm_id()).barn();
+
+    return barn.max_storage() - barn.storage() >= count;
+}
+
 int Shop::isSellable(int type, int farmer_id, int count)
 {
     if(count == 0)
@@ -330,9 +293,6 @@ int Shop::isBuyable(int type, int farmer_id, int count)
     case Enums::WHEAT:
         return isWheatBuyable(farmer_id, count);
 
-    case Enums::ALFALFA:
-        return isAlfalfaBuyable(farmer_id, count);
-
     case Enums::CHICKEN:
         return isChickenBuyable(farmer_id, count);
 
@@ -341,12 +301,6 @@ int Shop::isBuyable(int type, int farmer_id, int count)
 
     case Enums::SHEEP:
         return isSheepBuyable(farmer_id, count);
-
-    case Enums::NAIL:
-        return isNailBuyable(farmer_id, count);
-
-    case Enums::SHOVEL:
-        return isShovelBuyable(farmer_id, count);
 
     default:
         return -1;
