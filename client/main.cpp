@@ -5,6 +5,7 @@
 uint CURRENT_DAY;
 const uint SECONDS_PER_DAY = 30;
 TcpSocket socket;
+bool is_sound_muted = false;
 
 int main(int argc, char *argv[])
 {
