@@ -12,6 +12,7 @@ namespace Enums
 
         NOT_PLANTED,
         PLANTED,
+        REAPABLE,
 
         //planting contdition
         AREA_ERROR,

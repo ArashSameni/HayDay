@@ -185,9 +185,15 @@ int WheatField::reapXp() const
     return 1;
 }
 
-bool WheatField::isReapTime() const
+bool WheatField::isPlantingFinished() const
 {
     return CURRENT_DAY - static_cast<uint>(planting_day_) >= 2;
+}
+
+void WheatField::finishPlanting()
+{
+    plants_condition_ = Enums::REAPABLE;
+    save();
 }
 
 int WheatField::isReapable(int silo_id) const
@@ -443,9 +449,15 @@ int AlfalfaField::reapXp() const
     return 2;
 }
 
-bool AlfalfaField::isReapTime() const
+bool AlfalfaField::isPlantingFinished() const
 {
     return CURRENT_DAY - static_cast<uint>(planting_day_) >= 4;
+}
+
+void AlfalfaField::finishPlanting()
+{
+    plants_condition_ = Enums::REAPABLE;
+    save();
 }
 
 int AlfalfaField::isReapable(int barn_id) const

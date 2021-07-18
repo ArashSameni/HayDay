@@ -118,8 +118,24 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
         MessageDialog w("Wheat Field is now level " + QString::number(farm.wheat_field().level()), "Info", this);
         w.exec();
     }
+    if(farm.wheat_field().plants_condition() == Enums::PLANTED && farm.wheat_field().isPlantingFinished())
+    {
+        farm.wheat_field().finishPlanting();
+        MessageDialog w("Planted wheats are now reapable", "Info", this);
+        w.exec();
+    }
+    if(farm.alfalfa_field().plants_condition() == Enums::PLANTED && farm.alfalfa_field().isPlantingFinished())
+    {
+        farm.alfalfa_field().finishPlanting();
+        MessageDialog w("Planted alfalfas are now reapable", "Info", this);
+        w.exec();
+    }
     if(farm.alfalfa_field().plants_condition() == Enums::PLOWING && farm.alfalfa_field().isPlowingFinished())
+    {
         farm.alfalfa_field().finishPlowing();
+        MessageDialog w("Alfalfa field plowed", "Info", this);
+        w.exec();
+    }
 
     int count_of_expired_milks = farm.barn().checkMilksExpiration();
     if(count_of_expired_milks)

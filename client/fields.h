@@ -8,7 +8,7 @@ class Field : public Place
 protected:
     int area_;
     int planted_area_;
-    int plants_condition_ = Enums::NOT_PLANTED;
+    int plants_condition_;
     int planting_day_ = -1;
 
 public:
@@ -23,7 +23,8 @@ public:
     virtual int isPlantable(int id, int amount) const = 0;
     virtual void plant(int id, int amount) = 0;
     virtual int reapXp() const = 0;
-    virtual bool isReapTime() const = 0;
+    virtual bool isPlantingFinished() const = 0;
+    virtual void finishPlanting() = 0;
     virtual int isReapable(int id) const = 0;
     virtual void reap(int id) = 0;
 
@@ -59,7 +60,8 @@ public:
     int isPlantable(int silo_id, int amount) const;
     void plant(int silo_id, int amount);
     int reapXp() const;
-    bool isReapTime() const;
+    bool isPlantingFinished() const;
+    void finishPlanting();
     int isReapable(int silo_id) const;
     void reap(int silo_id);
 
@@ -99,7 +101,8 @@ public:
     int isPlantable(int barn_id, int amount) const;
     void plant(int barn_id, int amount);
     int reapXp() const;
-    bool isReapTime() const;
+    bool isPlantingFinished() const;
+    void finishPlanting();
     int isReapable(int barn_id) const;
     void reap(int barn_id);
 

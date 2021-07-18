@@ -281,10 +281,10 @@ void DetailsDialog::initialField(const Field &field)
         {
             if(field.plants_condition() == Enums::NOT_PLANTED)
                 btnFeedCollect->setText("Plant");
-            else if(field.plants_condition() == Enums::PLANTED)
+            else
             {
                 btnFeedCollect->setText("Reap");
-                if(!field.isReapTime())
+                if(field.plants_condition() != Enums::REAPABLE)
                     disableFeedCollectButton();
             }
         }
@@ -303,7 +303,7 @@ void DetailsDialog::initialField(const Field &field)
             else
             {
                 btnFeedCollect->setText("Reap");
-                if(!alfalfa_field.isReapTime())
+                if(field.plants_condition() != Enums::REAPABLE)
                     disableFeedCollectButton();
             }
         }
@@ -414,7 +414,7 @@ void DetailsDialog::plantField(int amount, Field &field)
 void DetailsDialog::reapField(Field &field)
 {
     int res, storage_place_id = 0;
-    if (field.isReapTime())
+    if (field.plants_condition() == Enums::REAPABLE)
     {
         if (current_place == WHEAT_FIELD)
             storage_place_id = farm.silo().id();
@@ -520,7 +520,7 @@ void DetailsDialog::on_btnPlant_clicked()
     case WHEAT_FIELD:
         if (farm.wheat_field().plants_condition() == Enums::NOT_PLANTED)
             dialog.exec();
-        else if (farm.wheat_field().plants_condition() == Enums::PLANTED)
+        else if (farm.wheat_field().plants_condition() == Enums::REAPABLE)
             reapField(farm.wheat_field());
         break;
 
@@ -529,7 +529,7 @@ void DetailsDialog::on_btnPlant_clicked()
             plowField(farm.alfalfa_field());
         else if (farm.alfalfa_field().plants_condition() == Enums::PLOWED)
             dialog.exec();
-        else if (farm.alfalfa_field().plants_condition() == Enums::PLANTED)
+        else if (farm.alfalfa_field().plants_condition() == Enums::REAPABLE)
             reapField(farm.alfalfa_field());
         else if (farm.alfalfa_field().plants_condition() == Enums::PLOWING)
         {
