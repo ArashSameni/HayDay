@@ -63,11 +63,14 @@ void MainWindow::initSounds()
 {
     clickSound = new QSound("://sounds/clickSound.wav", this);
 
-    backgroundSound = new QMediaPlaylist();
-    backgroundSound->addMedia(QUrl("qrc:/sounds/background.mp3"));
-    backgroundSound->setPlaybackMode(QMediaPlaylist::Loop);
-    music = new QMediaPlayer();
-    music->setPlaylist(backgroundSound);
+    music = new QMediaPlayer(this);
+    music->setMedia(QUrl("qrc:/sounds/background.mp3"));
+    connect(music, &QMediaPlayer::stateChanged, [this](QMediaPlayer::State state) {
+        if (state == QMediaPlayer::State::StoppedState)
+        {
+            music->play();
+        }
+    });
     music->play();
 
 }
