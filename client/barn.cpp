@@ -138,6 +138,8 @@ int Barn::checkMilksExpiration()
     }
 
     milks_ = milks;
+    storage_ -= count_of_expired;
+    save();
     return count_of_expired;
 }
 
