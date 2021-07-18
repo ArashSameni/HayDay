@@ -1,5 +1,6 @@
 #include "messagedialog.h"
 #include "ui_messagedialog.h"
+#include "globals.h"
 
 MessageDialog::MessageDialog(QString text, QString title, QWidget *parent, bool get_num) :
     QDialog(parent),
@@ -13,6 +14,8 @@ MessageDialog::MessageDialog(QString text, QString title, QWidget *parent, bool 
         ui->txtNumber->hide();
         setFixedSize(450, 140);
     }
+
+    errorSound = new QSound("://sounds/error.wav", this);
 }
 
 MessageDialog::~MessageDialog()

@@ -5,6 +5,7 @@
 #include "farmer.h"
 #include "farm.h"
 #include "livingplaces.h"
+#include <QSound>
 
 namespace Ui {
 class DetailsDialog;
@@ -48,6 +49,11 @@ private:
     QPushButton *btnFeedCollect = nullptr;
     Farmer& farmer;
     Farm& farm;
+    QSound* clickSound;
+    QSound* errorSound;
+
+    void initSounds();
+
     int current_place;
     void disableUpgradeButton();
     void disableFeedCollectButton();

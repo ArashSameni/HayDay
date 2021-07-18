@@ -17,6 +17,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Widget | Qt::MSWindowsFixedSizeDialogHint);
+    initSounds();
     fadeInLogo();
     ui->gboxSignup->setVisible(false);
 }
@@ -38,18 +39,25 @@ void LoginWindow::on_lblLogin_clicked()
 
 void LoginWindow::on_btnSignup_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
+
     const QString& username = ui->txtSignupUsername->text();
     const QString& password = ui->txtSignupPassword->text();
     const QString& nickname = ui->txtNickName->text();
     const int gender = ui->cmbGender->currentIndex();
     if(username.isEmpty() || password.isEmpty() || nickname.isEmpty())
     {
+        if(!is_sound_muted)
+            errorSound->play();
         MessageDialog w("Please fill the form.", "Error", this);
         w.exec();
         return;
     }
     if(!isPasswordStrong(password))
     {
+        if(!is_sound_muted)
+            errorSound->play();
         MessageDialog w("Password isn't strong enough.", "Error", this);
         w.exec();
         return;
@@ -79,6 +87,8 @@ void LoginWindow::on_btnSignup_clicked()
     }
     else
     {
+        if(!is_sound_muted)
+            errorSound->play();
         MessageDialog w("Username already exists.", "Error", this);
         w.exec();
     }
@@ -86,10 +96,15 @@ void LoginWindow::on_btnSignup_clicked()
 
 void LoginWindow::on_btnLogin_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
+
     const QString& username = ui->txtLoginUsername->text();
     const QString& password = ui->txtLoginPassword->text();
     if(username.isEmpty() || password.isEmpty())
     {
+        if(!is_sound_muted)
+            errorSound->play();
         MessageDialog w("Please enter username and password.", "Error", this);
         w.exec();
         return;
@@ -116,9 +131,17 @@ void LoginWindow::on_btnLogin_clicked()
     }
     else
     {
+        if(!is_sound_muted)
+            errorSound->play();
         MessageDialog w("Username or password is incorrect.", "Error", this);
         w.exec();
     }
+}
+
+void LoginWindow::initSounds()
+{
+    clickSound = new QSound("://sounds/clickSound.wav", this);
+    errorSound = new QSound("://sounds/error.wav", this);
 }
 
 bool LoginWindow::isPasswordStrong(const QString &password)

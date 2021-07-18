@@ -13,6 +13,7 @@ ShopDialog::ShopDialog(Farmer& farmer, QWidget *parent) :
     this->setWindowTitle("Shop");
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
+    initSounds();
     checkLock();
 }
 
@@ -108,6 +109,8 @@ void ShopDialog::buy()
 
     if(show_error)
     {
+        if(!is_sound_muted)
+            errorSound->play();
         MessageDialog dialog(err, "Error", this);
         dialog.exec();
     }
@@ -194,6 +197,8 @@ void ShopDialog::sell()
 
     if(show_error)
     {
+        if(!is_sound_muted)
+            errorSound->play();
         MessageDialog dialog(err, "Error", this);
         dialog.exec();
     }
@@ -367,6 +372,8 @@ void ShopDialog::lockAlfalfa()
 
 void ShopDialog::on_btnWheatPlus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblWheat->text().toInt();
     if(count < 100)
     {
@@ -380,6 +387,8 @@ void ShopDialog::on_btnWheatPlus_clicked()
 
 void ShopDialog::on_btnWheatMinus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblWheat->text().toInt();
     if(count > 0)
     {
@@ -393,6 +402,8 @@ void ShopDialog::on_btnWheatMinus_clicked()
 
 void ShopDialog::on_btnShovelPlus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblShovel->text().toInt();
     if(count < 100)
     {
@@ -406,6 +417,8 @@ void ShopDialog::on_btnShovelPlus_clicked()
 
 void ShopDialog::on_btnShovelMinus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblShovel->text().toInt();
     if(count > 0)
     {
@@ -419,6 +432,8 @@ void ShopDialog::on_btnShovelMinus_clicked()
 
 void ShopDialog::on_btnNailPlus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblNail->text().toInt();
     if(count < 100)
     {
@@ -432,6 +447,8 @@ void ShopDialog::on_btnNailPlus_clicked()
 
 void ShopDialog::on_btnNailMinus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblNail->text().toInt();
     if(count > 0)
     {
@@ -445,6 +462,8 @@ void ShopDialog::on_btnNailMinus_clicked()
 
 void ShopDialog::on_btnChickenPlus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblChicken->text().toInt();
     if(count < 100)
     {
@@ -458,6 +477,8 @@ void ShopDialog::on_btnChickenPlus_clicked()
 
 void ShopDialog::on_btnChickenMinus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblChicken->text().toInt();
     if(count > 0)
     {
@@ -471,6 +492,8 @@ void ShopDialog::on_btnChickenMinus_clicked()
 
 void ShopDialog::on_btnEggPlus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblEgg->text().toInt();
     if(count < 100)
     {
@@ -483,6 +506,8 @@ void ShopDialog::on_btnEggPlus_clicked()
 
 void ShopDialog::on_btnEggMinus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblEgg->text().toInt();
     if(count > 0)
     {
@@ -495,6 +520,8 @@ void ShopDialog::on_btnEggMinus_clicked()
 
 void ShopDialog::on_btnAlfalfaPlus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblAlfalfa->text().toInt();
     if(count < 100)
     {
@@ -508,6 +535,8 @@ void ShopDialog::on_btnAlfalfaPlus_clicked()
 
 void ShopDialog::on_btnAlfalfaMinus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblAlfalfa->text().toInt();
     if(count > 0)
     {
@@ -521,6 +550,8 @@ void ShopDialog::on_btnAlfalfaMinus_clicked()
 
 void ShopDialog::on_btnCowPlus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblCow->text().toInt();
     if(count < 100)
     {
@@ -534,6 +565,8 @@ void ShopDialog::on_btnCowPlus_clicked()
 
 void ShopDialog::on_btnCowMinus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblCow->text().toInt();
     if(count > 0)
     {
@@ -547,6 +580,8 @@ void ShopDialog::on_btnCowMinus_clicked()
 
 void ShopDialog::on_btnMilkPlus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblMilk->text().toInt();
     if(count < 100)
     {
@@ -559,6 +594,8 @@ void ShopDialog::on_btnMilkPlus_clicked()
 
 void ShopDialog::on_btnMilkMinus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblMilk->text().toInt();
     if(count > 0)
     {
@@ -571,6 +608,8 @@ void ShopDialog::on_btnMilkMinus_clicked()
 
 void ShopDialog::on_btnSheepPlus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblSheep->text().toInt();
     if(count < 100)
     {
@@ -584,6 +623,8 @@ void ShopDialog::on_btnSheepPlus_clicked()
 
 void ShopDialog::on_btnSheepMinus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblSheep->text().toInt();
     if(count > 0)
     {
@@ -597,6 +638,8 @@ void ShopDialog::on_btnSheepMinus_clicked()
 
 void ShopDialog::on_btnWoolPlus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblWool->text().toInt();
     if(count < 100)
     {
@@ -609,6 +652,8 @@ void ShopDialog::on_btnWoolPlus_clicked()
 
 void ShopDialog::on_btnWoolMinus_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     int count = ui->lblWool->text().toInt();
     if(count > 0)
     {
@@ -622,6 +667,8 @@ void ShopDialog::on_btnWoolMinus_clicked()
 
 void ShopDialog::on_btnBuy_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     if(buyAmount != 0)
     {
         if(buyAmount <= farmer.coins())
@@ -630,12 +677,16 @@ void ShopDialog::on_btnBuy_clicked()
         }
         else
         {
+            if(!is_sound_muted)
+                errorSound->play();
             MessageDialog w("You don't have enough coins!", "Error", this);
             w.exec();
         }
     }
     else
     {
+        if(!is_sound_muted)
+            errorSound->play();
         MessageDialog w("Please pick an item!", "Error", this);
         w.exec();
     }
@@ -643,13 +694,23 @@ void ShopDialog::on_btnBuy_clicked()
 
 void ShopDialog::on_btnSell_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     if(sellAmount != 0)
     {
         sell();
     }
     else
     {
+        if(!is_sound_muted)
+            errorSound->play();
         MessageDialog w("Please pick an item!", "Error", this);
         w.exec();
     }
+}
+
+void ShopDialog::initSounds()
+{
+    clickSound = new QSound("://sounds/clickSound.wav", this);
+    errorSound = new QSound("://sounds/error.wav", this);
 }

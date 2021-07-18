@@ -5,6 +5,7 @@
 #include "globals.h"
 #include <QVector>
 #include <QLabel>
+#include <QSound>
 
 namespace Ui {
 class ScoreboardDialog;
@@ -25,6 +26,8 @@ private slots:
 
 private:
     Ui::ScoreboardDialog *ui;
+    QSound* clickSound;
+
     int pagesCount = 0;
     int currentPage = 0;
     int currentRank = 0;

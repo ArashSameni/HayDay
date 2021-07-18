@@ -64,5 +64,6 @@
         <file>sounds/clickSound.wav</file>
         <file>sounds/levelUpSound.wav</file>
         <file>sounds/background.mp3</file>
+        <file>sounds/error.wav</file>
     </qresource>
 </RCC>

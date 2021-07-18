@@ -2,6 +2,7 @@
 #define LOGINWINDOW_H
 
 #include <QWidget>
+#include <QSound>
 
 namespace Ui {
 class LoginWindow;
@@ -26,6 +27,11 @@ private slots:
 
 private:
     Ui::LoginWindow *ui;
+    QSound* clickSound;
+    QSound* errorSound;
+
+    void initSounds();
+
     bool isPasswordStrong(const QString& password);
     void showSignup();
     void showLogin();

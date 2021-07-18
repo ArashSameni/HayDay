@@ -2,6 +2,7 @@
 #define MESSAGEDIALOG_H
 
 #include <QDialog>
+#include <QSound>
 
 namespace Ui {
 class MessageDialog;
@@ -23,6 +24,7 @@ private slots:
 
 private:
     Ui::MessageDialog *ui;
+    QSound* errorSound;
 };
 
 #endif // MESSAGEDIALOG_H

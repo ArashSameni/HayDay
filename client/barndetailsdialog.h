@@ -5,6 +5,7 @@
 #include "farm.h"
 #include "barn.h"
 #include <QDialog>
+#include <QSound>
 
 namespace Ui {
 class BarnDetailsDialog;
@@ -31,8 +32,11 @@ private:
     bool isBarnShown = true;
     Farmer &farmer;
     Farm &farm;
+    QSound* clickSound;
+    QSound* errorSound;
 
     void initUI();
+    void initSounds();
     void initUpgrade();
     void initBarn();
     void showUpgrade();

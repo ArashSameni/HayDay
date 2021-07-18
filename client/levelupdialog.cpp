@@ -10,9 +10,11 @@ LevelUpDialog::LevelUpDialog(int level ,QWidget *parent) :
 
     lblLeft = new QLabel(this);
     lblRight = new QLabel(this);
-    levelUpSound=new QSound("://sounds/levelUpSound.wav", this);
+
+    soundPlayer = new QSound("://sounds/levelUpSound.wav", this);
     if(!is_sound_muted)
-        levelUpSound->play();
+        soundPlayer->play();
+
     ui->lblCongrates->setText("Congratulations, You are now a level " + QString::number(level) + " farmer!!");
     if(level ==5 || level > 6)
         ui->lblCongrates->setGeometry(0,180,450,32);
@@ -90,5 +92,7 @@ LevelUpDialog::~LevelUpDialog()
 
 void LevelUpDialog::on_btnContinue_clicked()
 {
+    if(!is_sound_muted)
+        soundPlayer->play("://sounds/clickSound.wav");
     this->close();
 }

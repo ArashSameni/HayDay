@@ -14,6 +14,8 @@ ScoreboardDialog::ScoreboardDialog(QWidget *parent) : QDialog(parent),
     ui->lblCurrentPage->setText("1/" + QString::number(pagesCount));
     createLabels();
     fetchFarmers();
+
+    clickSound = new QSound("://sounds/clickSound.wav", this);
 }
 
 ScoreboardDialog::~ScoreboardDialog()
@@ -97,6 +99,8 @@ void ScoreboardDialog::clearScoreboard()
 
 void ScoreboardDialog::on_btnLeftArrow_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     if(currentPage > 0)
     {
         currentPage -= 1;
@@ -113,6 +117,8 @@ void ScoreboardDialog::showCurrentPage()
 
 void ScoreboardDialog::on_btnRightArrow_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     if(currentPage < pagesCount - 1)
     {
         currentPage += 1;

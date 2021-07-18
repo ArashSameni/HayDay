@@ -14,6 +14,7 @@ BarnDetailsDialog::BarnDetailsDialog(Farmer& farmer, Farm& farm, QWidget *parent
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
     initUI();
+    initSounds();
     showBarn();
 }
 
@@ -36,6 +37,12 @@ void BarnDetailsDialog::initUI()
 {
     initBarn();
     initUpgrade();
+}
+
+void BarnDetailsDialog::initSounds()
+{
+    clickSound = new QSound("://sounds/clickSound.wav", this);
+    errorSound = new QSound("://sounds/error.wav", this);
 }
 
 void BarnDetailsDialog::initUpgrade()
@@ -154,6 +161,8 @@ void BarnDetailsDialog::upgradeBarn()
         else if(res == Enums::LACK_OF_LEVEL)
             err = "You have not reached required level to upgrade";
 
+        if(!is_sound_muted)
+            errorSound->play();
         MessageDialog w(err, "Error", this);
         w.exec();
     }
@@ -161,5 +170,7 @@ void BarnDetailsDialog::upgradeBarn()
 
 void BarnDetailsDialog::on_btnUpgrade_clicked()
 {
+    if(!is_sound_muted)
+        clickSound->play();
     upgradeBarn();
 }

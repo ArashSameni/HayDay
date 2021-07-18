@@ -70,6 +70,7 @@ private:
     Farm& farm;
     QTimer* timer;
     QSound* clickSound;
+    QSound* errorSound;
     QMediaPlaylist* backgroundSound;
     QMediaPlayer * music;
 

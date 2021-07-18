@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "shop.h"
 #include "farmer.h"
+#include <QSound>
 
 namespace Ui {
 class ShopDialog;
@@ -75,6 +76,10 @@ private:
     int sellAmount = 0;
     Farmer& farmer;
     Shop shop;
+    QSound* clickSound;
+    QSound* errorSound;
+
+    void initSounds();
 
     void showAmount();
     void showBuyButton();

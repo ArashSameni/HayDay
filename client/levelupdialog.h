@@ -26,7 +26,7 @@ private slots:
     void on_btnContinue_clicked();
 
 private:
-    QSound* levelUpSound;
+    QSound* soundPlayer;
     Ui::LevelUpDialog *ui;
     QLabel* lblLeft;
     QLabel* lblRight;
