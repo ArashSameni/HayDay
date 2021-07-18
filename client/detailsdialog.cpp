@@ -42,6 +42,7 @@ DetailsDialog::DetailsDialog(QString title, Farmer &farmer, Farm &farm, QWidget 
         current_place = ALFALFA_FIELD;
         initialField(farm.alfalfa_field());
     }
+    initSounds();
 }
 
 DetailsDialog::~DetailsDialog()
@@ -111,8 +112,6 @@ void DetailsDialog::upgradeSilo()
         else if (res == Enums::LACK_OF_LEVEL)
             err = "You have not reached required level to upgrade";
 
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w(err, "Error", this);
         w.exec();
     }
@@ -174,8 +173,6 @@ void DetailsDialog::upgradeLivingPlace(LivingPlace &place)
         else if (res == Enums::LACK_OF_LEVEL)
             err = "You have not reached required level to upgrade";
 
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w(err, "Error", this);
         w.exec();
     }
@@ -210,8 +207,6 @@ void DetailsDialog::feedLivingPlace(LivingPlace &place)
         else
             err = "You don't have enough storage to feed animals!";
 
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w(err, "Error", this);
         w.exec();
     }
@@ -247,16 +242,12 @@ void DetailsDialog::collectLivingPlace(LivingPlace &place)
             else
                 err = "You don't have enough money to breed the sheeps!";
 
-            if(!is_sound_muted)
-                errorSound->play();
             MessageDialog w(err, "Error", this);
             w.exec();
         }
     }
     else
     {
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w("Product is not collectable yet!", "Error", this);
         w.exec();
     }
@@ -343,8 +334,7 @@ void DetailsDialog::upgradeField(Field &field)
         else if (res == Enums::LACK_OF_LEVEL)
             err = "You have not reached required level to upgrade";
 
-        if(!is_sound_muted)
-            errorSound->play();
+
         MessageDialog w(err, "Error", this);
         w.exec();
     }
@@ -374,8 +364,6 @@ void DetailsDialog::plowField(AlfalfaField &field)
         else if (res == Enums::PLANTED)
             err = "You have planted alfalfa in this field!";
 
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w(err, "Error", this);
         w.exec();
     }
@@ -420,8 +408,7 @@ void DetailsDialog::plantField(int amount, Field &field)
         else if (res == Enums::PLANTED)
             err = "Field is already planted!";
 
-        if(!is_sound_muted)
-            errorSound->play();
+
         MessageDialog w(err, "Error", this);
         w.exec();
     }
@@ -461,16 +448,13 @@ void DetailsDialog::reapField(Field &field)
             else if (current_place == ALFALFA_FIELD)
                 err = "You don't have enough space in barn!";
 
-            if(!is_sound_muted)
-                errorSound->play();
+
             MessageDialog w(err, "Error", this);
             w.exec();
         }
     }
     else
     {
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w("Plants' growing is not finished yet!", "Error", this);
         w.exec();
     }
@@ -559,8 +543,6 @@ void DetailsDialog::on_btnPlant_clicked()
             reapField(farm.alfalfa_field());
         else if (farm.alfalfa_field().plants_condition() == Enums::PLOWING)
         {
-            if(!is_sound_muted)
-                errorSound->play();
             MessageDialog w("Plowing is not finished!", "Error", this);
             w.exec();
         }
@@ -579,7 +561,6 @@ void DetailsDialog::on_plantAmountChoosed(int amount)
 void DetailsDialog::initSounds()
 {
     clickSound = new QSound("://sounds/clickSound.wav", this);
-    errorSound = new QSound("://sounds/error.wav", this);
 }
 
 void DetailsDialog::disableUpgradeButton()

@@ -77,7 +77,6 @@ private:
     Farmer& farmer;
     Shop shop;
     QSound* clickSound;
-    QSound* errorSound;
 
     void initSounds();
 

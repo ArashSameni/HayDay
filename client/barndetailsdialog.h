@@ -33,7 +33,6 @@ private:
     Farmer &farmer;
     Farm &farm;
     QSound* clickSound;
-    QSound* errorSound;
 
     void initUI();
     void initSounds();

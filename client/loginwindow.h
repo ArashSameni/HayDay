@@ -28,7 +28,6 @@ private slots:
 private:
     Ui::LoginWindow *ui;
     QSound* clickSound;
-    QSound* errorSound;
 
     void initSounds();
 

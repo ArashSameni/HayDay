@@ -42,7 +42,6 @@ void BarnDetailsDialog::initUI()
 void BarnDetailsDialog::initSounds()
 {
     clickSound = new QSound("://sounds/clickSound.wav", this);
-    errorSound = new QSound("://sounds/error.wav", this);
 }
 
 void BarnDetailsDialog::initUpgrade()
@@ -161,8 +160,6 @@ void BarnDetailsDialog::upgradeBarn()
         else if(res == Enums::LACK_OF_LEVEL)
             err = "You have not reached required level to upgrade";
 
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w(err, "Error", this);
         w.exec();
     }

@@ -109,8 +109,6 @@ void ShopDialog::buy()
 
     if(show_error)
     {
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog dialog(err, "Error", this);
         dialog.exec();
     }
@@ -197,8 +195,6 @@ void ShopDialog::sell()
 
     if(show_error)
     {
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog dialog(err, "Error", this);
         dialog.exec();
     }
@@ -677,16 +673,12 @@ void ShopDialog::on_btnBuy_clicked()
         }
         else
         {
-            if(!is_sound_muted)
-                errorSound->play();
             MessageDialog w("You don't have enough coins!", "Error", this);
             w.exec();
         }
     }
     else
     {
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w("Please pick an item!", "Error", this);
         w.exec();
     }
@@ -702,8 +694,6 @@ void ShopDialog::on_btnSell_clicked()
     }
     else
     {
-        if(!is_sound_muted)
-            errorSound->play();
         MessageDialog w("Please pick an item!", "Error", this);
         w.exec();
     }
@@ -712,5 +702,4 @@ void ShopDialog::on_btnSell_clicked()
 void ShopDialog::initSounds()
 {
     clickSound = new QSound("://sounds/clickSound.wav", this);
-    errorSound = new QSound("://sounds/error.wav", this);
 }
