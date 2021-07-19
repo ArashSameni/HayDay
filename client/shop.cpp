@@ -70,6 +70,10 @@ int Shop::isChickenBuyable(int farmer_id, int count) const
         return Enums::LACK_OF_STORAGE;
     if (farmer.level() < needed_level_for_chicken)
         return Enums::LACK_OF_LEVEL;
+    if(chickenCoop.animals_condition() == Enums::FED)
+        return Enums::FED;
+    if(chickenCoop.animals_condition() == Enums::COLLECTABLE)
+        return Enums::COLLECTABLE;
 
     return Enums::OK;
 }
@@ -84,6 +88,10 @@ int Shop::isCowBuyable(int farmer_id, int count) const
         return Enums::LACK_OF_STORAGE;
     if (farmer.level() < needed_level_for_cow)
         return Enums::LACK_OF_LEVEL;
+    if(cowPasture.animals_condition() == Enums::FED)
+        return Enums::FED;
+    if(cowPasture.animals_condition() == Enums::COLLECTABLE)
+        return Enums::COLLECTABLE;
 
     return Enums::OK;
 }
@@ -99,6 +107,10 @@ int Shop::isSheepBuyable(int farmer_id, int count) const
         return Enums::LACK_OF_STORAGE;
     if (farmer.level() < needed_level_for_sheep)
         return Enums::LACK_OF_LEVEL;
+    if(sheepPasture.animals_condition() == Enums::FED)
+        return Enums::FED;
+    if(sheepPasture.animals_condition() == Enums::COLLECTABLE)
+        return Enums::COLLECTABLE;
 
     return Enums::OK;
 }
@@ -138,6 +150,10 @@ int Shop::isChickenSellable(int farmer_id, int count) const
         return Enums::LACK_OF_STORAGE;
     if (farmer.level() < needed_level_for_chicken)
         return Enums::LACK_OF_LEVEL;
+    if(chickenCoop.animals_condition() == Enums::FED)
+        return Enums::FED;
+    if(chickenCoop.animals_condition() == Enums::COLLECTABLE)
+        return Enums::COLLECTABLE;
 
     return Enums::OK;
 }
@@ -164,6 +180,10 @@ int Shop::isCowSellable(int farmer_id, int count) const
         return Enums::LACK_OF_STORAGE;
     if (farmer.level() < needed_level_for_cow)
         return Enums::LACK_OF_LEVEL;
+    if(cowPasture.animals_condition() == Enums::FED)
+        return Enums::FED;
+    if(cowPasture.animals_condition() == Enums::COLLECTABLE)
+        return Enums::COLLECTABLE;
 
     return Enums::OK;
 }
@@ -190,6 +210,10 @@ int Shop::isSheepSellable(int farmer_id, int count) const
         return Enums::LACK_OF_STORAGE;
     if (farmer.level() < needed_level_for_sheep)
         return Enums::LACK_OF_LEVEL;
+    if(sheepPasture.animals_condition() == Enums::FED)
+        return Enums::FED;
+    if(sheepPasture.animals_condition() == Enums::COLLECTABLE)
+        return Enums::COLLECTABLE;
 
     return Enums::OK;
 }

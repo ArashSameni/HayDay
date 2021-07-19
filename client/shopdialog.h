@@ -107,6 +107,7 @@ private:
     int shovelCount();
 
     QString getNotEnoughError(int type, QString err_name);
+    QString animalConditionError(int type);
 };
 
 #endif // SHOPDIALOG_H

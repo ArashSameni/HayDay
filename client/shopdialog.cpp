@@ -56,18 +56,37 @@ void ShopDialog::buy()
 {
     QString err;
     bool show_error = true;
+    int chickenCondition = shop.isBuyable(Enums::CHICKEN, farmer.id(), chickenCount());
+    int sheepCondition = shop.isBuyable(Enums::SHEEP, farmer.id(), sheepCount());
+    int cowCondition = shop.isBuyable(Enums::COW, farmer.id(), cowCount());
 
     int barn_needed_space = alfalfaCount() + nailCount() + shovelCount();
     if(shop.isBuyable(Enums::WHEAT, farmer.id(), wheatCount())!= Enums::OK)
         err = getNotEnoughError(Enums::WHEAT, "space");
     else if(!shop.isBarnSpaceEnough(farmer.id(), barn_needed_space))
         err = getNotEnoughError(Enums::ALFALFA, "space");
-    else if(shop.isBuyable(Enums::CHICKEN, farmer.id(), chickenCount())!= Enums::OK)
-        err = getNotEnoughError(Enums::CHICKEN, " space");
-    else if(shop.isBuyable(Enums::COW, farmer.id(), cowCount())!= Enums::OK)
-        err = getNotEnoughError(Enums::COW, "space");
-    else if(shop.isBuyable(Enums::SHEEP, farmer.id(), sheepCount())!= Enums::OK)
-        err = getNotEnoughError(Enums::SHEEP, "space");
+    else if(chickenCondition != Enums::OK)
+    {
+        if(chickenCondition == Enums::LACK_OF_STORAGE)
+            err = getNotEnoughError(Enums::CHICKEN, " space");
+        else
+            err = animalConditionError(Enums::CHICKEN);
+    }
+    else if(cowCondition != Enums::OK)
+    {
+        if(cowCondition == Enums::LACK_OF_STORAGE)
+            err = getNotEnoughError(Enums::COW, "space");
+        else
+            err = animalConditionError(Enums::COW);
+    }
+
+    else if(sheepCondition != Enums::OK)
+    {
+        if(sheepCondition == Enums::LACK_OF_STORAGE)
+            err = getNotEnoughError(Enums::SHEEP, "space");
+        else
+            err = animalConditionError(Enums::SHEEP);
+    }
     else
     {
         int xp_to_add = 0;
@@ -119,16 +138,36 @@ void ShopDialog::sell()
     QString err;
     bool show_error = true;
 
+    int chickenCondition = shop.isSellable(Enums::CHICKEN, farmer.id(), chickenCount());
+    int sheepCondition = shop.isSellable(Enums::SHEEP, farmer.id(), sheepCount());
+    int cowCondition = shop.isSellable(Enums::COW, farmer.id(), cowCount());
+
     if(shop.isSellable(Enums::WHEAT, farmer.id(), wheatCount()) != Enums::OK)
         err = getNotEnoughError(Enums::WHEAT, "storage");
     else if(shop.isSellable(Enums::ALFALFA, farmer.id(), alfalfaCount())!= Enums::OK)
         err = getNotEnoughError(Enums::ALFALFA, "storage");
-    else if(shop.isSellable(Enums::CHICKEN, farmer.id(), chickenCount())!= Enums::OK)
-        err = getNotEnoughError(Enums::CHICKEN, " storage");
-    else if(shop.isSellable(Enums::COW, farmer.id(), cowCount())!= Enums::OK)
-        err = getNotEnoughError(Enums::COW, "storage");
-    else if(shop.isSellable(Enums::SHEEP, farmer.id(), sheepCount())!= Enums::OK)
-        err = getNotEnoughError(Enums::SHEEP, "storage");
+    else if(chickenCondition != Enums::OK)
+    {
+        if(chickenCondition == Enums::LACK_OF_STORAGE)
+            err = getNotEnoughError(Enums::CHICKEN, " storage");
+        else
+            err = animalConditionError(Enums::CHICKEN);
+    }
+    else if(cowCondition != Enums::OK)
+    {
+        if(cowCondition == Enums::LACK_OF_STORAGE)
+            err = getNotEnoughError(Enums::COW, "storage");
+        else
+            err = animalConditionError(Enums::COW);
+    }
+
+    else if(sheepCondition != Enums::OK)
+    {
+        if(sheepCondition == Enums::LACK_OF_STORAGE)
+            err = getNotEnoughError(Enums::SHEEP, "storage");
+        else
+            err = animalConditionError(Enums::SHEEP);
+    }
     else if(shop.isSellable(Enums::NAIL, farmer.id(), nailCount())!= Enums::OK)
         err = getNotEnoughError(Enums::NAIL, "storage");
     else if(shop.isSellable(Enums::SHOVEL, farmer.id(), shovelCount())!= Enums::OK)
@@ -298,6 +337,26 @@ QString ShopDialog::getNotEnoughError(int type, QString err_name)
         break;
     }
     return "You don't have enough " + err_name + " in " + place + "!";
+}
+
+QString ShopDialog::animalConditionError(int type)
+{
+    QString product = "";
+
+    switch (type) {
+    case Enums::CHICKEN:
+        product = "eggs";
+        break;
+    case Enums::COW:
+        product = "milk";
+        break;
+    case Enums::SHEEP:
+        product = "wools";
+        break;
+    default:
+        break;
+    }
+    return "Please collect the " + product + " first!";
 }
 
 void ShopDialog::openLockCowMilk()
