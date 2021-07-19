@@ -12,7 +12,7 @@ MessageDialog::MessageDialog(QString text, QString title, QWidget *parent, bool 
     if(!get_num)
     {
         ui->txtNumber->hide();
-        setFixedSize(450, 140);
+        resize(490, 140);
     }
 
     if(title == "Error" && !is_sound_muted)
