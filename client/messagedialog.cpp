@@ -15,7 +15,7 @@ MessageDialog::MessageDialog(QString text, QString title, QWidget *parent, bool 
         setFixedSize(450, 140);
     }
 
-    if(title == "Error")
+    if(title == "Error" && !is_sound_muted)
     {
         errorSound = new QSound("://sounds/error.wav", this);
         errorSound->play();
