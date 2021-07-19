@@ -66,7 +66,7 @@ void MainWindow::initSounds()
     music = new QMediaPlayer(this);
     music->setMedia(QUrl("qrc:/sounds/background.mp3"));
     connect(music, &QMediaPlayer::stateChanged, [this](QMediaPlayer::State state) {
-        if (state == QMediaPlayer::State::StoppedState)
+        if (state == QMediaPlayer::State::StoppedState && !is_sound_muted)
         {
             music->play();
         }
@@ -520,4 +520,20 @@ void MainWindow::on_xp_add(int amount)
 void MainWindow::on_show_coin()
 {
     showCoin();
+}
+
+void MainWindow::on_btnMute_clicked()
+{
+    is_sound_muted = !is_sound_muted;
+
+    if(is_sound_muted)
+    {
+        music->stop();
+        ui->btnMute->setStyleSheet("background-image: url(:/img/muted-sound.png);\nborder: none;");
+    }
+    else
+    {
+        music->play();
+        ui->btnMute->setStyleSheet("background-image: url(:/img/sound.png);\nborder: none;");
+    }
 }

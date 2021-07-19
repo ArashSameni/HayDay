@@ -64,6 +64,8 @@ private slots:
     void showCows();
     void showSheeps();
 
+    void on_btnMute_clicked();
+
 private:
     Ui::MainWindow *ui;
     Farmer& farmer;
