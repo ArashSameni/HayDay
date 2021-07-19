@@ -393,8 +393,10 @@ int AlfalfaField::isPlowable(int farmer_id) const
     return Enums::OK;
 }
 
-void AlfalfaField::plow()
+void AlfalfaField::plow(int farmer_id)
 {
+    Farmer &farmer = Farmer::get(farmer_id);
+    farmer.removeCoin(5 * area_);
     plants_condition_ = Enums::PLOWING;
     plowing_day_ = CURRENT_DAY;
     save();

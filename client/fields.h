@@ -109,7 +109,7 @@ public:
     int neededCoinsToPlow() const { return area_ * 5; }
     int plowXp() const;
     int isPlowable(int farmer_id) const;
-    void plow();
+    void plow(int farmer_id);
     bool isPlowingFinished() const;
     void finishPlowing();
 

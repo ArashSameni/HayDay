@@ -345,7 +345,7 @@ void DetailsDialog::plowField(AlfalfaField &field)
     int res = field.isPlowable(farmer.id());
     if (res == Enums::OK)
     {
-        field.plow();
+        field.plow(farmer.id());
         emit ShowCoin();
         MessageDialog w("Field is now plowing", "Info", this);
         w.exec();
