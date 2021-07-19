@@ -85,7 +85,7 @@ void DetailsDialog::initialSilo()
 
     ui->lblStorage->setText("Storage: " + QString::number(silo.storage()) + "/" + QString::number(silo.max_storage()));
     int new_storage = 2 * silo.max_storage();
-    ui->lblUpgradeInfo->setText("Max-storage will be " + QString::number(new_storage));
+    ui->lblInfo->setText("Max-storage will be " + QString::number(new_storage));
 }
 
 void DetailsDialog::upgradeSilo()
@@ -125,7 +125,7 @@ void DetailsDialog::initialLivingPlace(const LivingPlace &place)
     int new_storage = 2 * place.max_storage();
     if (new_storage == 0)
         new_storage = 2;
-    ui->lblUpgradeInfo->setText("Max-storage will be " + QString::number(new_storage));
+    ui->lblInfo->setText("Max-storage will be " + QString::number(new_storage));
 
     //Show Feed/Collect Button
     if (btnFeedCollect == nullptr)
@@ -144,9 +144,28 @@ void DetailsDialog::initialLivingPlace(const LivingPlace &place)
         btnFeedCollect->setText("Feed");
     else
     {
-        btnFeedCollect->setText("Collect");
+        if(current_place == SHEEP_PASTURE)
+        {
+            int needed_coins_to_breed = place.storage();
+            btnFeedCollect->setText("Collect - " + QString::number(needed_coins_to_breed));
+        }
+        else
+            btnFeedCollect->setText("Collect");
+
         if(!place.isCollectTime())
+        {
             disableFeedCollectButton();
+            int collecting_time = 0;
+            if(current_place == CHICKEN_COOP)
+                collecting_time = dynamic_cast<const ChickenCoop*>(&place)->collecting_time;
+            else if(current_place == COW_PASTURE)
+                collecting_time = dynamic_cast<const CowPasture*>(&place)->collecting_time;
+            else
+                collecting_time = dynamic_cast<const SheepPasture*>(&place)->collecting_time;
+
+            int remained_days = collecting_time + place.feeding_day() - CURRENT_DAY;
+            ui->lblInfo->setText(QString::number(remained_days) + " Days left to collect products");
+        }
     }
 }
 
@@ -261,7 +280,7 @@ void DetailsDialog::initialField(const Field &field)
     int new_area = 2 * field.area();
     if (new_area == 0)
         new_area = 4;
-    ui->lblUpgradeInfo->setText("New area will be " + QString::number(new_area));
+    ui->lblInfo->setText("New area will be " + QString::number(new_area));
 
     //Show Plant/Reap Button
     if (btnFeedCollect == nullptr)
@@ -286,7 +305,12 @@ void DetailsDialog::initialField(const Field &field)
             {
                 btnFeedCollect->setText("Reap");
                 if(field.plants_condition() != Enums::REAPABLE)
+                {
                     disableFeedCollectButton();
+                    int growing_time = dynamic_cast<const WheatField*>(&field)->growing_time;
+                    int remained_days = growing_time + field.planting_day() - CURRENT_DAY;
+                    ui->lblInfo->setText(QString::number(remained_days) + " Days left to reap the field");
+                }
             }
         }
         else if (current_place == ALFALFA_FIELD)
@@ -305,7 +329,11 @@ void DetailsDialog::initialField(const Field &field)
             {
                 btnFeedCollect->setText("Reap");
                 if(field.plants_condition() != Enums::REAPABLE)
+                {
                     disableFeedCollectButton();
+                    int remained_days = alfalfa_field.growing_time + field.planting_day() - CURRENT_DAY;
+                    ui->lblInfo->setText(QString::number(remained_days) + " Days left to reap the field");
+                }
             }
         }
     }

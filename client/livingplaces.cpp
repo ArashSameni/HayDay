@@ -9,12 +9,15 @@
 #include <QThread>
 
 int ChickenCoop::id_ = 0;
+const int ChickenCoop::collecting_time = 2;
 ChickenCoop *ChickenCoop::chicken_coop = nullptr;
 
 int CowPasture::id_ = 0;
+const int CowPasture::collecting_time = 3;
 CowPasture *CowPasture::cow_pasture = nullptr;
 
 int SheepPasture::id_ = 0;
+const int SheepPasture::collecting_time = 10;
 SheepPasture *SheepPasture::sheep_pasture = nullptr;
 
 LivingPlace::~LivingPlace() {}

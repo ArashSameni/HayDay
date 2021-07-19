@@ -9,9 +9,11 @@
 #include <QThread>
 
 int WheatField::id_ = 0;
+const int WheatField::growing_time = 2;
 WheatField *WheatField::wheat_field = nullptr;
 
 int AlfalfaField::id_ = 0;
+const int AlfalfaField::growing_time = 4;
 AlfalfaField *AlfalfaField::alfalfa_field = nullptr;
 
 Field::~Field() {}

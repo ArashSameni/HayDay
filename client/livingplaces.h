@@ -57,7 +57,7 @@ class ChickenCoop : public LivingPlace
     ChickenCoop();
 
 public:
-
+    static const int collecting_time;
     ChickenCoop(ChickenCoop const &) = delete;
     void operator=(ChickenCoop const &) = delete;
 
@@ -94,7 +94,7 @@ class CowPasture : public LivingPlace
     CowPasture();
 
 public:
-
+    static const int collecting_time;
     CowPasture(CowPasture const &) = delete;
     void operator=(CowPasture const &) = delete;
 
@@ -133,7 +133,7 @@ class SheepPasture : public LivingPlace
     SheepPasture();
 
 public:
-
+    static const int collecting_time;
     SheepPasture(SheepPasture const &) = delete;
     void operator=(SheepPasture const &) = delete;
 

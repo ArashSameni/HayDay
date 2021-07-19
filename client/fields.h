@@ -39,6 +39,8 @@ class WheatField : public Field
     WheatField();
 
 public:
+    static const int growing_time;
+
     WheatField(WheatField const &) = delete;
     void operator=(WheatField const &) = delete;
 
@@ -78,6 +80,8 @@ class AlfalfaField : public Field
     AlfalfaField();
 
 public:
+    static const int growing_time;
+
     AlfalfaField(AlfalfaField const &) = delete;
     void operator=(AlfalfaField const &) = delete;
 

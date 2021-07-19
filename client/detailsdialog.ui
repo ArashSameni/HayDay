@@ -100,7 +100,7 @@
     <string>Storage: 5/50</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lblUpgradeInfo">
+  <widget class="QLabel" name="lblInfo">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -187,7 +187,7 @@ padding-left: 28px;</string>
   <zorder>lblUpgradeTime</zorder>
   <zorder>lblUpgradeNail</zorder>
   <zorder>lblStorage</zorder>
-  <zorder>lblUpgradeInfo</zorder>
+  <zorder>lblInfo</zorder>
   <zorder>btnUpgrade</zorder>
   <zorder>lblDaysLeft</zorder>
  </widget>
