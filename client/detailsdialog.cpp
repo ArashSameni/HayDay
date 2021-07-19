@@ -293,7 +293,7 @@ void DetailsDialog::initialField(const Field &field)
         {
             const AlfalfaField &alfalfa_field = *dynamic_cast<const AlfalfaField *>(&field);
             if (alfalfa_field.plants_condition() == Enums::NOT_PLOWED)
-                btnFeedCollect->setText("Plow");
+                btnFeedCollect->setText("Plow - " + QString::number(5 * field.area()));
             else if(field.plants_condition() == Enums::PLOWING)
             {
                 btnFeedCollect->setText("Plant");
@@ -429,7 +429,6 @@ void DetailsDialog::reapField(Field &field)
             count_to_reap = field.planted_area();
         if (count_to_reap)
         {
-            field.reap(storage_place_id, count_to_reap);
             if(count_to_reap < field.planted_area())
             {
                 MessageDialog w(QString::number(count_to_reap) + " Plants reaped, Not enough space for all", "Info", this);
@@ -444,6 +443,8 @@ void DetailsDialog::reapField(Field &field)
                 else
                     emit AlfalfaFieldReaped();
             }
+
+            field.reap(storage_place_id, count_to_reap);
 
             emit AddXP(field.reapXp());
 
