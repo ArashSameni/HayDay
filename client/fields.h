@@ -25,8 +25,8 @@ public:
     virtual int reapXp() const = 0;
     virtual bool isPlantingFinished() const = 0;
     virtual void finishPlanting() = 0;
-    virtual int isReapable(int id) const = 0;
-    virtual void reap(int id) = 0;
+    virtual int reapableCount(int id) const = 0;
+    virtual void reap(int id, int count) = 0;
 
     virtual ~Field() = 0;
 };
@@ -62,8 +62,8 @@ public:
     int reapXp() const;
     bool isPlantingFinished() const;
     void finishPlanting();
-    int isReapable(int silo_id) const;
-    void reap(int silo_id);
+    int reapableCount(int silo_id) const;
+    void reap(int silo_id, int count);
 
     ~WheatField() {}
 };
@@ -103,8 +103,8 @@ public:
     int reapXp() const;
     bool isPlantingFinished() const;
     void finishPlanting();
-    int isReapable(int barn_id) const;
-    void reap(int barn_id);
+    int reapableCount(int barn_id) const;
+    void reap(int barn_id, int count);
 
     int neededCoinsToPlow() const { return area_ * 5; }
     int plowXp() const;

@@ -196,22 +196,21 @@ void WheatField::finishPlanting()
     save();
 }
 
-int WheatField::isReapable(int silo_id) const
+int WheatField::reapableCount(int silo_id) const
 {
     Silo &silo = Silo::get(silo_id);
-    if (silo.max_storage() - silo.storage() < planted_area_ * 2)
-        return Enums::LACK_OF_STORAGE;
-    return Enums::OK;
+    return (silo.max_storage() - silo.storage()) / 2;
 }
 
-void WheatField::reap(int silo_id)
+void WheatField::reap(int silo_id, int count)
 {
     Silo &silo = Silo::get(silo_id);
-    silo.addWheat(2 * planted_area_);
-    plants_condition_ = Enums::NOT_PLANTED;
-    planted_area_ = 0;
-    save();
+    silo.addWheat(2 * count);
     silo.save();
+    if(count == planted_area_)
+        plants_condition_ = Enums::NOT_PLANTED;
+    planted_area_ -= count;
+    save();
 }
 
 int WheatField::neededNailsToUpgrade() const
@@ -462,22 +461,21 @@ void AlfalfaField::finishPlanting()
     save();
 }
 
-int AlfalfaField::isReapable(int barn_id) const
+int AlfalfaField::reapableCount(int barn_id) const
 {
     Barn &barn = Barn::get(barn_id);
-    if ((barn.max_storage() - barn.storage()) < planted_area_ * 2)
-        return Enums::LACK_OF_STORAGE;
-    return Enums::OK;
+    return (barn.max_storage() - barn.storage()) / 2;
 }
 
-void AlfalfaField::reap(int barn_id)
+void AlfalfaField::reap(int barn_id, int count)
 {
     Barn &barn = Barn::get(barn_id);
-    barn.addAlfalfa(planted_area_ * 2);
-    plants_condition_ = Enums::NOT_PLOWED;
-    planted_area_ = 0;
-    save();
+    barn.addAlfalfa(count * 2);
     barn.save();
+    if(count == planted_area_)
+        plants_condition_ = Enums::NOT_PLOWED;
+    planted_area_ -= count;
+    save();
 }
 
 int AlfalfaField::neededNailsToUpgrade() const

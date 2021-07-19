@@ -416,26 +416,36 @@ void DetailsDialog::plantField(int amount, Field &field)
 
 void DetailsDialog::reapField(Field &field)
 {
-    int res, storage_place_id = 0;
+    int storage_place_id = 0;
     if (field.plants_condition() == Enums::REAPABLE)
     {
         if (current_place == WHEAT_FIELD)
             storage_place_id = farm.silo().id();
         else if (current_place == ALFALFA_FIELD)
             storage_place_id = farm.barn().id();
-        res = field.isReapable(storage_place_id);
-        if (res == Enums::OK)
+
+        int count_to_reap = field.reapableCount(storage_place_id);
+        if(count_to_reap > field.planted_area())
+            count_to_reap = field.planted_area();
+        if (count_to_reap)
         {
-            field.reap(storage_place_id);
-            MessageDialog w("Field is reaped", "Info", this);
-            w.exec();
+            field.reap(storage_place_id, count_to_reap);
+            if(count_to_reap < field.planted_area())
+            {
+                MessageDialog w(QString::number(count_to_reap) + " Plants reaped, Not enough space for all", "Info", this);
+                w.exec();
+            }
+            else
+            {
+                MessageDialog w(QString::number(count_to_reap) + " Plants reaped", "Info", this);
+                w.exec();
+                if(current_place == WHEAT_FIELD)
+                    emit WheatFieldReaped();
+                else
+                    emit AlfalfaFieldReaped();
+            }
 
             emit AddXP(field.reapXp());
-
-            if(current_place == WHEAT_FIELD)
-                emit WheatFieldReaped();
-            else
-                emit AlfalfaFieldReaped();
 
             initialField(field);
         }

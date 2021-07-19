@@ -50,9 +50,9 @@ void MainWindow::initUI()
     if(farm.alfalfa_field().level())
         unlockAlfalfaField();
 
-    if(farm.wheat_field().plants_condition() == Enums::PLANTED)
+    if(farm.wheat_field().plants_condition() == Enums::PLANTED || farm.wheat_field().plants_condition() == Enums::REAPABLE)
         on_wheatFieldPlanted();
-    if(farm.alfalfa_field().plants_condition() == Enums::PLANTED)
+    if(farm.alfalfa_field().plants_condition() == Enums::PLANTED || farm.alfalfa_field().plants_condition() == Enums::REAPABLE)
         on_alfalfaFieldPlanted();
 
     if(farmer.level() >= 2)
@@ -139,13 +139,13 @@ void MainWindow::checkTimeRelatedFunctions(bool add_day_xp)
     if(farm.wheat_field().plants_condition() == Enums::PLANTED && farm.wheat_field().isPlantingFinished())
     {
         farm.wheat_field().finishPlanting();
-        MessageDialog w("Planted wheats are now reapable", "Info", this);
+        MessageDialog w("Planted wheats are ready to reap", "Info", this);
         w.exec();
     }
     if(farm.alfalfa_field().plants_condition() == Enums::PLANTED && farm.alfalfa_field().isPlantingFinished())
     {
         farm.alfalfa_field().finishPlanting();
-        MessageDialog w("Planted alfalfas are now reapable", "Info", this);
+        MessageDialog w("Planted alfalfas are ready to reap", "Info", this);
         w.exec();
     }
     if(farm.alfalfa_field().plants_condition() == Enums::PLOWING && farm.alfalfa_field().isPlowingFinished())
